@@ -1,0 +1,70 @@
+"use client";
+
+import { useState } from "react";
+
+export default function FAQSection({ faqs }) {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  if (!faqs || faqs.length === 0) return null;
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section className="faq-section section-padding" style={{ background: "var(--bg-primary)" }}>
+      <div className="container">
+        <div className="section-header text-center reveal-on-scroll">
+          <span className="section-subtitle">Got Questions?</span>
+          <h2 className="section-title">Frequently Asked <span className="combination-font">Questions</span></h2>
+        </div>
+
+        <div className="faq-container reveal-on-scroll" style={{ maxWidth: "800px", margin: "40px auto 0", display: "flex", flexDirection: "column", gap: "15px" }}>
+          {faqs.map((faq, index) => (
+            <div 
+              key={faq._id || index} 
+              className={`faq-item glass-card ${openIndex === index ? 'active' : ''}`}
+              style={{
+                padding: "25px",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                border: openIndex === index ? "1px solid var(--accent-blue)" : "1px solid var(--glass-border)"
+              }}
+              onClick={() => toggleFAQ(index)}
+            >
+              <div className="faq-question" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "20px" }}>
+                <h3 style={{ fontSize: "1.2rem", fontWeight: "600", margin: 0, color: "var(--text-primary)" }}>
+                  {faq.question}
+                </h3>
+                <div 
+                  className="faq-icon" 
+                  style={{ 
+                    color: openIndex === index ? "var(--accent-blue)" : "var(--text-secondary)",
+                    transform: openIndex === index ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.3s ease"
+                  }}
+                >
+                  <i className="fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              
+              <div 
+                className="faq-answer" 
+                style={{
+                  maxHeight: openIndex === index ? "500px" : "0",
+                  overflow: "hidden",
+                  transition: "max-height 0.4s ease, margin-top 0.4s ease",
+                  marginTop: openIndex === index ? "15px" : "0"
+                }}
+              >
+                <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: "1.6" }}>
+                  {faq.answer}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
