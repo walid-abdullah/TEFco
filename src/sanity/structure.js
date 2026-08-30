@@ -8,48 +8,47 @@ import { StarIcon } from '@sanity/icons/Star'
 import { TagsIcon } from '@sanity/icons/Tags'
 import { TokenIcon } from '@sanity/icons/Token'
 import { UsersIcon } from '@sanity/icons/Users'
+import { BellIcon } from '@sanity/icons/Bell'
+import { CaseIcon } from '@sanity/icons/Case'
+import { UserIcon } from '@sanity/icons/User'
 
 export const structure = (S) =>
   S.list()
-    .title('Editly Foundry CMS')
+    .title('The Editly Foundry Co. — Command Center')
     .items([
-      // --- SETTINGS FOLDER ---
+      // --- 1. CLIENT LEADS & JOB CANDIDATES (TOP PRIORITY) ---
       S.listItem()
-        .title('Settings & Legal')
-        .icon(CogIcon)
+        .title('🚀 Leads & Applications')
+        .icon(EnvelopeIcon)
         .child(
           S.list()
-            .title('Settings & Legal')
+            .title('Leads & Candidates')
             .items([
               S.listItem()
-                .title('Global Settings & SEO')
-                .icon(EarthGlobeIcon)
-                .id('globalSettings')
-                .child(
-                  S.document()
-                    .schemaType('globalSettings')
-                    .documentId('globalSettings')
-                ),
+                .title('📥 Client Leads & Briefs')
+                .icon(EnvelopeIcon)
+                .schemaType('contactMessage')
+                .child(S.documentTypeList('contactMessage').title('Client Inquiries')),
               S.listItem()
-                .title('Legal Pages (Terms/Privacy)')
-                .icon(DocumentIcon)
-                .schemaType('legalPage')
-                .child(S.documentTypeList('legalPage').title('Legal Pages')),
+                .title('💼 Job Applications & CVs')
+                .icon(UserIcon)
+                .schemaType('jobApplication')
+                .child(S.documentTypeList('jobApplication').title('Editor & Motion Candidates')),
             ])
         ),
 
       S.divider(),
 
-      // --- PAGES FOLDER ---
+      // --- 2. PAGES & ANNOUNCEMENT ---
       S.listItem()
-        .title('Pages')
+        .title('📱 Pages & Banners')
         .icon(HomeIcon)
         .child(
           S.list()
-            .title('Pages')
+            .title('Pages & Banners')
             .items([
               S.listItem()
-                .title('Homepage Content')
+                .title('🏠 Homepage Content')
                 .icon(HomeIcon)
                 .id('homepage')
                 .child(
@@ -58,49 +57,54 @@ export const structure = (S) =>
                     .documentId('homepage')
                 ),
               S.listItem()
-                .title('Promo Banner')
-                .icon(DocumentIcon)
+                .title('🔔 Announcement / Promo Banner')
+                .icon(BellIcon)
                 .id('promoBanner')
                 .child(
                   S.document()
                     .schemaType('promoBanner')
                     .documentId('promoBanner')
                 ),
+              S.listItem()
+                .title('📜 Legal Pages (Terms / Privacy)')
+                .icon(DocumentIcon)
+                .schemaType('legalPage')
+                .child(S.documentTypeList('legalPage').title('Legal Pages')),
             ])
         ),
 
       S.divider(),
 
-      // --- AGENCY CONTENT FOLDER ---
+      // --- 3. CREATIVE PRODUCTION & PORTFOLIO ---
       S.listItem()
-        .title('Agency Content')
+        .title('🎬 Creative Production & Retainers')
         .icon(ImagesIcon)
         .child(
           S.list()
-            .title('Agency Content')
+            .title('Creative Production')
             .items([
               S.listItem()
-                .title('Service Categories')
-                .icon(TagsIcon)
-                .schemaType('service')
-                .child(S.documentTypeList('service').title('Service Categories')),
+                .title('💎 Pricing Retainer Plans')
+                .icon(TokenIcon)
+                .schemaType('pricing')
+                .child(S.documentTypeList('pricing').title('Retainer Plans')),
               S.listItem()
-                .title('Service Detail Pages')
-                .icon(DocumentIcon)
-                .schemaType('servicePage')
-                .child(S.documentTypeList('servicePage').title('Service Detail Pages')),
-              S.listItem()
-                .title('Portfolio Projects')
+                .title('🎬 Portfolio Showreels')
                 .icon(ImagesIcon)
                 .schemaType('portfolio')
                 .child(S.documentTypeList('portfolio').title('Portfolio Projects')),
               S.listItem()
-                .title('Pricing Packages')
-                .icon(TokenIcon)
-                .schemaType('pricing')
-                .child(S.documentTypeList('pricing').title('Pricing Packages')),
+                .title('📊 Client Case Studies & ROI')
+                .icon(CaseIcon)
+                .schemaType('caseStudy')
+                .child(S.documentTypeList('caseStudy').title('Case Studies')),
               S.listItem()
-                .title('FAQ Questions')
+                .title('✨ Service Detail Pages')
+                .icon(TagsIcon)
+                .schemaType('servicePage')
+                .child(S.documentTypeList('servicePage').title('Service Pages')),
+              S.listItem()
+                .title('❓ FAQ Accordions')
                 .icon(DocumentIcon)
                 .schemaType('faq')
                 .child(S.documentTypeList('faq').title('FAQ Questions')),
@@ -109,57 +113,47 @@ export const structure = (S) =>
 
       S.divider(),
 
-      // --- PEOPLE & FEEDBACK FOLDER ---
+      // --- 4. BRAND TRUST & TEAM ---
       S.listItem()
-        .title('People & Feedback')
+        .title('👑 Leadership & Social Proof')
         .icon(UsersIcon)
         .child(
           S.list()
-            .title('People & Feedback')
+            .title('Leadership & Proof')
             .items([
               S.listItem()
-                .title('Team Members')
+                .title('👥 Team & Leadership')
                 .icon(UsersIcon)
                 .schemaType('team')
                 .child(S.documentTypeList('team').title('Team Members')),
               S.listItem()
-                .title('Testimonials')
+                .title('⭐ Client Testimonials & Reviews')
                 .icon(StarIcon)
                 .schemaType('testimonial')
                 .child(S.documentTypeList('testimonial').title('Client Reviews')),
               S.listItem()
-                .title('Client Logos')
+                .title('🏢 Client Logos & Press')
                 .icon(ImagesIcon)
                 .schemaType('clientLogo')
                 .child(S.documentTypeList('clientLogo').title('Client Logos')),
+              S.listItem()
+                .title('📝 Agency Blogs & Insights')
+                .icon(DocumentIcon)
+                .schemaType('post')
+                .child(S.documentTypeList('post').title('Articles')),
             ])
         ),
 
       S.divider(),
 
-      // --- INBOX & MARKETING FOLDER ---
+      // --- 5. GLOBAL SETTINGS ---
       S.listItem()
-        .title('Inbox & Marketing')
-        .icon(EnvelopeIcon)
+        .title('🌐 Global SEO & Settings')
+        .icon(EarthGlobeIcon)
+        .id('globalSettings')
         .child(
-          S.list()
-            .title('Inbox & Marketing')
-            .items([
-              S.listItem()
-                .title('Contact Leads / Messages')
-                .icon(EnvelopeIcon)
-                .schemaType('contactMessage')
-                .child(S.documentTypeList('contactMessage').title('Contact Leads')),
-              S.listItem()
-                .title('Blogs / Reels')
-                .icon(DocumentIcon)
-                .schemaType('post')
-                .child(S.documentTypeList('post').title('Blogs & Reels')),
-            ])
+          S.document()
+            .schemaType('globalSettings')
+            .documentId('globalSettings')
         ),
-        
-      // Filter out mapped items to prevent duplicates
-      ...S.documentTypeListItems().filter(
-        (listItem) => !['globalSettings', 'homepage', 'promoBanner', 'service', 'servicePage', 'portfolio', 'pricing', 'team', 'testimonial', 'post', 'faq', 'clientLogo', 'legalPage', 'contactMessage'].includes(listItem.getId())
-      ),
     ])

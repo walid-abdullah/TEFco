@@ -1,54 +1,62 @@
 export default {
   name: 'contactMessage',
-  title: 'Contact Form Leads',
+  title: 'Client Leads & Project Briefs',
   type: 'document',
   fields: [
     {
       name: 'name',
-      title: 'Name',
+      title: 'Client Full Name',
       type: 'string',
       readOnly: true,
     },
     {
       name: 'email',
-      title: 'Email',
+      title: 'Email Address',
       type: 'string',
       readOnly: true,
     },
     {
-      name: 'type',
-      title: 'Message Type',
+      name: 'whatsapp',
+      title: 'WhatsApp / Phone Number',
       type: 'string',
-      options: {
-        list: [
-          { title: 'General Inquiry', value: 'general' },
-          { title: 'Booking Request', value: 'booking' }
-        ]
-      },
+      readOnly: true,
+    },
+    {
+      name: 'service',
+      title: 'Requested Services',
+      type: 'string',
+      readOnly: true,
+    },
+    {
+      name: 'budget',
+      title: 'Project Budget',
+      type: 'string',
       readOnly: true,
     },
     {
       name: 'message',
-      title: 'Message',
+      title: 'Project Brief / Message',
       type: 'text',
       readOnly: true,
     },
     {
       name: 'status',
-      title: 'Status',
+      title: 'Lead Pipeline Status',
       type: 'string',
       options: {
         list: [
-          { title: 'Unread', value: 'unread' },
-          { title: 'Read / Replied', value: 'read' },
-          { title: 'Spam', value: 'spam' }
+          { title: '🟡 New Incoming Lead', value: 'new' },
+          { title: '🔵 Contacted on WhatsApp / Email', value: 'contacted' },
+          { title: '🟣 Strategy Call Booked', value: 'call_booked' },
+          { title: '🟢 Closed / Active Client', value: 'closed' },
+          { title: '🔴 Lost / Unresponsive', value: 'lost' }
         ]
       },
-      initialValue: 'unread'
+      initialValue: 'new'
     },
     {
       name: 'submittedAt',
-      title: 'Submitted At',
+      title: 'Submitted Date',
       type: 'datetime',
       readOnly: true,
     }
@@ -56,24 +64,16 @@ export default {
   preview: {
     select: {
       title: 'name',
-      subtitle: 'type',
-      status: 'status'
+      subtitle: 'service',
+      status: 'status',
+      budget: 'budget'
     },
-    prepare({ title, subtitle, status }) {
+    prepare({ title, subtitle, status, budget }) {
+      const statusIcon = status === 'closed' ? '🟢' : status === 'call_booked' ? '🟣' : status === 'contacted' ? '🔵' : status === 'lost' ? '🔴' : '🟡';
       return {
-        title: title || 'Unknown Sender',
-        subtitle: `${subtitle === 'booking' ? 'Booking Request' : 'General Message'} - ${status}`
-      }
+        title: `${statusIcon} ${title || 'New Client'} (${budget || 'N/A'})`,
+        subtitle: subtitle || 'Project Inquiry'
+      };
     }
-  },
-  // Order by newest first by default in the list
-  orderings: [
-    {
-      title: 'Newest First',
-      name: 'submittedAtDesc',
-      by: [
-        { field: 'submittedAt', direction: 'desc' }
-      ]
-    }
-  ]
+  }
 }

@@ -12,6 +12,8 @@ import clientLogo from './clientLogo'
 import promoBanner from './promoBanner'
 import legalPage from './legalPage'
 import contactMessage from './contactMessage'
+import jobApplication from './jobApplication'
+import caseStudy from './caseStudy'
 
 export const schemaTypes = [
   globalSettings,
@@ -19,6 +21,7 @@ export const schemaTypes = [
   service,
   servicePage,
   portfolio,
+  caseStudy,
   pricing,
   team,
   testimonial,
@@ -27,5 +30,6 @@ export const schemaTypes = [
   clientLogo,
   promoBanner,
   legalPage,
-  contactMessage
+  contactMessage,
+  jobApplication
 ]
