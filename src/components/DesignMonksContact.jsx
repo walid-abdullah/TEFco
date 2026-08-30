@@ -196,17 +196,60 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
             We’ve received your details. Our Executive Producer Walid Abdullah will review your brand and reach out directly to your <strong>WhatsApp & Email</strong> shortly.
           </p>
 
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '50px', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.25)', color: 'var(--accent-blue-light)', fontSize: '0.84rem', fontWeight: '600', marginBottom: '20px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '50px', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.25)', color: 'var(--accent-blue-light)', fontSize: '0.84rem', fontWeight: '600', marginBottom: '25px' }}>
             <i className="fa-solid fa-clock"></i>
             <span>Guaranteed response within 0-10 minutes</span>
+          </div>
+
+          {/* Direct 1-Click WhatsApp Instant Chat Button */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', marginBottom: '20px' }}>
+            <a
+              href="https://wa.me/8801886755888?text=Hi%20Walid,%20I%20just%20submitted%20a%20project%20brief%20on%20The%20Editly%20Foundry%20website!"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 24px',
+                borderRadius: '12px',
+                background: '#25D366',
+                borderColor: '#25D366',
+                color: '#FFFFFF',
+                fontWeight: '700',
+                fontSize: '0.95rem'
+              }}
+            >
+              <i className="fa-brands fa-whatsapp" style={{ fontSize: '1.2rem' }}></i>
+              <span>Chat on WhatsApp Directly</span>
+            </a>
+
+            <a
+              href="https://calendly.com/w-abdullah5588/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 24px',
+                borderRadius: '12px',
+                fontWeight: '700',
+                fontSize: '0.95rem'
+              }}
+            >
+              <i className="fa-solid fa-calendar-check"></i>
+              <span>Book 15-Min Intro Call</span>
+            </a>
           </div>
 
           <div>
             <button
               type="button"
               onClick={() => setSubmitted(false)}
-              className="btn btn-outline"
-              style={{ padding: '8px 18px', fontSize: '0.84rem' }}
+              style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '0.82rem', cursor: 'pointer', textDecoration: 'underline' }}
             >
               Submit Another Brief
             </button>
