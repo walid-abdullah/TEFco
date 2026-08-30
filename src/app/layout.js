@@ -40,6 +40,9 @@ export async function generateMetadata() {
   return metadata;
 }
 
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 export default async function RootLayout({ children }) {
   const query = `*[_type == "globalSettings"][0]`;
   const settings = await client.fetch(query);
@@ -70,6 +73,8 @@ export default async function RootLayout({ children }) {
         <PromoBanner banner={bannerSettings} />
         <ClientScripts />
         <LayoutWrapper settings={settings}>{children}</LayoutWrapper>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
