@@ -241,7 +241,10 @@ export async function POST(request) {
           }
 
           // B. Send Instant Confirmation Message to CLIENT'S WHATSAPP
-          const waRes = await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
+          // We send using the official approved template client_project_confirmation
+          const serviceName = data.service || data.needs || 'Video Post-Production';
+
+          const templateRes = await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
@@ -251,17 +254,29 @@ export async function POST(request) {
               messaging_product: 'whatsapp',
               recipient_type: 'individual',
               to: cleanPhone,
-              type: 'text',
-              text: { preview_url: true, body: clientWhatsAppMsg }
+              type: 'template',
+              template: {
+                name: 'client_project_confirmation',
+                language: { code: 'en_US' },
+                components: [
+                  {
+                    type: 'body',
+                    parameters: [
+                      { type: 'text', text: fullName },
+                      { type: 'text', text: serviceName }
+                    ]
+                  }
+                ]
+              }
             })
           });
-          const waResult = await waRes.json();
-          console.log(`[WhatsApp API Text Response]`, waResult);
+          const templateResult = await templateRes.json();
+          console.log(`[WhatsApp Template Client Response]`, templateResult);
 
-          // If standard text is restricted by 24h window policy, send hello_world template
-          if (waResult.error) {
-            console.log(`[WhatsApp Fallback Triggered]:`, waResult.error.message);
-            const templateRes = await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
+          // If template is still in review or fails, try direct text fallback
+          if (templateResult.error) {
+            console.log(`[WhatsApp Template In Review / Fallback Triggered]:`, templateResult.error.message);
+            const waRes = await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
               method: 'POST',
               headers: {
                 'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
@@ -269,16 +284,14 @@ export async function POST(request) {
               },
               body: JSON.stringify({
                 messaging_product: 'whatsapp',
+                recipient_type: 'individual',
                 to: cleanPhone,
-                type: 'template',
-                template: {
-                  name: 'hello_world',
-                  language: { code: 'en_US' }
-                }
+                type: 'text',
+                text: { preview_url: true, body: clientWhatsAppMsg }
               })
             });
-            const templateResult = await templateRes.json();
-            console.log(`[WhatsApp Template Fallback Response]`, templateResult);
+            const waResult = await waRes.json();
+            console.log(`[WhatsApp Direct Text Fallback Response]`, waResult);
           }
         }
       } catch (waError) {
