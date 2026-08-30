@@ -134,14 +134,29 @@ export default function ServicesSection({ subtitle, title1, title2, description 
               <i className="fa-solid fa-chevron-right"></i>
             </button>
             <div className="slider-track" ref={trackRef} style={{ paddingBottom: "40px", alignItems: "stretch", display: 'flex', overflowX: 'auto', scrollBehavior: 'smooth', gap: '30px', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              {fixedServices.map((service) => (
-                <div key={service._id} className="service-card slider-item reveal-on-scroll" style={{ scrollSnapAlign: 'center', flex: '0 0 calc(33.333% - 20px)', minWidth: '320px', display: 'flex', flexDirection: 'column' }}>
-                  <div className="service-img-wrapper" style={{ height: '200px' }}>
-                    <img loading="lazy" src={service.image} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              {fixedServices.map((service, index) => (
+                <div 
+                  key={service._id} 
+                  className="service-card glow-border-card glass-card slider-item reveal-on-scroll" 
+                  style={{ 
+                    scrollSnapAlign: 'center', 
+                    flex: '0 0 calc(33.333% - 20px)', 
+                    minWidth: '320px', 
+                    display: 'flex', 
+                    flexDirection: 'column',
+                    overflow: 'hidden',
+                    transitionDelay: `${index * 80}ms`
+                  }}
+                >
+                  <div className="service-img-wrapper" style={{ height: '210px', position: 'relative', overflow: 'hidden' }}>
+                    <img loading="lazy" src={service.image} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} />
+                    <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(7, 13, 24, 0.75)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', color: '#38BDF8', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', border: '1px solid rgba(56, 189, 248, 0.3)', letterSpacing: '0.5px' }}>
+                      0{index + 1}
+                    </div>
                   </div>
-                  <div className="service-content" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <div className="service-content" style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '25px' }}>
                     <h3 style={{ fontSize: '1.4rem', marginBottom: '10px' }}>{service.title}</h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '20px', flex: 1 }}>{service.description}</p>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '20px', flex: 1, lineHeight: '1.6' }}>{service.description}</p>
                     <ul className="service-features" style={{ listStyle: 'none', padding: 0, marginBottom: '20px' }}>
                       {service.features.map((feature, i) => (
                         <li key={i} style={{ marginBottom: '8px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -152,7 +167,7 @@ export default function ServicesSection({ subtitle, title1, title2, description 
                     <button 
                       onClick={() => setSelectedService(service)} 
                       className="btn btn-outline pop-btn" 
-                      style={{ marginTop: 'auto', width: '100%', justifyContent: 'center', cursor: 'pointer' }}
+                      style={{ marginTop: 'auto', width: '100%', justifyContent: 'center', cursor: 'pointer', gap: '8px' }}
                     >
                       <span>View Details</span> <i className="fa-solid fa-arrow-right"></i>
                     </button>

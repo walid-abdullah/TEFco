@@ -1,127 +1,155 @@
-import Link from 'next/link';
+"use client";
 
-export const metadata = {
-  title: "The Editly Foundry | Pricing",
-};
+import React, { useState } from 'react';
+import Link from 'next/link';
+import PricingSection from '@/components/PricingSection';
+import PricingCalculator from '@/components/PricingCalculator';
+import BenefitsBento from '@/components/BenefitsBento';
+import ServicesMatrix from '@/components/ServicesMatrix';
+import ComparisonSection from '@/components/ComparisonSection';
+import DesignMonksContact from '@/components/DesignMonksContact';
 
 export default function PricingPage() {
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const pricingFaqs = [
+    {
+      q: "How does the monthly subscription work?",
+      a: "Once subscribed, you get a dedicated video editing pod (Senior Editor, Motion Designer & Art Director) in your private Slack/WhatsApp channel. You can submit video requests anytime. We edit and deliver them one by one (or two concurrently on the Growth plan) with an average turnaround of 24-48 hours."
+    },
+    {
+      q: "Can I pause or cancel my subscription anytime?",
+      a: "Yes! There are zero long-term contracts. If you have fewer videos to edit in a particular month, you can pause your membership and resume whenever your footage is ready. You will never lose any paid days."
+    },
+    {
+      q: "What is your revision policy?",
+      a: "We offer 100% unlimited revisions on all plans. We will adjust the pacing, sound effects, captions, B-roll, and color grading until you are completely satisfied with the final asset."
+    },
+    {
+      q: "How do we send our raw footage and assets?",
+      a: "We provide you with a dedicated Google Drive or Dropbox shared folder. You simply upload your raw footage, zoom recordings, or audio files, and our ingestion team logs them immediately."
+    },
+    {
+      q: "Are source files (Premiere / After Effects) included?",
+      a: "Yes, on our Growth and Enterprise retainers, we deliver full editable project files (.prproj / .aep) along with all exported assets upon request."
+    },
+    {
+      q: "Do you sign NDAs for confidential footage?",
+      a: "Absolutely. We routinely sign Non-Disclosure Agreements with venture-backed startups, high-profile creators, and agencies to protect unreleased products and private media."
+    }
+  ];
+
+  const toggleFaq = (idx) => {
+    setOpenFaq(openFaq === idx ? null : idx);
+  };
+
   return (
-    <>
+    <div className="pricing-page-full" style={{ minHeight: '100vh', paddingTop: '100px', paddingBottom: '100px' }}>
+      
+      {/* 1. Main Pricing Section with Monthly/Quarterly Toggle */}
+      <PricingSection 
+        subtitle="Transparent Studio Retainers"
+        title1="World-Class Video Production at a"
+        title2="Predictable Monthly Rate"
+        description="No hidden fees. No hourly billing surprises. Pause or cancel your membership anytime."
+      />
 
+      {/* 2. Interactive Calculator & ROI Estimator Embedded Inside Pricing */}
+      <PricingCalculator />
 
-  <section className="pricing-page section-padding" style={{"paddingTop": "150px", "minHeight": "80vh"}}>
-    <div className="container">
-      <div className="section-header text-center reveal-on-scroll" style={{"marginBottom": "60px"}}>
-        <span className="section-subtitle">Transparent Pricing</span>
-        <h2 className="section-title" style={{"fontSize": "3rem"}}>Investment In <span className="combination-font">Quality</span></h2>
-        <p className="section-description">Slide through our comprehensive pricing packages across all video editing services.</p>
-      </div>
+      {/* 3. Benefits of Membership Bento Grid */}
+      <BenefitsBento />
 
-      <div className="slider-container" style={{"marginTop": "40px"}}>
-        <button className="slider-btn prev" aria-label="Previous"><i className="fa-solid fa-chevron-left"></i></button>
-        <button className="slider-btn next" aria-label="Next"><i className="fa-solid fa-chevron-right"></i></button>
-        <div className="slider-track" style={{"paddingBottom": "40px", "alignItems": "stretch"}}>
+      {/* 4. Comprehensive 24+ Services Matrix */}
+      <ServicesMatrix />
 
-          {/* Podcast Packages */}
-          <div className="pricing-card slider-item glass-card reveal-on-scroll">
-            <div className="pricing-header">
-              <h3>Podcast: Standard</h3>
-              <p>For clean, professional episodes</p>
-            </div>
-            <div className="price-amount">$499<span>/episode</span></div>
-            <ul className="pricing-features">
-              <li><i className="fa-solid fa-check"></i> Up to 60 Mins Raw Footage</li>
-              <li><i className="fa-solid fa-check"></i> Color Grading & Audio Eq</li>
-              <li><i className="fa-solid fa-check"></i> 2 Revisions</li>
-              <li><i className="fa-solid fa-check"></i> 72-Hour Turnaround</li>
-            </ul>
-            <a href="index.html#contact" className="btn btn-primary pop-btn">Book Now</a>
+      {/* 5. The Editly Foundry vs Others Side-by-Side Comparison */}
+      <ComparisonSection />
+
+      {/* 5. Deep Pricing FAQ Section (Musemind Style) */}
+      <section className="section-padding" style={{ position: 'relative' }}>
+        <div className="container" style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div className="text-center reveal-on-scroll" style={{ marginBottom: '50px' }}>
+            <span className="section-subtitle">Got Questions?</span>
+            <h2 style={{ fontSize: '2.6rem', fontWeight: '800' }}>
+              Frequently Asked <span className="combination-font">Questions</span>
+            </h2>
+            <p style={{ color: 'var(--text-secondary)' }}>
+              Everything you need to know about our retainers, turnaround, and workflow.
+            </p>
           </div>
 
-          <div className="pricing-card highlight-card slider-item glass-card reveal-on-scroll">
-            <div className="popular-badge">Most Popular</div>
-            <div className="pricing-header">
-              <h3>Podcast: Growth</h3>
-              <p>Maximize organic reach</p>
-            </div>
-            <div className="price-amount">$899<span>/episode</span></div>
-            <ul className="pricing-features">
-              <li><i className="fa-solid fa-check"></i> Up to 90 Mins Raw Footage</li>
-              <li><i className="fa-solid fa-check"></i> 10 Extracted Viral Reels</li>
-              <li><i className="fa-solid fa-check"></i> Unlimited Revisions</li>
-              <li><i className="fa-solid fa-check"></i> 48-Hour Turnaround</li>
-            </ul>
-            <a href="index.html#contact" className="btn btn-primary pop-btn">Book Now</a>
-          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {pricingFaqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className="glass-card"
+                style={{
+                  borderRadius: '18px',
+                  overflow: 'hidden',
+                  border: openFaq === idx ? '1px solid #38BDF8' : '1px solid var(--glass-border)',
+                  transition: 'border-color 0.3s ease'
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleFaq(idx)}
+                  style={{
+                    width: '100%',
+                    padding: '24px 28px',
+                    background: 'transparent',
+                    border: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    textAlign: 'left',
+                    color: 'var(--text-primary)',
+                    fontSize: '1.1rem',
+                    fontWeight: '700',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <span>{faq.q}</span>
+                  <div style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    background: openFaq === idx ? 'var(--accent-blue-primary)' : 'rgba(255,255,255,0.06)',
+                    color: openFaq === idx ? '#FFFFFF' : 'var(--text-secondary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '0.85rem',
+                    transition: 'transform 0.3s ease',
+                    transform: openFaq === idx ? 'rotate(180deg)' : 'none',
+                    flexShrink: 0,
+                    marginLeft: '15px'
+                  }}>
+                    <i className="fa-solid fa-chevron-down"></i>
+                  </div>
+                </button>
 
-          {/* Reels Packages */}
-          <div className="pricing-card slider-item glass-card reveal-on-scroll">
-            <div className="pricing-header">
-              <h3>Reels: Creator</h3>
-              <p>Consistent daily posts</p>
-            </div>
-            <div className="price-amount">$999<span>/month</span></div>
-            <ul className="pricing-features">
-              <li><i className="fa-solid fa-check"></i> 15 Custom Edited Reels</li>
-              <li><i className="fa-solid fa-check"></i> Dynamic Captions</li>
-              <li><i className="fa-solid fa-check"></i> Trending Audio Selection</li>
-              <li><i className="fa-solid fa-check"></i> Dedicated Slack Channel</li>
-            </ul>
-            <a href="index.html#contact" className="btn btn-primary pop-btn">Book Now</a>
+                {openFaq === idx && (
+                  <div style={{
+                    padding: '0 28px 24px 28px',
+                    color: 'var(--text-secondary)',
+                    fontSize: '0.96rem',
+                    lineHeight: '1.7',
+                    borderTop: '1px solid var(--glass-border)',
+                    paddingTop: '16px'
+                  }}>
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-
-          <div className="pricing-card highlight-card slider-item glass-card reveal-on-scroll">
-            <div className="pricing-header">
-              <h3>Reels: Agency</h3>
-              <p>Full scale short-form</p>
-            </div>
-            <div className="price-amount">$1999<span>/month</span></div>
-            <ul className="pricing-features">
-              <li><i className="fa-solid fa-check"></i> 30 Custom Edited Reels</li>
-              <li><i className="fa-solid fa-check"></i> Advanced Motion Graphics</li>
-              <li><i className="fa-solid fa-check"></i> Weekly Strategy Calls</li>
-              <li><i className="fa-solid fa-check"></i> 24-Hour Turnaround Time</li>
-            </ul>
-            <a href="index.html#contact" className="btn btn-primary pop-btn">Book Now</a>
-          </div>
-
-          {/* YouTube Packages */}
-          <div className="pricing-card slider-item glass-card reveal-on-scroll">
-            <div className="pricing-header">
-              <h3>YouTube: Single</h3>
-              <p>Per video editing</p>
-            </div>
-            <div className="price-amount">$350<span>/video</span></div>
-            <ul className="pricing-features">
-              <li><i className="fa-solid fa-check"></i> Up to 15 Mins Final Length</li>
-              <li><i className="fa-solid fa-check"></i> Custom Thumbnail</li>
-              <li><i className="fa-solid fa-check"></i> Sound Design & SFX</li>
-              <li><i className="fa-solid fa-check"></i> Color Grading</li>
-            </ul>
-            <a href="index.html#contact" className="btn btn-primary pop-btn">Book Now</a>
-          </div>
-          
-          <div className="pricing-card slider-item glass-card reveal-on-scroll">
-            <div className="pricing-header">
-              <h3>SaaS Explainer</h3>
-              <p>Premium software demo</p>
-            </div>
-            <div className="price-amount">$1500<span>/project</span></div>
-            <ul className="pricing-features">
-              <li><i className="fa-solid fa-check"></i> 2-Minute App Demo</li>
-              <li><i className="fa-solid fa-check"></i> Vector UI Animations</li>
-              <li><i className="fa-solid fa-check"></i> Voiceover Sourcing</li>
-              <li><i className="fa-solid fa-check"></i> Unlimited Revisions</li>
-            </ul>
-            <a href="index.html#contact" className="btn btn-primary pop-btn">Book Now</a>
-          </div>
-
         </div>
-      </div>
+      </section>
+
+      {/* 6. Design Monks Project Inquiry Section */}
+      <DesignMonksContact />
+
     </div>
-  </section>
-
-
-    </>
   );
 }

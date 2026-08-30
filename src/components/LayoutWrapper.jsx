@@ -4,6 +4,9 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ChatWidget from "./ChatWidget";
 import VideoModal from "./VideoModal";
+import FloatingDock from "./FloatingDock";
+import GlassMeshBackground from "./GlassMeshBackground";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export default function LayoutWrapper({ children, settings }) {
   const pathname = usePathname();
@@ -14,12 +17,16 @@ export default function LayoutWrapper({ children, settings }) {
   }
 
   return (
-    <>
-      <Navbar menu={settings?.headerMenu} />
-      <main>{children}</main>
-      <Footer menu={settings?.footerMenu} />
-      <ChatWidget />
-      <VideoModal />
-    </>
+    <ThemeProvider>
+      <div style={{ position: 'relative', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
+        <GlassMeshBackground />
+        <Navbar menu={settings?.headerMenu} />
+        <main style={{ position: 'relative', zIndex: 1 }}>{children}</main>
+        <Footer menu={settings?.footerMenu} />
+        <FloatingDock />
+        <ChatWidget />
+        <VideoModal />
+      </div>
+    </ThemeProvider>
   );
 }

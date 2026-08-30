@@ -1,8 +1,12 @@
 import Link from 'next/link';
-import ContactSection from '@/components/ContactSection';
+import DesignMonksContact from '@/components/DesignMonksContact';
 import FAQSection from '@/components/FAQSection';
 import LogoMarquee from '@/components/LogoMarquee';
 import ServicesSection from '@/components/ServicesSection';
+import PricingSection from '@/components/PricingSection';
+import ServicesMatrix from '@/components/ServicesMatrix';
+import ComparisonSection from '@/components/ComparisonSection';
+import BenefitsBento from '@/components/BenefitsBento';
 import { client } from '@/sanity/client';
 import { urlFor } from '@/sanity/image';
 import InlineVideoPlayer from '@/components/InlineVideoPlayer';
@@ -127,12 +131,13 @@ export default async function Home() {
   } = data || {};
 
   return (
-    <>
+    <div className="homepage-wrapper" style={{ minHeight: '100vh', position: 'relative' }}>
 <section className="hero section-target" id="hero">
     <div className="hero-bg-glow"></div>
     <div className="container hero-container">
-      <div className="badge glow-badge reveal-on-scroll">
-        <i className="fa-solid fa-bolt"></i> {heroBadge}
+      <div className="badge glow-badge reveal-on-scroll" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+        <span className="pulse-radar"></span>
+        <i className="fa-solid fa-bolt" style={{ color: '#F59E0B' }}></i> {heroBadge}
       </div>
       
       <h1 className="hero-title reveal-on-scroll">
@@ -145,14 +150,75 @@ export default async function Home() {
       </p>
 
       <div className="hero-cta-group reveal-on-scroll">
-        <a href="#portfolio" className="btn btn-primary btn-lg pop-btn">
+        <a href="/work" className="btn btn-primary btn-lg pop-btn">
           <span>Explore Portfolio</span>
           <i className="fa-solid fa-play"></i>
         </a>
-        <a href="/book-a-call" className="btn btn-outline btn-lg pop-btn">
-          <span>Book Consultation</span>
-          <i className="fa-solid fa-calendar-check"></i>
+        <a href="/services" className="btn btn-outline btn-lg pop-btn">
+          <span>View Services</span>
+          <i className="fa-solid fa-wand-magic-sparkles"></i>
         </a>
+      </div>
+
+      {/* Pro Post-Production Tool Stack Ecosystem Bar (Design Studio UI/UX Style) */}
+      <div 
+        className="reveal-on-scroll" 
+        style={{
+          marginTop: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '12px'
+        }}
+      >
+        <div style={{
+          fontSize: '0.78rem',
+          fontWeight: '700',
+          letterSpacing: '2px',
+          textTransform: 'uppercase',
+          color: 'var(--text-muted)'
+        }}>
+          Industry-Standard Post-Production Stack
+        </div>
+        <div 
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px',
+            maxWidth: '850px'
+          }}
+        >
+          {[
+            { name: 'Premiere Pro', icon: 'fa-solid fa-film', color: '#9999FF', desc: 'Precision NLE' },
+            { name: 'After Effects', icon: 'fa-solid fa-wand-magic-sparkles', color: '#D946EF', desc: 'Motion Graphics' },
+            { name: 'DaVinci Resolve', icon: 'fa-solid fa-palette', color: '#F97316', desc: 'Color & Mastering' },
+            { name: 'Blender 3D', icon: 'fa-solid fa-cube', color: '#EA580C', desc: '3D VFX' },
+            { name: 'Cinema 4D', icon: 'fa-solid fa-shapes', color: '#0284C7', desc: 'Commercial 3D' },
+            { name: 'Frame.io', icon: 'fa-solid fa-cloud-arrow-up', color: '#06B6D4', desc: 'Real-Time Review' }
+          ].map((tool, i) => (
+            <div
+              key={i}
+              className="glass-card"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 14px',
+                borderRadius: '50px',
+                fontSize: '0.82rem',
+                fontWeight: '700',
+                border: '1px solid var(--glass-border)',
+                background: 'var(--input-bg)'
+              }}
+            >
+              <i className={tool.icon} style={{ color: tool.color, fontSize: '0.9rem' }}></i>
+              <span style={{ color: 'var(--text-primary)' }}>{tool.name}</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem', fontWeight: '500' }}>• {tool.desc}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -168,7 +234,7 @@ export default async function Home() {
       </div>
 
       {/* About Founder Explainer Video Card */}
-      <div className="about-video-card glass-card reveal-on-scroll pop-hover" style={{"maxWidth": "1200px", "margin": "0 auto", "padding": "0", "overflow": "hidden"}}>
+      <div className="about-video-card glow-border-card glass-card reveal-on-scroll pop-hover" style={{"maxWidth": "1200px", "margin": "0 auto", "padding": "0", "overflow": "hidden"}}>
         <div className="about-video-grid" style={{"gridTemplateColumns": "40% 60%", "alignItems": "center", "gap": "40px"}}>
           <div className="about-content" style={{"padding": "20px 20px 20px 40px", "display": "flex", "flexDirection": "column", "justifyContent": "center"}}>
             
@@ -301,47 +367,19 @@ export default async function Home() {
     )}
   </section>
 
-  {/* Pricing Section from index */}
-  <section id="pricing" className="pricing-page section-target" style={{"paddingTop": "100px", "paddingBottom": "80px", "background": "transparent"}}>
-    <div className="container text-center">
-      <span className="section-subtitle">{pricingSubtitle}</span>
-      <h1 className="section-title" style={{fontSize: "3rem"}}>{pricingTitle1} <span className="combination-font">{pricingTitle2}</span></h1>
-      <p style={{marginBottom: "50px", color: "var(--text-secondary)"}}>{pricingDescription}</p>
+  {/* MUSEMIND ARCHITECTURE: PRICING, MATRIX, COMPARISON & BENEFITS */}
+  <PricingSection 
+    subtitle={pricingSubtitle}
+    title1={pricingTitle1}
+    title2={pricingTitle2}
+    description={pricingDescription}
+  />
 
-      <div className="slider-container" style={{"position": "relative", "maxWidth": "1100px", "margin": "0 auto"}}>
-        {/* Arrows moved outside */}
-        <button className="slider-btn prev" aria-label="Previous" style={{"left": "-50px", "background": "var(--bg-secondary)", "color": "var(--text-primary)", "border": "1px solid var(--glass-border)", "boxShadow": "0 4px 10px rgba(0,0,0,0.1)"}}><i className="fa-solid fa-chevron-left"></i></button>
-        <button className="slider-btn next" aria-label="Next" style={{"right": "-50px", "background": "var(--bg-secondary)", "color": "var(--text-primary)", "border": "1px solid var(--glass-border)", "boxShadow": "0 4px 10px rgba(0,0,0,0.1)"}}><i className="fa-solid fa-chevron-right"></i></button>
-        
-        <div className="slider-track" style={{"padding": "20px 0", "alignItems": "center"}}>
-          {pricingData?.length > 0 ? pricingData.map((pkg) => (
-            <div key={pkg._id} className="slider-item" style={{"padding": "40px", "background": "var(--bg-secondary)", "borderRadius": "20px", "boxShadow": pkg.isPopular ? "0 10px 30px rgba(0,0,0,0.06)" : "0 10px 30px rgba(0,0,0,0.04)", "textAlign": "left", "border": pkg.isPopular ? "2px solid #F2994A" : "1px solid var(--glass-border)", "minHeight": pkg.isPopular ? "500px" : "480px", "display": "flex", "flexDirection": "column", "position": "relative", "transform": pkg.isPopular ? "scale(1.02)" : "scale(1)"}}>
-              {pkg.isPopular && <div style={{"position": "absolute", "top": "-15px", "left": "50%", "transform": "translateX(-50%)", "background": "#1976D2", "color": "white", "padding": "5px 20px", "borderRadius": "20px", "fontSize": "0.85rem", "fontWeight": "600"}}>Most Popular</div>}
-              <h3 style={{"fontSize": "1.4rem", "fontWeight": "700", "marginBottom": "5px", "color": "var(--text-primary)"}}>{pkg.title}</h3>
-              <p style={{"color": "var(--text-secondary)", "fontSize": "0.95rem", "marginBottom": "10px"}}>{pkg.subtitle}</p>
-              <div style={{"fontSize": "1.2rem", "fontWeight": "600", "color": "var(--text-primary)", "marginBottom": "25px"}}>{pkg.price}</div>
-              <ul style={{"listStyle": "none", "padding": "0", "marginBottom": "30px", "flex": "1"}}>
-                {pkg.features?.map((feature, i) => (
-                  <li key={i} style={{"marginBottom": "15px", "display": "flex", "gap": "10px", "color": "var(--text-primary)", "fontSize": "0.95rem"}}><span style={{"color": "var(--primary)", "fontWeight": "bold"}}>✓</span> {feature}</li>
-                ))}
-              </ul>
-              <a href="/book-a-call" className="btn btn-primary" style={{"borderRadius": "50px", "width": "100%", "justifyContent": "center", "background": "#1976D2"}}>Book Now</a>
-            </div>
-          )) : (
-            <div className="slider-item" style={{"padding": "40px", "background": "var(--bg-secondary)", "borderRadius": "20px", "boxShadow": "0 10px 30px rgba(0,0,0,0.04)", "textAlign": "left", "border": "1px solid var(--glass-border)", "minHeight": "480px", "display": "flex", "flexDirection": "column"}}>
-              <h3 style={{"fontSize": "1.4rem", "fontWeight": "700", "marginBottom": "5px", "color": "var(--text-primary)"}}>Standard</h3>
-              <p style={{"color": "var(--text-secondary)", "fontSize": "0.95rem", "marginBottom": "10px"}}>Fallback package</p>
-              <div style={{"fontSize": "1.2rem", "fontWeight": "600", "color": "var(--text-primary)", "marginBottom": "25px"}}>$499</div>
-              <ul style={{"listStyle": "none", "padding": "0", "marginBottom": "30px", "flex": "1"}}>
-                <li style={{"marginBottom": "15px", "display": "flex", "gap": "10px", "color": "var(--text-primary)", "fontSize": "0.95rem"}}><span style={{"color": "var(--primary)", "fontWeight": "bold"}}>✓</span> Feature 1</li>
-              </ul>
-              <a href="/book-a-call" className="btn btn-primary" style={{"borderRadius": "50px", "width": "100%", "justifyContent": "center", "background": "#1976D2"}}>Book Now</a>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  </section>
+  <ServicesMatrix />
+
+  <ComparisonSection />
+
+  <BenefitsBento />
 
   {/* TEAM SECTION */}
   <section className="team-section section-padding section-target section-alt" id="team" style={{"position": "relative"}}>
@@ -702,8 +740,9 @@ export default async function Home() {
   {/* FAQ Section */}
   <FAQSection faqs={faqData} />
 
-  <ContactSection />
+  {/* Design Monks Style Project Inquiry Section */}
+  <DesignMonksContact />
 
-    </>
+    </div>
   );
 }

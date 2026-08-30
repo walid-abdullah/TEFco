@@ -241,13 +241,25 @@ export default function BookingFormClient({ isFounder = false }) {
             </div>
 
             <div style={{ marginBottom: '10px' }}>
-              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Email Address</label>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Email Address *</label>
               <input type="email" name="email" placeholder="you@example.com" required style={{ width: '100%', padding: '12px 15px', borderRadius: '10px', background: 'var(--bg-secondary)', border: '1px solid var(--glass-border)', color: 'var(--text-primary)', outline: 'none', transition: 'border 0.3s ease' }} />
             </div>
 
             <div style={{ marginBottom: '10px' }}>
-              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>YouTube/TikTok Channel Link</label>
-              <input type="url" name="channelLink" placeholder="https://" required style={{ width: '100%', padding: '12px 15px', borderRadius: '10px', background: 'var(--bg-secondary)', border: '1px solid var(--glass-border)', color: 'var(--text-primary)', outline: 'none', transition: 'border 0.3s ease' }} />
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>WhatsApp Number <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>(For Instant Booking Confirmation)</span></label>
+              <input type="tel" name="whatsapp" placeholder="+1 (555) 000-0000 or +880 1..." style={{ width: '100%', padding: '12px 15px', borderRadius: '10px', background: 'var(--bg-secondary)', border: '1px solid var(--glass-border)', color: 'var(--text-primary)', outline: 'none', transition: 'border 0.3s ease' }} />
+            </div>
+
+            <div style={{ marginBottom: '10px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                YouTube / Social Link / Channel Name <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>(Optional)</span>
+              </label>
+              <input 
+                type="text" 
+                name="channelLink" 
+                placeholder="https://youtube.com/@yourbrand or @username (optional)" 
+                style={{ width: '100%', padding: '12px 15px', borderRadius: '10px', background: 'var(--bg-secondary)', border: '1px solid var(--glass-border)', color: 'var(--text-primary)', outline: 'none', transition: 'border 0.3s ease' }} 
+              />
             </div>
 
             {isFounder && (

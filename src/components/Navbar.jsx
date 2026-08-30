@@ -1,79 +1,222 @@
 "use client";
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function Navbar({ menu }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState('dark');
+  const { theme, toggleTheme } = useTheme();
 
-  // Initialize theme from HTML tag on mount
-  useEffect(() => {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-    setTheme(currentTheme);
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    setTheme(newTheme);
-  };
+  const isLight = theme === 'light';
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <header className="navbar" id="navbar">
-      <div className="nav-container">
-        <Link href="/" className="brand-logo">
+    <header 
+      className="navbar" 
+      id="navbar"
+      style={{
+        background: isLight ? 'rgba(255, 255, 255, 0.85)' : 'rgba(5, 8, 17, 0.78)',
+        borderBottom: isLight ? '1px solid rgba(15, 23, 42, 0.08)' : '1px solid rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(25px)',
+        WebkitBackdropFilter: 'blur(25px)',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 9999,
+        transition: 'background 0.3s ease, border-color 0.3s ease'
+      }}
+    >
+      <div className="nav-container navbar-container">
+        <Link 
+          href="/" 
+          className="brand-logo" 
+          onClick={() => setIsMobileMenuOpen(false)}
+          style={{ cursor: 'pointer', zIndex: 10 }}
+        >
           <span className="logo-icon"><i className="fa-solid fa-wand-magic-sparkles"></i></span>
-          <span className="logo-text">Editly<span className="highlight">Foundry</span></span>
+          <span className="logo-text" style={{ color: isLight ? '#090E1A' : '#FFFFFF' }}>
+            Editly<span className="highlight" style={{ color: '#38BDF8' }}>Foundry</span>
+          </span>
         </Link>
 
-        <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`} id="navMenu">
-          {menu && menu.length > 0 ? (
-            menu.map((item, idx) => (
-              <Link key={idx} href={item.link || '#'} className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                {item.label}
-              </Link>
-            ))
-          ) : (
-            <>
-              <Link href="/#about" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
-              <Link href="/#services" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
-              <Link href="/#portfolio" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Portfolio</Link>
-              <Link href="/#pricing" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
-              <Link href="/#team" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Team</Link>
-              <Link href="/#blogs" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Blogs</Link>
-              <Link href="/#contact" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
-            </>
-          )}
+        <nav 
+          className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`} 
+          id="navMenu"
+          style={{
+            background: isMobileMenuOpen ? (isLight ? 'rgba(255, 255, 255, 0.98)' : 'rgba(5, 8, 17, 0.98)') : 'transparent'
+          }}
+        >
+          {/* Always render Home button first */}
+          <Link 
+            href="/" 
+            className="nav-link" 
+            onClick={() => setIsMobileMenuOpen(false)}
+            style={{ color: isLight ? '#475569' : '#94A3B8', cursor: 'pointer' }}
+          >
+            Home
+          </Link>
+
+          {/* Work / Portfolio */}
+          <Link 
+            href="/work" 
+            className="nav-link" 
+            onClick={() => setIsMobileMenuOpen(false)}
+            style={{ color: isLight ? '#475569' : '#94A3B8', cursor: 'pointer' }}
+          >
+            Work
+          </Link>
+
+          {/* 2-Column Luxury Services Dropdown */}
+          <div 
+            className="nav-dropdown-wrapper"
+            style={{ position: 'relative', display: 'inline-block' }}
+          >
+            <Link 
+              href="/services" 
+              className="nav-link" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              style={{ color: isLight ? '#475569' : '#94A3B8', display: 'inline-flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}
+            >
+              <span>Services</span>
+              <i className="fa-solid fa-chevron-down" style={{ fontSize: '0.65rem', transition: 'transform 0.2s ease' }}></i>
+            </Link>
+
+            <div 
+              className="nav-dropdown-menu"
+              style={{
+                position: 'absolute',
+                top: '100%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '520px',
+                background: isLight ? 'rgba(255, 255, 255, 0.98)' : 'rgba(10, 16, 32, 0.97)',
+                backdropFilter: 'blur(35px)',
+                WebkitBackdropFilter: 'blur(35px)',
+                border: isLight ? '1px solid rgba(15, 23, 42, 0.12)' : '1px solid rgba(255, 255, 255, 0.14)',
+                borderRadius: '20px',
+                padding: '16px',
+                boxShadow: isLight ? '0 20px 45px rgba(0,0,0,0.12)' : '0 25px 60px rgba(0,0,0,0.7)',
+                zIndex: 10000,
+                display: 'none',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '8px'
+              }}
+            >
+              {[
+                { title: 'Reels & Shorts Viral Editing', slug: 'reels-shorts' },
+                { title: 'Multi-Cam Podcasts, Audio & Highlights Clips', slug: 'podcasts' },
+                { title: 'YouTube Long-Form & Talking Head', slug: 'talking-head' },
+                { title: 'High-Converting UGC & Ads', slug: 'ugc-ads' },
+                { title: '3D SaaS & Product Demos', slug: 'saas-motion' }
+              ].map((srv, sIdx) => (
+                <Link
+                  key={sIdx}
+                  href={`/services#${srv.slug}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '12px 14px',
+                    borderRadius: '12px',
+                    textDecoration: 'none',
+                    color: isLight ? '#0F172A' : '#F8FAFC',
+                    fontSize: '0.88rem',
+                    fontWeight: '700',
+                    lineHeight: '1.35',
+                    transition: 'all 0.18s ease',
+                    background: isLight ? 'rgba(15, 23, 42, 0.03)' : 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid transparent',
+                    textAlign: 'left',
+                    gridColumn: sIdx === 4 ? 'span 2' : 'auto',
+                    cursor: 'pointer'
+                  }}
+                  className="dropdown-item-hover"
+                >
+                  <span>{srv.title}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Pricing */}
+          <Link 
+            href="/pricing" 
+            className="nav-link" 
+            onClick={() => setIsMobileMenuOpen(false)}
+            style={{ color: isLight ? '#475569' : '#94A3B8', cursor: 'pointer' }}
+          >
+            Pricing
+          </Link>
+
+          {/* About */}
+          <Link 
+            href="/about" 
+            className="nav-link" 
+            onClick={() => setIsMobileMenuOpen(false)}
+            style={{ color: isLight ? '#475569' : '#94A3B8', cursor: 'pointer' }}
+          >
+            About
+          </Link>
+
+          {/* Contact */}
+          <Link 
+            href="/contact" 
+            className="nav-link" 
+            onClick={() => setIsMobileMenuOpen(false)}
+            style={{ color: isLight ? '#475569' : '#94A3B8', cursor: 'pointer' }}
+          >
+            Contact
+          </Link>
         </nav>
 
         <div className="nav-actions">
-          {/* Single Click Quick Theme Toggle Button */}
-          <button className="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Theme" onClick={toggleTheme}>
-            <svg className="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '1.25rem', height: '1.25rem' }}>
-              <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
-              <path d="M12 2v2"></path>
-              <path d="M12 20v2"></path>
-              <path d="M4.93 4.93l1.41 1.41"></path>
-              <path d="M17.66 17.66l1.41 1.41"></path>
-              <path d="M2 12h2"></path>
-              <path d="M20 12h2"></path>
-              <path d="M6.34 17.66l-1.41 1.41"></path>
-              <path d="M19.07 4.93l-1.41 1.41"></path>
-            </svg>
-            <i className="fa-solid fa-moon icon-moon"></i>
+          {/* Apple Glass Theme Switcher (Sun / Moon) */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="theme-toggle-btn"
+            aria-label="Toggle Theme"
+            style={{
+              width: '42px',
+              height: '42px',
+              borderRadius: '50%',
+              background: isLight ? 'rgba(15, 23, 42, 0.05)' : 'rgba(255, 255, 255, 0.08)',
+              border: isLight ? '1px solid rgba(15, 23, 42, 0.12)' : '1px solid rgba(255, 255, 255, 0.18)',
+              color: isLight ? '#F59E0B' : '#38BDF8',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              fontSize: '1.1rem',
+              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              boxShadow: isLight ? '0 2px 8px rgba(0,0,0,0.05)' : '0 4px 12px rgba(0,0,0,0.4)'
+            }}
+          >
+            {isLight ? (
+              <i className="fa-solid fa-sun" style={{ color: '#F59E0B' }}></i>
+            ) : (
+              <i className="fa-solid fa-moon" style={{ color: '#38BDF8' }}></i>
+            )}
           </button>
 
+          {/* Direct CTA (Design Monks Style) */}
           <Link href="/book-a-call" className="btn btn-primary nav-cta">
             <span>Book a Call</span>
             <i className="fa-solid fa-arrow-right"></i>
           </Link>
 
           {/* Mobile Menu Toggle */}
-          <button className="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu" onClick={toggleMobileMenu}>
+          <button 
+            className="mobile-toggle" 
+            id="mobileToggle" 
+            aria-label="Toggle Menu" 
+            onClick={toggleMobileMenu}
+            style={{ color: isLight ? '#090E1A' : '#FFFFFF' }}
+          >
             <i className="fa-solid fa-bars-staggered"></i>
           </button>
         </div>
