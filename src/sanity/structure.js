@@ -1,11 +1,9 @@
-import { CogIcon } from '@sanity/icons/Cog'
 import { DocumentIcon } from '@sanity/icons/Document'
 import { EarthGlobeIcon } from '@sanity/icons/EarthGlobe'
 import { EnvelopeIcon } from '@sanity/icons/Envelope'
 import { HomeIcon } from '@sanity/icons/Home'
 import { ImagesIcon } from '@sanity/icons/Images'
 import { StarIcon } from '@sanity/icons/Star'
-import { TagsIcon } from '@sanity/icons/Tags'
 import { TokenIcon } from '@sanity/icons/Token'
 import { UsersIcon } from '@sanity/icons/Users'
 import { BellIcon } from '@sanity/icons/Bell'
@@ -14,141 +12,100 @@ import { UserIcon } from '@sanity/icons/User'
 
 export const structure = (S) =>
   S.list()
-    .title('The Editly Foundry Co. — Command Center')
+    .title('Editly Studio Admin')
     .items([
-      // --- 1. CLIENT LEADS & JOB CANDIDATES (TOP PRIORITY) ---
+      // 1. INBOX & LEADS (Direct 1-Click Access)
       S.listItem()
-        .title('🚀 Leads & Applications')
+        .title('📥 Client Leads')
         .icon(EnvelopeIcon)
-        .child(
-          S.list()
-            .title('Leads & Candidates')
-            .items([
-              S.listItem()
-                .title('📥 Client Leads & Briefs')
-                .icon(EnvelopeIcon)
-                .schemaType('contactMessage')
-                .child(S.documentTypeList('contactMessage').title('Client Inquiries')),
-              S.listItem()
-                .title('💼 Job Applications & CVs')
-                .icon(UserIcon)
-                .schemaType('jobApplication')
-                .child(S.documentTypeList('jobApplication').title('Editor & Motion Candidates')),
-            ])
-        ),
+        .schemaType('contactMessage')
+        .child(S.documentTypeList('contactMessage').title('Client Inquiries & Briefs')),
+
+      S.listItem()
+        .title('💼 Job Applications')
+        .icon(UserIcon)
+        .schemaType('jobApplication')
+        .child(S.documentTypeList('jobApplication').title('Editor & Motion Candidates')),
 
       S.divider(),
 
-      // --- 2. PAGES & ANNOUNCEMENT ---
+      // 2. CORE WEBSITE CONTENT
       S.listItem()
-        .title('📱 Pages & Banners')
+        .title('🏠 Homepage Master')
         .icon(HomeIcon)
+        .id('homepage')
         .child(
-          S.list()
-            .title('Pages & Banners')
-            .items([
-              S.listItem()
-                .title('🏠 Homepage Content')
-                .icon(HomeIcon)
-                .id('homepage')
-                .child(
-                  S.document()
-                    .schemaType('homepage')
-                    .documentId('homepage')
-                ),
-              S.listItem()
-                .title('🔔 Announcement / Promo Banner')
-                .icon(BellIcon)
-                .id('promoBanner')
-                .child(
-                  S.document()
-                    .schemaType('promoBanner')
-                    .documentId('promoBanner')
-                ),
-              S.listItem()
-                .title('📜 Legal Pages (Terms / Privacy)')
-                .icon(DocumentIcon)
-                .schemaType('legalPage')
-                .child(S.documentTypeList('legalPage').title('Legal Pages')),
-            ])
+          S.document()
+            .schemaType('homepage')
+            .documentId('homepage')
         ),
 
-      S.divider(),
-
-      // --- 3. CREATIVE PRODUCTION & PORTFOLIO ---
       S.listItem()
-        .title('🎬 Creative Production & Retainers')
+        .title('💎 Pricing Retainers')
+        .icon(TokenIcon)
+        .schemaType('pricing')
+        .child(S.documentTypeList('pricing').title('Pricing Plans ($1,499 / $2,899)')),
+
+      S.listItem()
+        .title('🎬 Portfolio Showreels')
         .icon(ImagesIcon)
-        .child(
-          S.list()
-            .title('Creative Production')
-            .items([
-              S.listItem()
-                .title('💎 Pricing Retainer Plans')
-                .icon(TokenIcon)
-                .schemaType('pricing')
-                .child(S.documentTypeList('pricing').title('Retainer Plans')),
-              S.listItem()
-                .title('🎬 Portfolio Showreels')
-                .icon(ImagesIcon)
-                .schemaType('portfolio')
-                .child(S.documentTypeList('portfolio').title('Portfolio Projects')),
-              S.listItem()
-                .title('📊 Client Case Studies & ROI')
-                .icon(CaseIcon)
-                .schemaType('caseStudy')
-                .child(S.documentTypeList('caseStudy').title('Case Studies')),
-              S.listItem()
-                .title('✨ Service Detail Pages')
-                .icon(TagsIcon)
-                .schemaType('servicePage')
-                .child(S.documentTypeList('servicePage').title('Service Pages')),
-              S.listItem()
-                .title('❓ FAQ Accordions')
-                .icon(DocumentIcon)
-                .schemaType('faq')
-                .child(S.documentTypeList('faq').title('FAQ Questions')),
-            ])
-        ),
+        .schemaType('portfolio')
+        .child(S.documentTypeList('portfolio').title('Portfolio Projects')),
+
+      S.listItem()
+        .title('📊 Client Case Studies')
+        .icon(CaseIcon)
+        .schemaType('caseStudy')
+        .child(S.documentTypeList('caseStudy').title('Case Studies & Results')),
 
       S.divider(),
 
-      // --- 4. BRAND TRUST & TEAM ---
+      // 3. SOCIAL PROOF & TEAM
       S.listItem()
-        .title('👑 Leadership & Social Proof')
+        .title('👥 Team & Founder')
         .icon(UsersIcon)
-        .child(
-          S.list()
-            .title('Leadership & Proof')
-            .items([
-              S.listItem()
-                .title('👥 Team & Leadership')
-                .icon(UsersIcon)
-                .schemaType('team')
-                .child(S.documentTypeList('team').title('Team Members')),
-              S.listItem()
-                .title('⭐ Client Testimonials & Reviews')
-                .icon(StarIcon)
-                .schemaType('testimonial')
-                .child(S.documentTypeList('testimonial').title('Client Reviews')),
-              S.listItem()
-                .title('🏢 Client Logos & Press')
-                .icon(ImagesIcon)
-                .schemaType('clientLogo')
-                .child(S.documentTypeList('clientLogo').title('Client Logos')),
-              S.listItem()
-                .title('📝 Agency Blogs & Insights')
-                .icon(DocumentIcon)
-                .schemaType('post')
-                .child(S.documentTypeList('post').title('Articles')),
-            ])
-        ),
+        .schemaType('team')
+        .child(S.documentTypeList('team').title('Team Members')),
+
+      S.listItem()
+        .title('⭐ Client Reviews')
+        .icon(StarIcon)
+        .schemaType('testimonial')
+        .child(S.documentTypeList('testimonial').title('Client Reviews')),
+
+      S.listItem()
+        .title('🏢 Client Logos')
+        .icon(ImagesIcon)
+        .schemaType('clientLogo')
+        .child(S.documentTypeList('clientLogo').title('Client Logos')),
+
+      S.listItem()
+        .title('❓ FAQ Questions')
+        .icon(DocumentIcon)
+        .schemaType('faq')
+        .child(S.documentTypeList('faq').title('FAQ Questions')),
 
       S.divider(),
 
-      // --- 5. GLOBAL SETTINGS ---
+      // 4. ANNOUNCEMENTS & SETTINGS
       S.listItem()
-        .title('🌐 Global SEO & Settings')
+        .title('🔔 Top Promo Banner')
+        .icon(BellIcon)
+        .id('promoBanner')
+        .child(
+          S.document()
+            .schemaType('promoBanner')
+            .documentId('promoBanner')
+        ),
+
+      S.listItem()
+        .title('📜 Legal Pages (Terms / Privacy)')
+        .icon(DocumentIcon)
+        .schemaType('legalPage')
+        .child(S.documentTypeList('legalPage').title('Legal Pages')),
+
+      S.listItem()
+        .title('🌐 Global SEO & Brand')
         .icon(EarthGlobeIcon)
         .id('globalSettings')
         .child(
