@@ -64,11 +64,31 @@ const portableTextComponents = {
 export default async function LegalPage({ params }) {
   const { slug } = await params;
   
-  const query = `*[_type == "legalPage" && slug.current == $slug][0]`;
-  const page = await client.fetch(query, { slug });
+  let page = null;
+  try {
+    const query = `*[_type == "legalPage" && slug.current == $slug][0]`;
+    page = await client.fetch(query, { slug });
+  } catch (e) {
+    console.error("Legal fetch error:", e);
+  }
 
+  // Built-in standard legal document fallbacks
   if (!page) {
-    notFound();
+    if (slug === 'privacy-policy') {
+      page = {
+        title: 'Privacy Policy',
+        isDefault: true,
+        defaultContent: `The Editly Foundry Co. respects your privacy. We strictly hold all client raw video footage, branding assets, and project files under professional Non-Disclosure Agreements (NDAs). We never sell or share your contact or media data with any third parties. All lead details submitted via our website are strictly used for project communication and meeting scheduling.`
+      };
+    } else if (slug === 'terms-of-service' || slug === 'terms') {
+      page = {
+        title: 'Terms of Service',
+        isDefault: true,
+        defaultContent: `Welcome to The Editly Foundry Co. By subscribing to our video editing retainers or submitting a project brief, you agree that you own or possess legal rights to all raw media provided. Upon full payment of retainers or project milestones, 100% of the intellectual property (IP) and commercial rights of all final edited assets transfer entirely to you.`
+      };
+    } else {
+      notFound();
+    }
   }
 
   return (
@@ -82,8 +102,12 @@ export default async function LegalPage({ params }) {
 
       {/* Content Section */}
       <section className="legal-content section-padding" style={{ background: 'var(--bg-primary)' }}>
-        <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <PortableText value={page.content} components={portableTextComponents} />
+        <div className="container" style={{ maxWidth: '800px', margin: '0 auto', color: 'var(--text-secondary)', lineHeight: '1.8' }}>
+          {page.isDefault ? (
+            <p style={{ fontSize: '1.1rem' }}>{page.defaultContent}</p>
+          ) : (
+            <PortableText value={page.content} components={portableTextComponents} />
+          )}
         </div>
       </section>
     </>
