@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-export default function PricingSection({ subtitle, title1, title2, description }) {
+export default function PricingSection({ subtitle, title1, title2, description, pricingData = [] }) {
   const [billingCycle, setBillingCycle] = useState('monthly'); // 'monthly' | 'quarterly'
 
-  const plans = [
+  const defaultPlans = [
     {
       id: 'starter',
       name: 'Starter Creator',
@@ -59,6 +59,17 @@ export default function PricingSection({ subtitle, title1, title2, description }
       description: 'Dedicated multi-editor production pod for venture-backed startups and high-volume media brands.',
       monthlyPrice: null, // Custom
       quarterlyPrice: null,
+      duration: '',
+      isPopular: false,
+      features: [
+        'Custom Video Volume (40+ Videos / month)',
+        'Multi-Camera Podcasts & Documentary Edits',
+        '24-Hour Express Turnaround SLA',
+        'Dedicated Full-Stack Motion & 3D Pod',
+        'Unlimited Concurrent Requests',
+        'White-Glove Ingestion & DAM Management',
+        'Weekly Creative Direction & Retention Audits',
+        'Private Slack Channel + Direct Phone Line',
       customText: 'Custom Plan',
       duration: 'tailored to volume',
       isPopular: false,
@@ -74,6 +85,8 @@ export default function PricingSection({ subtitle, title1, title2, description }
       ]
     }
   ];
+
+  const plans = (pricingData && pricingData.length > 0) ? pricingData : defaultPlans;
 
   return (
     <section id="pricing" className="pricing-page section-target" style={{ paddingTop: '90px', paddingBottom: '90px', position: 'relative' }}>
