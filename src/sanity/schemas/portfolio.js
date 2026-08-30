@@ -23,10 +23,9 @@ export default {
       options: {
         list: [
           { title: 'Reels & Shorts', value: 'reels' },
-          { title: 'Podcasts', value: 'podcast' },
-          { title: 'Talking Head', value: 'talking-head' },
-          { title: 'UGC Ads', value: 'ugc' },
-          { title: 'SaaS Motion', value: 'saas' },
+          { title: 'Podcasts & Talking Head', value: 'podcasts' },
+          { title: 'UGC & Paid Ads', value: 'ugc' },
+          { title: 'SaaS & Motion Graphics', value: 'saas' },
         ],
       },
       validation: (Rule) => Rule.required(),
