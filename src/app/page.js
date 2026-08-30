@@ -256,7 +256,7 @@ export default async function Home() {
               
               <InlineVideoPlayer 
                 videoUrl={founderVideoUrl} 
-                thumbnailUrl={founderVideoThumbnail ? urlFor(founderVideoThumbnail).url() : "Picture/Thumbnail.png"}
+                thumbnailUrl={founderVideoThumbnail ? urlFor(founderVideoThumbnail).url() : "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80"}
                 altText="Founder Explainer Video Thumbnail"
                 playButtonId="founder-video-play-btn"
                 badge={

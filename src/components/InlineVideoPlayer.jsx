@@ -45,7 +45,7 @@ export default function InlineVideoPlayer({ videoUrl, thumbnailUrl, altText, bad
   if (!videoUrl) {
     return (
       <div style={{ position: "relative", width: "100%", height: "100%", background: "transparent" }}>
-        <img loading="lazy" src={thumbnailUrl || "Picture/Thumbnail.png"} alt={altText || "Video Thumbnail"} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <img loading="lazy" src={thumbnailUrl || "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80"} alt={altText || "Video Thumbnail"} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </div>
     );
   }
