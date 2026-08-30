@@ -18,49 +18,45 @@ export default function GlassMeshBackground() {
   useEffect(() => {
     setMounted(true);
 
-    const handleMouseMove = (e) => {
-      const normX = (e.clientX / window.innerWidth - 0.5) * 2;
-      const normY = (e.clientY / window.innerHeight - 0.5) * 2;
-      targetMouse.current = {
-        x: e.clientX,
-        y: e.clientY,
-        normX: normX,
-        normY: normY
+    // Only run continuous 60fps mouse tracking if on desktop non-touch device
+    const isTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    
+    if (!isTouch && window.innerWidth > 768) {
+      const handleMouseMove = (e) => {
+        const normX = (e.clientX / window.innerWidth - 0.5) * 2;
+        const normY = (e.clientY / window.innerHeight - 0.5) * 2;
+        targetMouse.current = {
+          x: e.clientX,
+          y: e.clientY,
+          normX: normX,
+          normY: normY
+        };
       };
-    };
 
-    const handleScroll = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-      setScrollProgress(Math.min(Math.max(progress, 0), 1));
-    };
+      const loop = () => {
+        currentMouse.current.normX += (targetMouse.current.normX - currentMouse.current.normX) * 0.05;
+        currentMouse.current.normY += (targetMouse.current.normY - currentMouse.current.normY) * 0.05;
+        currentMouse.current.x += (targetMouse.current.x - currentMouse.current.x) * 0.05;
+        currentMouse.current.y += (targetMouse.current.y - currentMouse.current.y) * 0.05;
 
-    const loop = () => {
-      currentMouse.current.normX += (targetMouse.current.normX - currentMouse.current.normX) * 0.05;
-      currentMouse.current.normY += (targetMouse.current.normY - currentMouse.current.normY) * 0.05;
-      currentMouse.current.x += (targetMouse.current.x - currentMouse.current.x) * 0.05;
-      currentMouse.current.y += (targetMouse.current.y - currentMouse.current.y) * 0.05;
+        setMouse({
+          x: currentMouse.current.x,
+          y: currentMouse.current.y,
+          normX: currentMouse.current.normX,
+          normY: currentMouse.current.normY
+        });
 
-      setMouse({
-        x: currentMouse.current.x,
-        y: currentMouse.current.y,
-        normX: currentMouse.current.normX,
-        normY: currentMouse.current.normY
-      });
+        animRef.current = requestAnimationFrame(loop);
+      };
 
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
       animRef.current = requestAnimationFrame(loop);
-    };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    animRef.current = requestAnimationFrame(loop);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-    };
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        if (animRef.current) cancelAnimationFrame(animRef.current);
+      };
+    }
   }, []);
 
   if (!mounted) return null;

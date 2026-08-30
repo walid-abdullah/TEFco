@@ -1721,6 +1721,18 @@ input::placeholder, textarea::placeholder {
   html, body {
     overflow-x: hidden !important;
     width: 100% !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* GPU Rendering Optimization for Mobile (Remove Lag & Stutter) */
+  * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .glass-card, .apple-glass-panel, .floating-dock-bar, .navbar {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
   }
 
   .container {
