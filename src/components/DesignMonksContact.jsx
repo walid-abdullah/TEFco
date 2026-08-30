@@ -213,12 +213,15 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
           </div>
         </div>
       ) : (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1.35fr',
-          gap: '35px',
-          alignItems: 'center'
-        }}>
+        <div 
+          className="contact-main-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '35px',
+            alignItems: 'start'
+          }}
+        >
           {/* LEFT COLUMN: Headings, Value Points & Mini Video Player */}
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
