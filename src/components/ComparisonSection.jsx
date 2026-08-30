@@ -82,102 +82,110 @@ export default function ComparisonSection() {
           </p>
         </div>
 
-        {/* Comparison Table (Musemind Architecture) */}
-        <div className="glass-card reveal-on-scroll" style={{
-          maxWidth: '1050px',
-          margin: '0 auto',
-          borderRadius: '24px',
-          overflow: 'hidden',
-          border: '1px solid var(--glass-border)',
-          boxShadow: 'var(--glass-shadow)'
+        {/* Comparison Table (Musemind Architecture - Mobile Scrollable & Clean) */}
+        <div className="comparison-table-wrapper" style={{
+          width: '100%',
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          paddingBottom: '10px'
         }}>
-          {/* Table Header */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '2.2fr 1.8fr 1.5fr 1.5fr',
-            background: 'var(--card-bg)',
-            borderBottom: '1px solid var(--glass-border)',
-            padding: '24px 20px',
-            alignItems: 'center',
-            fontWeight: '700',
-            fontSize: '1rem'
+          <div className="glass-card reveal-on-scroll" style={{
+            minWidth: '700px',
+            maxWidth: '1050px',
+            margin: '0 auto',
+            borderRadius: '24px',
+            overflow: 'hidden',
+            border: '1px solid var(--glass-border)',
+            boxShadow: 'var(--glass-shadow)'
           }}>
-            <div style={{ color: 'var(--text-muted)' }}>Capability / Factor</div>
+            {/* Table Header */}
             <div style={{
-              color: '#38BDF8',
-              display: 'flex',
+              display: 'grid',
+              gridTemplateColumns: '2.2fr 1.8fr 1.5fr 1.5fr',
+              background: 'var(--card-bg)',
+              borderBottom: '1px solid var(--glass-border)',
+              padding: '24px 20px',
               alignItems: 'center',
-              gap: '8px',
-              fontSize: '1.15rem'
+              fontWeight: '700',
+              fontSize: '1rem'
             }}>
-              <i className="fa-solid fa-crown" style={{ color: '#F59E0B' }}></i>
-              <span>The Editly Foundry</span>
-            </div>
-            <div style={{ color: 'var(--text-secondary)' }}>In-House Full-Time</div>
-            <div style={{ color: 'var(--text-secondary)' }}>Freelancers</div>
-          </div>
-
-          {/* Table Rows */}
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {comparisonData.map((row, idx) => (
-              <div
-                key={idx}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '2.2fr 1.8fr 1.5fr 1.5fr',
-                  padding: '20px 20px',
-                  borderBottom: idx === comparisonData.length - 1 ? 'none' : '1px solid var(--glass-border)',
-                  background: idx % 2 === 0 ? 'transparent' : 'var(--input-bg)',
-                  alignItems: 'center'
-                }}
-              >
-                {/* Feature Name */}
-                <div style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.95rem' }}>
-                  {row.feature}
-                </div>
-
-                {/* Editly Foundry Column (Highlighted) */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)' }}>
-                  <div style={{
-                    width: '24px',
-                    height: '24px',
-                    borderRadius: '50%',
-                    background: 'rgba(16, 185, 129, 0.2)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#10B981',
-                    fontSize: '0.8rem',
-                    flexShrink: 0
-                  }}>
-                    <i className="fa-solid fa-check"></i>
-                  </div>
-                  <span style={{ fontWeight: '600', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
-                    {row.editlyText}
-                  </span>
-                </div>
-
-                {/* In-House Column */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                  {row.inHouse ? (
-                    <i className="fa-solid fa-check" style={{ color: '#94A3B8' }}></i>
-                  ) : (
-                    <i className="fa-solid fa-xmark" style={{ color: '#EF4444' }}></i>
-                  )}
-                  <span>{row.inHouseText}</span>
-                </div>
-
-                {/* Freelancer Column */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                  {row.freelance ? (
-                    <i className="fa-solid fa-check" style={{ color: '#94A3B8' }}></i>
-                  ) : (
-                    <i className="fa-solid fa-xmark" style={{ color: '#EF4444' }}></i>
-                  )}
-                  <span>{row.freelanceText}</span>
-                </div>
+              <div style={{ color: 'var(--text-muted)' }}>Capability / Factor</div>
+              <div style={{
+                color: '#38BDF8',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '1.15rem'
+              }}>
+                <i className="fa-solid fa-crown" style={{ color: '#F59E0B' }}></i>
+                <span>The Editly Foundry</span>
               </div>
-            ))}
+              <div style={{ color: 'var(--text-secondary)' }}>In-House Full-Time</div>
+              <div style={{ color: 'var(--text-secondary)' }}>Freelancers</div>
+            </div>
+
+            {/* Table Rows */}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {comparisonData.map((row, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '2.2fr 1.8fr 1.5fr 1.5fr',
+                    padding: '20px 20px',
+                    borderBottom: idx === comparisonData.length - 1 ? 'none' : '1px solid var(--glass-border)',
+                    background: idx % 2 === 0 ? 'transparent' : 'var(--input-bg)',
+                    alignItems: 'center'
+                  }}
+                >
+                  {/* Feature Name */}
+                  <div style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                    {row.feature}
+                  </div>
+
+                  {/* Editly Foundry Column (Highlighted) */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)' }}>
+                    <div style={{
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '50%',
+                      background: 'rgba(16, 185, 129, 0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#10B981',
+                      fontSize: '0.8rem',
+                      flexShrink: 0
+                    }}>
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                    <span style={{ fontWeight: '600', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
+                      {row.editlyText}
+                    </span>
+                  </div>
+
+                  {/* In-House Column */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                    {row.inHouse ? (
+                      <i className="fa-solid fa-check" style={{ color: '#94A3B8' }}></i>
+                    ) : (
+                      <i className="fa-solid fa-xmark" style={{ color: '#EF4444' }}></i>
+                    )}
+                    <span>{row.inHouseText}</span>
+                  </div>
+
+                  {/* Freelancer Column */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                    {row.freelance ? (
+                      <i className="fa-solid fa-check" style={{ color: '#94A3B8' }}></i>
+                    ) : (
+                      <i className="fa-solid fa-xmark" style={{ color: '#EF4444' }}></i>
+                    )}
+                    <span>{row.freelanceText}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

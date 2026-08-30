@@ -1892,6 +1892,17 @@ input::placeholder, textarea::placeholder {
     gap: 16px !important;
   }
 
+  /* Hide Floating Bottom Dock on Mobile so it does not block footer or chat */
+  .floating-dock-container {
+    display: none !important;
+  }
+
+  /* Live Chat positioning on Mobile */
+  .live-chat-wrapper {
+    bottom: 20px !important;
+    right: 20px !important;
+  }
+
   /* 11. Founder Section on About Page */
   .about-page-wrapper .glass-card[style*="grid-template-columns"] {
     grid-template-columns: 1fr !important;

@@ -30,14 +30,46 @@ function getEmbedUrl(url) {
 }
 
 export default async function Home() {
-  const query = `*[_type == "homepage"][0]`;
-  const data = await client.fetch(query);
-  
-  const postQuery = `*[_type == "post"] | order(publishedAt desc)[0...3]`;
-  const postData = await client.fetch(postQuery);
+  let data = null;
+  let postData = [];
+  let faqData = [];
+  let logoData = [];
+  let teamData = [];
+  let pricingData = [];
+  let servicesData = [];
+  let portfolioData = [];
+  let testimonialData = [];
 
-  const faqQuery = `*[_type == "faq"] | order(order asc)`;
-  let faqData = await client.fetch(faqQuery);
+  try {
+    const query = `*[_type == "homepage"][0]`;
+    data = await client.fetch(query);
+    
+    const postQuery = `*[_type == "post"] | order(publishedAt desc)[0...3]`;
+    postData = await client.fetch(postQuery);
+
+    const faqQuery = `*[_type == "faq"] | order(order asc)`;
+    faqData = await client.fetch(faqQuery);
+
+    const logoQuery = `*[_type == "clientLogo"] | order(order asc)`;
+    logoData = await client.fetch(logoQuery);
+    
+    const teamQuery = `*[_type == "team"] | order(order asc)`;
+    teamData = await client.fetch(teamQuery);
+    
+    const pricingQuery = `*[_type == "pricing"] | order(order asc)`;
+    pricingData = await client.fetch(pricingQuery);
+    
+    const servicesQuery = `*[_type == "service"]`;
+    servicesData = await client.fetch(servicesQuery);
+    
+    const portfolioQuery = `*[_type == "portfolio"]`;
+    portfolioData = await client.fetch(portfolioQuery);
+    
+    const testimonialQuery = `*[_type == "testimonial"]`;
+    testimonialData = await client.fetch(testimonialQuery);
+  } catch (err) {
+    console.error("Sanity fetch error (using resilient defaults):", err);
+  }
   
   if (!faqData || faqData.length === 0) {
     faqData = [
@@ -64,28 +96,11 @@ export default async function Home() {
     ];
   }
   
-  const logoQuery = `*[_type == "clientLogo"] | order(order asc)`;
-  const logoData = await client.fetch(logoQuery);
+  const foundersData = (teamData || []).filter(member => member.isFounder);
+  const regularTeamData = (teamData || []).filter(member => !member.isFounder);
   
-  const teamQuery = `*[_type == "team"] | order(order asc)`;
-  const teamData = await client.fetch(teamQuery);
-  const foundersData = teamData.filter(member => member.isFounder);
-  const regularTeamData = teamData.filter(member => !member.isFounder);
-  
-  const pricingQuery = `*[_type == "pricing"] | order(order asc)`;
-  const pricingData = await client.fetch(pricingQuery);
-  
-  const servicesQuery = `*[_type == "service"]`;
-  const servicesData = await client.fetch(servicesQuery);
-  
-  const portfolioQuery = `*[_type == "portfolio"]`;
-  const portfolioData = await client.fetch(portfolioQuery);
-  
-  const testimonialQuery = `*[_type == "testimonial"]`;
-  const testimonialData = await client.fetch(testimonialQuery);
-  
-  const videoTestimonials = testimonialData.filter(t => t.isVideo);
-  const textTestimonials = testimonialData.filter(t => !t.isVideo);
+  const videoTestimonials = (testimonialData || []).filter(t => t.isVideo);
+  const textTestimonials = (testimonialData || []).filter(t => !t.isVideo);
   
   const {
     heroBadge = 'Premium Video Production Agency',
