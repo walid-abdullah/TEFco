@@ -81,15 +81,11 @@ export async function POST(request) {
     if (data.email) {
       try {
         const clientAutoReply = {
-          from: `"Walid Abdullah | The Editly Foundry Co." <${process.env.EMAIL_USER}>`,
+          from: `"The Editly Foundry Co." <${process.env.EMAIL_USER}>`,
           to: data.email,
-          replyTo: `theeditlyfoundry@gmail.com`,
+          replyTo: process.env.EMAIL_USER,
           subject: `Your Project Brief with The Editly Foundry Co.`,
-          text: `Hi ${fullName},\n\nThank you for reaching out to The Editly Foundry Co. We have received your project brief.\n\nOur Executive Producer Walid Abdullah is currently reviewing your content.\n\nTo skip the back-and-forth and lock in your 48-hour turnaround, book a quick 15-minute slot on Walid's calendar here:\nhttps://calendly.com/w-abdullah5588/30min\n\nLooking forward to speaking with you!\n\nWalid Abdullah\nFounder & CEO, The Editly Foundry Co.\nWhatsApp: +880 1886 755 888`,
-          headers: {
-            'X-Entity-Ref-ID': `${Date.now()}`,
-            'X-Auto-Response-Suppress': 'OOF, AutoReply'
-          },
+          text: `Hi ${fullName},\n\nThank you for reaching out to The Editly Foundry Co. We have received your project brief.\n\nOur Executive Producer Walid Abdullah is currently reviewing your content.\n\nTo lock in your 48-hour turnaround, you can book a quick 15-minute slot on Walid's calendar here:\nhttps://calendly.com/w-abdullah5588/30min\n\nLooking forward to speaking with you!\n\nWalid Abdullah\nFounder & CEO, The Editly Foundry Co.\nWhatsApp: +880 1886 755 888`,
           html: `
             <!DOCTYPE html>
             <html>
@@ -158,7 +154,7 @@ export async function POST(request) {
         };
 
         await transporter.sendMail(clientAutoReply);
-        console.log(`[Auto-Responder Sent] Delivered confirmation & Calendly invite to ${data.email}`);
+        console.log(`[Auto-Responder Sent] Successfully delivered confirmation & Calendly invite to ${data.email}`);
       } catch (clientMailError) {
         console.error("Failed to send auto-reply to client:", clientMailError);
       }
