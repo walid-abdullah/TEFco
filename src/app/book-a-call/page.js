@@ -78,7 +78,7 @@ export default function BookACallPage() {
 
         {/* OFFICIAL CALENDLY INLINE EMBEDDED WIDGET CONTAINER */}
         <div 
-          className="glass-card reveal-on-scroll" 
+          className="glass-card" 
           style={{
             borderRadius: '24px',
             overflow: 'hidden',
@@ -91,12 +91,15 @@ export default function BookACallPage() {
             position: 'relative'
           }}
         >
-          {/* Official Calendly Inline Widget */}
-          <div 
-            className="calendly-inline-widget" 
-            data-url={`${calendlyUrl}?hide_landing_page_details=0&hide_gdpr_banner=1&background_color=070d18&text_color=ffffff&primary_color=2563eb`} 
-            style={{ minWidth: '320px', height: '700px', width: '100%' }}
-          ></div>
+          {/* Robust Direct Calendly Embed iframe */}
+          <iframe
+            src={`${calendlyUrl}?hide_landing_page_details=0&hide_gdpr_banner=1&background_color=070d18&text_color=ffffff&primary_color=2563eb`}
+            width="100%"
+            height="720px"
+            frameBorder="0"
+            title="Book a Strategy Session with Walid Abdullah"
+            style={{ minWidth: '320px', width: '100%', height: '720px', border: 'none' }}
+          ></iframe>
         </div>
 
         {/* Reassurance Features */}
