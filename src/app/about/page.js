@@ -188,6 +188,10 @@ export default function AboutPage() {
                 <img
                   src={leader.image}
                   alt={leader.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="420"
+                  height="420"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>

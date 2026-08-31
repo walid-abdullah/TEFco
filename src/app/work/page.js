@@ -173,6 +173,10 @@ export default function WorkPage() {
                 <img 
                   src={proj.thumbnail} 
                   alt={proj.title} 
+                  loading="lazy"
+                  decoding="async"
+                  width="640"
+                  height="360"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} 
                 />
                 
