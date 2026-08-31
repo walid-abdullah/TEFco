@@ -1,9 +1,31 @@
 "use client";
 import React, { useState } from 'react';
+import { useExperiment } from '@/lib/experiments';
 
 export default function ContactSection() {
   const [activeTab, setActiveTab] = useState('book'); // 'book' or 'message'
   const [showNotification, setShowNotification] = useState(false);
+  const contactVariant = useExperiment('contact_section_copy_variant', ['control', 'growth_focus', 'trust_focus'], 'control');
+  const contactCopy = {
+    control: {
+      title: "Let's Build Something ",
+      highlight: 'Great',
+      description: "Choose how you'd like to connect with us.",
+      bookCta: 'Request Strategy Call',
+    },
+    growth_focus: {
+      title: 'Turn Attention Into ',
+      highlight: 'Pipeline',
+      description: 'Tell us what you want to grow, and we’ll map the fastest path to more qualified leads.',
+      bookCta: 'Get My Growth Audit',
+    },
+    trust_focus: {
+      title: 'Book a Quick ',
+      highlight: 'Strategy Call',
+      description: 'We reply quickly, clarify the bottleneck, and recommend the most effective production path for your brand.',
+      bookCta: 'Book a Call',
+    },
+  }[contactVariant];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,9 +89,9 @@ export default function ContactSection() {
 
       <div className="container">
         <div className="section-header text-center reveal-on-scroll" style={{ marginBottom: '50px' }}>
-          <h2 className="section-title" style={{ fontSize: '3.5rem' }}>Let's Build Something <span className="combination-font">Great</span></h2>
+          <h2 className="section-title" style={{ fontSize: '3.5rem' }}>{contactCopy.title}<span className="combination-font">{contactCopy.highlight}</span></h2>
           <p className="section-description" style={{ maxWidth: '600px', margin: '0 auto', color: 'var(--text-secondary)' }}>
-            Choose how you'd like to connect with us.
+            {contactCopy.description}
           </p>
         </div>
 
@@ -192,7 +214,7 @@ export default function ContactSection() {
                     <textarea name="bottleneck" rows="3" placeholder="Tell us what's holding you back..." required style={{ width: '100%', padding: '12px 15px', border: '1px solid var(--glass-border)', borderRadius: '8px', background: 'var(--bg-secondary)', color: 'var(--text-primary)', outline: 'none', resize: 'vertical', transition: 'border-color 0.3s' }}></textarea>
                   </div>
                   <button type="submit" className="btn btn-primary pulse-anim" style={{ width: '100%', justifyContent: 'center', padding: '15px', background: 'linear-gradient(135deg, #1976D2 0%, #0d47a1 100%)', border: 'none' }}>
-                    Request Strategy Call
+                    {contactCopy.bookCta}
                   </button>
                 </form>
               ) : (

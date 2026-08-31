@@ -18,9 +18,17 @@ export default function GlassMeshBackground() {
   useEffect(() => {
     setMounted(true);
 
-    // Only run continuous 60fps mouse tracking if on desktop non-touch device
+    const handleScroll = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const nextProgress = scrollable > 0 ? window.scrollY / scrollable : 0;
+      setScrollProgress(Math.min(Math.max(nextProgress, 0), 1));
+    };
+
     const isTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     if (!isTouch && window.innerWidth > 768) {
       const handleMouseMove = (e) => {
         const normX = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -54,17 +62,30 @@ export default function GlassMeshBackground() {
 
       return () => {
         window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('scroll', handleScroll);
         if (animRef.current) cancelAnimationFrame(animRef.current);
       };
     }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   if (!mounted) return null;
 
+  const paletteMix = Math.min(1, scrollProgress * 1.4);
+  const lightBackground = isLight
+    ? `radial-gradient(ellipse at ${32 + mouse.normX * 18}% ${18 + mouse.normY * 16}%, rgba(255,255,255,0.94) 0%, rgba(227,240,255,0.88) 28%, rgba(241,246,253,0.82) 55%, rgba(248,250,252,0.92) 100%)`
+    : `radial-gradient(ellipse at ${52 + mouse.normX * 18}% ${20 + mouse.normY * 16}%, rgba(14, 116, 144, 0.26) 0%, rgba(15, 23, 42, 0.8) 28%, rgba(3, 7, 18, 0.96) 60%, rgba(2, 6, 23, 1) 100%)`;
+
+  const cyanPulse = isLight ? `rgba(59, 130, 246, ${0.15 + paletteMix * 0.2})` : `rgba(34, 211, 238, ${0.2 + paletteMix * 0.30})`;
+  const violetPulse = isLight ? `rgba(124, 58, 237, ${0.12 + paletteMix * 0.18})` : `rgba(168, 85, 247, ${0.18 + paletteMix * 0.22})`;
+
   // 3D Perspective Angles for the Sculptures
   const rotateY = mouse.normX * 14;
   const rotateX = -mouse.normY * 10;
-  const transX = mouse.normX * 20;
+  const transX = mouse.normX * 20 + (scrollProgress - 0.5) * 40;
   const transY = mouse.normY * 15 - scrollProgress * 90;
 
   return (
@@ -80,10 +101,9 @@ export default function GlassMeshBackground() {
         zIndex: 0,
         overflow: 'hidden',
         perspective: '1300px',
-        background: isLight 
-          ? 'radial-gradient(ellipse at 70% 25%, #FFFFFF 0%, #F1F6FD 45%, #E5EFFB 100%)'
-          : 'radial-gradient(ellipse at 70% 25%, #0C1736 0%, #060E22 45%, #030610 100%)',
-        transition: 'background 0.5s ease'
+        background: lightBackground,
+        transition: 'background 0.5s ease, opacity 0.25s ease',
+        opacity: 1,
       }}
       aria-hidden="true"
     >
@@ -153,132 +173,14 @@ export default function GlassMeshBackground() {
           width: '650px',
           height: '650px',
           borderRadius: '50%',
-          background: isLight
-            ? 'radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(244, 63, 94, 0.06) 45%, transparent 70%)'
-            : 'radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(139, 92, 246, 0.14) 45%, transparent 70%)',
-          filter: 'blur(90px)'
+          background: `radial-gradient(circle, ${cyanPulse} 0%, ${violetPulse} 38%, transparent 72%)`,
+          filter: 'blur(90px)',
+          transform: `translate3d(${mouse.normX * 18}px, ${mouse.normY * 14}px, 0) scale(${1 + paletteMix * 0.12})`,
+          transition: 'background 0.5s ease, transform 0.35s ease-out'
         }}
       />
 
-      {/* =========================================================================
-          CUSTOM 3D IRIDESCENT GLASS SCULPTURE (Signature EF Foundry Geometry)
-          ========================================================================= */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '8%',
-          right: '2%',
-          width: '620px',
-          height: '540px',
-          transform: `translate3d(${transX}px, ${transY}px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-          transformStyle: 'preserve-3d',
-          transition: 'transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1)',
-          willChange: 'transform'
-        }}
-      >
-        <svg
-          viewBox="0 0 600 520"
-          style={{ width: '100%', height: '100%', overflow: 'visible' }}
-          filter="url(#efSculptureShadow)"
-        >
-          {/* -------------------------------------------------------------
-              FACET 1: Upper Kinetic Glass Wing (Foundry Ascent Slab)
-              ------------------------------------------------------------- */}
-          {/* 3D Extrusion Side Bevel */}
-          <polygon
-            points="180,60 160,85 460,185 480,160"
-            fill="url(#efPrismRainbowBevel)"
-          />
-          <polygon
-            points="480,160 460,185 540,310 560,285"
-            fill="url(#efPrismRainbowRev)"
-          />
 
-          {/* Front Main Glass Face */}
-          <polygon
-            points="180,60 480,160 560,285 420,240"
-            fill={isLight ? "url(#efGlassFaceLight)" : "url(#efGlassFaceDark)"}
-            stroke={isLight ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)"}
-            strokeWidth="1.5"
-          />
-
-          {/* Specular White Rim Highlight Line */}
-          <line
-            x1="180"
-            y1="60"
-            x2="560"
-            y2="285"
-            stroke="url(#efSpecularRidge)"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-
-          {/* -------------------------------------------------------------
-              FACET 2: Central Interlocking Rhombus Prism (The Foundry Core)
-              ------------------------------------------------------------- */}
-          {/* 3D Extrusion Bottom Bevel with Rainbow Dispersion */}
-          <polygon
-            points="280,240 260,265 420,445 440,420"
-            fill="url(#efPrismRainbowBevel)"
-          />
-          <polygon
-            points="140,240 120,265 280,445 300,420"
-            fill="url(#efPrismRainbowRev)"
-          />
-
-          {/* Front Main Glass Face */}
-          <polygon
-            points="140,240 300,160 440,340 280,420"
-            fill={isLight ? "url(#efGlassFaceLight)" : "url(#efGlassFaceDark)"}
-            stroke={isLight ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)"}
-            strokeWidth="1.5"
-          />
-
-          {/* Specular White Highlight Ridge */}
-          <line
-            x1="300"
-            y1="160"
-            x2="440"
-            y2="340"
-            stroke="url(#efSpecularRidge)"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-
-          {/* -------------------------------------------------------------
-              FACET 3: Dynamic Lower Horizon Blade (Anchor Facet)
-              ------------------------------------------------------------- */}
-          <polygon
-            points="320,380 300,405 480,465 500,440"
-            fill="url(#efPrismRainbowBevel)"
-          />
-
-          {/* Front Face */}
-          <polygon
-            points="320,380 500,440 420,490 260,430"
-            fill={isLight ? "url(#efGlassFaceLight)" : "url(#efGlassFaceDark)"}
-            stroke={isLight ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)"}
-            strokeWidth="1.5"
-          />
-
-          {/* Specular Ridge */}
-          <line
-            x1="320"
-            y1="380"
-            x2="500"
-            y2="440"
-            stroke="url(#efSpecularRidge)"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-
-          {/* Focal Specular Star Points */}
-          <circle cx="180" cy="60" r="3.5" fill="#FFFFFF" opacity="0.95" />
-          <circle cx="560" cy="285" r="4" fill="#FFFFFF" opacity="0.95" />
-          <circle cx="300" cy="160" r="3.5" fill="#38BDF8" opacity="0.9" />
-          <circle cx="440" cy="340" r="3.5" fill="#F43F5E" opacity="0.9" />
-        </svg>
-      </div>
 
       {/* Luminous Bottom Horizon Reflection Line */}
       <div
@@ -289,8 +191,8 @@ export default function GlassMeshBackground() {
           right: 0,
           height: '1px',
           background: isLight
-            ? 'linear-gradient(90deg, transparent 0%, rgba(37, 99, 235, 0.2) 30%, rgba(139, 92, 246, 0.25) 70%, transparent 100%)'
-            : 'linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.3) 30%, rgba(139, 92, 246, 0.3) 70%, transparent 100%)'
+            ? `linear-gradient(90deg, transparent 0%, rgba(37, 99, 235, ${0.12 + paletteMix * 0.18}) 20%, rgba(124, 58, 237, ${0.16 + paletteMix * 0.18}) 60%, transparent 100%)`
+            : `linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, ${0.2 + paletteMix * 0.20}) 20%, rgba(139, 92, 246, ${0.22 + paletteMix * 0.18}) 60%, transparent 100%)`
         }}
       />
 

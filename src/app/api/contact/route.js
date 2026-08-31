@@ -12,70 +12,152 @@ export async function POST(request) {
       return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
     }
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    // Formatting the email content
+    // Formatting the lead content
     const fullName = data.firstName || data.name || 'Unknown Client';
-    
-    const mailOptions = {
-      from: `"${fullName}" <${data.email}>`,
-      to: process.env.EMAIL_USER, // Send to yourself
-      replyTo: data.email,
-      subject: `New Request: ${fullName}`,
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h2 style="color: #2563EB;">New ${data.message ? 'Message' : 'Booking Request'}</h2>
-          <p>You have received a new request from your website.</p>
-          
-          <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; width: 35%;">Name</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${fullName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Email</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${data.email}</td>
-            </tr>
-            ${data.whatsapp ? `
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">WhatsApp</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${data.whatsapp}</td>
-            </tr>` : ''}
-            ${data.service ? `
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Interested In</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${data.service}</td>
-            </tr>` : ''}
-            ${data.channelLink ? `
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Channel / Brand</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;"><a href="${data.channelLink}">${data.channelLink}</a></td>
-            </tr>` : ''}
-            ${data.needs || data.bottleneck ? `
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; vertical-align: top;">Bottleneck</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; line-height: 1.6;">${data.needs || data.bottleneck}</td>
-            </tr>` : ''}
-            ${data.message ? `
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; vertical-align: top;">Message</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; line-height: 1.6;">${data.message}</td>
-            </tr>` : ''}
-          </table>
-          
-          <p style="margin-top: 30px; font-size: 0.9em; color: #888;">This email was sent automatically from your Editly Foundry website.</p>
-        </div>
-      `,
-    };
+    const cleanPhone = String(data.whatsapp || data.phone || '').replace(/[^0-9]/g, '');
+    const formattedPhone = (cleanPhone.startsWith('01') && cleanPhone.length === 11) ? ('88' + cleanPhone) : cleanPhone;
 
-    // 1. Send Internal Lead Notification to Founder (Walid)
-    await transporter.sendMail(mailOptions);
+    // 1. INSTANT DUAL WHATSAPP DISPATCH (Founder Alert + Client Confirmation)
+    if (process.env.WHATSAPP_API_TOKEN && process.env.WHATSAPP_PHONE_NUMBER_ID) {
+      const founderAlertPhone = '8801886755888';
+      const founderLeadMsg = `*NEW PROJECT INQUIRY — THE EDITLY FOUNDRY CO.*\n\n` +
+        `Client Name: ${fullName}\n` +
+        `Email: ${data.email || 'N/A'}\n` +
+        `WhatsApp: ${data.whatsapp || data.phone || 'N/A'}\n` +
+        `Budget: ${data.budget || 'N/A'}\n` +
+        `Service: ${data.service || data.needs || 'N/A'}\n` +
+        `Channel / Brand: ${data.channelLink || 'N/A'}\n` +
+        (data.message ? `Details: ${data.message}\n\n` : '\n') +
+        `Direct WhatsApp Client Link:\nhttps://wa.me/${formattedPhone}`;
+
+      // A. Send Full Lead Alert to Founder
+      try {
+        await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            messaging_product: 'whatsapp',
+            recipient_type: 'individual',
+            to: founderAlertPhone,
+            type: 'text',
+            text: { preview_url: false, body: founderLeadMsg }
+          })
+        });
+      } catch (fErr) {
+        console.error('Founder WhatsApp notification error:', fErr);
+      }
+
+      // B. Send Client Instant Confirmation Message
+      if (formattedPhone) {
+        const actualCalendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/w-abdullah5588/30min';
+        const walidDirectWhatsApp = 'https://wa.me/8801886755888';
+
+        const clientWhatsAppMsg = `Hi ${fullName},\n\n` +
+          `Thank you for submitting your project brief with *The Editly Foundry Co.* We have successfully logged your inquiry regarding *"${data.service || data.needs || 'Video Post-Production'}"*.\n\n` +
+          `Our Executive Producer *Walid Abdullah* is currently reviewing your content and requirements.\n\n` +
+          `1. Direct WhatsApp Chat with Walid:\n` +
+          `${walidDirectWhatsApp}\n\n` +
+          `2. Or Book a 15-Min Video Strategy Call:\n` +
+          `${actualCalendlyUrl}\n\n` +
+          `We look forward to working with you.\n\n` +
+          `_The Editly Foundry Co. Production Desk_\n` +
+          `📍 United States • Dubai • Dhaka`;
+
+        try {
+          // Deliver confirmation to client
+          await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              messaging_product: 'whatsapp',
+              recipient_type: 'individual',
+              to: formattedPhone,
+              type: 'text',
+              text: { preview_url: false, body: clientWhatsAppMsg }
+            })
+          });
+        } catch (cErr) {
+          console.error('Client WhatsApp notification error:', cErr);
+        }
+      }
+    }
+
+    // 2. Setup Email Transporter
+    let transporter = null;
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+    }
+
+    if (transporter) {
+      try {
+        const mailOptions = {
+          from: `"${fullName}" <${data.email}>`,
+          to: process.env.EMAIL_USER,
+          replyTo: data.email,
+          subject: `New Request: ${fullName}`,
+          html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+              <h2 style="color: #2563EB;">New ${data.message ? 'Message' : 'Booking Request'}</h2>
+              <p>You have received a new request from your website.</p>
+              
+              <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; width: 35%;">Name</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;">${fullName}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Email</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;">${data.email}</td>
+                </tr>
+                ${data.whatsapp ? `
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">WhatsApp</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;">${data.whatsapp}</td>
+                </tr>` : ''}
+                ${data.service ? `
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Interested In</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;">${data.service}</td>
+                </tr>` : ''}
+                ${data.channelLink ? `
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Channel / Brand</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee;"><a href="${data.channelLink}">${data.channelLink}</a></td>
+                </tr>` : ''}
+                ${data.needs || data.bottleneck ? `
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; vertical-align: top;">Bottleneck</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee; line-height: 1.6;">${data.needs || data.bottleneck}</td>
+                </tr>` : ''}
+                ${data.message ? `
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; vertical-align: top;">Message</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee; line-height: 1.6;">${data.message}</td>
+                </tr>` : ''}
+              </table>
+              
+              <p style="margin-top: 30px; font-size: 0.9em; color: #888;">This email was sent automatically from your Editly Foundry website.</p>
+            </div>
+          `,
+        };
+
+        await transporter.sendMail(mailOptions);
+      } catch (mailErr) {
+        console.error('Founder Email notification error:', mailErr);
+      }
+    }
 
     // 2. Send Instant Branded Auto-Responder & Calendly Link to the Client Email
     if (data.email) {
@@ -117,12 +199,21 @@ export async function POST(request) {
                     Our Executive Producer Walid Abdullah is currently reviewing your channel and brand details. To skip the email back-and-forth and lock in your 48-hour production turnaround, you can grab a quick 15-minute slot directly on Walid's calendar:
                   </p>
 
-                  <!-- Direct Action Button -->
-                  <div style="text-align: center; margin: 35px 0;">
+                  <!-- Sleek & Classy Action Buttons -->
+                  <div style="text-align: center; margin: 30px 0;">
+                    <!-- Primary Blue Calendly Button -->
                     <a href="${process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/w-abdullah5588/30min'}" 
-                       style="display: inline-block; padding: 16px 36px; background: #2563eb; color: #ffffff; font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 10px;">
-                      Book Your 15-Min Strategy Call &rarr;
+                       style="display: inline-block; padding: 13px 28px; background: #2563eb; color: #ffffff; font-size: 14px; font-weight: 700; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);">
+                      Book 15-Min Strategy Call &rarr;
                     </a>
+                    
+                    <!-- Sleek WhatsApp Sub-Link / Button -->
+                    <div style="margin-top: 14px;">
+                      <a href="https://wa.me/8801886755888" 
+                         style="display: inline-block; padding: 7px 18px; background: #ecfdf5; border: 1px solid #a7f3d0; color: #059669; font-size: 13px; font-weight: 700; text-decoration: none; border-radius: 20px;">
+                        <span style="font-size: 14px; margin-right: 4px;">💬</span> Chat Directly on WhatsApp &rarr;
+                      </a>
+                    </div>
                   </div>
 
                   <!-- 3 Step Next Box -->
@@ -160,146 +251,7 @@ export async function POST(request) {
       }
     }
 
-    // 3. Send Instant WhatsApp Confirmation to Client (via WhatsApp Cloud API or Webhook)
-    if (data.whatsapp) {
-      try {
-        let cleanPhone = String(data.whatsapp).replace(/[^0-9]/g, '');
-        // Auto convert BD local 018... to 88018... if country code wasn't included
-        if (cleanPhone.startsWith('01') && cleanPhone.length === 11) {
-          cleanPhone = '88' + cleanPhone;
-        }
-
-        const actualCalendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/w-abdullah5588/30min';
-        const walidDirectWhatsApp = 'https://wa.me/8801886755888';
-
-        const clientWhatsAppMsg = `Hi ${fullName},\n\n` +
-          `Thank you for submitting your project brief with *The Editly Foundry Co.* We have successfully logged your inquiry regarding *"${data.service || data.needs || 'Video Post-Production'}"*.\n\n` +
-          `Our Executive Producer *Walid Abdullah* is currently reviewing your content and requirements.\n\n` +
-          `1. Direct WhatsApp Chat with Walid:\n` +
-          `${walidDirectWhatsApp}\n\n` +
-          `2. Or Book a 15-Min Video Strategy Call:\n` +
-          `${actualCalendlyUrl}\n\n` +
-          `We look forward to working with you.\n\n` +
-          `_The Editly Foundry Co. Production Desk_\n` +
-          `📍 United States • Dubai • Dhaka`;
-
-        console.log(`[WhatsApp Auto-Ping Triggered] Prepared message to client ${cleanPhone}:`);
-        console.log(clientWhatsAppMsg);
-
-        // If WhatsApp Business Cloud API credentials are set in environment
-        if (process.env.WHATSAPP_API_TOKEN && process.env.WHATSAPP_PHONE_NUMBER_ID) {
-          // A. Send Lead Alert Message to WALID'S PERSONAL WHATSAPP (8801886755888)
-          const founderAlertPhone = '8801886755888';
-          const founderLeadMsg = `*NEW PROJECT INQUIRY — THE EDITLY FOUNDRY CO.*\n\n` +
-            `Client Name: ${fullName}\n` +
-            `Email: ${data.email || 'N/A'}\n` +
-            `WhatsApp: ${data.whatsapp || data.phone || 'N/A'}\n` +
-            `Budget: ${data.budget || 'N/A'}\n` +
-            `Service: ${data.service || data.needs || 'N/A'}\n` +
-            `Channel: ${data.channelLink || 'N/A'}\n` +
-            (data.message ? `Details: ${data.message}\n\n` : '\n') +
-            `Direct WhatsApp Client Link:\nhttps://wa.me/${cleanPhone}`;
-
-          try {
-            const founderRes = await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
-              method: 'POST',
-              headers: {
-                'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                messaging_product: 'whatsapp',
-                recipient_type: 'individual',
-                to: founderAlertPhone,
-                type: 'text',
-                text: { preview_url: false, body: founderLeadMsg }
-              })
-            });
-            const founderResult = await founderRes.json();
-            console.log(`[Founder WhatsApp Alert Response]`, founderResult);
-
-            if (founderResult.error) {
-              await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
-                method: 'POST',
-                headers: {
-                  'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  messaging_product: 'whatsapp',
-                  to: founderAlertPhone,
-                  type: 'template',
-                  template: {
-                    name: 'hello_world',
-                    language: { code: 'en_US' }
-                  }
-                })
-              });
-            }
-          } catch (founderAlertErr) {
-            console.error("Failed to send lead alert to Founder WhatsApp:", founderAlertErr);
-          }
-
-          // B. Send Instant Confirmation Message to CLIENT'S WHATSAPP
-          // We send using the official approved template client_project_confirmation
-          const serviceName = data.service || data.needs || 'Video Post-Production';
-
-          const templateRes = await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              messaging_product: 'whatsapp',
-              recipient_type: 'individual',
-              to: cleanPhone,
-              type: 'template',
-              template: {
-                name: 'client_project_confirmation',
-                language: { code: 'en_US' },
-                components: [
-                  {
-                    type: 'body',
-                    parameters: [
-                      { type: 'text', text: fullName },
-                      { type: 'text', text: serviceName }
-                    ]
-                  }
-                ]
-              }
-            })
-          });
-          const templateResult = await templateRes.json();
-          console.log(`[WhatsApp Template Client Response]`, templateResult);
-
-          // If template is still in review or fails, try direct text fallback
-          if (templateResult.error) {
-            console.log(`[WhatsApp Template In Review / Fallback Triggered]:`, templateResult.error.message);
-            const waRes = await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
-              method: 'POST',
-              headers: {
-                'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                messaging_product: 'whatsapp',
-                recipient_type: 'individual',
-                to: cleanPhone,
-                type: 'text',
-                text: { preview_url: true, body: clientWhatsAppMsg }
-              })
-            });
-            const waResult = await waRes.json();
-            console.log(`[WhatsApp Direct Text Fallback Response]`, waResult);
-          }
-        }
-      } catch (waError) {
-        console.error("Failed to send automated WhatsApp message:", waError);
-      }
-    }
-    
-    // Attempt to save to Sanity CMS if a write token is provided
+    // 4. Attempt to save to Sanity CMS if a write token is provided
     if (process.env.SANITY_API_TOKEN) {
       try {
         const sanityClient = createClient({
@@ -334,9 +286,9 @@ export async function POST(request) {
       console.log("SANITY_API_TOKEN is not set. Skipping saving lead to Sanity.");
     }
 
-    return NextResponse.json({ message: "Email sent successfully" }, { status: 200 });
+    return NextResponse.json({ message: "Inquiry processed successfully" }, { status: 200 });
   } catch (error) {
-    console.error("Error sending email:", error);
-    return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+    console.error("Error processing lead inquiry:", error);
+    return NextResponse.json({ error: "Failed to process inquiry" }, { status: 500 });
   }
 }

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { trackEvent } from '@/lib/analytics';
 
 export default function BookingFormClient({ isFounder = false }) {
   const [step, setStep] = useState(1);
@@ -13,6 +14,11 @@ export default function BookingFormClient({ isFounder = false }) {
 
   // Generate next 5 weekdays including today
   useEffect(() => {
+    trackEvent('booking_page_view', {
+      is_founder: isFounder,
+      page_path: '/book-a-call',
+    });
+
     const dates = [];
     let d = new Date(); // Start from today
     
@@ -54,6 +60,16 @@ export default function BookingFormClient({ isFounder = false }) {
       });
 
       if (response.ok) {
+        const result = await response.json().catch(() => ({}));
+        trackEvent('booking_form_submit', {
+          service: payload.service || payload.needs || 'unknown',
+          budget: payload.budget || 'not_set',
+          method: 'booking_form',
+          success: true,
+          email_status: result.emailStatus || 'unknown',
+          whatsapp_status: result.whatsappStatus || 'unknown',
+        });
+
         setShowNotification(true);
         setTimeout(() => {
           setShowNotification(false);

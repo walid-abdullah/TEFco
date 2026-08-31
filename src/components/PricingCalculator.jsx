@@ -45,6 +45,11 @@ export default function PricingCalculator() {
   const inHouseCost = 11500;
   const monthlySavings = Math.max(0, inHouseCost - monthlyFoundryPrice);
   const annualSavings = monthlySavings * 12;
+  const serviceSummary = selectedFormats
+    .map((formatId) => formats.find((item) => item.id === formatId)?.name)
+    .filter(Boolean)
+    .join(', ') || 'Video Editing';
+  const bookCallHref = `/book-a-call?source=calculator&service=${encodeURIComponent(serviceSummary)}&volume=${videoCount}&turnaround=${turnaround}&budget=${encodeURIComponent(`$${monthlyFoundryPrice.toLocaleString()}/mo`)}`;
 
   return (
     <section className="section-padding" style={{ position: 'relative' }}>
@@ -60,7 +65,7 @@ export default function PricingCalculator() {
             Calculate Your Output & <span className="combination-font">Annual Savings</span>
           </h2>
           <p className="section-description" style={{ maxWidth: '750px', margin: '0 auto', fontSize: '1.05rem', color: 'var(--text-secondary)' }}>
-            See exactly how much you save with The Editly Foundry Co.'s dedicated post-production pod compared to hiring full-time in-house editors.
+            See exactly how much you save with The Editly Foundry Co. dedicated post-production pod compared to hiring full-time in-house editors.
           </p>
         </div>
 
@@ -309,8 +314,12 @@ export default function PricingCalculator() {
             {/* Action Buttons */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <Link 
-                href="/contact" 
+                href={bookCallHref}
                 className="btn btn-primary btn-lg"
+                data-analytics-id="pricing_calculator_cta"
+                data-analytics-label="Lock In This Retainer"
+                data-analytics-location="pricing_calculator"
+                data-analytics-value={monthlyFoundryPrice}
                 style={{ width: '100%', textAlign: 'center', borderRadius: '12px', padding: '14px', fontWeight: '800', fontSize: '0.95rem' }}
               >
                 <span>Lock In This Retainer ➔</span>
@@ -321,6 +330,10 @@ export default function PricingCalculator() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-outline"
+                data-analytics-id="pricing_whatsapp_cta"
+                data-analytics-label="Discuss Custom Budget with Walid"
+                data-analytics-location="pricing_calculator"
+                data-analytics-value={monthlyFoundryPrice}
                 style={{ width: '100%', textAlign: 'center', borderRadius: '12px', padding: '12px', color: '#22C55E', borderColor: 'rgba(34, 197, 94, 0.4)', fontSize: '0.88rem' }}
               >
                 <i className="fa-brands fa-whatsapp" style={{ marginRight: '8px' }}></i>

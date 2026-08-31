@@ -10,6 +10,9 @@ import BenefitsBento from '@/components/BenefitsBento';
 import { client } from '@/sanity/client';
 import { urlFor } from '@/sanity/image';
 import InlineVideoPlayer from '@/components/InlineVideoPlayer';
+import HomepageHeroExperiment from '@/components/HomepageHeroExperiment';
+import ReelsTestimonialsMarquee from '@/components/ReelsTestimonialsMarquee';
+import DynamicPortfolioSection from '@/components/DynamicPortfolioSection';
 
 export const dynamic = 'force-dynamic';
 
@@ -147,26 +150,15 @@ export default async function Home() {
 
   return (
     <>
-      {/* HERO SECTION */}
-      <section className="hero section-padding section-target" id="hero" style={{"paddingTop": "140px", "position": "relative", "overflow": "hidden"}}>
-        <div className="container text-center" style={{position: "relative", zIndex: 1}}>
-          <div className="badge glass-badge reveal-on-scroll">
-            <i className="fa-solid fa-sparkles"></i> <span>{heroBadge}</span>
-          </div>
-
-          <h1 className="hero-title reveal-on-scroll" style={{"fontSize": "3.8rem", "lineHeight": "1.15", "margin": "20px 0 25px"}}>
-            {heroTitle1} <br />
-            <span className="combination-font">{heroTitle2}</span>
-          </h1>
-
-          <p className="hero-description reveal-on-scroll" style={{"maxWidth": "750px", "margin": "0 auto 35px", "fontSize": "1.15rem", "color": "var(--text-secondary)"}}>
-            {heroDescription}
-          </p>
-
-          <div className="hero-cta-group reveal-on-scroll" style={{"display": "flex", "justifyContent": "center", "gap": "20px", "marginBottom": "40px"}}>
-            <Link href="/work" className="btn btn-primary pop-btn" style={{"padding": "16px 36px", "fontSize": "1.05rem", "borderRadius": "14px"}}>Explore Portfolio ▶</Link>
-            <Link href="/services" className="btn btn-outline pop-btn" style={{"padding": "16px 36px", "fontSize": "1.05rem", "borderRadius": "14px"}}>View Services ✨</Link>
-          </div>
+      {/* LUXURY HERO SECTION */}
+      <section className="luxury-hero-section section-target" id="home">
+        <div className="container luxury-hero-container">
+          <HomepageHeroExperiment 
+            heroBadge={heroBadge}
+            heroTitle1={heroTitle1}
+            heroTitle2={heroTitle2}
+            heroDescription={heroDescription}
+          />
         </div>
       </section>
 
@@ -214,34 +206,30 @@ export default async function Home() {
       </section>
 
       {/* Metrics Bar */}
-      <section className="metrics-bar section-padding-sm" style={{position: 'relative'}}>
+      <section className="metrics-bar section-padding-sm" style={{ position: 'relative' }}>
         <div className="container">
           <div className="metrics-grid">
             <div className="metric-item">
-              <div className="metric-icon"><i className="fa-solid fa-play"></i></div>
               <div className="metric-number-wrapper">
                 <span className="metric-number" data-target={viewsCount}>{viewsCount}</span><span className="metric-suffix">M+</span>
               </div>
               <div className="metric-label">Total Views Generated</div>
             </div>
             <div className="metric-item">
-              <div className="metric-icon"><i className="fa-solid fa-film"></i></div>
               <div className="metric-number-wrapper">
                 <span className="metric-number" data-target={deliveredCount}>{deliveredCount}</span><span className="metric-suffix">+</span>
               </div>
               <div className="metric-label">Videos Delivered</div>
             </div>
             <div className="metric-item">
-              <div className="metric-icon"><i className="fa-solid fa-clock-rotate-left"></i></div>
               <div className="metric-number-wrapper">
                 <span className="metric-number" data-target={onTimeRate}>{onTimeRate}</span><span className="metric-suffix">%</span>
               </div>
               <div className="metric-label">On-Time Turnaround</div>
             </div>
             <div className="metric-item">
-              <div className="metric-icon"><i className="fa-solid fa-star"></i></div>
               <div className="metric-number-wrapper">
-                <span className="metric-number" data-target={rating}>{rating}</span><span className="metric-suffix">/5</span>
+                <span className="metric-number" data-target={rating}>{rating}</span>
               </div>
               <div className="metric-label">Client Satisfaction</div>
             </div>
@@ -257,68 +245,20 @@ export default async function Home() {
         description={servicesDescription} 
       />
 
-      {/* PORTFOLIO SECTION */}
-      <section className="portfolio section-padding section-target section-alt" id="portfolio" style={{"position": "relative"}}>
-        <div className="container" style={{position: "relative", zIndex: 1}}>
-          <div className="section-header text-center reveal-on-scroll">
-            <span className="section-subtitle">{portfolioSubtitle}</span>
-            <h2 className="section-title" style={{fontSize: "3rem"}}>{portfolioTitle1} <span className="combination-font">{portfolioTitle2}</span></h2>
-            <p className="section-description">{portfolioDescription}</p>
-          </div>
+      {/* DYNAMIC REACT FILTERABLE PORTFOLIO SECTION */}
+      <DynamicPortfolioSection 
+        subtitle={portfolioSubtitle}
+        title1={portfolioTitle1}
+        title2={portfolioTitle2}
+        description={portfolioDescription}
+        initialProjects={portfolioData?.length > 0 ? portfolioData : []}
+      />
 
-          <div className="portfolio-tabs">
-            <button className="tab-btn active" data-filter="all">All Projects</button>
-            <button className="tab-btn" data-filter="reels">Reels & Shorts</button>
-            <button className="tab-btn" data-filter="podcast">Podcasts</button>
-            <button className="tab-btn" data-filter="talking-head">Talking Head</button>
-            <button className="tab-btn" data-filter="ugc">UGC Ads</button>
-            <button className="tab-btn" data-filter="saas">SaaS Motion</button>
-          </div>
-
-          <div className="portfolio-grid">
-            {portfolioData?.length > 0 ? portfolioData.map((project) => (
-              <div key={project._id} className="portfolio-card glass-card" data-category={project.category || 'reels'}>
-                <div className="portfolio-thumb-wrapper" style={{"position": "relative", "aspectRatio": "16/9", "borderRadius": "12px", "overflow": "hidden", "background": "#000"}}>
-                  <InlineVideoPlayer 
-                    videoUrl={project.videoUrl} 
-                    thumbnailUrl={project.thumbnail ? urlFor(project.thumbnail).url() : null}
-                    altText={project.title}
-                  />
-                </div>
-                <div className="portfolio-info">
-                  <span className="client-tag">{project.clientName}</span>
-                  <h4>{project.title}</h4>
-                  <div className="meta-row">
-                    {project.metric1Text && <span><i className={project.metric1Icon || 'fa-solid fa-star'}></i> {project.metric1Text}</span>}
-                    {project.metric2Text && <span><i className={project.metric2Icon || 'fa-solid fa-star'}></i> {project.metric2Text}</span>}
-                  </div>
-                </div>
-              </div>
-            )) : (
-              <div className="portfolio-card glass-card" data-category="reels">
-                <div className="portfolio-thumb-wrapper">
-                  <img loading="lazy" src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80" alt="Tech Reel" />
-                  <div className="portfolio-badge">Reels</div>
-                </div>
-                <div className="portfolio-info">
-                  <span className="client-tag">Alex Rivera (SaaS Founder)</span>
-                  <h4>Viral Tech Founder Reel</h4>
-                  <div className="meta-row">
-                    <span><i className="fa-solid fa-eye"></i> 2.4M Views</span>
-                    <span><i className="fa-solid fa-heart"></i> 180K Likes</span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+      {logoData?.length > 0 && (
+        <div style={{ marginTop: '50px' }}>
+          <LogoMarquee logos={logoData} />
         </div>
-        
-        {logoData?.length > 0 && (
-          <div style={{"marginTop": "50px"}}>
-            <LogoMarquee logos={logoData} />
-          </div>
-        )}
-      </section>
+      )}
 
       {/* PRICING, MATRIX, COMPARISON & BENEFITS */}
       <PricingSection 
@@ -326,57 +266,21 @@ export default async function Home() {
         title1={pricingTitle1} 
         title2={pricingTitle2} 
         description={pricingDescription}
-        pricingData={pricingData}
       />
       <ServicesMatrix />
       <ComparisonSection />
       <BenefitsBento />
 
-      {/* TESTIMONIALS SECTION */}
-      <section className="testimonials section-padding section-target" id="testimonials" style={{"position": "relative"}}>
-        <div className="container" style={{position: "relative", zIndex: 1}}>
-          <div className="section-header text-center">
+      {/* TESTIMONIALS REELS MARQUEE SECTION */}
+      <section className="testimonials section-target" id="testimonials" style={{ position: "relative", overflow: "hidden", paddingTop: "60px", paddingBottom: "60px" }}>
+        <div className="container" style={{ position: "relative", zIndex: 1, maxWidth: "1380px" }}>
+          <div className="section-header text-center" style={{ marginBottom: "28px" }}>
             <span className="section-subtitle">{testimonialsSubtitle}</span>
-            <h2 className="section-title" style={{fontSize: "3rem"}}>{testimonialsTitle1} <span className="combination-font">{testimonialsTitle2}</span></h2>
+            <h2 className="section-title" style={{ fontSize: "2.8rem", margin: "6px 0 16px" }}>{testimonialsTitle1} <span className="combination-font">{testimonialsTitle2}</span></h2>
           </div>
 
-          <div className="testimonials-grid" style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit, minmax(320px, 1fr))", "gap": "30px"}}>
-            {textTestimonials?.length > 0 ? textTestimonials.map((testimonial) => (
-              <div key={testimonial._id} className="testimonial-card glass-card">
-                <div className="testimonial-header" style={{"display": "flex", "alignItems": "center", "gap": "15px", "marginBottom": "20px"}}>
-                  <div className="avatar-placeholder" style={{"width": "50px", "height": "50px", "borderRadius": "50%", "background": "rgba(37,99,235,0.2)", "display": "flex", "alignItems": "center", "justifyContent": "center", "color": "var(--primary)", "fontWeight": "bold"}}>
-                    {testimonial.author ? testimonial.author.charAt(0) : 'U'}
-                  </div>
-                  <div>
-                    <h4 style={{"margin": "0 0 4px 0", "fontSize": "1.1rem"}}>{testimonial.author}</h4>
-                    <p style={{"margin": "0", "fontSize": "0.85rem", "color": "var(--text-secondary)"}}>{testimonial.role} - <span style={{"color": "var(--primary)"}}>{testimonial.company}</span></p>
-                  </div>
-                </div>
-                <div className="testimonial-stars" style={{"color": "#F59E0B", "marginBottom": "15px"}}>
-                  <i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i>
-                </div>
-                <p style={{"color": "var(--text-primary)", "fontStyle": "italic", "lineHeight": "1.6"}}>
-                  "{testimonial.quote || testimonial.content}"
-                </p>
-              </div>
-            )) : (
-              <div className="testimonial-card glass-card">
-                <div className="testimonial-header" style={{"display": "flex", "alignItems": "center", "gap": "15px", "marginBottom": "20px"}}>
-                  <div className="avatar-placeholder" style={{"width": "50px", "height": "50px", "borderRadius": "50%", "background": "rgba(37,99,235,0.2)", "display": "flex", "alignItems": "center", "justifyContent": "center", "color": "var(--primary)", "fontWeight": "bold"}}>D</div>
-                  <div>
-                    <h4 style={{"margin": "0 0 4px 0", "fontSize": "1.1rem"}}>David Miller</h4>
-                    <p style={{"margin": "0", "fontSize": "0.85rem", "color": "var(--text-secondary)"}}>Co-Founder - <span style={{"color": "var(--primary)"}}>NexusAI</span></p>
-                  </div>
-                </div>
-                <div className="testimonial-stars" style={{"color": "#F59E0B", "marginBottom": "15px"}}>
-                  <i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i>
-                </div>
-                <p style={{"color": "var(--text-primary)", "fontStyle": "italic", "lineHeight": "1.6"}}>
-                  "Editly Foundry completely transformed our social presence. Our short-form retention went from 40% to 78% in just 3 weeks!"
-                </p>
-              </div>
-            )}
-          </div>
+          {/* Dynamic 9:16 Animated Reels Marquee */}
+          <ReelsTestimonialsMarquee videoTestimonials={videoTestimonials} />
         </div>
       </section>
 

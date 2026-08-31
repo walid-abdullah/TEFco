@@ -59,19 +59,8 @@ export default function PricingSection({ subtitle, title1, title2, description, 
       description: 'Dedicated multi-editor production pod for venture-backed startups and high-volume media brands.',
       monthlyPrice: null, // Custom
       quarterlyPrice: null,
+      customText: 'Custom Quote',
       duration: '',
-      isPopular: false,
-      features: [
-        'Custom Video Volume (40+ Videos / month)',
-        'Multi-Camera Podcasts & Documentary Edits',
-        '24-Hour Express Turnaround SLA',
-        'Dedicated Full-Stack Motion & 3D Pod',
-        'Unlimited Concurrent Requests',
-        'White-Glove Ingestion & DAM Management',
-        'Weekly Creative Direction & Retention Audits',
-        'Private Slack Channel + Direct Phone Line',
-      customText: 'Custom Plan',
-      duration: 'tailored to volume',
       isPopular: false,
       features: [
         'Dedicated 3-Editor Video Production Pod',
@@ -94,7 +83,7 @@ export default function PricingSection({ subtitle, title1, title2, description, 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Header */}
-        <div className="section-header text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 45px' }}>
+        <div className="section-header text-center" style={{ maxWidth: '850px', margin: '0 auto 45px' }}>
           <span className="section-subtitle">{subtitle || 'Transparent Video Retainers'}</span>
           <h2 className="section-title" style={{ fontSize: '3rem', marginBottom: '15px' }}>
             {title1 || 'Secure a Full Studio Team at a'} <span className="combination-font">{title2 || 'Fixed Monthly Rate'}</span>
@@ -103,7 +92,7 @@ export default function PricingSection({ subtitle, title1, title2, description, 
             {description || 'No surprise invoices. No long-term hiring contracts. Pause or cancel anytime.'}
           </p>
 
-          {/* Monthly / Quarterly Switcher (Musemind Style) */}
+          {/* Monthly / Quarterly Switcher */}
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -170,7 +159,7 @@ export default function PricingSection({ subtitle, title1, title2, description, 
           </div>
         </div>
 
-        {/* Pricing Cards Grid (Musemind 3-Tier Grid) */}
+        {/* Pricing Cards Grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -179,41 +168,39 @@ export default function PricingSection({ subtitle, title1, title2, description, 
           maxWidth: '1200px',
           margin: '0 auto 60px'
         }}>
-          {plans.map((plan) => {
+          {plans.map((plan, planIdx) => {
             const price = billingCycle === 'monthly' ? plan.monthlyPrice : plan.quarterlyPrice;
 
             return (
               <div
-                key={plan.id}
+                key={plan.id || `pricing-plan-${planIdx}`}
                 className={`glass-card pop-hover ${plan.isPopular ? 'popular-pricing-card' : ''}`}
                 style={{
-                  padding: '40px 32px',
+                  padding: '44px 32px',
                   display: 'flex',
                   flexDirection: 'column',
-                  borderRadius: '28px',
-                  position: 'relative',
-                  border: plan.isPopular ? '2px solid rgba(56, 189, 248, 0.6)' : '1px solid var(--glass-border)',
-                  background: plan.isPopular ? 'var(--card-bg)' : 'var(--glass-bg)',
-                  boxShadow: plan.isPopular ? '0 20px 50px -10px rgba(37, 99, 235, 0.3)' : 'var(--glass-shadow)',
-                  transform: plan.isPopular ? 'translateY(-6px)' : 'none'
+                  borderRadius: '32px',
+                  position: 'relative'
                 }}
               >
                 {/* Most Popular Badge on Top */}
                 {plan.isPopular && (
                   <div style={{
                     position: 'absolute',
-                    top: '-16px',
+                    top: '-15px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    background: 'linear-gradient(135deg, #2563EB 0%, #0284C7 100%)',
+                    background: 'linear-gradient(135deg, #38BDF8 0%, #2563EB 100%)',
                     color: '#FFFFFF',
-                    padding: '6px 20px',
-                    borderRadius: '50px',
-                    fontSize: '0.8rem',
+                    padding: '5px 18px',
+                    borderRadius: '30px',
+                    fontSize: '0.75rem',
                     fontWeight: '800',
-                    letterSpacing: '1px',
+                    letterSpacing: '0.06em',
                     textTransform: 'uppercase',
-                    boxShadow: '0 6px 20px rgba(37, 99, 235, 0.4)'
+                    boxShadow: '0 8px 25px rgba(37, 99, 235, 0.45)',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    zIndex: 5
                   }}>
                     Most Popular
                   </div>
@@ -267,12 +254,13 @@ export default function PricingSection({ subtitle, title1, title2, description, 
                     </>
                   ) : (
                     <span style={{
-                      fontSize: '2.4rem',
+                      fontSize: '2.2rem',
                       fontWeight: '800',
                       color: 'var(--accent-blue-light)',
-                      fontFamily: "'Outfit', sans-serif"
+                      fontFamily: "'Outfit', sans-serif",
+                      lineHeight: '1.1'
                     }}>
-                      Custom Quote
+                      {plan.customText || 'Custom Quote'}
                     </span>
                   )}
                 </div>
@@ -310,8 +298,8 @@ export default function PricingSection({ subtitle, title1, title2, description, 
 
                 {/* Feature List */}
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, flex: 1, display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                  {plan.features.map((feature, i) => (
-                    <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: '0.92rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                  {plan.features?.map((feature, i) => (
+                    <li key={`feature-${plan.id || planIdx}-${i}`} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: '0.92rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                       <i className="fa-solid fa-check" style={{ color: plan.isPopular ? 'var(--accent-blue-light)' : '#10B981', marginTop: '3px', flexShrink: 0 }}></i>
                       <span>{feature}</span>
                     </li>
@@ -321,33 +309,6 @@ export default function PricingSection({ subtitle, title1, title2, description, 
             );
           })}
         </div>
-
-        {/* Reassurance Footer Banner (Musemind Style) */}
-        <div className="glass-card text-center reveal-on-scroll" style={{
-          padding: '24px 30px',
-          borderRadius: '20px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '35px',
-          maxWidth: '950px',
-          margin: '0 auto'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', fontWeight: '600' }}>
-            <i className="fa-solid fa-bolt" style={{ color: '#F59E0B' }}></i>
-            <span>No Long-Term Contracts</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', fontWeight: '600' }}>
-            <i className="fa-solid fa-rotate-left" style={{ color: '#38BDF8' }}></i>
-            <span>Pause or Cancel Anytime</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', fontWeight: '600' }}>
-            <i className="fa-solid fa-shield-halved" style={{ color: '#10B981' }}></i>
-            <span>100% Quality Guaranteed</span>
-          </div>
-        </div>
-
       </div>
     </section>
   );

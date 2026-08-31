@@ -2,10 +2,32 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useExperiment } from '@/lib/experiments';
 
 export default function ServicesSection({ subtitle, title1, title2, description }) {
   const trackRef = useRef(null);
   const [selectedService, setSelectedService] = useState(null);
+  const serviceVariant = useExperiment('service_section_copy_variant', ['control', 'growth_focus', 'trust_focus'], 'control');
+  const serviceCopy = {
+    control: {
+      subtitle: subtitle || 'What We Do',
+      title1: title1 || 'Premium Video Services',
+      title2: title2 || 'Built For Scale',
+      description: description || "We don't just cut clips — we engineer viral hooks, retain audience attention, and drive action. Click on a service to see full details.",
+    },
+    growth_focus: {
+      subtitle: 'Built for pipeline growth',
+      title1: 'Video Systems That',
+      title2: 'Convert Attention',
+      description: 'From discovery to demo to conversion, we build short-form and product videos that turn eyeballs into qualified pipeline.',
+    },
+    trust_focus: {
+      subtitle: 'Proven production partner',
+      title1: 'Creative Execution That',
+      title2: 'Feels Premium',
+      description: 'Our team handles strategy, editing, and iteration so your brand stays consistent, credible, and ready to scale.',
+    },
+  }[serviceVariant];
 
   // The 5 requested fixed services
   const fixedServices = [
@@ -117,12 +139,12 @@ export default function ServicesSection({ subtitle, title1, title2, description 
         <div className="bg-glow-orb glow-blue" style={{ bottom: "10%", right: "-10%" }}></div>
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
           <div className="section-header text-center reveal-on-scroll">
-            <span className="section-subtitle">{subtitle || 'What We Do'}</span>
+            <span className="section-subtitle">{serviceCopy.subtitle}</span>
             <h2 className="section-title" style={{ fontSize: "3rem" }}>
-              {title1 || 'Premium Video Services'} <span className="combination-font">{title2 || 'Built For Scale'}</span>
+              {serviceCopy.title1} <span className="combination-font">{serviceCopy.title2}</span>
             </h2>
             <p className="section-description" style={{ maxWidth: "800px", margin: "0 auto" }}>
-              {description || "We don't just cut clips — we engineer viral hooks, retain audience attention, and drive action. Click on a service to see full details."}
+              {serviceCopy.description}
             </p>
           </div>
 

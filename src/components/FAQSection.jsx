@@ -12,11 +12,31 @@ export default function FAQSection({ faqs }) {
   };
 
   return (
-    <section className="faq-section section-padding" style={{ background: "var(--bg-primary)" }}>
+    <section className="faq-section section-padding" style={{ background: "var(--bg-primary)", paddingTop: '70px', paddingBottom: '90px' }}>
       <div className="container">
+        
+        {/* Large Prominent Trust & Clutch Proof Banner */}
+        <div className="text-center reveal-on-scroll" style={{ marginBottom: '45px' }}>
+          <div className="luxury-proof-capsule">
+            <div className="luxury-proof-chip luxury-proof-chip--trustpilot">
+              <i className="fa-solid fa-star"></i>
+              <span className="luxury-proof-chip-val">4.9/5</span>
+              <span className="luxury-proof-chip-label">on Trustpilot</span>
+            </div>
+
+            <div className="luxury-proof-divider"></div>
+
+            <div className="luxury-proof-chip luxury-proof-chip--clutch">
+              <i className="fa-solid fa-award"></i>
+              <span className="luxury-proof-chip-val">Top Video Agency</span>
+              <span className="luxury-proof-chip-label">on Clutch (US/EU)</span>
+            </div>
+          </div>
+        </div>
+
         <div className="section-header text-center reveal-on-scroll">
           <span className="section-subtitle">Got Questions?</span>
-          <h2 className="section-title">Frequently Asked <span className="combination-font">Questions</span></h2>
+          <h2 className="section-title" style={{ fontSize: '3rem' }}>Frequently Asked <span className="combination-font">Questions</span></h2>
         </div>
 
         <div className="faq-container reveal-on-scroll" style={{ maxWidth: "800px", margin: "40px auto 0", display: "flex", flexDirection: "column", gap: "15px" }}>

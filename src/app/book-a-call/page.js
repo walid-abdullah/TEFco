@@ -1,19 +1,51 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useTheme } from '@/context/ThemeContext';
 
-export default function BookACallPage() {
-  /* 
-    ==========================================================================
-    আপনার CALENDLY লিংক:
-    আপনার আসল Calendly লিংকটি নিচে বসিয়ে দিন (যেমন: 'https://calendly.com/walid-abdullah/15min')
-    ==========================================================================
-  */
+function BookACallPageContent() {
+  const searchParams = useSearchParams();
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const [calendlyUrl, setCalendlyUrl] = useState("https://calendly.com/w-abdullah5588/30min");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [showBriefForm, setShowBriefForm] = useState(false);
+
+  const buildLeadForm = (params) => {
+    const serviceFromUrl = params.get('service');
+    const volumeFromUrl = params.get('volume');
+    const turnaroundFromUrl = params.get('turnaround');
+    const budgetFromUrl = params.get('budget');
+
+    return {
+      name: '',
+      email: '',
+      whatsapp: '',
+      company: '',
+      service: serviceFromUrl ? decodeURIComponent(serviceFromUrl) : 'Shorts / Reels / TikTok',
+      projectType: 'Monthly Retainer',
+      volume: volumeFromUrl || '12 - 16 videos / mo',
+      turnaround: turnaroundFromUrl || 'Standard 48h',
+      budget: budgetFromUrl ? decodeURIComponent(budgetFromUrl) : '$2K - $3.5K',
+      details: '',
+    };
+  };
+
+  const [leadForm, setLeadForm] = useState(() => buildLeadForm(searchParams));
+
+  const serviceOptions = useMemo(() => [
+    'Shorts / Reels / TikTok',
+    'Podcast & Clips Editing',
+    'YouTube Long-Form',
+    'UGC / Ads Editing',
+    'SaaS / Product Motion',
+    'Custom / Multi-Format Retainer'
+  ], []);
 
   useEffect(() => {
-    // Official Calendly Widget Script Load
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
@@ -25,6 +57,62 @@ export default function BookACallPage() {
       }
     };
   }, [calendlyUrl]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setLeadForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const payload = {
+        name: leadForm.name,
+        email: leadForm.email,
+        whatsapp: leadForm.whatsapp,
+        company: leadForm.company,
+        service: leadForm.service,
+        projectType: leadForm.projectType,
+        monthlyVolume: leadForm.volume,
+        budget: leadForm.budget,
+        turnaround: leadForm.turnaround,
+        channelLink: leadForm.company,
+        needs: `${leadForm.projectType} — ${leadForm.service}`,
+        message: leadForm.details || `Project type: ${leadForm.projectType}. Estimated range: ${leadForm.budget}. Turnaround: ${leadForm.turnaround}.`,
+      };
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
+
+      setSubmitted(true);
+      setLeadForm({
+        name: '',
+        email: '',
+        whatsapp: '',
+        company: '',
+        service: 'Shorts / Reels / TikTok',
+        projectType: 'Monthly Retainer',
+        volume: '12 - 16 videos / mo',
+        budget: '$2K - $3.5K',
+        turnaround: 'Standard 48h',
+        details: '',
+      });
+    } catch (error) {
+      console.error(error);
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const globalOffices = [
     {
@@ -56,49 +144,148 @@ export default function BookACallPage() {
     }
   ];
 
+  const inputStyle = {
+    width: '100%',
+    borderRadius: '12px',
+    border: '1px solid var(--glass-border)',
+    background: 'rgba(255, 255, 255, 0.03)',
+    color: 'var(--text-primary)',
+    padding: '12px 14px',
+    fontSize: '0.95rem',
+    fontFamily: 'inherit',
+    outline: 'none',
+  };
+
+  const calendlyEmbedUrl = useMemo(() => {
+    if (isLight) {
+      return `${calendlyUrl}?hide_landing_page_details=0&hide_gdpr_banner=1&background_color=ffffff&text_color=090e1a&primary_color=2563eb`;
+    }
+    return `${calendlyUrl}?hide_landing_page_details=0&hide_gdpr_banner=1&background_color=070d18&text_color=ffffff&primary_color=38bdf8`;
+  }, [calendlyUrl, isLight]);
+
   return (
-    <div className="book-call-page" style={{ paddingTop: '80px', paddingBottom: '100px', minHeight: '100vh', position: 'relative' }}>
+    <div className="book-call-page" style={{ paddingTop: '75px', paddingBottom: '60px', minHeight: '100vh', position: 'relative' }}>
       
       {/* Background ambient orbs */}
       <div className="bg-glow-orb glow-blue" style={{ top: '5%', left: '5%' }}></div>
       <div className="bg-glow-orb glow-purple" style={{ top: '35%', right: '5%' }}></div>
 
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1180px' }}>
         
         {/* Top Header */}
-        <div className="text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 40px' }}>
-          <span className="section-subtitle">Discovery Session</span>
-          <h1 className="section-title" style={{ fontSize: '3.2rem', marginBottom: '18px' }}>
+        <div className="text-center" style={{ maxWidth: '800px', margin: '0 auto 20px' }}>
+          <span className="section-subtitle" style={{ fontSize: '0.82rem', marginBottom: '6px' }}>Discovery Session</span>
+          <h1 className="section-title" style={{ fontSize: '2.4rem', marginBottom: '10px' }}>
             Book a 15-Minute <span className="combination-font">Growth Audit</span>
           </h1>
-          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1.15rem' }}>
-            Select a time below to audit your video retention, analyze your audience growth bottlenecks, and explore our dedicated video production retainers.
+          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '0.98rem', margin: '0 auto', maxWidth: '650px' }}>
+            Select a convenient time below to audit your video retention, analyze bottlenecks, and explore our editing retainers.
           </p>
         </div>
 
-        {/* OFFICIAL CALENDLY INLINE EMBEDDED WIDGET CONTAINER */}
+        {/* Optional Brief Toggle Button */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '18px' }}>
+          <button
+            onClick={() => setShowBriefForm(!showBriefForm)}
+            className="btn btn-outline"
+            style={{
+              padding: '8px 18px',
+              borderRadius: '30px',
+              fontSize: '0.82rem',
+              fontWeight: '700',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            <i className={`fa-solid ${showBriefForm ? 'fa-xmark' : 'fa-clipboard-list'}`} style={{ color: 'var(--accent-blue-light)' }}></i>
+            <span>{showBriefForm ? 'Close Project Brief Form' : 'Fill Pre-Call Project Brief (Optional)'}</span>
+          </button>
+        </div>
+
+        {showBriefForm && (
+          <div className="glass-card" style={{
+            maxWidth: '1100px',
+            margin: '0 auto 24px',
+            padding: '24px 20px',
+            borderRadius: '20px',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--glass-border)',
+            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.15)'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', marginBottom: '18px', flexWrap: 'wrap' }}>
+              <div>
+                <span className="section-subtitle" style={{ marginBottom: '4px', display: 'inline-block' }}>Pre-qualify your project</span>
+                <h3 style={{ margin: 0, fontSize: '1.4rem' }}>Tell us what you need before the call</h3>
+              </div>
+              <div style={{ padding: '6px 12px', borderRadius: '999px', background: 'rgba(34, 197, 94, 0.12)', color: '#22C55E', border: '1px solid rgba(34, 197, 94, 0.3)', fontWeight: 700, fontSize: '0.75rem' }}>
+                Response within 10 minutes
+              </div>
+            </div>
+
+            {submitted ? (
+              <div style={{ textAlign: 'center', padding: '16px 12px 6px', color: 'var(--text-primary)' }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(34, 197, 94, 0.12)', color: '#22C55E', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', marginBottom: '10px' }}>
+                  <i className="fa-solid fa-check"></i>
+                </div>
+                <h4 style={{ marginBottom: '6px' }}>Project brief received</h4>
+                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.88rem' }}>We’ve got your details and will review them before the strategy session.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
+                <label style={{ display: 'grid', gap: '6px', fontWeight: 700, fontSize: '0.85rem' }}>
+                  Full name
+                  <input name="name" value={leadForm.name} onChange={handleChange} required style={inputStyle} placeholder="Your name" />
+                </label>
+                <label style={{ display: 'grid', gap: '6px', fontWeight: 700, fontSize: '0.85rem' }}>
+                  Email
+                  <input type="email" name="email" value={leadForm.email} onChange={handleChange} required style={inputStyle} placeholder="you@brand.com" />
+                </label>
+                <label style={{ display: 'grid', gap: '6px', fontWeight: 700, fontSize: '0.85rem' }}>
+                  WhatsApp / Phone
+                  <input name="whatsapp" value={leadForm.whatsapp} onChange={handleChange} required style={inputStyle} placeholder="+1 555 123 4567" />
+                </label>
+                <label style={{ display: 'grid', gap: '6px', fontWeight: 700, fontSize: '0.85rem' }}>
+                  Service
+                  <select name="service" value={leadForm.service} onChange={handleChange} style={inputStyle}>
+                    {serviceOptions.map((service) => (
+                      <option key={service} value={service}>{service}</option>
+                    ))}
+                  </select>
+                </label>
+                <div style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'flex-end', marginTop: '6px' }}>
+                  <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ padding: '10px 22px', borderRadius: '10px', fontWeight: 800, fontSize: '0.88rem' }}>
+                    {isSubmitting ? 'Sending...' : 'Submit Brief'}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        )}
+
+        {/* Compact Calendly Frame */}
         <div 
           className="glass-card" 
           style={{
-            borderRadius: '24px',
+            borderRadius: '20px',
             overflow: 'hidden',
-            background: 'var(--card-bg)',
-            border: '1px solid var(--glass-border)',
-            boxShadow: '0 25px 70px rgba(0, 0, 0, 0.25)',
-            maxWidth: '1280px',
-            margin: '0 auto 60px',
-            minHeight: '700px',
+            background: isLight ? '#FFFFFF' : 'rgba(7, 13, 24, 0.95)',
+            border: isLight ? '1px solid rgba(15, 23, 42, 0.1)' : '1px solid var(--glass-border)',
+            boxShadow: isLight ? '0 15px 40px rgba(0, 0, 0, 0.08)' : '0 25px 70px rgba(0, 0, 0, 0.4)',
+            maxWidth: '1080px',
+            margin: '0 auto 30px',
+            height: '620px',
             position: 'relative'
           }}
         >
-          {/* Robust Direct Calendly Embed iframe */}
           <iframe
-            src={`${calendlyUrl}?hide_landing_page_details=0&hide_gdpr_banner=1&background_color=070d18&text_color=ffffff&primary_color=2563eb`}
+            key={isLight ? 'calendly-light' : 'calendly-dark'}
+            src={calendlyEmbedUrl}
             width="100%"
-            height="720px"
+            height="100%"
             frameBorder="0"
             title="Book a Strategy Session with Walid Abdullah"
-            style={{ minWidth: '320px', width: '100%', height: '720px', border: 'none' }}
+            style={{ minWidth: '320px', width: '100%', height: '100%', border: 'none' }}
           ></iframe>
         </div>
 
@@ -219,5 +406,13 @@ export default function BookACallPage() {
       </a>
 
     </div>
+  );
+}
+
+export default function BookACallPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Loading booking page...</div>}>
+      <BookACallPageContent />
+    </Suspense>
   );
 }

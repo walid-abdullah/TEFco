@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import ServicesMatrix from '@/components/ServicesMatrix';
 import DesignMonksContact from '@/components/DesignMonksContact';
+import FAQSchema from '@/components/FAQSchema';
+import { SERVICE_FAQS } from '@/lib/seoData';
 
 export default function ServicesHubPage() {
   const [selectedService, setSelectedService] = useState(null);
@@ -100,6 +102,8 @@ export default function ServicesHubPage() {
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80'
     }
   ];
+
+  const aggregatedFaqs = Object.values(SERVICE_FAQS).flat().slice(0, 10);
 
   return (
     <div className="services-page-full" style={{ minHeight: '100vh', paddingTop: '120px', paddingBottom: '100px' }}>
@@ -240,6 +244,9 @@ export default function ServicesHubPage() {
         <div style={{ marginTop: '70px' }}>
           <DesignMonksContact />
         </div>
+
+        {/* FAQ structured data for services (JSON-LD) */}
+        <FAQSchema faqs={aggregatedFaqs} />
 
       </div>
     </div>

@@ -162,6 +162,16 @@ export default function Navbar({ menu }) {
             About
           </Link>
 
+          {/* Blogs */}
+          <Link 
+            href="/blogs" 
+            className="nav-link" 
+            onClick={() => setIsMobileMenuOpen(false)}
+            style={{ color: isLight ? '#475569' : '#94A3B8', cursor: 'pointer' }}
+          >
+            Blogs
+          </Link>
+
           {/* Contact */}
           <Link 
             href="/contact" 
@@ -174,32 +184,46 @@ export default function Navbar({ menu }) {
         </nav>
 
         <div className="nav-actions">
-          {/* Apple Glass Theme Switcher (Sun / Moon) */}
+          {/* Apple Glass Luxury Theme Switcher (Sun / Moon) */}
           <button
             type="button"
             onClick={toggleTheme}
             className="theme-toggle-btn"
             aria-label="Toggle Theme"
+            title={isLight ? "Switch to Dark Mode" : "Switch to Light Mode"}
             style={{
               width: '42px',
               height: '42px',
-              borderRadius: '50%',
-              background: isLight ? 'rgba(15, 23, 42, 0.05)' : 'rgba(255, 255, 255, 0.08)',
-              border: isLight ? '1px solid rgba(15, 23, 42, 0.12)' : '1px solid rgba(255, 255, 255, 0.18)',
-              color: isLight ? '#F59E0B' : '#38BDF8',
+              borderRadius: '12px',
+              background: isLight ? 'rgba(15, 23, 42, 0.04)' : 'rgba(255, 255, 255, 0.08)',
+              border: isLight ? '1px solid rgba(15, 23, 42, 0.12)' : '1px solid rgba(255, 255, 255, 0.16)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              fontSize: '1.1rem',
+              fontSize: '1.05rem',
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              boxShadow: isLight ? '0 2px 8px rgba(0,0,0,0.05)' : '0 4px 12px rgba(0,0,0,0.4)'
+              boxShadow: isLight ? '0 2px 10px rgba(0,0,0,0.04)' : '0 4px 15px rgba(0,0,0,0.3)',
+              position: 'relative',
+              overflow: 'hidden'
             }}
           >
             {isLight ? (
-              <i className="fa-solid fa-sun" style={{ color: '#F59E0B' }}></i>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
             ) : (
-              <i className="fa-solid fa-moon" style={{ color: '#38BDF8' }}></i>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
             )}
           </button>
 
