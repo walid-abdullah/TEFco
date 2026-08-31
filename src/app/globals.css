@@ -598,16 +598,10 @@ img { max-width: 100%; height: auto; display: block; }
 .btn-lg { padding: 18px 36px; font-size: 1.15rem; }
 .btn-block { width: 100%; }
 
-/* Scroll Reveal Base Classes */
+/* Scroll Reveal Base Classes (Safe & Instant Visibility Guaranteed) */
 .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(35px) scale(0.98);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-.reveal-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
 }
 
 /* --------------------------------------------------------------------------
