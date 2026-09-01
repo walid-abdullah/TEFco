@@ -100,6 +100,7 @@ export default async function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
         <link rel="canonical" href={ORGANIZATION.url} />
+        <meta name="google-site-verification" content="google397bc2b4bbbb7f90" />
         <meta name="google-site-verification" content="397bc2b4bbbb7f90" />
 
         {/* Organization / Breadcrumb / Website structured data */}
