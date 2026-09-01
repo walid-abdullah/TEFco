@@ -2273,9 +2273,22 @@ input::placeholder, textarea::placeholder {
   }
 
   /* 2. Global Typography Scaling */
-  h1.hero-title, .hero-title {
-    font-size: 2.1rem !important;
-    line-height: 1.2 !important;
+  h1.hero-title, .hero-title, .luxury-hero-shell .hero-title {
+    font-size: 2.15rem !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.03em !important;
+    margin: 0 0 16px !important;
+  }
+
+  .luxury-word-line {
+    display: block !important;
+    margin-bottom: 0.12em !important;
+    line-height: 1.18 !important;
+  }
+
+  .luxury-word-line--accent {
+    display: inline-block !important;
+    margin-top: 0.05em !important;
   }
 
   h1.section-title, h1 {
