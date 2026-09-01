@@ -2472,6 +2472,10 @@ input::placeholder, textarea::placeholder {
     right: 8px !important;
     width: 34px !important;
     height: 34px !important;
+    font-size: 0.95rem !important;
+  }
+}
+
 /* Dedicated Mobile Luxury Hero Typography Guarantee */
 @media (max-width: 768px) {
   .luxury-hero-shell .hero-title {
