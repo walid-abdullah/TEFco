@@ -7,6 +7,14 @@ export default function PodcastServiceLandingPage() {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
 
+  // Hero Intro Explainer Video for Podcast Service
+  const introVideo = {
+    title: 'Podcast Production & Multiplication Suite — Overview',
+    thumbnail: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80',
+    youtubeId: 'M7lc1UVf-VE',
+    duration: '1:45 Min Explainer'
+  };
+
   const podcastWorks = [
     {
       id: 'pod-work-1',
@@ -79,9 +87,9 @@ export default function PodcastServiceLandingPage() {
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1240px' }}>
         
         {/* ============================================================
-            1. THE FOUNDRY CINEMATIC HERO (Interactive Multi-Cam Preview)
+            1. THE FOUNDRY CINEMATIC HERO
             ============================================================ */}
-        <div className="text-center" style={{ maxWidth: '900px', margin: '0 auto 35px' }}>
+        <div className="text-center" style={{ maxWidth: '900px', margin: '0 auto 30px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 16px', borderRadius: '50px', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', color: '#38BDF8', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '14px' }}>
             <i className="fa-solid fa-microphone-lines"></i>
             <span>Broadcast-Grade Podcast Post-Production</span>
@@ -91,11 +99,11 @@ export default function PodcastServiceLandingPage() {
             Turn 1 Raw Episode into <span className="combination-font">30 Days of Viral Authority</span>
           </h1>
           
-          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '720px', margin: '0 auto 26px', lineHeight: '1.6' }}>
+          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '720px', margin: '0 auto 24px', lineHeight: '1.6' }}>
             Full-episode multi-cam switching, studio audio mastering, and automated extraction of 10–20 high-retention micro clips engineered for Spotify, YouTube, and paid social.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap', marginBottom: '35px' }}>
             <Link href="/book-a-call?service=Podcast%20%26%20Clips%20Editing" className="btn btn-primary pop-btn" style={{ padding: '14px 30px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
               <span>Book 15-Min Podcast Audit</span>
               <i className="fa-solid fa-arrow-right" style={{ marginLeft: '6px' }}></i>
@@ -103,6 +111,79 @@ export default function PodcastServiceLandingPage() {
             <a href="#showcase" className="btn btn-outline" style={{ padding: '14px 28px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
               <span>Watch Live Work Samples</span>
             </a>
+          </div>
+
+          {/* ============================================================
+              FEATURED HERO SERVICE INTRO VIDEO PLAYER
+              ============================================================ */}
+          <div 
+            className="glass-card pop-hover"
+            style={{
+              maxWidth: '920px',
+              margin: '0 auto 50px',
+              borderRadius: '20px',
+              overflow: 'hidden',
+              padding: 0,
+              border: '1px solid var(--glass-border)',
+              background: 'var(--card-bg)',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.3)',
+              position: 'relative'
+            }}
+          >
+            <div 
+              style={{ position: 'relative', aspectRatio: '16/9', cursor: 'pointer', overflow: 'hidden' }}
+              onClick={() => setSelectedVideo(introVideo)}
+            >
+              <img src={introVideo.thumbnail} alt={introVideo.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(7,13,24,0.85) 0%, rgba(0,0,0,0.2) 60%)' }}></div>
+
+              {/* Glowing Play Button */}
+              <div style={{
+                position: 'absolute',
+                top: '50%', left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '74px', height: '50px',
+                borderRadius: '14px',
+                background: 'rgba(255, 255, 255, 0.22)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255, 255, 255, 0.5)',
+                color: '#FFFFFF',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '1.2rem',
+                boxShadow: '0 12px 35px rgba(0,0,0,0.45)',
+                transition: 'transform 0.3s ease'
+              }}>
+                <i className="fa-solid fa-play" style={{ marginLeft: '3px' }}></i>
+              </div>
+
+              {/* Bottom Video Badge Info */}
+              <div style={{
+                position: 'absolute',
+                bottom: '16px',
+                left: '20px',
+                right: '20px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '8px'
+              }}>
+                <div style={{ textAlign: 'left' }}>
+                  <div style={{ color: '#38BDF8', fontSize: '0.76rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    SERVICE EXPLAINER & BREAKDOWN
+                  </div>
+                  <h3 style={{ color: '#FFFFFF', fontSize: '1.1rem', fontWeight: '800', margin: '2px 0 0' }}>
+                    How We Engineer Your Podcast Pipeline
+                  </h3>
+                </div>
+
+                <span style={{ padding: '5px 12px', borderRadius: '8px', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF', fontSize: '0.78rem', fontWeight: '700' }}>
+                  <i className="fa-solid fa-circle-play" style={{ marginRight: '6px', color: '#38BDF8' }}></i>
+                  {introVideo.duration}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -130,29 +211,25 @@ export default function PodcastServiceLandingPage() {
             gap: '16px',
             alignItems: 'stretch'
           }}>
-            {/* Stage 1 */}
-            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>
               <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#38BDF8', textTransform: 'uppercase', marginBottom: '6px' }}>01. RAW INGEST</div>
               <h4 style={{ margin: '0 0 6px', fontSize: '1.05rem', fontWeight: '700' }}>1 Raw Full Episode</h4>
               <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>Multi-cam 4K feeds and multitrack WAV audio files uploaded to your private studio portal.</p>
             </div>
 
-            {/* Stage 2 */}
-            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>
               <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#8B5CF6', textTransform: 'uppercase', marginBottom: '6px' }}>02. MASTER EPISODE</div>
               <h4 style={{ margin: '0 0 6px', fontSize: '1.05rem', fontWeight: '700' }}>1 Full 4K YouTube Cut</h4>
               <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>Dynamic multi-cam switching, custom lower thirds, chapter timestamps, and studio sound.</p>
             </div>
 
-            {/* Stage 3 */}
-            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>
               <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#EC4899', textTransform: 'uppercase', marginBottom: '6px' }}>03. SHORT-FORM EXTRACTS</div>
               <h4 style={{ margin: '0 0 6px', fontSize: '1.05rem', fontWeight: '700' }}>10-20 Viral Micro Reels</h4>
               <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>Vertical 9:16 clips hooked with Hormozi captions, sound risers, and high-impact pacing.</p>
             </div>
 
-            {/* Stage 4 */}
-            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>
               <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#10B981', textTransform: 'uppercase', marginBottom: '6px' }}>04. PACKAGED ASSETS</div>
               <h4 style={{ margin: '0 0 6px', fontSize: '1.05rem', fontWeight: '700' }}>Thumbnails & SEO Notes</h4>
               <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>High-CTR custom YouTube thumbnail + Spotify show notes and key quote highlights.</p>
@@ -195,7 +272,6 @@ export default function PodcastServiceLandingPage() {
                   <img src={work.thumbnail} alt={work.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.25)' }}></div>
                   
-                  {/* Frosted Play Button */}
                   <div style={{
                     position: 'absolute',
                     top: '50%', left: '50%',
