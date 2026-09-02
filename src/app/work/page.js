@@ -10,10 +10,18 @@ function WorkContent() {
   
   const validTabs = ['podcast', 'talking-head', 'reels', 'saas', 'promo', 'thumbnails'];
   const initialTab = searchParams.get('tab');
-  const activeFilter = (initialTab && validTabs.includes(initialTab)) ? initialTab : 'podcast';
-
+  const [activeFilter, setActiveFilter] = useState((initialTab && validTabs.includes(initialTab)) ? initialTab : 'podcast');
   const [selectedVideo, setSelectedVideo] = useState(null);
+
   const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/w-abdullah5588/30min";
+
+  // Keep state and URL in sync
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    if (tab && validTabs.includes(tab)) {
+      setActiveFilter(tab);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -29,7 +37,8 @@ function WorkContent() {
   }, []);
 
   const handleTabChange = (tabId) => {
-    router.push(`/work?tab=${tabId}`, { scroll: false });
+    setActiveFilter(tabId);
+    router.replace(`/work?tab=${tabId}`, { scroll: false });
   };
 
   const categories = [
@@ -104,8 +113,8 @@ function WorkContent() {
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
-        {/* Header (Original Editly Foundry Premium Branding) */}
-        <div className="text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 24px' }}>
+        {/* Header */}
+        <div className="text-center" style={{ maxWidth: '850px', margin: '0 auto 24px' }}>
           <span className="section-subtitle" style={{ display: 'inline-block', padding: '5px 16px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38BDF8', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '10px' }}>
             Production Showcase
           </span>
@@ -116,7 +125,7 @@ function WorkContent() {
             Explore our retention-driven post-production assets across high-ticket short-form, podcasts, SaaS animations, and paid social campaigns.
           </p>
 
-          {/* Clean Horizontal Filter Bar (URL Synced & Clean Active State) */}
+          {/* Clean Horizontal Filter Bar */}
           <div className="portfolio-tabs" style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -153,7 +162,7 @@ function WorkContent() {
           </div>
         </div>
 
-        {/* DYNAMIC SHOWCASE GRID (6 Items per Category | 9:16 for Reels, 16:9 for others) */}
+        {/* 100% INSTANT VISIBLE SHOWCASE GRID (NO OPACITY:0 BUG) */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: isReelsCategory 
@@ -163,17 +172,18 @@ function WorkContent() {
           maxWidth: isReelsCategory ? '1200px' : '1240px',
           margin: '30px auto 60px'
         }}>
-          {filteredProjects.map((proj, idx) => (
+          {filteredProjects.map((proj) => (
             <div
               key={proj.id}
-              className="glass-card pop-hover reveal-on-scroll"
+              className="glass-card pop-hover"
               style={{
                 borderRadius: '14px',
                 overflow: 'hidden',
                 padding: '0',
                 border: '1px solid var(--glass-border)',
-                transitionDelay: `${idx * 40}ms`,
-                position: 'relative'
+                position: 'relative',
+                opacity: 1,
+                transform: 'none'
               }}
             >
               {/* Thumbnail Container (16:9 standard OR 9:16 Reel ratio) */}
@@ -239,7 +249,7 @@ function WorkContent() {
         </div>
 
         {/* 1:1 Booking Calendar & Strategy Section */}
-        <div className="glass-card reveal-on-scroll" style={{
+        <div className="glass-card" style={{
           padding: '24px 20px',
           borderRadius: '20px',
           maxWidth: '1100px',
