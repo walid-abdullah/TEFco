@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import ServicesMatrix from '@/components/ServicesMatrix';
 import DesignMonksContact from '@/components/DesignMonksContact';
@@ -8,8 +8,6 @@ import FAQSchema from '@/components/FAQSchema';
 import { SERVICE_FAQS } from '@/lib/seoData';
 
 export default function ServicesHubPage() {
-  const [selectedService, setSelectedService] = useState(null);
-
   const mainServices = [
     {
       id: 'reels',
@@ -106,7 +104,7 @@ export default function ServicesHubPage() {
   const aggregatedFaqs = Object.values(SERVICE_FAQS).flat().slice(0, 10);
 
   return (
-    <div className="services-page-full" style={{ minHeight: '100vh', paddingTop: '120px', paddingBottom: '100px' }}>
+    <div className="services-page-full" style={{ minHeight: '100vh', paddingTop: '100px', paddingBottom: '60px' }}>
       
       {/* Ambient Orbs */}
       <div className="bg-glow-orb glow-cyan" style={{ top: '5%', left: '-10%' }}></div>
@@ -115,93 +113,94 @@ export default function ServicesHubPage() {
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Top Header */}
-        <div className="text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 60px' }}>
+        <div className="text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 40px' }}>
           <span className="section-subtitle">Our Post-Production Capabilities</span>
-          <h1 className="section-title" style={{ fontSize: '3.4rem', marginBottom: '20px' }}>
+          <h1 className="section-title" style={{ fontSize: '3rem', marginBottom: '14px' }}>
             Full-Stack Video Editing for <span className="combination-font">Ambitious Brands</span>
           </h1>
-          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', lineHeight: '1.7' }}>
+          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6' }}>
             From viral short-form clips to studio-grade podcasts and SaaS animations, explore our 5 specialized production arms.
           </p>
         </div>
 
         {/* 5 Core Services Deep Dive Grid */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', maxWidth: '1280px', margin: '0 auto 90px' }}>
+        <div className="services-hub-list" style={{ display: 'flex', flexDirection: 'column', gap: '30px', maxWidth: '1280px', margin: '0 auto 60px' }}>
           {mainServices.map((service, idx) => (
             <div
               key={service.id}
               id={service.slug}
-              className="glass-card pop-hover reveal-on-scroll"
+              className="glass-card pop-hover reveal-on-scroll service-hub-card"
               style={{
-                scrollMarginTop: '120px',
-                borderRadius: '32px',
-                padding: '45px 40px',
+                scrollMarginTop: '100px',
+                borderRadius: '24px',
+                padding: '36px 32px',
                 display: 'grid',
                 gridTemplateColumns: idx % 2 === 0 ? '1.2fr 0.8fr' : '0.8fr 1.2fr',
-                gap: '45px',
+                gap: '36px',
                 alignItems: 'center',
-                border: '1px solid var(--glass-border)'
+                border: '1px solid var(--glass-border)',
+                position: 'relative'
               }}
             >
               {/* Content Column */}
-              <div style={{ order: idx % 2 === 0 ? 1 : 2 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '15px' }}>
+              <div className="service-hub-content" style={{ order: idx % 2 === 0 ? 1 : 2 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
                   <span style={{
-                    fontSize: '1.1rem',
+                    fontSize: '0.95rem',
                     fontWeight: '900',
                     color: service.color,
                     background: `${service.color}15`,
-                    padding: '4px 14px',
-                    borderRadius: '20px',
+                    padding: '3px 12px',
+                    borderRadius: '8px',
                     border: `1px solid ${service.color}30`
                   }}>
                     {service.index}
                   </span>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.82rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.8px' }}>
                     Specialized Arm
                   </span>
                 </div>
 
-                <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '10px', color: 'var(--text-primary)', lineHeight: '1.25' }}>
+                <h2 style={{ fontSize: '1.75rem', fontWeight: '800', marginBottom: '8px', color: 'var(--text-primary)', lineHeight: '1.25' }}>
                   {service.title}
                 </h2>
-                <div style={{ color: service.color, fontWeight: '700', fontSize: '1.05rem', marginBottom: '16px' }}>
+                <div style={{ color: service.color, fontWeight: '700', fontSize: '0.96rem', marginBottom: '14px' }}>
                   {service.tagline}
                 </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.96rem', lineHeight: '1.6', marginBottom: '24px' }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.55', marginBottom: '20px' }}>
                   {service.desc}
                 </p>
 
                 {/* Deliverables Checklist */}
-                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px 0', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {service.deliverables.map((item, i) => (
-                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                      <i className="fa-solid fa-check" style={{ color: service.color, fontSize: '0.85rem' }}></i>
+                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: 'var(--text-secondary)' }}>
+                      <i className="fa-solid fa-check" style={{ color: service.color, fontSize: '0.82rem' }}></i>
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-                  <Link href="/book-a-call" className="btn btn-primary pop-btn">
+                <div className="service-hub-actions" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  <Link href="/book-a-call" className="btn btn-primary pop-btn" style={{ borderRadius: '10px', padding: '11px 20px', fontSize: '0.9rem' }}>
                     <span>Book This Service</span>
                     <i className="fa-solid fa-arrow-right"></i>
                   </Link>
-                  <Link href="/work" className="btn btn-outline pop-btn">
+                  <Link href="/work" className="btn btn-outline pop-btn" style={{ borderRadius: '10px', padding: '11px 20px', fontSize: '0.9rem' }}>
                     <span>View Case Studies</span>
                   </Link>
                 </div>
               </div>
 
               {/* Image Preview Column */}
-              <div style={{
+              <div className="service-hub-img-col" style={{
                 order: idx % 2 === 0 ? 2 : 1,
                 position: 'relative',
-                borderRadius: '24px',
+                borderRadius: '16px',
                 overflow: 'hidden',
-                aspectRatio: '4/3',
+                aspectRatio: '16/10',
                 border: '1px solid var(--glass-border)',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.3)'
+                boxShadow: '0 15px 35px rgba(0,0,0,0.2)'
               }}>
                 <img
                   src={service.image}
@@ -214,19 +213,20 @@ export default function ServicesHubPage() {
                   background: 'linear-gradient(to top, rgba(7, 13, 24, 0.8) 0%, transparent 60%)',
                   display: 'flex',
                   alignItems: 'flex-end',
-                  padding: '24px'
+                  padding: '16px'
                 }}>
                   <div style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
+                    background: 'rgba(255, 255, 255, 0.12)',
                     backdropFilter: 'blur(10px)',
                     color: '#FFFFFF',
-                    padding: '8px 16px',
-                    borderRadius: '30px',
-                    fontSize: '0.85rem',
+                    padding: '6px 14px',
+                    borderRadius: '8px',
+                    fontSize: '0.78rem',
                     fontWeight: '700',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '8px'
+                    gap: '6px',
+                    border: '1px solid rgba(255, 255, 255, 0.2)'
                   }}>
                     <i className={service.icon}></i>
                     <span>Studio Verified</span>
@@ -241,7 +241,7 @@ export default function ServicesHubPage() {
         <ServicesMatrix />
 
         {/* Design Monks Project Inquiry Section */}
-        <div style={{ marginTop: '70px' }}>
+        <div style={{ marginTop: '50px' }}>
           <DesignMonksContact />
         </div>
 
