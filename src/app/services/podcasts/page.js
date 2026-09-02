@@ -7,12 +7,10 @@ export default function PodcastServiceLandingPage() {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
 
-  // Hero Intro Explainer Video for Podcast Service
   const introVideo = {
-    title: 'Podcast Production & Multiplication Suite — Overview',
+    title: 'Broadcast-Grade Podcast Production & Repurposing',
     thumbnail: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80',
-    youtubeId: 'M7lc1UVf-VE',
-    duration: '1:45 Min Explainer'
+    youtubeId: 'M7lc1UVf-VE'
   };
 
   const podcastWorks = [
@@ -80,47 +78,28 @@ export default function PodcastServiceLandingPage() {
   return (
     <div className="podcast-landing-page" style={{ minHeight: '100vh', paddingTop: '90px', paddingBottom: '60px', position: 'relative' }}>
       
-      {/* Background Ambient Glows */}
       <div className="bg-glow-orb glow-blue" style={{ top: '5%', left: '-8%' }}></div>
       <div className="bg-glow-orb glow-purple" style={{ top: '35%', right: '-8%' }}></div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1240px' }}>
         
-        {/* ============================================================
-            1. THE FOUNDRY CINEMATIC HERO
-            ============================================================ */}
-        <div className="text-center" style={{ maxWidth: '900px', margin: '0 auto 30px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 16px', borderRadius: '50px', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', color: '#38BDF8', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '14px' }}>
-            <i className="fa-solid fa-microphone-lines"></i>
-            <span>Broadcast-Grade Podcast Post-Production</span>
-          </div>
+        {/* HERO */}
+        <div className="text-center" style={{ maxWidth: '960px', margin: '0 auto 40px' }}>
           
-          <h1 className="section-title" style={{ fontSize: '3rem', lineHeight: '1.15', marginBottom: '16px', fontWeight: '800' }}>
-            Turn 1 Raw Episode into <span className="combination-font">30 Days of Viral Authority</span>
+          <h1 className="section-title" style={{ fontSize: '3.2rem', lineHeight: '1.15', marginBottom: '12px', fontWeight: '800' }}>
+            Multi-Cam Podcasts, Audio & <span className="combination-font">Highlights Clips</span>
           </h1>
           
-          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '720px', margin: '0 auto 24px', lineHeight: '1.6' }}>
-            Full-episode multi-cam switching, studio audio mastering, and automated extraction of 10–20 high-retention micro clips engineered for Spotify, YouTube, and paid social.
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', maxWidth: '720px', margin: '0 auto 30px', fontWeight: '500' }}>
+            Turn 1 Raw Episode into 30 Days of Viral Authority
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap', marginBottom: '35px' }}>
-            <Link href="/book-a-call?service=Podcast%20%26%20Clips%20Editing" className="btn btn-primary pop-btn" style={{ padding: '14px 30px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
-              <span>Book 15-Min Podcast Audit</span>
-              <i className="fa-solid fa-arrow-right" style={{ marginLeft: '6px' }}></i>
-            </Link>
-            <a href="#showcase" className="btn btn-outline" style={{ padding: '14px 28px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
-              <span>Watch Live Work Samples</span>
-            </a>
-          </div>
-
-          {/* ============================================================
-              FEATURED HERO SERVICE INTRO VIDEO PLAYER
-              ============================================================ */}
+          {/* FEATURED HERO SERVICE INTRO VIDEO */}
           <div 
             className="glass-card pop-hover"
             style={{
               maxWidth: '920px',
-              margin: '0 auto 50px',
+              margin: '0 auto 28px',
               borderRadius: '20px',
               overflow: 'hidden',
               padding: 0,
@@ -135,9 +114,8 @@ export default function PodcastServiceLandingPage() {
               onClick={() => setSelectedVideo(introVideo)}
             >
               <img src={introVideo.thumbnail} alt={introVideo.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(7,13,24,0.85) 0%, rgba(0,0,0,0.2) 60%)' }}></div>
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }}></div>
 
-              {/* Glowing Play Button */}
               <div style={{
                 position: 'absolute',
                 top: '50%', left: '50%',
@@ -156,40 +134,22 @@ export default function PodcastServiceLandingPage() {
               }}>
                 <i className="fa-solid fa-play" style={{ marginLeft: '3px' }}></i>
               </div>
-
-              {/* Bottom Video Badge Info */}
-              <div style={{
-                position: 'absolute',
-                bottom: '16px',
-                left: '20px',
-                right: '20px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '8px'
-              }}>
-                <div style={{ textAlign: 'left' }}>
-                  <div style={{ color: '#38BDF8', fontSize: '0.76rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                    SERVICE EXPLAINER & BREAKDOWN
-                  </div>
-                  <h3 style={{ color: '#FFFFFF', fontSize: '1.1rem', fontWeight: '800', margin: '2px 0 0' }}>
-                    How We Engineer Your Podcast Pipeline
-                  </h3>
-                </div>
-
-                <span style={{ padding: '5px 12px', borderRadius: '8px', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF', fontSize: '0.78rem', fontWeight: '700' }}>
-                  <i className="fa-solid fa-circle-play" style={{ marginRight: '6px', color: '#38BDF8' }}></i>
-                  {introVideo.duration}
-                </span>
-              </div>
             </div>
+          </div>
+
+          {/* Action Buttons Below Video */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap', marginBottom: '50px' }}>
+            <Link href="/book-a-call?service=Podcast%20%26%20Clips%20Editing" className="btn btn-primary pop-btn" style={{ padding: '14px 30px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
+              <span>Book 15-Min Podcast Audit</span>
+              <i className="fa-solid fa-arrow-right" style={{ marginLeft: '6px' }}></i>
+            </Link>
+            <a href="#showcase" className="btn btn-outline" style={{ padding: '14px 28px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
+              <span>Watch Live Work Samples</span>
+            </a>
           </div>
         </div>
 
-        {/* ============================================================
-            2. THE 1-TO-30 CONTENT ENGINE (Visual Repurposing Architecture)
-            ============================================================ */}
+        {/* THE 1-TO-30 CONTENT ENGINE */}
         <div className="glass-card" style={{
           padding: '30px 24px',
           borderRadius: '20px',
@@ -237,9 +197,7 @@ export default function PodcastServiceLandingPage() {
           </div>
         </div>
 
-        {/* ============================================================
-            3. LIVE FEATURED VIDEO SHOWCASE (4K Master Lightbox)
-            ============================================================ */}
+        {/* SHOWCASE */}
         <div id="showcase" style={{ marginBottom: '60px' }}>
           <div className="text-center" style={{ marginBottom: '26px' }}>
             <span className="section-subtitle" style={{ fontSize: '0.78rem' }}>Production Portfolio</span>
@@ -309,9 +267,7 @@ export default function PodcastServiceLandingPage() {
           </div>
         </div>
 
-        {/* ============================================================
-            4. THE AUDIO-VISUAL LAB (Technical Post-Production Standards)
-            ============================================================ */}
+        {/* AUDIO-VISUAL LAB */}
         <div className="glass-card" style={{
           padding: '30px 24px',
           borderRadius: '20px',
@@ -351,62 +307,7 @@ export default function PodcastServiceLandingPage() {
           </div>
         </div>
 
-        {/* ============================================================
-            5. DEDICATED FOUNDRY POD SYSTEM (Your Dedicated Team)
-            ============================================================ */}
-        <div style={{ marginBottom: '60px' }}>
-          <div className="text-center" style={{ marginBottom: '26px' }}>
-            <span className="section-subtitle" style={{ fontSize: '0.78rem' }}>Infrastructure</span>
-            <h2 style={{ fontSize: '2rem', fontWeight: '800', margin: 0 }}>
-              Your Dedicated <span className="combination-font">Production Pod</span>
-            </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', maxWidth: '580px', margin: '8px auto 0' }}>
-              You don’t get random freelancers. Every brand is assigned a locked studio pod managed by Executive Producer Walid Abdullah.
-            </p>
-          </div>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '16px'
-          }}>
-            <div className="glass-card" style={{ padding: '20px', borderRadius: '16px', textAlign: 'center' }}>
-              <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', margin: '0 auto 12px' }}>
-                <i className="fa-solid fa-user-tie"></i>
-              </div>
-              <h4 style={{ margin: '0 0 4px', fontSize: '1.05rem', fontWeight: '700' }}>Dedicated Lead Editor</h4>
-              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Executes full multi-cam assembly and narrative flow.</p>
-            </div>
-
-            <div className="glass-card" style={{ padding: '20px', borderRadius: '16px', textAlign: 'center' }}>
-              <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: 'rgba(236, 72, 153, 0.15)', color: '#EC4899', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', margin: '0 auto 12px' }}>
-                <i className="fa-solid fa-wand-magic-sparkles"></i>
-              </div>
-              <h4 style={{ margin: '0 0 4px', fontSize: '1.05rem', fontWeight: '700' }}>Short-Form Motion Lead</h4>
-              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Extracts and polishes 10-20 viral 9:16 reels.</p>
-            </div>
-
-            <div className="glass-card" style={{ padding: '20px', borderRadius: '16px', textAlign: 'center' }}>
-              <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: 'rgba(139, 92, 246, 0.15)', color: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', margin: '0 auto 12px' }}>
-                <i className="fa-solid fa-headphones"></i>
-              </div>
-              <h4 style={{ margin: '0 0 4px', fontSize: '1.05rem', fontWeight: '700' }}>Sound & Color Specialist</h4>
-              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Delivers -14 LUFS audio and DaVinci color matching.</p>
-            </div>
-
-            <div className="glass-card" style={{ padding: '20px', borderRadius: '16px', textAlign: 'center' }}>
-              <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.15)', color: '#10B981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', margin: '0 auto 12px' }}>
-                <i className="fa-solid fa-clipboard-check"></i>
-              </div>
-              <h4 style={{ margin: '0 0 4px', fontSize: '1.05rem', fontWeight: '700' }}>Quality Assurance Lead</h4>
-              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Audits 48-hour SLAs, spellings, and audio sync.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================================
-            6. SERVICE-SPECIFIC FAQ ACCORDION
-            ============================================================ */}
+        {/* FAQ */}
         <div style={{ maxWidth: '850px', margin: '0 auto 60px' }}>
           <div className="text-center" style={{ marginBottom: '26px' }}>
             <span className="section-subtitle" style={{ fontSize: '0.78rem' }}>Frequently Asked Questions</span>
@@ -443,9 +344,7 @@ export default function PodcastServiceLandingPage() {
           </div>
         </div>
 
-        {/* ============================================================
-            7. EMBEDDED STRATEGY AUDIT WITH WALID ABDULLAH (Pre-Filled)
-            ============================================================ */}
+        {/* CALENDAR */}
         <div className="glass-card" style={{
           padding: '30px 20px',
           borderRadius: '20px',

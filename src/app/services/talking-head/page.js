@@ -7,12 +7,10 @@ export default function TalkingHeadLandingPage() {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
 
-  // Hero Intro Explainer Video for Talking Head & YouTube Long-Form
   const introVideo = {
-    title: 'YouTube Long-Form & Authority Engineering — Overview',
+    title: 'YouTube Long-Form & Thought Leadership Authority',
     thumbnail: 'https://images.unsplash.com/photo-1516280440502-12695fb79f15?auto=format&fit=crop&w=1200&q=80',
-    youtubeId: 'L_LUpnjgPso',
-    duration: '2:10 Min Explainer'
+    youtubeId: 'L_LUpnjgPso'
   };
 
   const talkingHeadWorks = [
@@ -82,36 +80,22 @@ export default function TalkingHeadLandingPage() {
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1240px' }}>
         
         {/* HERO */}
-        <div className="text-center" style={{ maxWidth: '900px', margin: '0 auto 30px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 16px', borderRadius: '50px', background: 'rgba(239, 68, 68, 0.12)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#EF4444', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '14px' }}>
-            <i className="fa-brands fa-youtube"></i>
-            <span>Long-Form Thought Leadership & Authority</span>
-          </div>
+        <div className="text-center" style={{ maxWidth: '960px', margin: '0 auto 40px' }}>
           
-          <h1 className="section-title" style={{ fontSize: '3rem', lineHeight: '1.15', marginBottom: '16px', fontWeight: '800' }}>
-            YouTube Long-Form That <span className="combination-font">Commands Trust & Watch-Time</span>
+          <h1 className="section-title" style={{ fontSize: '3.2rem', lineHeight: '1.15', marginBottom: '12px', fontWeight: '800' }}>
+            YouTube Long-Form & <span className="combination-font">Talking Head Authority</span>
           </h1>
           
-          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '720px', margin: '0 auto 24px', lineHeight: '1.6' }}>
-            Documentary-style story pacing, bespoke animated graphics, and cinematic color grading designed for founders, consultants, and educational channels scaling high-ticket conversions.
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', maxWidth: '720px', margin: '0 auto 30px', fontWeight: '500' }}>
+            Scale Watch-Time, Subscribers, and High-Ticket Trust
           </p>
-
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap', marginBottom: '35px' }}>
-            <Link href="/book-a-call?service=YouTube%20Long-Form" className="btn btn-primary pop-btn" style={{ padding: '14px 30px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
-              <span>Book YouTube Strategy Call</span>
-              <i className="fa-solid fa-arrow-right" style={{ marginLeft: '6px' }}></i>
-            </Link>
-            <a href="#showcase" className="btn btn-outline" style={{ padding: '14px 28px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
-              <span>Explore Work Showcase</span>
-            </a>
-          </div>
 
           {/* FEATURED HERO SERVICE INTRO VIDEO */}
           <div 
             className="glass-card pop-hover"
             style={{
               maxWidth: '920px',
-              margin: '0 auto 50px',
+              margin: '0 auto 28px',
               borderRadius: '20px',
               overflow: 'hidden',
               padding: 0,
@@ -126,7 +110,7 @@ export default function TalkingHeadLandingPage() {
               onClick={() => setSelectedVideo(introVideo)}
             >
               <img src={introVideo.thumbnail} alt={introVideo.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(7,13,24,0.85) 0%, rgba(0,0,0,0.2) 60%)' }}></div>
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }}></div>
 
               <div style={{
                 position: 'absolute',
@@ -146,33 +130,18 @@ export default function TalkingHeadLandingPage() {
               }}>
                 <i className="fa-solid fa-play" style={{ marginLeft: '3px' }}></i>
               </div>
-
-              <div style={{
-                position: 'absolute',
-                bottom: '16px',
-                left: '20px',
-                right: '20px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '8px'
-              }}>
-                <div style={{ textAlign: 'left' }}>
-                  <div style={{ color: '#EF4444', fontSize: '0.76rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                    SERVICE EXPLAINER & BREAKDOWN
-                  </div>
-                  <h3 style={{ color: '#FFFFFF', fontSize: '1.1rem', fontWeight: '800', margin: '2px 0 0' }}>
-                    How We Craft High-Retention Authority Films
-                  </h3>
-                </div>
-
-                <span style={{ padding: '5px 12px', borderRadius: '8px', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF', fontSize: '0.78rem', fontWeight: '700' }}>
-                  <i className="fa-solid fa-circle-play" style={{ marginRight: '6px', color: '#EF4444' }}></i>
-                  {introVideo.duration}
-                </span>
-              </div>
             </div>
+          </div>
+
+          {/* Action Buttons Below Video */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap', marginBottom: '50px' }}>
+            <Link href="/book-a-call?service=YouTube%20Long-Form" className="btn btn-primary pop-btn" style={{ padding: '14px 30px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
+              <span>Book YouTube Strategy Call</span>
+              <i className="fa-solid fa-arrow-right" style={{ marginLeft: '6px' }}></i>
+            </Link>
+            <a href="#showcase" className="btn btn-outline" style={{ padding: '14px 28px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
+              <span>Explore Work Showcase</span>
+            </a>
           </div>
         </div>
 
@@ -330,7 +299,7 @@ export default function TalkingHeadLandingPage() {
           </div>
         </div>
 
-        {/* EMBEDDED STRATEGY CALENDAR */}
+        {/* CALENDAR */}
         <div className="glass-card" style={{
           padding: '30px 20px',
           borderRadius: '20px',
