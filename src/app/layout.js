@@ -13,14 +13,15 @@ import { KEYWORDS, GLOBAL_META, ORGANIZATION, BREADCRUMBS } from '@/lib/seoData'
 export async function generateMetadata() {
   const query = `*[_type == "globalSettings"][0]`;
   const settings = await client.fetch(query);
-  
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || ORGANIZATION.url || 'https://editlyfoundry.vercel.app').replace(/\/$/, '');
+
   const seoTitle = settings?.seoTitle || GLOBAL_META.siteTitle;
   const seoDescription = settings?.seoDescription || GLOBAL_META.siteDescription;
   const seoKeywords = settings?.seoKeywords ? settings.seoKeywords.split(',').map(k => k.trim()) : KEYWORDS;
-  
+
   const metadata = {
-    metadataBase: new URL(ORGANIZATION.url),
-    alternates: { canonical: ORGANIZATION.url },
+    metadataBase: new URL(siteUrl),
+    alternates: { canonical: siteUrl },
     title: seoTitle,
     description: seoDescription,
     keywords: seoKeywords,
@@ -29,7 +30,7 @@ export async function generateMetadata() {
       description: seoDescription,
       type: 'website',
       siteName: ORGANIZATION.name,
-      url: ORGANIZATION.url,
+      url: siteUrl,
       images: [{ url: settings?.seoImage ? urlFor(settings.seoImage).url() : GLOBAL_META.ogImage }]
     },
     twitter: {
@@ -49,10 +50,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export default async function RootLayout({ children }) {
   const query = `*[_type == "globalSettings"][0]`;
   const settings = await client.fetch(query);
-  
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || ORGANIZATION.url || 'https://editlyfoundry.vercel.app').replace(/\/$/, '');
+
   const bannerQuery = `*[_type == "promoBanner"][0]`;
   const bannerSettings = await client.fetch(bannerQuery);
-  
+
   const defaultTheme = settings?.defaultTheme || 'dark';
 
   const orgLd = {
@@ -99,7 +101,7 @@ export default async function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-        <link rel="canonical" href={ORGANIZATION.url} />
+        <link rel="canonical" href={siteUrl} />
         <meta name="google-site-verification" content="google397bc2b4bbbb7f90" />
         <meta name="google-site-verification" content="397bc2b4bbbb7f90" />
 

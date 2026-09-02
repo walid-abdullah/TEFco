@@ -5,9 +5,17 @@ import { useTheme } from '@/context/ThemeContext';
 
 export default function Navbar({ menu }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   const isLight = theme === 'light';
+  const serviceItems = [
+    { title: 'Reels & Shorts Viral Editing', slug: 'reels-shorts' },
+    { title: 'Multi-Cam Podcasts, Audio & Highlights Clips', slug: 'podcasts' },
+    { title: 'YouTube Long-Form & Talking Head', slug: 'talking-head' },
+    { title: 'High-Converting UGC & Ads', slug: 'ugc-ads' },
+    { title: '3D SaaS & Product Demos', slug: 'saas-motion' }
+  ];
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -106,13 +114,7 @@ export default function Navbar({ menu }) {
                 gap: '8px'
               }}
             >
-              {[
-                { title: 'Reels & Shorts Viral Editing', slug: 'reels-shorts' },
-                { title: 'Multi-Cam Podcasts, Audio & Highlights Clips', slug: 'podcasts' },
-                { title: 'YouTube Long-Form & Talking Head', slug: 'talking-head' },
-                { title: 'High-Converting UGC & Ads', slug: 'ugc-ads' },
-                { title: '3D SaaS & Product Demos', slug: 'saas-motion' }
-              ].map((srv, sIdx) => (
+              {serviceItems.map((srv, sIdx) => (
                 <Link
                   key={sIdx}
                   href={`/services#${srv.slug}`}
@@ -140,6 +142,53 @@ export default function Navbar({ menu }) {
                 </Link>
               ))}
             </div>
+          </div>
+
+          <div className="mobile-services-accordion" style={{ display: 'none' }}>
+            <button
+              type="button"
+              className="mobile-services-toggle"
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              aria-expanded={isServicesOpen}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: 'transparent',
+                border: 'none',
+                color: isLight ? '#475569' : '#94A3B8',
+                padding: '10px 0',
+                fontWeight: 700,
+                fontSize: '0.95rem',
+                cursor: 'pointer',
+              }}
+            >
+              <span>Services</span>
+              <span style={{ fontSize: '1.1rem' }}>{isServicesOpen ? '−' : '+'}</span>
+            </button>
+            {isServicesOpen && (
+              <div className="mobile-services-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingTop: '6px' }}>
+                {serviceItems.map((service) => (
+                  <Link
+                    key={service.slug}
+                    href={`/services#${service.slug}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    style={{
+                      color: isLight ? '#0F172A' : '#F8FAFC',
+                      padding: '10px 12px',
+                      background: isLight ? 'rgba(15, 23, 42, 0.03)' : 'rgba(255, 255, 255, 0.04)',
+                      borderRadius: '12px',
+                      textDecoration: 'none',
+                      fontSize: '0.86rem',
+                      fontWeight: 600,
+                    }}
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Pricing */}
