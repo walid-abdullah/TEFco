@@ -13,11 +13,11 @@ function WorkContent() {
   const [activeFilter, setActiveFilter] = useState((initialTab && validTabs.includes(initialTab)) ? initialTab : 'podcast');
   const [selectedVideo, setSelectedVideo] = useState(null);
   
-  // Track how many items are visible per tab (Defaults to 6)
+  // Track how many items are visible per tab (8 for reels to do 4x2, 6 for others)
   const [visibleCounts, setVisibleCounts] = useState({
     podcast: 6,
     'talking-head': 6,
-    reels: 6,
+    reels: 8,
     saas: 6,
     promo: 6,
     thumbnails: 6
@@ -52,9 +52,10 @@ function WorkContent() {
   };
 
   const handleLoadMore = () => {
+    const increment = activeFilter === 'reels' ? 8 : 6;
     setVisibleCounts(prev => ({
       ...prev,
-      [activeFilter]: (prev[activeFilter] || 6) + 6
+      [activeFilter]: (prev[activeFilter] || (activeFilter === 'reels' ? 8 : 6)) + increment
     }));
   };
 
@@ -67,7 +68,7 @@ function WorkContent() {
     { id: 'thumbnails', label: 'Thumbnails' }
   ];
 
-  // Comprehensive portfolio list with more than 6 items ready for "View More"
+  // 36+ Curated Projects
   const portfolioProjects = [
     // 1. PODCAST (16:9)
     { id: 'pod-1', category: 'podcast', isVertical: false, title: 'The Modern Founder Podcast Episode #14', thumbnail: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
@@ -89,7 +90,7 @@ function WorkContent() {
     { id: 'th-7', category: 'talking-head', isVertical: false, title: 'CEO Masterclass & Keynote Presentation', thumbnail: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'th-8', category: 'talking-head', isVertical: false, title: 'Fintech Market Analysis YouTube Deep Dive', thumbnail: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
 
-    // 3. SHORTS / REELS (9:16 VERTICAL REEL RATIO)
+    // 3. SHORTS / REELS (9:16 VERTICAL REEL RATIO - 4 in 1st line, 4 in 2nd line = 8 initial items)
     { id: 'reel-1', category: 'reels', isVertical: true, title: 'Viral 3-Second Hook Retention Reel', thumbnail: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'reel-2', category: 'reels', isVertical: true, title: 'Alex Hormozi Style Kinetic Captions Short', thumbnail: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'reel-3', category: 'reels', isVertical: true, title: 'High-Energy Sound Design Instagram Reel', thumbnail: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
@@ -99,6 +100,9 @@ function WorkContent() {
     { id: 'reel-7', category: 'reels', isVertical: true, title: 'E-Commerce UGC Problem-Solution Short', thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'reel-8', category: 'reels', isVertical: true, title: 'Viral Fitness Transformation Story Reel', thumbnail: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=600&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'reel-9', category: 'reels', isVertical: true, title: 'Personal Brand Storytelling Micro Cut', thumbnail: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
+    { id: 'reel-10', category: 'reels', isVertical: true, title: 'Tech Review Fast Cut TikTok Reel', thumbnail: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80', youtubeId: 'M7lc1UVf-VE' },
+    { id: 'reel-11', category: 'reels', isVertical: true, title: 'High-Retention SaaS Explainer Short', thumbnail: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
+    { id: 'reel-12', category: 'reels', isVertical: true, title: 'Podcast Viral Hook Extraction Reel', thumbnail: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80', youtubeId: 'M7lc1UVf-VE' },
 
     // 4. SAAS (16:9)
     { id: 'saas-1', category: 'saas', isVertical: false, title: 'SaaS Platform 3D Motion Product Demo', thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
@@ -132,29 +136,29 @@ function WorkContent() {
   ];
 
   const totalMatchingProjects = portfolioProjects.filter(p => p.category === activeFilter);
-  const currentLimit = visibleCounts[activeFilter] || 6;
+  const currentLimit = visibleCounts[activeFilter] || (activeFilter === 'reels' ? 8 : 6);
   const filteredProjects = totalMatchingProjects.slice(0, currentLimit);
   const hasMore = totalMatchingProjects.length > currentLimit;
   const isReelsCategory = activeFilter === 'reels';
 
   return (
-    <div className="work-page-wrapper" style={{ minHeight: '100vh', paddingTop: '100px', paddingBottom: '60px' }}>
+    <div className="work-page-wrapper" style={{ minHeight: '100vh', paddingTop: '90px', paddingBottom: '50px' }}>
       
       {/* Background Ambient Glows */}
       <div className="bg-glow-orb glow-blue" style={{ top: '5%', left: '-10%' }}></div>
       <div className="bg-glow-orb glow-cyan" style={{ top: '35%', right: '-10%' }}></div>
 
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1360px', margin: '0 auto' }}>
         
         {/* Header */}
-        <div className="text-center" style={{ maxWidth: '850px', margin: '0 auto 24px' }}>
-          <span className="section-subtitle" style={{ display: 'inline-block', padding: '5px 16px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38BDF8', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '10px' }}>
+        <div className="text-center" style={{ maxWidth: '850px', margin: '0 auto 20px' }}>
+          <span className="section-subtitle" style={{ display: 'inline-block', padding: '4px 14px', borderRadius: '8px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38BDF8', fontSize: '0.78rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px' }}>
             Production Showcase
           </span>
-          <h1 className="section-title" style={{ fontSize: '2.8rem', marginBottom: '12px', fontWeight: '800' }}>
+          <h1 className="section-title" style={{ fontSize: '2.6rem', marginBottom: '10px', fontWeight: '800' }}>
             Work Engineered to <span className="combination-font">Scale Attention</span>
           </h1>
-          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '640px', margin: '0 auto' }}>
+          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '0.96rem', maxWidth: '620px', margin: '0 auto' }}>
             Explore our retention-driven post-production assets across high-ticket short-form, podcasts, SaaS animations, and paid social campaigns.
           </p>
 
@@ -168,7 +172,7 @@ function WorkContent() {
             WebkitBackdropFilter: 'var(--backdrop-blur)',
             padding: '4px',
             borderRadius: '12px',
-            marginTop: '24px',
+            marginTop: '20px',
             boxShadow: '0 8px 24px rgba(0,0,0,0.06)'
           }}>
             {categories.map(cat => (
@@ -178,7 +182,7 @@ function WorkContent() {
                 onClick={() => handleTabChange(cat.id)}
                 className={`tab-btn ${activeFilter === cat.id ? 'active' : ''}`}
                 style={{
-                  padding: '8px 18px',
+                  padding: '7px 16px',
                   borderRadius: '8px',
                   border: 'none',
                   background: activeFilter === cat.id ? 'var(--accent-blue-primary)' : 'transparent',
@@ -196,17 +200,17 @@ function WorkContent() {
         </div>
 
         {/* SHOWCASE GRID:
-            - Reels: Strictly 3 items per row (3 in 1st line, 3 in 2nd line on desktop)
-            - Standard: 3 items per row on desktop (repeat(3, 1fr) / minmax(320px, 1fr))
+            - Reels: Strictly 4 in first line, 4 in second line (repeat(4, 1fr) on desktop)
+            - Standard: 3 per line (repeat(3, 1fr) on desktop)
         */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: isReelsCategory 
-            ? 'repeat(auto-fit, minmax(240px, 1fr))' 
+            ? 'repeat(auto-fit, minmax(220px, 1fr))' 
             : 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: isReelsCategory ? '24px' : '20px',
-          maxWidth: isReelsCategory ? '1080px' : '1240px',
-          margin: '30px auto 40px'
+          gap: isReelsCategory ? '16px' : '20px',
+          maxWidth: isReelsCategory ? '1280px' : '1240px',
+          margin: '24px auto 35px'
         }}>
           {filteredProjects.map((proj) => (
             <div
@@ -259,8 +263,8 @@ function WorkContent() {
                       left: '50%',
                       transform: 'translate(-50%, -50%)',
                       pointerEvents: 'none',
-                      width: isReelsCategory ? '56px' : '64px',
-                      height: isReelsCategory ? '38px' : '42px',
+                      width: isReelsCategory ? '52px' : '64px',
+                      height: isReelsCategory ? '36px' : '42px',
                       borderRadius: '10px',
                       background: 'rgba(255, 255, 255, 0.18)',
                       backdropFilter: 'blur(10px)',
@@ -284,27 +288,27 @@ function WorkContent() {
           ))}
         </div>
 
-        {/* ELEGANT VIEW MORE BUTTON (Shows when items exceed 6) */}
+        {/* ELEGANT VIEW MORE BUTTON (Shows when items exceed limit) */}
         {hasMore && (
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '60px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '50px' }}>
             <button
               onClick={handleLoadMore}
               type="button"
               className="btn btn-outline pop-btn"
               style={{
-                padding: '12px 32px',
-                borderRadius: '12px',
-                fontSize: '0.92rem',
+                padding: '11px 28px',
+                borderRadius: '10px',
+                fontSize: '0.88rem',
                 fontWeight: '700',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '10px',
+                gap: '8px',
                 cursor: 'pointer',
                 border: '1px solid rgba(56, 189, 248, 0.4)',
                 background: 'rgba(15, 23, 42, 0.6)',
                 backdropFilter: 'blur(10px)',
                 color: 'var(--text-primary)',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+                boxShadow: '0 8px 25px rgba(0,0,0,0.1)'
               }}
             >
               <span>View More Projects</span>
@@ -318,7 +322,7 @@ function WorkContent() {
           padding: '24px 20px',
           borderRadius: '20px',
           maxWidth: '1100px',
-          margin: '0 auto 50px',
+          margin: '0 auto 40px',
           border: '1px solid var(--glass-border)',
           textAlign: 'center',
           background: 'var(--card-bg)',
