@@ -1,13 +1,27 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function WorkPage() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedVideo, setSelectedVideo] = useState(null);
 
-  // 6 Premium Disciplines aligned with Montage Motion clean classification
+  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/w-abdullah5588/30min";
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
   const categories = [
     { id: 'all', label: 'All Projects' },
     { id: 'podcast', label: 'Podcast' },
@@ -22,81 +36,63 @@ export default function WorkPage() {
     {
       id: 'proj-1',
       category: 'reels',
-      title: 'Viral Short-Form Retention Reel Showcase',
-      client: 'The Editly Foundry Co.',
-      metrics: '3.4M Views • 85% Retention',
+      title: 'Viral Short-Form Retention Reel',
       thumbnail: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80',
       youtubeId: 'L_LUpnjgPso'
     },
     {
       id: 'proj-2',
       category: 'podcast',
-      title: 'The Modern Founder Podcast (Multi-Cam Cut)',
-      client: 'The Editly Foundry Co.',
-      metrics: '450k Full Episode Views • 12 Clips',
+      title: 'The Modern Founder Podcast',
       thumbnail: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80',
       youtubeId: 'M7lc1UVf-VE'
     },
     {
       id: 'proj-3',
       category: 'promo',
-      title: 'High-Converting Direct Response Paid Ad',
-      client: 'The Editly Foundry Co.',
-      metrics: '4.2x ROAS on Meta • $180k Revenue',
+      title: 'Direct Response Paid Video Ad',
       thumbnail: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80',
       youtubeId: 'L_LUpnjgPso'
     },
     {
       id: 'proj-4',
       category: 'saas',
-      title: 'SaaS Platform 3D Motion & Product Launch Demo',
-      client: 'The Editly Foundry Co.',
-      metrics: '#1 Product of the Day on Product Hunt',
+      title: 'SaaS 3D Motion Product Demo',
       thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
       youtubeId: 'M7lc1UVf-VE'
     },
     {
       id: 'proj-5',
       category: 'talking-head',
-      title: 'Cinematic YouTube Long-Form & Talking Head',
-      client: 'The Editly Foundry Co.',
-      metrics: '1.2M YouTube Views • +45k Subs',
+      title: 'Cinematic YouTube Authority Video',
       thumbnail: 'https://images.unsplash.com/photo-1516280440502-12695fb79f15?auto=format&fit=crop&w=800&q=80',
       youtubeId: 'L_LUpnjgPso'
     },
     {
       id: 'proj-6',
       category: 'reels',
-      title: 'High-Energy Social Hook & Sound Design',
-      client: 'The Editly Foundry Co.',
-      metrics: '8.1M Total Impressions • 35k Shares',
+      title: 'High-Energy Social Hook Cut',
       thumbnail: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80',
       youtubeId: 'M7lc1UVf-VE'
     },
     {
       id: 'proj-7',
       category: 'thumbnails',
-      title: 'High-CTR YouTube Custom Thumbnail Package',
-      client: 'The Editly Foundry Co.',
-      metrics: '14.8% Average CTR Boost',
+      title: 'High-CTR YouTube Custom Thumbnail',
       thumbnail: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80',
       youtubeId: 'L_LUpnjgPso'
     },
     {
       id: 'proj-8',
       category: 'promo',
-      title: 'Direct Response Meta & TikTok E-Com Ad',
-      client: 'The Editly Foundry Co.',
-      metrics: '3.8x ROAS • Scaled to $50k/mo',
+      title: 'E-Commerce Meta & TikTok Ad',
       thumbnail: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
       youtubeId: 'M7lc1UVf-VE'
     },
     {
       id: 'proj-9',
       category: 'podcast',
-      title: 'Studio Audio Mastering & Multi-Camera Cut',
-      client: 'The Editly Foundry Co.',
-      metrics: 'Studio Quality Sound • Noise Purged',
+      title: 'Studio Audio & Multi-Cam Mastering',
       thumbnail: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=800&q=80',
       youtubeId: 'L_LUpnjgPso'
     }
@@ -107,7 +103,7 @@ export default function WorkPage() {
     : portfolioProjects.filter(p => p.category === activeFilter);
 
   return (
-    <div className="work-page-wrapper" style={{ minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+    <div className="work-page-wrapper" style={{ minHeight: '100vh', paddingTop: '100px', paddingBottom: '60px' }}>
       
       {/* Background Ambient Glows */}
       <div className="bg-glow-orb glow-blue" style={{ top: '5%', left: '-10%' }}></div>
@@ -116,15 +112,15 @@ export default function WorkPage() {
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Header (Montage Motion Clean Aesthetic) */}
-        <div className="text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 30px' }}>
-          <span className="section-subtitle" style={{ display: 'inline-block', padding: '6px 18px', borderRadius: '12px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38BDF8', fontSize: '0.82rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '12px' }}>
+        <div className="text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 24px' }}>
+          <span className="section-subtitle" style={{ display: 'inline-block', padding: '5px 16px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38BDF8', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '10px' }}>
             Our Portfolio
           </span>
-          <h1 className="section-title" style={{ fontSize: '3rem', marginBottom: '14px', fontWeight: '800' }}>
+          <h1 className="section-title" style={{ fontSize: '2.8rem', marginBottom: '12px', fontWeight: '800' }}>
             Creativity That <span className="combination-font">Converts</span>
           </h1>
-          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '650px', margin: '0 auto' }}>
-            Turning raw footage and ideas into high-retention video assets that capture attention and drive measurable growth.
+          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '600px', margin: '0 auto' }}>
+            Turning raw footage and ideas into content that captures attention and scales brands.
           </p>
 
           {/* Clean Horizontal Filter Bar */}
@@ -135,10 +131,10 @@ export default function WorkPage() {
             border: '1px solid var(--glass-border)',
             backdropFilter: 'var(--backdrop-blur)',
             WebkitBackdropFilter: 'var(--backdrop-blur)',
-            padding: '5px',
-            borderRadius: '14px',
-            marginTop: '28px',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.08)'
+            padding: '4px',
+            borderRadius: '12px',
+            marginTop: '24px',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)'
           }}>
             {categories.map(cat => (
               <button
@@ -148,12 +144,12 @@ export default function WorkPage() {
                 className={`tab-btn ${activeFilter === cat.id ? 'active' : ''}`}
                 style={{
                   padding: '8px 18px',
-                  borderRadius: '10px',
+                  borderRadius: '8px',
                   border: 'none',
                   background: activeFilter === cat.id ? 'var(--accent-blue-primary)' : 'transparent',
                   color: activeFilter === cat.id ? '#FFFFFF' : 'var(--text-secondary)',
                   fontWeight: '700',
-                  fontSize: '0.86rem',
+                  fontSize: '0.84rem',
                   cursor: 'pointer',
                   transition: 'all 0.25s ease'
                 }}
@@ -164,27 +160,27 @@ export default function WorkPage() {
           </div>
         </div>
 
-        {/* Ultra-Clean 3-Column Video Showcase Grid (Montage Motion Pure Style) */}
+        {/* 100% PURE CLEAN VIDEO SHOWCASE GRID (NO TEXT ON THUMBNAIL, WIDE PLAY BUTTON) */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '20px',
-          margin: '40px auto 70px'
+          gap: '16px',
+          margin: '30px auto 60px'
         }}>
           {filteredProjects.map((proj, idx) => (
             <div
               key={proj.id}
               className="glass-card pop-hover reveal-on-scroll"
               style={{
-                borderRadius: '16px',
+                borderRadius: '14px',
                 overflow: 'hidden',
                 padding: '0',
                 border: '1px solid var(--glass-border)',
-                transitionDelay: `${idx * 50}ms`,
+                transitionDelay: `${idx * 40}ms`,
                 position: 'relative'
               }}
             >
-              {/* 16:9 Thumbnail with Overlay & Play Button */}
+              {/* Pure Clean 16:9 Thumbnail (ZERO TEXT, WIDE CAPSULE PLAY BUTTON) */}
               <div 
                 style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', cursor: 'pointer' }}
                 onClick={() => setSelectedVideo(proj)}
@@ -193,39 +189,18 @@ export default function WorkPage() {
                   src={proj.thumbnail} 
                   alt={proj.title} 
                   loading="lazy"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }} 
                 />
 
-                {/* Subtle Gradient Shadow */}
+                {/* Subtle Hover Darkening Layer */}
                 <div style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'linear-gradient(to top, rgba(7, 13, 24, 0.85) 0%, rgba(7, 13, 24, 0.1) 60%, transparent 100%)'
+                  background: 'rgba(0, 0, 0, 0.2)',
+                  transition: 'background 0.3s ease'
                 }}></div>
 
-                {/* Top Badge: Metric / Category */}
-                <div style={{
-                  position: 'absolute',
-                  top: '12px',
-                  left: '12px',
-                  background: 'rgba(7, 13, 24, 0.85)',
-                  backdropFilter: 'blur(10px)',
-                  WebkitBackdropFilter: 'blur(10px)',
-                  color: '#38BDF8',
-                  padding: '4px 10px',
-                  borderRadius: '8px',
-                  fontSize: '0.74rem',
-                  fontWeight: '700',
-                  border: '1px solid rgba(56, 189, 248, 0.25)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '5px'
-                }}>
-                  <i className="fa-solid fa-chart-simple" style={{ color: '#10B981' }}></i>
-                  {proj.metrics}
-                </div>
-
-                {/* Center Apple-Style Frosted Glass Play Button */}
+                {/* Montage-Motion Style WIDE Capsule Play Button */}
                 <button 
                   className="apple-glass-play-btn"
                   style={{
@@ -234,75 +209,55 @@ export default function WorkPage() {
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     pointerEvents: 'none',
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '12px',
-                    background: 'rgba(255, 255, 255, 0.2)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(255, 255, 255, 0.4)',
+                    width: '64px',
+                    height: '42px',
+                    borderRadius: '10px',
+                    background: 'rgba(255, 255, 255, 0.18)',
+                    backdropFilter: 'blur(10px)',
+                    WebkitBackdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(255, 255, 255, 0.45)',
                     color: '#FFFFFF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '1rem',
-                    boxShadow: '0 10px 25px rgba(0,0,0,0.3)'
+                    boxShadow: '0 8px 25px rgba(0,0,0,0.35)',
+                    transition: 'all 0.3s ease'
                   }}
                   aria-label="Play Video"
                 >
-                  <i className="fa-solid fa-play" style={{ marginLeft: '3px' }}></i>
+                  <i className="fa-solid fa-play" style={{ marginLeft: '2px' }}></i>
                 </button>
-
-                {/* Bottom Title on Thumbnail */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '12px',
-                  left: '14px',
-                  right: '14px'
-                }}>
-                  <h3 style={{
-                    fontSize: '0.98rem',
-                    fontWeight: '700',
-                    color: '#FFFFFF',
-                    margin: 0,
-                    lineHeight: '1.35',
-                    textShadow: '0 2px 8px rgba(0,0,0,0.8)'
-                  }}>
-                    {proj.title}
-                  </h3>
-                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* 1:1 Booking Calendar & Strategy Section */}
+        {/* 1:1 Booking Calendar & Strategy Section (Official Contact-Style Calendly) */}
         <div className="glass-card reveal-on-scroll" style={{
-          padding: '40px 30px',
-          borderRadius: '24px',
-          maxWidth: '1200px',
-          margin: '0 auto 60px',
+          padding: '24px 20px',
+          borderRadius: '20px',
+          maxWidth: '1100px',
+          margin: '0 auto 50px',
           border: '1px solid var(--glass-border)',
-          textAlign: 'center'
+          textAlign: 'center',
+          background: 'var(--card-bg)',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.2)'
         }}>
-          <span className="section-subtitle" style={{ color: 'var(--accent-blue-light)' }}>Book a Call</span>
-          <h2 style={{ fontSize: '2.4rem', marginBottom: '10px', fontWeight: '800' }}>
+          <span className="section-subtitle" style={{ display: 'inline-block', fontSize: '0.8rem', marginBottom: '4px' }}>Book a Call</span>
+          <h2 style={{ fontSize: '2.2rem', marginBottom: '8px', fontWeight: '800' }}>
             Your Next <span className="combination-font">Growth Step</span>
           </h2>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 30px', fontSize: '0.96rem' }}>
-            Prefer a direct 1:1 strategy session? Schedule a 15-minute discovery call and let's bring your video vision to life.
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '580px', margin: '0 auto 16px', fontSize: '0.92rem' }}>
+            Prefer virtual? Schedule a 15-minute quick call directly on the calendar below.
           </p>
 
-          <div style={{ maxWidth: '900px', margin: '0 auto', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--glass-border)' }}>
-            <iframe
-              src="https://calendly.com/walid-abdullah-editlyfoundry/30min?embed_type=Inline&embed_domain=1"
-              width="100%"
-              height="650"
-              frameBorder="0"
-              title="Calendly Booking"
-              style={{ minHeight: '650px', background: 'transparent' }}
-            ></iframe>
-          </div>
+          {/* Official Calendly Inline Widget Integration */}
+          <div 
+            className="calendly-inline-widget" 
+            data-url={`${calendlyUrl}?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=070d18&text_color=ffffff&primary_color=2563eb`} 
+            style={{ minWidth: '320px', height: '620px', width: '100%', borderRadius: '12px', overflow: 'hidden' }}
+          ></div>
         </div>
 
       </div>
@@ -372,16 +327,11 @@ export default function WorkPage() {
             </div>
 
             {/* Modal Info */}
-            <div style={{ padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-              <div>
-                <span style={{ color: 'var(--accent-blue-light)', fontWeight: '700', fontSize: '0.8rem', textTransform: 'uppercase' }}>
-                  {selectedVideo.client}
-                </span>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '800', marginTop: '2px', marginBottom: '0' }}>
-                  {selectedVideo.title}
-                </h3>
-              </div>
-              <Link href="/book-a-call" onClick={() => setSelectedVideo(null)} className="btn btn-primary" style={{ padding: '10px 20px', fontSize: '0.88rem', borderRadius: '10px' }}>
+            <div style={{ padding: '16px 22px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>
+                {selectedVideo.title}
+              </h3>
+              <Link href="/book-a-call" onClick={() => setSelectedVideo(null)} className="btn btn-primary" style={{ padding: '9px 18px', fontSize: '0.86rem', borderRadius: '8px' }}>
                 Book This Service
               </Link>
             </div>
