@@ -117,7 +117,7 @@ export default function Navbar({ menu }) {
               {serviceItems.map((srv, sIdx) => (
                 <Link
                   key={sIdx}
-                  href={`/services#${srv.slug}`}
+                  href={`/services/${srv.slug}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   style={{
                     display: 'flex',
