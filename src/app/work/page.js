@@ -200,14 +200,11 @@ function WorkContent() {
         </div>
 
         {/* SHOWCASE GRID:
-            - Reels: Strictly 4 in first line, 4 in second line (repeat(4, 1fr) on desktop)
-            - Standard: 3 per line (repeat(3, 1fr) on desktop)
+            - Reels: Strictly 4 in first line, 4 in second line (repeat(4, minmax(0, 1fr)))
+            - Standard: 3 per line (repeat(3, minmax(0, 1fr)))
         */}
-        <div style={{
+        <div className={isReelsCategory ? 'reels-showcase-grid' : 'standard-showcase-grid'} style={{
           display: 'grid',
-          gridTemplateColumns: isReelsCategory 
-            ? 'repeat(auto-fit, minmax(220px, 1fr))' 
-            : 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: isReelsCategory ? '16px' : '20px',
           maxWidth: isReelsCategory ? '1280px' : '1240px',
           margin: '24px auto 35px'
@@ -422,6 +419,29 @@ function WorkContent() {
           </div>
         </div>
       )}
+
+      {/* Grid CSS for Strict 4-Column on Desktop */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .reels-showcase-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+        .standard-showcase-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        @media (max-width: 1024px) {
+          .reels-showcase-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+        }
+        @media (max-width: 768px) {
+          .reels-showcase-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+          .standard-showcase-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}} />
 
     </div>
   );
