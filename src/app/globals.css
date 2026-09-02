@@ -2637,3 +2637,94 @@ input::placeholder, textarea::placeholder {
     flex: 0 0 85vw !important;
   }
 }
+
+/* ==========================================================================
+   CLEAN MINIMAL DESIGN SYSTEM (Subtle Corners & Balanced Segments)
+   ========================================================================== */
+.pricing-toggle-container {
+  display: inline-flex;
+  align-items: center;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  padding: 4px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.toggle-tab-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.toggle-tab-btn.active {
+  background: var(--accent-blue-primary) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+.discount-tag {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38BDF8;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.toggle-tab-btn.active .discount-tag {
+  background: #FFFFFF;
+  color: var(--accent-blue-primary);
+}
+
+.modal-actions-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .pricing-toggle-container {
+    width: 100% !important;
+    max-width: 310px !important;
+    margin: 16px auto 0 auto !important;
+    border-radius: 10px !important;
+  }
+
+  .toggle-tab-btn {
+    flex: 1 1 50% !important;
+    justify-content: center !important;
+    padding: 9px 8px !important;
+    font-size: 0.82rem !important;
+    border-radius: 8px !important;
+  }
+
+  .modal-actions-row {
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .modal-actions-row .btn,
+  .modal-actions-row button {
+    width: 100% !important;
+    padding: 12px 20px !important;
+    height: auto !important;
+    border-radius: 10px !important;
+  }
+
+  .btn, .pop-btn, .tab-btn {
+    border-radius: 10px !important;
+  }
+}

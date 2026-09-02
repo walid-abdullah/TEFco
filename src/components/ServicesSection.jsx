@@ -29,7 +29,6 @@ export default function ServicesSection({ subtitle, title1, title2, description 
     },
   }[serviceVariant];
 
-  // The 5 requested fixed services
   const fixedServices = [
     {
       _id: 'service-reels',
@@ -100,21 +99,18 @@ export default function ServicesSection({ subtitle, title1, title2, description 
 
   const handleNext = () => {
     if (trackRef.current) {
-      // Scroll right by the width of one card plus gap
       const itemWidth = trackRef.current.querySelector('.service-card')?.offsetWidth || 300;
-      trackRef.current.scrollBy({ left: itemWidth + 30, behavior: 'smooth' });
+      trackRef.current.scrollBy({ left: itemWidth + 20, behavior: 'smooth' });
     }
   };
 
   const handlePrev = () => {
     if (trackRef.current) {
-      // Scroll left by the width of one card plus gap
       const itemWidth = trackRef.current.querySelector('.service-card')?.offsetWidth || 300;
-      trackRef.current.scrollBy({ left: -(itemWidth + 30), behavior: 'smooth' });
+      trackRef.current.scrollBy({ left: -(itemWidth + 20), behavior: 'smooth' });
     }
   };
 
-  // Close modal on Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setSelectedService(null);
@@ -123,7 +119,6 @@ export default function ServicesSection({ subtitle, title1, title2, description 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Prevent background scrolling when modal is open
   useEffect(() => {
     if (selectedService) {
       document.body.style.overflow = 'hidden';
@@ -135,53 +130,54 @@ export default function ServicesSection({ subtitle, title1, title2, description 
 
   return (
     <>
-      <section className="services section-padding section-target" id="services" style={{ paddingTop: "60px", position: "relative" }}>
+      <section className="services section-target" id="services" style={{ position: "relative" }}>
         <div className="bg-glow-orb glow-blue" style={{ bottom: "10%", right: "-10%" }}></div>
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
-          <div className="section-header text-center reveal-on-scroll">
+          <div className="section-header text-center reveal-on-scroll" style={{ marginBottom: "24px" }}>
             <span className="section-subtitle">{serviceCopy.subtitle}</span>
-            <h2 className="section-title" style={{ fontSize: "3rem" }}>
+            <h2 className="section-title" style={{ fontSize: "2.8rem", marginBottom: "10px" }}>
               {serviceCopy.title1} <span className="combination-font">{serviceCopy.title2}</span>
             </h2>
-            <p className="section-description" style={{ maxWidth: "800px", margin: "0 auto" }}>
+            <p className="section-description" style={{ maxWidth: "800px", margin: "0 auto", fontSize: "1rem" }}>
               {serviceCopy.description}
             </p>
           </div>
 
-          <div className="slider-container" style={{ marginTop: "40px", position: 'relative' }}>
+          <div className="slider-container" style={{ position: 'relative' }}>
             <button className="slider-btn prev" aria-label="Previous" onClick={handlePrev}>
               <i className="fa-solid fa-chevron-left"></i>
             </button>
             <button className="slider-btn next" aria-label="Next" onClick={handleNext}>
               <i className="fa-solid fa-chevron-right"></i>
             </button>
-            <div className="slider-track" ref={trackRef} style={{ paddingBottom: "40px", alignItems: "stretch", display: 'flex', overflowX: 'auto', scrollBehavior: 'smooth', gap: '30px', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="slider-track" ref={trackRef} style={{ paddingBottom: "20px", alignItems: "stretch", display: 'flex', overflowX: 'auto', scrollBehavior: 'smooth', gap: '20px', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
               {fixedServices.map((service, index) => (
                 <div 
                   key={service._id} 
                   className="service-card glow-border-card glass-card slider-item reveal-on-scroll" 
                   style={{ 
                     scrollSnapAlign: 'center', 
-                    flex: '0 0 calc(33.333% - 20px)', 
-                    minWidth: '320px', 
+                    flex: '0 0 calc(33.333% - 15px)', 
+                    minWidth: '300px', 
                     display: 'flex', 
                     flexDirection: 'column',
                     overflow: 'hidden',
-                    transitionDelay: `${index * 80}ms`
+                    borderRadius: '16px',
+                    padding: '0'
                   }}
                 >
-                  <div className="service-img-wrapper" style={{ height: '210px', position: 'relative', overflow: 'hidden' }}>
-                    <img loading="lazy" src={service.image} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} />
-                    <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(7, 13, 24, 0.75)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', color: '#38BDF8', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', border: '1px solid rgba(56, 189, 248, 0.3)', letterSpacing: '0.5px' }}>
+                  <div className="service-img-wrapper" style={{ height: '190px', position: 'relative', overflow: 'hidden' }}>
+                    <img loading="lazy" src={service.image} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(7, 13, 24, 0.75)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', color: '#38BDF8', padding: '3px 10px', borderRadius: '10px', fontSize: '0.72rem', fontWeight: '700', border: '1px solid rgba(56, 189, 248, 0.3)', letterSpacing: '0.5px' }}>
                       0{index + 1}
                     </div>
                   </div>
-                  <div className="service-content" style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '25px' }}>
-                    <h3 style={{ fontSize: '1.4rem', marginBottom: '10px' }}>{service.title}</h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '20px', flex: 1, lineHeight: '1.6' }}>{service.description}</p>
-                    <ul className="service-features" style={{ listStyle: 'none', padding: 0, marginBottom: '20px' }}>
+                  <div className="service-content" style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '20px' }}>
+                    <h3 style={{ fontSize: '1.3rem', marginBottom: '8px' }}>{service.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '16px', flex: 1, lineHeight: '1.5' }}>{service.description}</p>
+                    <ul className="service-features" style={{ listStyle: 'none', padding: 0, marginBottom: '16px' }}>
                       {service.features.map((feature, i) => (
-                        <li key={i} style={{ marginBottom: '8px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <li key={i} style={{ marginBottom: '6px', fontSize: '0.84rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <i className="fa-solid fa-check" style={{ color: 'var(--primary)' }}></i> {feature}
                         </li>
                       ))}
@@ -189,7 +185,7 @@ export default function ServicesSection({ subtitle, title1, title2, description 
                     <button 
                       onClick={() => setSelectedService(service)} 
                       className="btn btn-outline pop-btn" 
-                      style={{ marginTop: 'auto', width: '100%', justifyContent: 'center', cursor: 'pointer', gap: '8px' }}
+                      style={{ marginTop: 'auto', width: '100%', justifyContent: 'center', cursor: 'pointer', gap: '8px', padding: '10px 16px', fontSize: '0.88rem', borderRadius: '10px' }}
                     >
                       <span>View Details</span> <i className="fa-solid fa-arrow-right"></i>
                     </button>
@@ -201,7 +197,7 @@ export default function ServicesSection({ subtitle, title1, title2, description 
         </div>
       </section>
 
-      {/* MODAL */}
+      {/* CLEAN APPLE-STYLE MODAL WITH UNIFORM BUTTONS */}
       {selectedService && (
         <div 
           className="modal-overlay" 
@@ -209,84 +205,94 @@ export default function ServicesSection({ subtitle, title1, title2, description 
           style={{
             position: 'fixed',
             top: 0, left: 0, width: '100%', height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)',
+            backgroundColor: 'rgba(0, 0, 0, 0.65)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             zIndex: 99999,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '20px',
-            animation: 'fadeIn 0.3s ease'
+            padding: '16px',
+            animation: 'fadeIn 0.25s ease'
           }}
         >
           <div 
             className="modal-content glass-card"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+            onClick={(e) => e.stopPropagation()}
             style={{
-              maxWidth: '800px',
+              maxWidth: '720px',
               width: '100%',
               maxHeight: '90vh',
               overflowY: 'auto',
               position: 'relative',
-              borderRadius: '20px',
+              borderRadius: '18px',
               padding: '0',
               border: '1px solid var(--glass-border)',
-              background: 'var(--glass-bg)',
-              animation: 'slideUp 0.4s ease'
+              background: 'var(--card-bg)',
+              animation: 'slideUp 0.3s ease'
             }}
           >
             <button 
               onClick={() => setSelectedService(null)}
               style={{
                 position: 'absolute',
-                top: '15px', right: '15px',
+                top: '12px', right: '12px',
                 background: 'rgba(0,0,0,0.5)',
                 color: '#fff',
                 border: 'none',
-                width: '40px', height: '40px',
-                borderRadius: '50%',
+                width: '36px', height: '36px',
+                borderRadius: '10px',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'pointer',
                 zIndex: 10,
-                fontSize: '1.2rem',
+                fontSize: '1.1rem',
                 backdropFilter: 'blur(5px)'
               }}
             >
               <i className="fa-solid fa-xmark"></i>
             </button>
             
-            <div style={{ width: '100%', height: '300px', position: 'relative' }}>
+            <div style={{ width: '100%', height: '220px', position: 'relative' }}>
               <img 
                 src={selectedService.image} 
                 alt={selectedService.title} 
-                style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '20px', borderTopRightRadius: '20px' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
-              <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100px', background: 'linear-gradient(to top, var(--bg-primary) 0%, transparent 100%)' }}></div>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '80px', background: 'linear-gradient(to top, var(--bg-primary) 0%, transparent 100%)' }}></div>
             </div>
             
-            <div style={{ padding: '30px' }}>
-              <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', background: 'linear-gradient(90deg, #fff, #a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            <div style={{ padding: '24px' }}>
+              <h2 style={{ fontSize: '1.8rem', marginBottom: '12px', fontWeight: '800' }}>
                 {selectedService.title}
               </h2>
-              <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '25px' }}>
+              <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '20px' }}>
                 {selectedService.fullDetails}
               </p>
               
-              <h4 style={{ fontSize: '1.2rem', marginBottom: '15px' }}>What's Included:</h4>
-              <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px', listStyle: 'none', padding: 0, marginBottom: '30px' }}>
+              <h4 style={{ fontSize: '1rem', marginBottom: '12px', fontWeight: '700' }}>What's Included:</h4>
+              <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '10px', listStyle: 'none', padding: 0, marginBottom: '24px' }}>
                 {selectedService.features.map((feature, i) => (
-                  <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'rgba(255,255,255,0.03)', padding: '12px 15px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    <i className="fa-solid fa-check" style={{ color: '#4ade80' }}></i> {feature}
+                  <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.03)', padding: '10px 12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)', fontSize: '0.85rem' }}>
+                    <i className="fa-solid fa-check" style={{ color: '#10B981' }}></i> {feature}
                   </li>
                 ))}
               </ul>
               
-              <div style={{ display: 'flex', gap: '15px' }}>
-                <Link href="#contact" onClick={() => setSelectedService(null)} className="btn btn-primary" style={{ padding: '12px 30px', flex: 1, textAlign: 'center', justifyContent: 'center' }}>
+              {/* UNIFORM CLEAN BUTTONS (NO WEIRD CIRCLING) */}
+              <div className="modal-actions-row">
+                <Link 
+                  href="/book-a-call" 
+                  onClick={() => setSelectedService(null)} 
+                  className="btn btn-primary" 
+                  style={{ padding: '12px 24px', flex: 1, textAlign: 'center', justifyContent: 'center', borderRadius: '10px', fontSize: '0.92rem' }}
+                >
                   Book This Service
                 </Link>
-                <button onClick={() => setSelectedService(null)} className="btn btn-outline" style={{ padding: '12px 30px' }}>
+                <button 
+                  onClick={() => setSelectedService(null)} 
+                  className="btn btn-outline" 
+                  style={{ padding: '12px 24px', borderRadius: '10px', fontSize: '0.92rem' }}
+                >
                   Close
                 </button>
               </div>
@@ -301,7 +307,7 @@ export default function ServicesSection({ subtitle, title1, title2, description 
           to { opacity: 1; }
         }
         @keyframes slideUp {
-          from { opacity: 0; transform: translateY(30px) scale(0.95); }
+          from { opacity: 0; transform: translateY(20px) scale(0.98); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
         .slider-track::-webkit-scrollbar {
