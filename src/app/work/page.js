@@ -13,7 +13,7 @@ function WorkContent() {
   const [activeFilter, setActiveFilter] = useState((initialTab && validTabs.includes(initialTab)) ? initialTab : 'podcast');
   const [selectedVideo, setSelectedVideo] = useState(null);
   
-  // Track how many items are visible per tab (8 for reels to do 4x2, 6 for others)
+  // Exactly 8 items for reels (4 on row 1, 4 on row 2), 6 for standard (3 on row 1, 3 on row 2)
   const [visibleCounts, setVisibleCounts] = useState({
     podcast: 6,
     'talking-head': 6,
@@ -25,7 +25,6 @@ function WorkContent() {
 
   const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/w-abdullah5588/30min";
 
-  // Keep state and URL in sync
   useEffect(() => {
     const tab = searchParams.get('tab');
     if (tab && validTabs.includes(tab)) {
@@ -68,7 +67,6 @@ function WorkContent() {
     { id: 'thumbnails', label: 'Thumbnails' }
   ];
 
-  // 36+ Curated Projects
   const portfolioProjects = [
     // 1. PODCAST (16:9)
     { id: 'pod-1', category: 'podcast', isVertical: false, title: 'The Modern Founder Podcast Episode #14', thumbnail: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
@@ -90,7 +88,7 @@ function WorkContent() {
     { id: 'th-7', category: 'talking-head', isVertical: false, title: 'CEO Masterclass & Keynote Presentation', thumbnail: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'th-8', category: 'talking-head', isVertical: false, title: 'Fintech Market Analysis YouTube Deep Dive', thumbnail: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
 
-    // 3. SHORTS / REELS (9:16 VERTICAL REEL RATIO - 4 in 1st line, 4 in 2nd line = 8 initial items)
+    // 3. SHORTS / REELS (9:16 VERTICAL REEL RATIO - Exactly 4 per row, 8 initial items)
     { id: 'reel-1', category: 'reels', isVertical: true, title: 'Viral 3-Second Hook Retention Reel', thumbnail: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'reel-2', category: 'reels', isVertical: true, title: 'Alex Hormozi Style Kinetic Captions Short', thumbnail: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'reel-3', category: 'reels', isVertical: true, title: 'High-Energy Sound Design Instagram Reel', thumbnail: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
@@ -148,7 +146,7 @@ function WorkContent() {
       <div className="bg-glow-orb glow-blue" style={{ top: '5%', left: '-10%' }}></div>
       <div className="bg-glow-orb glow-cyan" style={{ top: '35%', right: '-10%' }}></div>
 
-      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1360px', margin: '0 auto' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1280px', margin: '0 auto' }}>
         
         {/* Header */}
         <div className="text-center" style={{ maxWidth: '850px', margin: '0 auto 20px' }}>
@@ -200,15 +198,18 @@ function WorkContent() {
         </div>
 
         {/* SHOWCASE GRID:
-            - Reels: Strictly 4 in first line, 4 in second line (repeat(4, minmax(0, 1fr)))
-            - Standard: 3 per line (repeat(3, minmax(0, 1fr)))
+            - Reels: Strictly 4 columns in desktop (Row 1: 4 cards, Row 2: 4 cards)
+            - Standard: Strictly 3 columns in desktop (Row 1: 3 cards, Row 2: 3 cards)
         */}
-        <div className={isReelsCategory ? 'reels-showcase-grid' : 'standard-showcase-grid'} style={{
-          display: 'grid',
-          gap: isReelsCategory ? '16px' : '20px',
-          maxWidth: isReelsCategory ? '1280px' : '1240px',
-          margin: '24px auto 35px'
-        }}>
+        <div 
+          className={isReelsCategory ? 'reels-grid-4col' : 'standard-grid-3col'} 
+          style={{
+            display: 'grid',
+            gap: isReelsCategory ? '16px' : '20px',
+            maxWidth: isReelsCategory ? '1200px' : '1200px',
+            margin: '24px auto 35px'
+          }}
+        >
           {filteredProjects.map((proj) => (
             <div
               key={proj.id}
@@ -420,25 +421,25 @@ function WorkContent() {
         </div>
       )}
 
-      {/* Grid CSS for Strict 4-Column on Desktop */}
+      {/* Strict CSS grid overriding inline style */}
       <style dangerouslySetInnerHTML={{__html: `
-        .reels-showcase-grid {
-          grid-template-columns: repeat(4, minmax(0, 1fr));
+        .reels-grid-4col {
+          grid-template-columns: repeat(4, 1fr) !important;
         }
-        .standard-showcase-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+        .standard-grid-3col {
+          grid-template-columns: repeat(3, 1fr) !important;
         }
         @media (max-width: 1024px) {
-          .reels-showcase-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+          .reels-grid-4col {
+            grid-template-columns: repeat(3, 1fr) !important;
           }
         }
         @media (max-width: 768px) {
-          .reels-showcase-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+          .reels-grid-4col {
+            grid-template-columns: repeat(2, 1fr) !important;
           }
-          .standard-showcase-grid {
-            grid-template-columns: 1fr;
+          .standard-grid-3col {
+            grid-template-columns: 1fr !important;
           }
         }
       `}} />
