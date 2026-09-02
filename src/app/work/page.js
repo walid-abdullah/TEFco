@@ -12,6 +12,16 @@ function WorkContent() {
   const initialTab = searchParams.get('tab');
   const [activeFilter, setActiveFilter] = useState((initialTab && validTabs.includes(initialTab)) ? initialTab : 'podcast');
   const [selectedVideo, setSelectedVideo] = useState(null);
+  
+  // Track how many items are visible per tab (Defaults to 6)
+  const [visibleCounts, setVisibleCounts] = useState({
+    podcast: 6,
+    'talking-head': 6,
+    reels: 6,
+    saas: 6,
+    promo: 6,
+    thumbnails: 6
+  });
 
   const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/w-abdullah5588/30min";
 
@@ -41,6 +51,13 @@ function WorkContent() {
     router.replace(`/work?tab=${tabId}`, { scroll: false });
   };
 
+  const handleLoadMore = () => {
+    setVisibleCounts(prev => ({
+      ...prev,
+      [activeFilter]: (prev[activeFilter] || 6) + 6
+    }));
+  };
+
   const categories = [
     { id: 'podcast', label: 'Podcast' },
     { id: 'talking-head', label: 'Talking-head' },
@@ -50,58 +67,74 @@ function WorkContent() {
     { id: 'thumbnails', label: 'Thumbnails' }
   ];
 
-  // 6 Projects per Category (36 Projects total)
+  // Comprehensive portfolio list with more than 6 items ready for "View More"
   const portfolioProjects = [
-    // 1. PODCAST (6 Items - 16:9)
+    // 1. PODCAST (16:9)
     { id: 'pod-1', category: 'podcast', isVertical: false, title: 'The Modern Founder Podcast Episode #14', thumbnail: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'pod-2', category: 'podcast', isVertical: false, title: 'Studio Multi-Camera Audio Cut', thumbnail: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'pod-3', category: 'podcast', isVertical: false, title: 'Creator Mastery Audio & Video Suite', thumbnail: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'pod-4', category: 'podcast', isVertical: false, title: 'Tech Founders Table Roundtable Master', thumbnail: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'pod-5', category: 'podcast', isVertical: false, title: 'Deep Dive Studio Recording Cut', thumbnail: 'https://images.unsplash.com/photo-1589903308904-1010c2294adc?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'pod-6', category: 'podcast', isVertical: false, title: 'Executive Voice & Sound Engineering Cut', thumbnail: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
+    { id: 'pod-7', category: 'podcast', isVertical: false, title: 'Venture Backed Startup Founder Talk', thumbnail: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
+    { id: 'pod-8', category: 'podcast', isVertical: false, title: 'Studio Broadcast Level Podcast Master', thumbnail: 'https://images.unsplash.com/photo-1520333789090-1afc82db536a?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
 
-    // 2. TALKING-HEAD (6 Items - 16:9)
+    // 2. TALKING-HEAD (16:9)
     { id: 'th-1', category: 'talking-head', isVertical: false, title: 'Cinematic YouTube Long-Form Authority Video', thumbnail: 'https://images.unsplash.com/photo-1516280440502-12695fb79f15?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'th-2', category: 'talking-head', isVertical: false, title: 'Educational Strategy Breakdown Film', thumbnail: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'th-3', category: 'talking-head', isVertical: false, title: 'Personal Brand Story & Case Study Cut', thumbnail: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'th-4', category: 'talking-head', isVertical: false, title: 'High-Ticket Agency Authority Presentation', thumbnail: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'th-5', category: 'talking-head', isVertical: false, title: 'Documentary-Style Narrative YouTube Video', thumbnail: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'th-6', category: 'talking-head', isVertical: false, title: 'Investor Pitch & Founder Vision Cut', thumbnail: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
+    { id: 'th-7', category: 'talking-head', isVertical: false, title: 'CEO Masterclass & Keynote Presentation', thumbnail: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
+    { id: 'th-8', category: 'talking-head', isVertical: false, title: 'Fintech Market Analysis YouTube Deep Dive', thumbnail: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
 
-    // 3. SHORTS / REELS (6 Items - 9:16 VERTICAL REEL RATIO)
+    // 3. SHORTS / REELS (9:16 VERTICAL REEL RATIO)
     { id: 'reel-1', category: 'reels', isVertical: true, title: 'Viral 3-Second Hook Retention Reel', thumbnail: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'reel-2', category: 'reels', isVertical: true, title: 'Alex Hormozi Style Kinetic Captions Short', thumbnail: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'reel-3', category: 'reels', isVertical: true, title: 'High-Energy Sound Design Instagram Reel', thumbnail: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'reel-4', category: 'reels', isVertical: true, title: 'Founder Wisdom Micro-Podcast Clip', thumbnail: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'reel-5', category: 'reels', isVertical: true, title: 'Direct Response TikTok Organic Hook', thumbnail: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'reel-6', category: 'reels', isVertical: true, title: 'Fast-Paced Motion Graphics Short Clip', thumbnail: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80', youtubeId: 'M7lc1UVf-VE' },
+    { id: 'reel-7', category: 'reels', isVertical: true, title: 'E-Commerce UGC Problem-Solution Short', thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
+    { id: 'reel-8', category: 'reels', isVertical: true, title: 'Viral Fitness Transformation Story Reel', thumbnail: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=600&q=80', youtubeId: 'M7lc1UVf-VE' },
+    { id: 'reel-9', category: 'reels', isVertical: true, title: 'Personal Brand Storytelling Micro Cut', thumbnail: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80', youtubeId: 'L_LUpnjgPso' },
 
-    // 4. SAAS (6 Items - 16:9)
+    // 4. SAAS (16:9)
     { id: 'saas-1', category: 'saas', isVertical: false, title: 'SaaS Platform 3D Motion Product Demo', thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'saas-2', category: 'saas', isVertical: false, title: 'Product Hunt Launch Video Animation', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'saas-3', category: 'saas', isVertical: false, title: 'Silky Smooth UI Dynamic Cursor Demo', thumbnail: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'saas-4', category: 'saas', isVertical: false, title: '2D Vector Explainer & Feature Breakdown', thumbnail: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'saas-5', category: 'saas', isVertical: false, title: 'App Store Interactive Screen Mockups', thumbnail: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'saas-6', category: 'saas', isVertical: false, title: 'Enterprise Cloud SaaS Walkthrough Animation', thumbnail: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
+    { id: 'saas-7', category: 'saas', isVertical: false, title: 'AI Automation Software Dashboard Demo', thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
+    { id: 'saas-8', category: 'saas', isVertical: false, title: 'Fintech Mobile App Launch Motion Promo', thumbnail: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
 
-    // 5. PROMO & ADS (6 Items - 16:9)
+    // 5. PROMO & ADS (16:9)
     { id: 'promo-1', category: 'promo', isVertical: false, title: 'High-Converting Direct Response Paid Ad', thumbnail: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'promo-2', category: 'promo', isVertical: false, title: 'Meta & TikTok E-Commerce Commercial Ad', thumbnail: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'promo-3', category: 'promo', isVertical: false, title: 'Brand Launch Teaser & Cinematic Commercial', thumbnail: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'promo-4', category: 'promo', isVertical: false, title: 'Split-Test Hook Variations Direct Response Cut', thumbnail: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
     { id: 'promo-5', category: 'promo', isVertical: false, title: 'Fashion & Luxury Lifestyle Promo Video', thumbnail: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
     { id: 'promo-6', category: 'promo', isVertical: false, title: 'Lead Generation Video Ad for Meta Campaigns', thumbnail: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
+    { id: 'promo-7', category: 'promo', isVertical: false, title: 'High-ROAS Direct Response Supplement Ad', thumbnail: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80', youtubeId: 'L_LUpnjgPso' },
+    { id: 'promo-8', category: 'promo', isVertical: false, title: 'Agency Scaling Service Commercial Cut', thumbnail: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80', youtubeId: 'M7lc1UVf-VE' },
 
-    // 6. THUMBNAILS (6 Items - 16:9 Thumbnail Designs)
+    // 6. THUMBNAILS (16:9 Thumbnail Designs)
     { id: 'thumb-1', category: 'thumbnails', isVertical: false, isThumbnailOnly: true, title: 'High-CTR YouTube Custom Thumbnail #1', thumbnail: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80' },
     { id: 'thumb-2', category: 'thumbnails', isVertical: false, isThumbnailOnly: true, title: 'High-CTR YouTube Custom Thumbnail #2', thumbnail: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80' },
     { id: 'thumb-3', category: 'thumbnails', isVertical: false, isThumbnailOnly: true, title: 'High-CTR YouTube Custom Thumbnail #3', thumbnail: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80' },
     { id: 'thumb-4', category: 'thumbnails', isVertical: false, isThumbnailOnly: true, title: 'High-CTR YouTube Custom Thumbnail #4', thumbnail: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80' },
     { id: 'thumb-5', category: 'thumbnails', isVertical: false, isThumbnailOnly: true, title: 'High-CTR YouTube Custom Thumbnail #5', thumbnail: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=800&q=80' },
-    { id: 'thumb-6', category: 'thumbnails', isVertical: false, isThumbnailOnly: true, title: 'High-CTR YouTube Custom Thumbnail #6', thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80' }
+    { id: 'thumb-6', category: 'thumbnails', isVertical: false, isThumbnailOnly: true, title: 'High-CTR YouTube Custom Thumbnail #6', thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80' },
+    { id: 'thumb-7', category: 'thumbnails', isVertical: false, isThumbnailOnly: true, title: 'High-CTR YouTube Custom Thumbnail #7', thumbnail: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80' },
+    { id: 'thumb-8', category: 'thumbnails', isVertical: false, isThumbnailOnly: true, title: 'High-CTR YouTube Custom Thumbnail #8', thumbnail: 'https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=800&q=80' }
   ];
 
-  const filteredProjects = portfolioProjects.filter(p => p.category === activeFilter);
+  const totalMatchingProjects = portfolioProjects.filter(p => p.category === activeFilter);
+  const currentLimit = visibleCounts[activeFilter] || 6;
+  const filteredProjects = totalMatchingProjects.slice(0, currentLimit);
+  const hasMore = totalMatchingProjects.length > currentLimit;
   const isReelsCategory = activeFilter === 'reels';
 
   return (
@@ -162,15 +195,18 @@ function WorkContent() {
           </div>
         </div>
 
-        {/* 100% INSTANT VISIBLE SHOWCASE GRID (NO OPACITY:0 BUG) */}
+        {/* SHOWCASE GRID:
+            - Reels: Strictly 3 items per row (3 in 1st line, 3 in 2nd line on desktop)
+            - Standard: 3 items per row on desktop (repeat(3, 1fr) / minmax(320px, 1fr))
+        */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: isReelsCategory 
-            ? 'repeat(auto-fit, minmax(200px, 1fr))' 
+            ? 'repeat(auto-fit, minmax(240px, 1fr))' 
             : 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: isReelsCategory ? '16px' : '20px',
-          maxWidth: isReelsCategory ? '1200px' : '1240px',
-          margin: '30px auto 60px'
+          gap: isReelsCategory ? '24px' : '20px',
+          maxWidth: isReelsCategory ? '1080px' : '1240px',
+          margin: '30px auto 40px'
         }}>
           {filteredProjects.map((proj) => (
             <div
@@ -223,8 +259,8 @@ function WorkContent() {
                       left: '50%',
                       transform: 'translate(-50%, -50%)',
                       pointerEvents: 'none',
-                      width: isReelsCategory ? '52px' : '64px',
-                      height: isReelsCategory ? '36px' : '42px',
+                      width: isReelsCategory ? '56px' : '64px',
+                      height: isReelsCategory ? '38px' : '42px',
                       borderRadius: '10px',
                       background: 'rgba(255, 255, 255, 0.18)',
                       backdropFilter: 'blur(10px)',
@@ -247,6 +283,35 @@ function WorkContent() {
             </div>
           ))}
         </div>
+
+        {/* ELEGANT VIEW MORE BUTTON (Shows when items exceed 6) */}
+        {hasMore && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '60px' }}>
+            <button
+              onClick={handleLoadMore}
+              type="button"
+              className="btn btn-outline pop-btn"
+              style={{
+                padding: '12px 32px',
+                borderRadius: '12px',
+                fontSize: '0.92rem',
+                fontWeight: '700',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                cursor: 'pointer',
+                border: '1px solid rgba(56, 189, 248, 0.4)',
+                background: 'rgba(15, 23, 42, 0.6)',
+                backdropFilter: 'blur(10px)',
+                color: 'var(--text-primary)',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+              }}
+            >
+              <span>View More Projects</span>
+              <i className="fa-solid fa-chevron-down" style={{ fontSize: '0.8rem', color: '#38BDF8' }}></i>
+            </button>
+          </div>
+        )}
 
         {/* 1:1 Booking Calendar & Strategy Section */}
         <div className="glass-card" style={{
