@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-export default function WorkPage() {
-  const [activeFilter, setActiveFilter] = useState('podcast');
-  const [selectedVideo, setSelectedVideo] = useState(null);
+function WorkContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  
+  const validTabs = ['podcast', 'talking-head', 'reels', 'saas', 'promo', 'thumbnails'];
+  const initialTab = searchParams.get('tab');
+  const activeFilter = (initialTab && validTabs.includes(initialTab)) ? initialTab : 'podcast';
 
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/w-abdullah5588/30min";
 
   useEffect(() => {
@@ -21,6 +27,10 @@ export default function WorkPage() {
       }
     };
   }, []);
+
+  const handleTabChange = (tabId) => {
+    router.push(`/work?tab=${tabId}`, { scroll: false });
+  };
 
   const categories = [
     { id: 'podcast', label: 'Podcast' },
@@ -94,19 +104,19 @@ export default function WorkPage() {
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
-        {/* Header (Montage Motion Clean Aesthetic) */}
+        {/* Header (Original Editly Foundry Premium Branding) */}
         <div className="text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 24px' }}>
           <span className="section-subtitle" style={{ display: 'inline-block', padding: '5px 16px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38BDF8', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '10px' }}>
-            Our Portfolio
+            Production Showcase
           </span>
           <h1 className="section-title" style={{ fontSize: '2.8rem', marginBottom: '12px', fontWeight: '800' }}>
-            Creativity That <span className="combination-font">Converts</span>
+            Work Engineered to <span className="combination-font">Scale Attention</span>
           </h1>
-          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '600px', margin: '0 auto' }}>
-            Turning raw footage and ideas into content that captures attention and scales brands.
+          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '640px', margin: '0 auto' }}>
+            Explore our retention-driven post-production assets across high-ticket short-form, podcasts, SaaS animations, and paid social campaigns.
           </p>
 
-          {/* Clean Horizontal Filter Bar (6 Dedicated Tabs) */}
+          {/* Clean Horizontal Filter Bar (URL Synced & Clean Active State) */}
           <div className="portfolio-tabs" style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -123,7 +133,7 @@ export default function WorkPage() {
               <button
                 key={cat.id}
                 type="button"
-                onClick={() => setActiveFilter(cat.id)}
+                onClick={() => handleTabChange(cat.id)}
                 className={`tab-btn ${activeFilter === cat.id ? 'active' : ''}`}
                 style={{
                   padding: '8px 18px',
@@ -193,7 +203,7 @@ export default function WorkPage() {
                   }}></div>
                 )}
 
-                {/* Montage-Motion Style WIDE Capsule Play Button */}
+                {/* Wide Capsule Play Button */}
                 {!proj.isThumbnailOnly && (
                   <button 
                     className="apple-glass-play-btn"
@@ -228,7 +238,7 @@ export default function WorkPage() {
           ))}
         </div>
 
-        {/* 1:1 Booking Calendar & Strategy Section (Official Contact-Style Calendly) */}
+        {/* 1:1 Booking Calendar & Strategy Section */}
         <div className="glass-card reveal-on-scroll" style={{
           padding: '24px 20px',
           borderRadius: '20px',
@@ -241,10 +251,10 @@ export default function WorkPage() {
         }}>
           <span className="section-subtitle" style={{ display: 'inline-block', fontSize: '0.8rem', marginBottom: '4px' }}>Book a Call</span>
           <h2 style={{ fontSize: '2.2rem', marginBottom: '8px', fontWeight: '800' }}>
-            Your Next <span className="combination-font">Growth Step</span>
+            Book a 15-Minute <span className="combination-font">Discovery Call</span>
           </h2>
           <p style={{ color: 'var(--text-secondary)', maxWidth: '580px', margin: '0 auto 16px', fontSize: '0.92rem' }}>
-            Prefer virtual? Schedule a 15-minute quick call directly on the calendar below.
+            Pick a convenient time slot directly on the calendar below to speak with Executive Producer Walid Abdullah.
           </p>
 
           {/* Official Calendly Inline Widget Integration */}
@@ -335,5 +345,13 @@ export default function WorkPage() {
       )}
 
     </div>
+  );
+}
+
+export default function WorkPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>Loading Portfolio...</div>}>
+      <WorkContent />
+    </Suspense>
   );
 }
