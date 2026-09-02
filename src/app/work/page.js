@@ -413,7 +413,19 @@ function WorkContent() {
               <h3 style={{ fontSize: '1.1rem', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>
                 {selectedVideo.title}
               </h3>
-              <Link href="/book-a-call" onClick={() => setSelectedVideo(null)} className="btn btn-primary" style={{ padding: '9px 18px', fontSize: '0.86rem', borderRadius: '8px' }}>
+              <Link 
+                href={`/book-a-call?service=${encodeURIComponent(
+                  selectedVideo.category === 'reels' ? 'Shorts / Reels / TikTok' :
+                  selectedVideo.category === 'podcast' ? 'Podcast & Clips Editing' :
+                  selectedVideo.category === 'talking-head' ? 'Talking-Head & Authority Videos' :
+                  selectedVideo.category === 'saas' ? 'SaaS & Product Motion UI' :
+                  selectedVideo.category === 'promo' ? 'Promo & Commercial Ads' :
+                  'High-CTR YouTube Thumbnails'
+                )}`} 
+                onClick={() => setSelectedVideo(null)} 
+                className="btn btn-primary" 
+                style={{ padding: '9px 18px', fontSize: '0.86rem', borderRadius: '8px' }}
+              >
                 Book This Service
               </Link>
             </div>
