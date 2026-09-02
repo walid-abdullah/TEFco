@@ -182,12 +182,12 @@ export default function ServicesHubPage() {
                 </ul>
 
                 <div className="service-hub-actions" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                  <Link href="/book-a-call" className="btn btn-primary pop-btn" style={{ borderRadius: '10px', padding: '11px 20px', fontSize: '0.9rem' }}>
-                    <span>Book This Service</span>
+                  <Link href={`/services/${service.slug}`} className="btn btn-primary pop-btn" style={{ borderRadius: '10px', padding: '11px 20px', fontSize: '0.9rem' }}>
+                    <span>Explore Service Details</span>
                     <i className="fa-solid fa-arrow-right"></i>
                   </Link>
-                  <Link href="/work" className="btn btn-outline pop-btn" style={{ borderRadius: '10px', padding: '11px 20px', fontSize: '0.9rem' }}>
-                    <span>View Case Studies</span>
+                  <Link href={`/book-a-call?service=${encodeURIComponent(service.title)}`} className="btn btn-outline pop-btn" style={{ borderRadius: '10px', padding: '11px 20px', fontSize: '0.9rem' }}>
+                    <span>Book Strategy Call</span>
                   </Link>
                 </div>
               </div>
