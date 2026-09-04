@@ -96,98 +96,64 @@ function BookACallPageContent() {
   const calendlyEmbedUrl = useMemo(() => {
     const baseCalendly = "https://calendly.com/w-abdullah5588/30min";
     const noteText = encodeURIComponent(`Interested Service: ${selectedServiceTitle}`);
-    const bgColor = isLight ? 'ffffff' : '070d18';
+    const bgColor = isLight ? 'ffffff' : '080c14';
     const textColor = isLight ? '090e1a' : 'ffffff';
     const primaryColor = isLight ? '2563eb' : '38bdf8';
 
     return `${baseCalendly}?hide_landing_page_details=0&hide_gdpr_banner=1&background_color=${bgColor}&text_color=${textColor}&primary_color=${primaryColor}&a1=${noteText}`;
   }, [selectedServiceTitle, isLight]);
 
-  const globalOffices = [
-    {
-      city: 'New York',
-      country: 'United States',
-      address: '47 Macdonough St, Brooklyn, NY 11216',
-      phone: '+1 555 675-0125',
-      email: 'theeditlyfoundry@gmail.com',
-      role: 'US Partnerships & Growth Hub',
-      icon: 'fa-solid fa-city'
-    },
-    {
-      city: 'Dubai',
-      country: 'United Arab Emirates',
-      address: 'Level 14, Boulevard Plaza Tower 1, Downtown Dubai',
-      phone: '+971 50 196 6827',
-      email: 'theeditlyfoundry@gmail.com',
-      role: 'Middle East Strategy',
-      icon: 'fa-solid fa-globe'
-    },
-    {
-      city: 'Dhaka',
-      country: 'Bangladesh',
-      address: 'House 42, Road 11, Banani, Dhaka 1213',
-      phone: '+880 1886 755 888',
-      email: 'theeditlyfoundry@gmail.com',
-      role: 'Creative Production Studio HQ',
-      icon: 'fa-solid fa-building'
-    }
-  ];
-
   const inputStyle = {
     width: '100%',
-    borderRadius: '10px',
-    border: '1px solid var(--glass-border)',
-    background: 'rgba(255, 255, 255, 0.04)',
-    color: 'var(--text-primary)',
-    padding: '11px 14px',
-    fontSize: '0.92rem',
+    borderRadius: '8px',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'rgba(255, 255, 255, 0.03)',
+    color: '#FFFFFF',
+    padding: '10px 14px',
+    fontSize: '0.88rem',
     fontFamily: 'inherit',
     outline: 'none',
   };
 
   return (
-    <div className="book-call-page" style={{ paddingTop: '85px', paddingBottom: '50px', minHeight: '100vh', position: 'relative' }}>
+    <div className="book-call-page" style={{ paddingTop: '95px', paddingBottom: '60px', minHeight: '100vh', position: 'relative' }}>
       
-      {/* Background ambient orbs */}
-      <div className="bg-glow-orb glow-blue" style={{ top: '5%', left: '5%' }}></div>
-      <div className="bg-glow-orb glow-purple" style={{ top: '35%', right: '5%' }}></div>
-
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1180px' }}>
         
         {/* Top Header */}
-        <div className="text-center" style={{ maxWidth: '800px', margin: '0 auto 16px' }}>
+        <div className="text-center" style={{ maxWidth: '800px', margin: '0 auto 20px' }}>
           
           {/* Active Service Badge */}
           {rawService && (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 16px', borderRadius: '50px', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', color: '#38BDF8', fontSize: '0.82rem', fontWeight: '700', marginBottom: '12px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 14px', borderRadius: '999px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38BDF8', fontSize: '0.78rem', fontWeight: '700', marginBottom: '12px' }}>
               <i className="fa-solid fa-clapperboard"></i>
-              <span>Selected Scope: <strong>{selectedServiceTitle}</strong></span>
+              <span className="mono-spec">SCOPE: <strong>{selectedServiceTitle}</strong></span>
             </div>
           )}
 
-          <h1 className="section-title" style={{ fontSize: '2.4rem', marginBottom: '8px', fontWeight: '800' }}>
-            Book a 15-Minute <span className="combination-font">Growth Call</span>
+          <h1 className="section-title" style={{ fontSize: '2.8rem', marginBottom: '10px', fontWeight: '800', letterSpacing: '-0.03em' }}>
+            Book a 15-Minute <span className="combination-font">Technical Growth Audit</span>
           </h1>
-          <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '0.96rem', margin: '0 auto', maxWidth: '640px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.98rem', margin: '0 auto 20px', maxWidth: '640px' }}>
             Pick a time slot directly on Walid Abdullah’s calendar below to audit your video assets and discuss production timelines.
           </p>
         </div>
 
         {/* Minimal Optional Quick-Brief Toggle */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '18px' }}>
           <button
             onClick={() => setShowBriefForm(!showBriefForm)}
             className="btn btn-outline"
             style={{
               padding: '7px 16px',
-              borderRadius: '20px',
+              borderRadius: '8px',
               fontSize: '0.8rem',
               fontWeight: '700',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
               background: showBriefForm ? 'rgba(56, 189, 248, 0.1)' : 'transparent',
-              borderColor: showBriefForm ? '#38BDF8' : 'var(--glass-border)'
+              borderColor: showBriefForm ? '#38BDF8' : 'rgba(255, 255, 255, 0.1)'
             }}
           >
             <i className={`fa-solid ${showBriefForm ? 'fa-xmark' : 'fa-bolt'}`} style={{ color: '#38BDF8' }}></i>
@@ -201,13 +167,13 @@ function BookACallPageContent() {
             maxWidth: '1080px',
             margin: '0 auto 20px',
             padding: '20px',
-            borderRadius: '16px',
-            background: 'var(--card-bg)',
-            border: '1px solid var(--glass-border)',
-            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.12)'
+            borderRadius: '12px',
+            background: '#080C14',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.6)'
           }}>
             {submitted ? (
-              <div style={{ textAlign: 'center', padding: '16px 10px', color: 'var(--text-primary)' }}>
+              <div style={{ textAlign: 'center', padding: '16px 10px', color: '#FFFFFF' }}>
                 <div style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(34, 197, 94, 0.12)', color: '#22C55E', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', marginBottom: '8px' }}>
                   <i className="fa-solid fa-check"></i>
                 </div>
@@ -216,28 +182,28 @@ function BookACallPageContent() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '10px' }}>
-                <label style={{ display: 'grid', gap: '4px', fontWeight: 700, fontSize: '0.82rem' }}>
+                <label style={{ display: 'grid', gap: '4px', fontWeight: 700, fontSize: '0.82rem', color: '#FFFFFF' }}>
                   Your Name *
                   <input name="name" value={leadForm.name} onChange={handleChange} required style={inputStyle} placeholder="Full Name" />
                 </label>
-                <label style={{ display: 'grid', gap: '4px', fontWeight: 700, fontSize: '0.82rem' }}>
+                <label style={{ display: 'grid', gap: '4px', fontWeight: 700, fontSize: '0.82rem', color: '#FFFFFF' }}>
                   Email Address *
                   <input type="email" name="email" value={leadForm.email} onChange={handleChange} required style={inputStyle} placeholder="you@company.com" />
                 </label>
-                <label style={{ display: 'grid', gap: '4px', fontWeight: 700, fontSize: '0.82rem' }}>
+                <label style={{ display: 'grid', gap: '4px', fontWeight: 700, fontSize: '0.82rem', color: '#FFFFFF' }}>
                   WhatsApp Number *
                   <input name="whatsapp" value={leadForm.whatsapp} onChange={handleChange} required style={inputStyle} placeholder="+1 234 567 8900" />
                 </label>
-                <label style={{ display: 'grid', gap: '4px', fontWeight: 700, fontSize: '0.82rem' }}>
+                <label style={{ display: 'grid', gap: '4px', fontWeight: 700, fontSize: '0.82rem', color: '#FFFFFF' }}>
                   Service Needed
                   <select name="service" value={leadForm.service} onChange={handleChange} style={inputStyle}>
                     {serviceOptions.map((service) => (
-                      <option key={service} value={service} style={{ background: '#0F172A', color: '#fff' }}>{service}</option>
+                      <option key={service} value={service} style={{ background: '#080C14', color: '#fff' }}>{service}</option>
                     ))}
                   </select>
                 </label>
                 <div style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'flex-end', marginTop: '4px' }}>
-                  <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ padding: '9px 20px', borderRadius: '8px', fontWeight: 700, fontSize: '0.86rem' }}>
+                  <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ padding: '8px 18px', borderRadius: '6px', fontWeight: 700, fontSize: '0.84rem' }}>
                     {isSubmitting ? 'Logging...' : 'Send Brief & Notify Walid'}
                   </button>
                 </div>
@@ -252,11 +218,11 @@ function BookACallPageContent() {
           style={{
             borderRadius: '16px',
             overflow: 'hidden',
-            background: isLight ? '#FFFFFF' : 'rgba(7, 13, 24, 0.95)',
-            border: isLight ? '1px solid rgba(15, 23, 42, 0.1)' : '1px solid var(--glass-border)',
-            boxShadow: isLight ? '0 15px 40px rgba(0, 0, 0, 0.08)' : '0 25px 70px rgba(0, 0, 0, 0.4)',
+            background: '#080C14',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 25px 70px rgba(0, 0, 0, 0.8)',
             maxWidth: '1080px',
-            margin: '0 auto 24px',
+            margin: '0 auto 30px',
             height: '620px',
             position: 'relative'
           }}
@@ -272,127 +238,41 @@ function BookACallPageContent() {
           ></iframe>
         </div>
 
-        {/* Reassurance Features */}
+        {/* Technical Reassurance Spec Pods */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
           gap: '16px',
-          maxWidth: '1280px',
-          margin: '0 auto 50px'
+          maxWidth: '1080px',
+          margin: '0 auto'
         }}>
-          <div className="glass-card" style={{ padding: '18px', borderRadius: '14px', display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(37, 99, 235, 0.15)', color: '#38BDF8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', flexShrink: 0 }}>
-              <i className="fa-solid fa-clock"></i>
-            </div>
-            <div>
-              <h4 style={{ margin: '0 0 2px 0', fontSize: '0.94rem', fontWeight: '700' }}>15-Min Direct Audit</h4>
-              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Direct strategy with Founder Walid Abdullah.</p>
-            </div>
+          <div style={{ padding: '18px', borderRadius: '10px', background: '#080C14', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div className="mono-spec" style={{ color: '#38BDF8', marginBottom: '4px' }}>01. ZERO COMMITMENT</div>
+            <h4 style={{ margin: '0 0 4px', fontSize: '0.96rem', fontWeight: '700', color: '#FFFFFF' }}>15-Min Technical Audit</h4>
+            <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>We analyze your current watch-time retention curve and outline custom editing optimizations.</p>
           </div>
 
-          <div className="glass-card" style={{ padding: '18px', borderRadius: '14px', display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.15)', color: '#10B981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', flexShrink: 0 }}>
-              <i className="fa-solid fa-video"></i>
-            </div>
-            <div>
-              <h4 style={{ margin: '0 0 2px 0', fontSize: '0.94rem', fontWeight: '700' }}>Google Meet / Zoom</h4>
-              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Invite link delivered directly to your calendar.</p>
-            </div>
+          <div style={{ padding: '18px', borderRadius: '10px', background: '#080C14', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div className="mono-spec" style={{ color: '#10B981', marginBottom: '4px' }}>02. FRAME.IO PIPELINE</div>
+            <h4 style={{ margin: '0 0 4px', fontSize: '0.96rem', fontWeight: '700', color: '#FFFFFF' }}>48h SLA &amp; Direct Revisions</h4>
+            <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Leave timecoded feedback directly inside private review links with same-day adjustments.</p>
           </div>
 
-          <div className="glass-card" style={{ padding: '18px', borderRadius: '14px', display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(245, 158, 11, 0.15)', color: '#F59E0B', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', flexShrink: 0 }}>
-              <i className="fa-solid fa-shield-halved"></i>
-            </div>
-            <div>
-              <h4 style={{ margin: '0 0 2px 0', fontSize: '0.94rem', fontWeight: '700' }}>Zero Obligation</h4>
-              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Get actionable retention advice for free.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Global Studio Locations */}
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div className="text-center" style={{ marginBottom: '24px' }}>
-            <span className="section-subtitle" style={{ fontSize: '0.78rem' }}>Global Hubs</span>
-            <h2 style={{ fontSize: '2rem', fontWeight: '800', margin: 0 }}>
-              Studio <span className="combination-font">Locations</span>
-            </h2>
-          </div>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '16px'
-          }}>
-            {globalOffices.map((office, idx) => (
-              <div
-                key={idx}
-                className="glass-card pop-hover"
-                style={{ padding: '22px 20px', borderRadius: '16px', display: 'flex', flexDirection: 'column' }}
-              >
-                <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(37, 99, 235, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#38BDF8', fontSize: '1.1rem', marginBottom: '12px' }}>
-                  <i className={office.icon}></i>
-                </div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '2px' }}>{office.city}</h3>
-                <div style={{ color: 'var(--accent-blue-light)', fontSize: '0.76rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
-                  {office.country}
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.84rem', lineHeight: '1.4', marginBottom: '12px', flex: 1 }}>
-                  {office.address}
-                </p>
-
-                <div style={{ borderTop: '1px solid var(--glass-border)', paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.82rem' }}>
-                  <div style={{ color: 'var(--text-secondary)' }}>
-                    <i className="fa-solid fa-phone" style={{ marginRight: '6px', color: 'var(--accent-blue-light)' }}></i>
-                    {office.phone}
-                  </div>
-                  <div style={{ color: 'var(--text-secondary)' }}>
-                    <i className="fa-solid fa-envelope" style={{ marginRight: '6px', color: 'var(--accent-blue-light)' }}></i>
-                    {office.email}
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div style={{ padding: '18px', borderRadius: '10px', background: '#080C14', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div className="mono-spec" style={{ color: '#8B5CF6', marginBottom: '4px' }}>03. BROADCAST MASTER</div>
+            <h4 style={{ margin: '0 0 4px', fontSize: '0.96rem', fontWeight: '700', color: '#FFFFFF' }}>ProRes &amp; Multitrack Sound</h4>
+            <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Every project includes full 4K source delivery, -14 LUFS loudness mastering, and project files.</p>
           </div>
         </div>
 
       </div>
-
-      {/* Floating WhatsApp Quick Action Button */}
-      <a
-        href="https://wa.me/8801886755888"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          width: '52px',
-          height: '52px',
-          borderRadius: '50%',
-          background: '#25D366',
-          color: '#FFFFFF',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '1.6rem',
-          boxShadow: '0 8px 25px rgba(37, 211, 102, 0.45)',
-          zIndex: 99999,
-          transition: 'transform 0.3s ease'
-        }}
-        aria-label="Chat on WhatsApp"
-      >
-        <i className="fa-brands fa-whatsapp"></i>
-      </a>
-
     </div>
   );
 }
 
 export default function BookACallPage() {
   return (
-    <Suspense fallback={<div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Loading booking page...</div>}>
+    <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>Loading Growth Session...</div>}>
       <BookACallPageContent />
     </Suspense>
   );

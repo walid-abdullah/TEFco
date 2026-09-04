@@ -6,6 +6,7 @@ import ChatWidget from "./ChatWidget";
 import VideoModal from "./VideoModal";
 import FloatingDock from "./FloatingDock";
 import GlassMeshBackground from "./GlassMeshBackground";
+import RaycastCommandPalette from "./RaycastCommandPalette";
 import { ThemeProvider } from "@/context/ThemeContext";
 
 export default function LayoutWrapper({ children, settings }) {
@@ -23,6 +24,7 @@ export default function LayoutWrapper({ children, settings }) {
         <Navbar menu={settings?.headerMenu} />
         <main style={{ position: 'relative', zIndex: 1 }}>{children}</main>
         <Footer menu={settings?.footerMenu} />
+        <RaycastCommandPalette />
         <FloatingDock />
         <ChatWidget />
         <VideoModal />

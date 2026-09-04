@@ -72,21 +72,22 @@ export default function TalkingHeadLandingPage() {
   ];
 
   return (
-    <div className="talking-head-page" style={{ minHeight: '100vh', paddingTop: '90px', paddingBottom: '60px', position: 'relative' }}>
+    <div className="talking-head-page" style={{ minHeight: '100vh', paddingTop: '95px', paddingBottom: '60px', position: 'relative' }}>
       
-      <div className="bg-glow-orb glow-blue" style={{ top: '5%', left: '-8%' }}></div>
-      <div className="bg-glow-orb glow-cyan" style={{ top: '35%', right: '-8%' }}></div>
-
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1240px' }}>
         
         {/* HERO */}
         <div className="text-center" style={{ maxWidth: '960px', margin: '0 auto 40px' }}>
           
-          <h1 className="section-title" style={{ fontSize: '3.2rem', lineHeight: '1.15', marginBottom: '12px', fontWeight: '800' }}>
-            YouTube Long-Form & <span className="combination-font">Talking Head Authority</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '14px' }}>
+            <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#EF4444' }}>YOUTUBE LONG-FORM AUTHORITY PIPELINE</span>
+          </div>
+
+          <h1 className="section-title" style={{ fontSize: '3.2rem', lineHeight: '1.12', marginBottom: '12px', fontWeight: '800', letterSpacing: '-0.03em' }}>
+            YouTube Long-Form &amp; <span className="combination-font">Talking Head Authority</span>
           </h1>
           
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', maxWidth: '720px', margin: '0 auto 30px', fontWeight: '500' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '720px', margin: '0 auto 28px', fontWeight: '400' }}>
             Scale Watch-Time, Subscribers, and High-Ticket Trust
           </p>
 
@@ -95,51 +96,68 @@ export default function TalkingHeadLandingPage() {
             className="glass-card pop-hover"
             style={{
               maxWidth: '920px',
-              margin: '0 auto 28px',
-              borderRadius: '20px',
+              margin: '0 auto 26px',
+              borderRadius: '16px',
               overflow: 'hidden',
               padding: 0,
-              border: '1px solid var(--glass-border)',
-              background: 'var(--card-bg)',
-              boxShadow: '0 25px 60px rgba(0,0,0,0.3)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              background: '#080C14',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.08)',
               position: 'relative'
             }}
           >
+            {/* Top Spec Bar */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '8px 14px',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+              background: 'rgba(255, 255, 255, 0.02)'
+            }}>
+              <span className="mono-spec" style={{ fontSize: '0.68rem', color: '#EF4444' }}>
+                YOUTUBE_AUTHORITY_BREAKDOWN.MOV
+              </span>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <span className="mono-tag" style={{ fontSize: '0.62rem' }}>4K 60FPS</span>
+                <span className="mono-tag" style={{ fontSize: '0.62rem' }}>DOCUMENTARY J-CUTS</span>
+              </div>
+            </div>
+
             <div 
               style={{ position: 'relative', aspectRatio: '16/9', cursor: 'pointer', overflow: 'hidden' }}
               onClick={() => setSelectedVideo(introVideo)}
             >
               <img src={introVideo.thumbnail} alt={introVideo.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }}></div>
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.25)' }}></div>
 
               <div style={{
                 position: 'absolute',
                 top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%)',
-                width: '74px', height: '50px',
-                borderRadius: '14px',
-                background: 'rgba(255, 255, 255, 0.22)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255, 255, 255, 0.5)',
+                width: '68px', height: '46px',
+                borderRadius: '10px',
+                background: 'rgba(255, 255, 255, 0.2)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                border: '1px solid rgba(255, 255, 255, 0.45)',
                 color: '#FFFFFF',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '1.2rem',
-                boxShadow: '0 12px 35px rgba(0,0,0,0.45)',
-                transition: 'transform 0.3s ease'
+                fontSize: '1.1rem',
+                boxShadow: '0 12px 35px rgba(0,0,0,0.6)'
               }}>
-                <i className="fa-solid fa-play" style={{ marginLeft: '3px' }}></i>
+                <i className="fa-solid fa-play" style={{ marginLeft: '2px' }}></i>
               </div>
             </div>
           </div>
 
           {/* Action Buttons Below Video */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap', marginBottom: '50px' }}>
-            <Link href="/book-a-call?service=YouTube%20Long-Form" className="btn btn-primary pop-btn" style={{ padding: '14px 30px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', marginBottom: '50px' }}>
+            <Link href="/book-a-call?service=YouTube%20Long-Form" className="btn btn-primary pop-btn" style={{ padding: '12px 26px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '700' }}>
               <span>Book YouTube Strategy Call</span>
               <i className="fa-solid fa-arrow-right" style={{ marginLeft: '6px' }}></i>
             </Link>
-            <a href="#showcase" className="btn btn-outline" style={{ padding: '14px 28px', borderRadius: '12px', fontSize: '0.95rem', fontWeight: '700' }}>
+            <a href="#showcase" className="btn btn-outline" style={{ padding: '12px 24px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '700' }}>
               <span>Explore Work Showcase</span>
             </a>
           </div>
@@ -148,15 +166,15 @@ export default function TalkingHeadLandingPage() {
         {/* RETENTION ARCHITECTURE */}
         <div className="glass-card" style={{
           padding: '30px 24px',
-          borderRadius: '20px',
+          borderRadius: '16px',
           margin: '0 auto 55px',
-          border: '1px solid var(--glass-border)',
-          background: 'var(--card-bg)',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.15)'
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          background: '#080C14',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.6)'
         }}>
           <div className="text-center" style={{ marginBottom: '24px' }}>
-            <span className="section-subtitle" style={{ fontSize: '0.78rem', marginBottom: '4px' }}>Editorial Framework</span>
-            <h2 style={{ fontSize: '1.9rem', fontWeight: '800', margin: 0 }}>
+            <span className="mono-spec" style={{ fontSize: '0.74rem', color: '#EF4444', display: 'block', marginBottom: '4px' }}>EDITORIAL FRAMEWORK</span>
+            <h2 style={{ fontSize: '1.9rem', fontWeight: '800', margin: 0, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
               The 4 Pillars of <span className="combination-font">High-Retention Long-Form</span>
             </h2>
           </div>
@@ -166,28 +184,28 @@ export default function TalkingHeadLandingPage() {
             gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
             gap: '16px'
           }}>
-            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#EF4444', textTransform: 'uppercase', marginBottom: '6px' }}>01. STORY ARC PACING</div>
-              <h4 style={{ margin: '0 0 6px', fontSize: '1.05rem', fontWeight: '700' }}>J-Cut Narrative Flow</h4>
-              <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>Seamless conversational continuity without robotic hard jumps or awkward silences.</p>
+            <div style={{ padding: '18px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              <div className="mono-spec" style={{ color: '#EF4444', marginBottom: '6px', fontWeight: '800' }}>01. STORY ARC PACING</div>
+              <h4 style={{ margin: '0 0 6px', fontSize: '1rem', fontWeight: '700', color: '#FFFFFF' }}>J-Cut Narrative Flow</h4>
+              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>Seamless conversational continuity without robotic hard jumps or awkward silences.</p>
             </div>
 
-            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#38BDF8', textTransform: 'uppercase', marginBottom: '6px' }}>02. BESPOKE GRAPHICS</div>
-              <h4 style={{ margin: '0 0 6px', fontSize: '1.05rem', fontWeight: '700' }}>Custom Diagrams & B-Roll</h4>
-              <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>Animated chart overlays, callouts, and curated 4K footage reinforcing your teaching points.</p>
+            <div style={{ padding: '18px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              <div className="mono-spec" style={{ color: '#38BDF8', marginBottom: '6px', fontWeight: '800' }}>02. BESPOKE GRAPHICS</div>
+              <h4 style={{ margin: '0 0 6px', fontSize: '1rem', fontWeight: '700', color: '#FFFFFF' }}>Custom Diagrams &amp; B-Roll</h4>
+              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>Animated chart overlays, callouts, and curated 4K footage reinforcing your teaching points.</p>
             </div>
 
-            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#8B5CF6', textTransform: 'uppercase', marginBottom: '6px' }}>03. AUDIO ATMOSPHERE</div>
-              <h4 style={{ margin: '0 0 6px', fontSize: '1.05rem', fontWeight: '700' }}>Layered Soundscape</h4>
-              <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>Subtle background music transitions, cinematic sweeps, and crisp voice frequency EQ.</p>
+            <div style={{ padding: '18px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              <div className="mono-spec" style={{ color: '#8B5CF6', marginBottom: '6px', fontWeight: '800' }}>03. AUDIO ATMOSPHERE</div>
+              <h4 style={{ margin: '0 0 6px', fontSize: '1rem', fontWeight: '700', color: '#FFFFFF' }}>Layered Soundscape</h4>
+              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>Subtle background music transitions, cinematic sweeps, and crisp voice frequency EQ.</p>
             </div>
 
-            <div style={{ padding: '18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--glass-border)' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#10B981', textTransform: 'uppercase', marginBottom: '6px' }}>04. CLICK-THROUGH SUITE</div>
-              <h4 style={{ margin: '0 0 6px', fontSize: '1.05rem', fontWeight: '700' }}>Custom Thumbnails</h4>
-              <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>3D layered YouTube thumbnails designed to beat benchmark industry CTR averages.</p>
+            <div style={{ padding: '18px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              <div className="mono-spec" style={{ color: '#10B981', marginBottom: '6px', fontWeight: '800' }}>04. CLICK-THROUGH SUITE</div>
+              <h4 style={{ margin: '0 0 6px', fontSize: '1rem', fontWeight: '700', color: '#FFFFFF' }}>Custom Thumbnails</h4>
+              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45' }}>3D layered YouTube thumbnails designed to beat benchmark industry CTR averages.</p>
             </div>
           </div>
         </div>
@@ -195,8 +213,8 @@ export default function TalkingHeadLandingPage() {
         {/* 16:9 SHOWCASE */}
         <div id="showcase" style={{ marginBottom: '60px' }}>
           <div className="text-center" style={{ marginBottom: '26px' }}>
-            <span className="section-subtitle" style={{ fontSize: '0.78rem' }}>Recent Work</span>
-            <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: 0 }}>
+            <span className="mono-spec" style={{ fontSize: '0.74rem', color: '#EF4444', display: 'block', marginBottom: '4px' }}>RECENT MASTERS</span>
+            <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: 0, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
               Long-Form <span className="combination-font">Authority Masters</span>
             </h2>
           </div>
@@ -211,11 +229,11 @@ export default function TalkingHeadLandingPage() {
                 key={work.id}
                 className="glass-card pop-hover"
                 style={{
-                  borderRadius: '16px',
+                  borderRadius: '12px',
                   overflow: 'hidden',
                   padding: 0,
-                  border: '1px solid var(--glass-border)',
-                  background: 'var(--card-bg)'
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  background: '#080C14'
                 }}
               >
                 <div 
@@ -229,30 +247,29 @@ export default function TalkingHeadLandingPage() {
                     position: 'absolute',
                     top: '50%', left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: '60px', height: '40px',
-                    borderRadius: '10px',
+                    width: '56px', height: '38px',
+                    borderRadius: '8px',
                     background: 'rgba(255,255,255,0.2)',
                     backdropFilter: 'blur(10px)',
                     border: '1px solid rgba(255,255,255,0.4)',
                     color: '#fff',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    boxShadow: '0 8px 25px rgba(0,0,0,0.4)'
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
                   }}>
                     <i className="fa-solid fa-play"></i>
                   </div>
                 </div>
 
-                <div style={{ padding: '16px 18px' }}>
-                  <h4 style={{ margin: '0 0 10px', fontSize: '1.02rem', fontWeight: '700', lineHeight: '1.4' }}>{work.title}</h4>
+                <div style={{ padding: '14px 16px' }}>
+                  <h4 style={{ margin: '0 0 10px', fontSize: '0.98rem', fontWeight: '700', lineHeight: '1.4', color: '#FFFFFF' }}>{work.title}</h4>
                   
-                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                    <span style={{ padding: '3px 10px', borderRadius: '6px', background: 'rgba(239, 68, 68, 0.1)', color: '#EF4444', fontSize: '0.74rem', fontWeight: '700' }}>
+                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                    <span className="mono-spec" style={{ padding: '2px 8px', borderRadius: '4px', background: 'rgba(239, 68, 68, 0.1)', color: '#EF4444', fontSize: '0.68rem', fontWeight: '700' }}>
                       {work.watchTime}
                     </span>
-                    <span style={{ padding: '3px 10px', borderRadius: '6px', background: 'rgba(56, 189, 248, 0.1)', color: '#38BDF8', fontSize: '0.74rem', fontWeight: '700' }}>
+                    <span className="mono-spec" style={{ padding: '2px 8px', borderRadius: '4px', background: 'rgba(56, 189, 248, 0.1)', color: '#38BDF8', fontSize: '0.68rem', fontWeight: '700' }}>
                       {work.style}
                     </span>
-                    <span style={{ padding: '3px 10px', borderRadius: '6px', background: 'rgba(16, 185, 129, 0.1)', color: '#10B981', fontSize: '0.74rem', fontWeight: '700' }}>
+                    <span className="mono-spec" style={{ padding: '2px 8px', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.1)', color: '#10B981', fontSize: '0.68rem', fontWeight: '700' }}>
                       {work.length}
                     </span>
                   </div>
@@ -265,8 +282,8 @@ export default function TalkingHeadLandingPage() {
         {/* FAQ */}
         <div style={{ maxWidth: '850px', margin: '0 auto 60px' }}>
           <div className="text-center" style={{ marginBottom: '26px' }}>
-            <span className="section-subtitle" style={{ fontSize: '0.78rem' }}>YouTube Production FAQ</span>
-            <h2 style={{ fontSize: '2rem', fontWeight: '800', margin: 0 }}>
+            <span className="mono-spec" style={{ fontSize: '0.74rem', color: '#38BDF8', display: 'block', marginBottom: '4px' }}>YOUTUBE EDITING FAQ</span>
+            <h2 style={{ fontSize: '2rem', fontWeight: '800', margin: 0, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
               Frequently Asked <span className="combination-font">Questions</span>
             </h2>
           </div>
@@ -279,18 +296,18 @@ export default function TalkingHeadLandingPage() {
                 onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
                 style={{
                   padding: '16px 20px',
-                  borderRadius: '12px',
+                  borderRadius: '10px',
                   cursor: 'pointer',
-                  border: '1px solid var(--glass-border)',
-                  background: 'var(--card-bg)'
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  background: '#080C14'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px' }}>
-                  <h4 style={{ margin: 0, fontSize: '0.98rem', fontWeight: '700' }}>{faq.q}</h4>
-                  <i className={`fa-solid ${activeFaq === idx ? 'fa-minus' : 'fa-plus'}`} style={{ color: '#38BDF8', fontSize: '0.85rem' }}></i>
+                  <h4 style={{ margin: 0, fontSize: '0.94rem', fontWeight: '700', color: '#FFFFFF' }}>{faq.q}</h4>
+                  <i className={`fa-solid ${activeFaq === idx ? 'fa-minus' : 'fa-plus'}`} style={{ color: '#38BDF8', fontSize: '0.8rem' }}></i>
                 </div>
                 {activeFaq === idx && (
-                  <p style={{ margin: '10px 0 0', color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.5', borderTop: '1px solid var(--glass-border)', paddingTop: '10px' }}>
+                  <p style={{ margin: '10px 0 0', color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '10px' }}>
                     {faq.a}
                   </p>
                 )}
@@ -302,16 +319,16 @@ export default function TalkingHeadLandingPage() {
         {/* CALENDAR */}
         <div className="glass-card" style={{
           padding: '30px 20px',
-          borderRadius: '20px',
+          borderRadius: '16px',
           maxWidth: '1100px',
           margin: '0 auto',
-          border: '1px solid var(--glass-border)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
           textAlign: 'center',
-          background: 'var(--card-bg)',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.2)'
+          background: '#080C14',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.8)'
         }}>
-          <span className="section-subtitle" style={{ display: 'inline-block', fontSize: '0.8rem', marginBottom: '4px' }}>Long-Form Retainer</span>
-          <h2 style={{ fontSize: '2.2rem', marginBottom: '8px', fontWeight: '800' }}>
+          <span className="mono-spec" style={{ display: 'inline-block', fontSize: '0.74rem', color: '#EF4444', marginBottom: '4px' }}>LONG-FORM RETAINER SLOTS</span>
+          <h2 style={{ fontSize: '2.2rem', marginBottom: '8px', fontWeight: '800', letterSpacing: '-0.02em', color: '#FFFFFF' }}>
             Book Your 15-Minute <span className="combination-font">YouTube Strategy Call</span>
           </h2>
           <p style={{ color: 'var(--text-secondary)', maxWidth: '580px', margin: '0 auto 20px', fontSize: '0.92rem' }}>
@@ -320,7 +337,7 @@ export default function TalkingHeadLandingPage() {
 
           <div 
             className="calendly-inline-widget" 
-            data-url="https://calendly.com/w-abdullah5588/30min?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=070d18&text_color=ffffff&primary_color=2563eb&a1=Interested%20in%20YouTube%20Long-Form%20Editing" 
+            data-url="https://calendly.com/w-abdullah5588/30min?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=080c14&text_color=ffffff&primary_color=2563eb&a1=Interested%20in%20YouTube%20Long-Form%20Editing" 
             style={{ minWidth: '320px', height: '620px', width: '100%', borderRadius: '12px', overflow: 'hidden' }}
           ></div>
         </div>
@@ -336,9 +353,9 @@ export default function TalkingHeadLandingPage() {
             position: 'fixed',
             top: 0, left: 0, right: 0, bottom: 0,
             width: '100vw', height: '100vh',
-            backgroundColor: 'rgba(0, 0, 0, 0.92)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
             zIndex: 9999999,
             display: 'flex',
             alignItems: 'center',
@@ -352,31 +369,40 @@ export default function TalkingHeadLandingPage() {
             style={{
               maxWidth: '920px',
               width: '100%',
-              borderRadius: '20px',
+              borderRadius: '16px',
               overflow: 'hidden',
               position: 'relative',
-              background: '#070D18',
-              border: '1px solid var(--glass-border)',
-              boxShadow: '0 30px 80px rgba(0, 0, 0, 0.9)'
+              background: '#05070B',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              boxShadow: '0 30px 80px rgba(0, 0, 0, 0.95)'
             }}
           >
-            <button
-              onClick={() => setSelectedVideo(null)}
-              style={{
-                position: 'absolute',
-                top: '12px', right: '12px',
-                background: 'rgba(0, 0, 0, 0.75)',
-                color: '#FFFFFF',
-                border: '1px solid rgba(255,255,255,0.2)',
-                width: '38px', height: '38px',
-                borderRadius: '10px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer',
-                zIndex: 100
-              }}
-            >
-              <i className="fa-solid fa-xmark"></i>
-            </button>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '10px 16px',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+              background: 'rgba(255, 255, 255, 0.02)'
+            }}>
+              <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#EF4444' }}>
+                YOUTUBE_MASTER // {selectedVideo.title}
+              </span>
+              <button
+                onClick={() => setSelectedVideo(null)}
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  color: '#FFFFFF',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  width: '30px', height: '30px',
+                  borderRadius: '6px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  cursor: 'pointer'
+                }}
+              >
+                <i className="fa-solid fa-xmark"></i>
+              </button>
+            </div>
 
             <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
               <iframe
@@ -388,9 +414,9 @@ export default function TalkingHeadLandingPage() {
               ></iframe>
             </div>
 
-            <div style={{ padding: '16px 22px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>{selectedVideo.title}</h3>
-              <Link href="/book-a-call?service=YouTube%20Long-Form" onClick={() => setSelectedVideo(null)} className="btn btn-primary" style={{ padding: '9px 18px', fontSize: '0.86rem', borderRadius: '8px' }}>
+            <div style={{ padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+              <h3 style={{ fontSize: '1rem', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>{selectedVideo.title}</h3>
+              <Link href="/book-a-call?service=YouTube%20Long-Form" onClick={() => setSelectedVideo(null)} className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.82rem', borderRadius: '6px' }}>
                 Book This Service
               </Link>
             </div>

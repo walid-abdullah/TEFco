@@ -10,7 +10,8 @@ import BenefitsBento from '@/components/BenefitsBento';
 import { client } from '@/sanity/client';
 import { urlFor } from '@/sanity/image';
 import InlineVideoPlayer from '@/components/InlineVideoPlayer';
-import HomepageHeroExperiment from '@/components/HomepageHeroExperiment';
+import RaycastHeroBanner from '@/components/RaycastHeroBanner';
+import InteractiveVideoScrubber from '@/components/InteractiveVideoScrubber';
 import ReelsTestimonialsMarquee from '@/components/ReelsTestimonialsMarquee';
 import DynamicPortfolioSection from '@/components/DynamicPortfolioSection';
 
@@ -150,17 +151,11 @@ export default async function Home() {
 
   return (
     <>
-      {/* LUXURY HERO SECTION */}
-      <section className="luxury-hero-section section-target" id="home">
-        <div className="container luxury-hero-container">
-          <HomepageHeroExperiment 
-            heroBadge={heroBadge}
-            heroTitle1={heroTitle1}
-            heroTitle2={heroTitle2}
-            heroDescription={heroDescription}
-          />
-        </div>
-      </section>
+      {/* PURE RAYCAST RED KINETIC HERO BANNER */}
+      <RaycastHeroBanner />
+
+      {/* BASEMENT STUDIO INTERACTIVE VIDEO SCRUBBER LAB */}
+      <InteractiveVideoScrubber />
 
       {/* ABOUT & FOUNDER VIDEO SECTION */}
       <section className="about section-padding section-target" id="about" style={{"position": "relative"}}>
@@ -236,6 +231,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* BASEMENT STUDIO INTERACTIVE VIDEO SCRUBBER LAB */}
+      <InteractiveVideoScrubber />
 
       {/* SERVICES SECTION */}
       <ServicesSection 
