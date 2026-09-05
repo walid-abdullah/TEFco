@@ -6,7 +6,8 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node scripts/integration-test.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",
