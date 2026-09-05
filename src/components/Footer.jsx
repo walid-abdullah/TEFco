@@ -167,38 +167,54 @@ export default function Footer({ menu }) {
 
         {/* 
           ========================================================================
-          2. ELEVATED MONUMENTAL BRAND WORDMARK (PascalCase "EditlyFoundry")
+          2. ELEVATED MONUMENTAL BRAND WORDMARK (Auto-Scaling Responsive SVG)
           ======================================================================== 
         */}
         <div 
           style={{
             width: '100%',
+            maxWidth: '1240px',
+            margin: '0 auto',
             textAlign: 'center',
-            padding: '20px 0 50px',
-            overflow: 'hidden',
+            padding: '10px 0 45px',
             userSelect: 'none'
           }}
         >
-          <span
-            style={{
-              display: 'block',
-              fontFamily: "'Syne', var(--font-display), sans-serif",
-              fontSize: 'clamp(3.8rem, 12.8vw, 12.5rem)',
-              fontWeight: '900',
-              letterSpacing: '-0.04em',
-              lineHeight: '0.9',
-              whiteSpace: 'nowrap',
-              background: isLight 
-                ? 'linear-gradient(180deg, #090E1A 0%, #475569 80%, rgba(100, 116, 139, 0.3) 100%)'
-                : 'linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 40%, rgba(148, 163, 184, 0.35) 85%, rgba(148, 163, 184, 0.05) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: isLight ? 'none' : '0 20px 60px rgba(0,0,0,0.8)',
-              transition: 'opacity 0.3s ease'
+          <svg 
+            viewBox="0 0 1100 135" 
+            width="100%" 
+            height="auto" 
+            style={{ 
+              display: 'block', 
+              width: '100%', 
+              maxHeight: '150px',
+              overflow: 'visible' 
             }}
           >
-            EditlyFoundry
-          </span>
+            <defs>
+              <linearGradient id="footerWordmarkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor={isLight ? "#090E1A" : "#FFFFFF"} stopOpacity="1" />
+                <stop offset="45%" stopColor={isLight ? "#334155" : "#E2E8F0"} stopOpacity="0.85" />
+                <stop offset="85%" stopColor={isLight ? "#64748B" : "#94A3B8"} stopOpacity="0.4" />
+                <stop offset="100%" stopColor={isLight ? "#94A3B8" : "#94A3B8"} stopOpacity="0.1" />
+              </linearGradient>
+            </defs>
+            <text 
+              x="50%" 
+              y="62%" 
+              textAnchor="middle" 
+              dominantBaseline="middle"
+              fill="url(#footerWordmarkGrad)" 
+              style={{ 
+                fontFamily: "'Syne', var(--font-display), sans-serif", 
+                fontWeight: '900', 
+                fontSize: '118px', 
+                letterSpacing: '-0.04em'
+              }}
+            >
+              EditlyFoundry
+            </text>
+          </svg>
         </div>
 
         {/* 
