@@ -11,7 +11,7 @@ export default function RaycastCommandPalette() {
   const inputRef = useRef(null);
 
   const actions = [
-    { id: 'act-1', category: 'Navigation', title: 'Explore 4K Work Vault', shortcut: 'W', href: '/work', desc: 'Browse full portfolio across all 5 video formats' },
+    { id: 'act-1', category: 'Navigation', title: 'Work', shortcut: 'W', href: '/work', desc: 'Browse selected portfolio work' },
     { id: 'act-2', category: 'Services', title: 'Reels & Shorts Retention Engine', shortcut: 'R', href: '/services/reels-shorts', desc: '9:16 scroll-stopping viral editing & sound design' },
     { id: 'act-3', category: 'Services', title: 'Multi-Cam Podcasts & Audio Suite', shortcut: 'M', href: '/services/podcasts', desc: '1-to-30 content multiplication engine & 4K switching' },
     { id: 'act-4', category: 'Services', title: 'YouTube Long-Form Authority', shortcut: 'Y', href: '/services/talking-head', desc: 'Documentary pacing, J-cuts & bespoke B-roll' },
@@ -302,4 +302,3 @@ export default function RaycastCommandPalette() {
     </>
   );
 }
-

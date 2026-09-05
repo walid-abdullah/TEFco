@@ -195,7 +195,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
             We’ve received your details. Our Executive Producer Walid Abdullah will review your brand and reach out directly to your <strong>WhatsApp & Email</strong> shortly.
           </p>
 
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '50px', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.25)', color: 'var(--accent-blue-light)', fontSize: '0.84rem', fontWeight: '600', marginBottom: '25px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '50px', background: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255, 255, 255, 0.18)', color: 'var(--accent-silver)', fontSize: '0.84rem', fontWeight: '600', marginBottom: '25px' }}>
             <i className="fa-solid fa-clock"></i>
             <span>Guaranteed response within 0-10 minutes</span>
           </div>
@@ -275,7 +275,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                 color: 'var(--text-primary)'
               }}>
                 Build Your Next High-Impact <br />
-                <span className="combination-font" style={{ fontStyle: 'italic', fontWeight: '400', color: 'var(--accent-blue-light)' }}>
+                <span className="combination-font" style={{ fontStyle: 'italic', fontWeight: '400', color: 'var(--accent-silver)' }}>
                   Video Campaign
                 </span>
               </h2>
@@ -661,7 +661,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                 disabled={isSubmitting}
                 className="btn pop-btn"
                 style={{
-                  background: 'linear-gradient(135deg, #2563EB 0%, #0284C7 100%)',
+                  background: 'linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 100%)',
                   color: '#FFFFFF',
                   padding: '16px 36px',
                   borderRadius: '12px',
@@ -672,7 +672,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                   alignItems: 'center',
                   gap: '10px',
                   cursor: 'pointer',
-                  boxShadow: '0 10px 30px rgba(37, 99, 235, 0.35)',
+                  boxShadow: '0 10px 30px rgba(255, 255, 255, 0.14)',
                   transition: 'transform 0.2s ease, box-shadow 0.2s ease'
                 }}
               >

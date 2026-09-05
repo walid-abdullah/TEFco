@@ -251,7 +251,7 @@ export default function Footer({ menu }) {
               PIPELINE &amp; OS
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <li><Link href="/work" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>4K Work Vault (24)</Link></li>
+              <li><Link href="/work" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>Work</Link></li>
               <li><Link href="/workflow" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>Production SLA &amp; Workflow</Link></li>
               <li><Link href="/pricing" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>Transparent Retainer Vault</Link></li>
               <li><Link href="/calculator" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>In-House Savings Calculator</Link></li>
@@ -311,5 +311,4 @@ export default function Footer({ menu }) {
     </footer>
   );
 }
-
 

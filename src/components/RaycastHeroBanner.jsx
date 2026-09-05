@@ -224,7 +224,7 @@ export default function RaycastHeroBanner() {
               gap: '8px'
             }}
           >
-            <span>Explore 4K Work Vault</span>
+            <span>Explore Work</span>
             <span className="mono-spec" style={{ fontSize: '0.7rem', color: '#94A3B8', background: 'rgba(255,255,255,0.08)', padding: '1px 6px', borderRadius: '4px' }}>
               24
             </span>

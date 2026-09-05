@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import CinematicFounderVideo from "@/components/CinematicFounderVideo";
 
 const pipelineSteps = [
   {
@@ -190,6 +191,19 @@ const aboutStructuredData = {
   ],
 };
 
+const clientLogos = [
+  "NORTHSTAR",
+  "LUMA",
+  "ORBIT",
+  "KINETIC",
+  "MOMENT",
+  "ARC",
+  "VANTA",
+  "FIELDNOTE",
+  "NOVA",
+  "MAKERHOUSE",
+];
+
 export default function AboutPage() {
   return (
     <main className="about-page-wrapper" style={{ paddingTop: "112px", paddingBottom: "96px" }}>
@@ -201,8 +215,9 @@ export default function AboutPage() {
             <span className="mono-spec">THE EDITLY FOUNDRY / ABOUT</span>
           </div>
           <h1 className="about-hero-title">
-            We turn raw ideas into
-            <span className="combination-font"> finished momentum.</span>
+            <span>We turn raw ideas into</span>
+            <br />
+            <span className="combination-font">finished momentum.</span>
           </h1>
           <p className="about-hero-copy">
             The Editly Foundry is a post-production studio for people building
@@ -224,6 +239,29 @@ export default function AboutPage() {
             <span className="mono-spec">BUILDING / ALWAYS ON</span>
             <span className="about-signal-rule" />
             <span className="mono-spec">REMOTE-FIRST / GLOBAL</span>
+          </div>
+        </section>
+
+        <section className="about-client-logos reveal-on-scroll" aria-label="Selected clients">
+          <div className="about-client-logos-heading">
+            <span className="section-subtitle">Selected collaborators</span>
+            <span className="mono-spec">TRUSTED IN THE ROOM</span>
+          </div>
+          <div className="about-client-marquee">
+            <div className="about-client-row about-client-row-forward">
+              {[...clientLogos, ...clientLogos].map((logo, index) => (
+                <span className="about-client-logo" key={`forward-${logo}-${index}`}>
+                  {logo}
+                </span>
+              ))}
+            </div>
+            <div className="about-client-row about-client-row-reverse">
+              {[...clientLogos.slice(5), ...clientLogos.slice(0, 5), ...clientLogos.slice(5), ...clientLogos.slice(0, 5)].map((logo, index) => (
+                <span className="about-client-logo" key={`reverse-${logo}-${index}`}>
+                  {logo}
+                </span>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -309,6 +347,25 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <section className="about-founder-video-section reveal-on-scroll">
+          <div className="about-section-heading">
+            <span className="section-subtitle">Founder note</span>
+            <h2>
+              The thinking behind
+              <span className="combination-font"> the work.</span>
+            </h2>
+            <p>
+              Walid shares the editorial principles, retention thinking, and
+              production rhythm behind The Editly Foundry.
+            </p>
+          </div>
+          <CinematicFounderVideo
+            videoUrl={process.env.NEXT_PUBLIC_FOUNDER_VIDEO_URL || ""}
+            posterUrl="/Picture/square.png"
+            title="Walid Abdullah explains the Editly Foundry system"
+          />
+        </section>
+
         <section className="about-founder-grid">
           <div className="about-founder-image reveal-on-scroll">
             <Image
@@ -364,27 +421,30 @@ export default function AboutPage() {
               grows around the work, never between you and it.
             </p>
           </div>
-          <div className="about-team-grid">
-            {team.map((member, index) => (
-              <article
-                className="about-team-card glass-card reveal-on-scroll"
-                key={member.name}
-                style={{ transitionDelay: `${index * 90}ms` }}
-              >
-                <div className="about-team-card-top">
-                  <span className="mono-spec">{member.index} / STUDIO</span>
-                  <span className="about-team-arrow" aria-hidden="true">↗</span>
-                </div>
-                <div className="about-team-avatar" aria-hidden="true">
-                  {member.initials}
-                </div>
-                <div className="about-team-content">
-                  <h3>{member.name}</h3>
-                  <span className="about-team-role">{member.role}</span>
-                  <p>{member.focus}</p>
-                </div>
-              </article>
-            ))}
+          <div className="about-team-viewport">
+            <div className="about-team-track">
+              {[...team, ...team].map((member, index) => (
+                <article
+                  className="about-team-card glass-card reveal-on-scroll"
+                  key={`${member.name}-${index}`}
+                  aria-hidden={index >= team.length}
+                  style={{ transitionDelay: `${(index % team.length) * 70}ms` }}
+                >
+                  <div className="about-team-card-top">
+                    <span className="mono-spec">{member.index} / STUDIO</span>
+                    <span className="about-team-arrow" aria-hidden="true">↗</span>
+                  </div>
+                  <div className="about-team-avatar" aria-hidden="true">
+                    {member.initials}
+                  </div>
+                  <div className="about-team-content">
+                    <h3>{member.name}</h3>
+                    <span className="about-team-role">{member.role}</span>
+                    <p>{member.focus}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 

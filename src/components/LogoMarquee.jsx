@@ -35,6 +35,10 @@ export default function LogoMarquee({ logos }) {
           width: max-content;
           animation: scrollMarquee 20s linear infinite;
         }
+        .marquee-track-reverse {
+          animation-direction: reverse;
+          animation-duration: 24s;
+        }
         .marquee-track:hover {
           animation-play-state: paused;
         }
@@ -77,7 +81,7 @@ export default function LogoMarquee({ logos }) {
         }
       `}} />
       
-      <div className="marquee-track">
+      <div className="marquee-track marquee-track-forward">
         <div className="marquee-logo-group">
           {validLogos.map((logo, index) => (
             <img 
@@ -95,6 +99,30 @@ export default function LogoMarquee({ logos }) {
               key={`logo-2-${logo._id || index}`} 
               src={urlFor(logo.logo).url()} 
               alt={logo.name || "Client Logo"} 
+              className="marquee-logo"
+              loading="lazy"
+            />
+          ))}
+        </div>
+      </div>
+      <div className="marquee-track marquee-track-reverse" aria-hidden="true">
+        <div className="marquee-logo-group">
+          {validLogos.slice().reverse().map((logo, index) => (
+            <img
+              key={`logo-reverse-1-${logo._id || index}`}
+              src={urlFor(logo.logo).url()}
+              alt=""
+              className="marquee-logo"
+              loading="lazy"
+            />
+          ))}
+        </div>
+        <div className="marquee-logo-group">
+          {validLogos.slice().reverse().map((logo, index) => (
+            <img
+              key={`logo-reverse-2-${logo._id || index}`}
+              src={urlFor(logo.logo).url()}
+              alt=""
               className="marquee-logo"
               loading="lazy"
             />

@@ -84,7 +84,7 @@ export default function CinematicFounderVideo({
           }}
         >
           <video
-            src={videoUrl}
+            src={videoUrl || undefined}
             poster={posterUrl}
             controls
             playsInline
