@@ -31,11 +31,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
 
   // Refined Lower-Entry Budget Options
   const monthlyBudgetOptions = [
-    'Less than $1K',
-    '$1K - $2K',
-    '$2K - $3.5K',
-    '$3.5K - $5K',
-    '$5K+'
+    '$999/mo (Starter Pod)',
+    '$1,499/mo (Growth Retainer)',
+    '$2,499/mo (Scale)',
+    '$3.5K - $5K/mo',
+    '$5K+/mo (Enterprise)'
   ];
   const onetimeBudgetOptions = [
     'Under $500',
@@ -44,7 +44,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
     'Custom Scope'
   ];
 
-  const [selectedBudget, setSelectedBudget] = useState('Less than $1K');
+  const [selectedBudget, setSelectedBudget] = useState('$999/mo (Starter Pod)');
   const [isMuted, setIsMuted] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);

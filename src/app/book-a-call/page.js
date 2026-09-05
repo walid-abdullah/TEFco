@@ -26,7 +26,7 @@ function BookACallPageContent() {
     projectType: 'Monthly Retainer',
     volume: searchParams.get('volume') || '12 - 16 videos / mo',
     turnaround: searchParams.get('turnaround') || 'Standard 48h',
-    budget: searchParams.get('budget') ? decodeURIComponent(searchParams.get('budget')) : '$2K - $3.5K',
+    budget: searchParams.get('budget') ? decodeURIComponent(searchParams.get('budget')) : '$999 - $1,499 / mo',
     details: '',
   });
 
