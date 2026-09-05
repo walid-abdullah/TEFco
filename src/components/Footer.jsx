@@ -83,7 +83,7 @@ export default function Footer({ menu }) {
               color: isLight ? '#05070B' : '#FFFFFF',
               letterSpacing: '-0.04em',
               margin: '0 0 16px',
-              fontFamily: 'var(--font-display)'
+              fontFamily: 'var(--font-heading)'
             }}>
               Have a Project in Mind? <br />
               <span 

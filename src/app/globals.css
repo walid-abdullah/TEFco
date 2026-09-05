@@ -76,6 +76,7 @@
   --transition-normal: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   
   /* Unique High-Impact Typography */
+  --font-heading: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Geist', 'Halenoir', -apple-system, sans-serif;
   --font-serif: 'DM Serif Display', 'Playfair Display', serif;
   --font-mono: 'Geist Mono', 'JetBrains Mono', monospace;
@@ -328,12 +329,12 @@ body {
   gap: 5px;
 }
 
-/* Primary Titles: High Density Geometric Geist / Inter */
-h1, h2, h3, h4, h5, h6, .hero-title, .section-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.035em;
+/* Primary Titles: High Density Geometric Syne Display Typography */
+h1, h2, h3, h4, h5, h6, .hero-title, .section-title, .brand-title, .bento-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
   color: #FFFFFF;
 }
 
@@ -1094,9 +1095,9 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-primary);
   flex-shrink: 0;
   text-decoration: none;

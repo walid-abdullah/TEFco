@@ -186,7 +186,7 @@ export default function RaycastHeroBanner() {
           letterSpacing: '-0.04em', 
           color: '#FFFFFF',
           marginBottom: '20px',
-          fontFamily: 'var(--font-display)'
+          fontFamily: 'var(--font-heading)'
         }}>
           Elevate Your Video Projects. <br />
           <span 

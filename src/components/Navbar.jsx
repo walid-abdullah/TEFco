@@ -90,7 +90,7 @@ export default function Navbar({ menu }) {
           
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ 
-              fontFamily: 'var(--font-display)', 
+              fontFamily: 'var(--font-heading)', 
               fontWeight: '800', 
               fontSize: '1.15rem', 
               letterSpacing: '-0.03em', 
