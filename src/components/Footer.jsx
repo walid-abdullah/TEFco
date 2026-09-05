@@ -11,9 +11,9 @@ export default function Footer({ menu }) {
     <footer 
       className="footer" 
       style={{
-        padding: '90px 0 30px',
+        padding: '100px 0 40px',
         borderTop: isLight ? '1px solid rgba(15, 23, 42, 0.08)' : '1px solid rgba(255, 255, 255, 0.08)',
-        background: isLight ? 'rgba(255, 255, 255, 0.95)' : '#05070B',
+        background: isLight ? 'rgba(255, 255, 255, 0.96)' : '#05070B',
         color: isLight ? '#090E1A' : '#FFFFFF',
         position: 'relative',
         zIndex: 1,
@@ -21,19 +21,19 @@ export default function Footer({ menu }) {
         transition: 'background 0.25s ease, border-color 0.25s ease'
       }}
     >
-      {/* Subtle Bottom Ambient Mesh Glow behind the giant brand text */}
+      {/* Background Ambient Darkroom Glow */}
       <div 
         style={{
           position: 'absolute',
-          bottom: 0,
+          top: '20%',
           left: '50%',
           transform: 'translateX(-50%)',
           width: '100%',
           maxWidth: '1200px',
-          height: '240px',
+          height: '400px',
           background: isLight 
-            ? 'radial-gradient(ellipse at bottom, rgba(15, 23, 42, 0.03) 0%, rgba(255, 255, 255, 0) 70%)'
-            : 'radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.05) 0%, rgba(5, 7, 11, 0) 70%)',
+            ? 'radial-gradient(ellipse at center, rgba(15, 23, 42, 0.03) 0%, rgba(255, 255, 255, 0) 70%)'
+            : 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.04) 0%, rgba(5, 7, 11, 0) 70%)',
           pointerEvents: 'none',
           zIndex: 0
         }}
@@ -41,75 +41,190 @@ export default function Footer({ menu }) {
 
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1240px' }}>
         
-        {/* Top Status & SLA Header Bar */}
+        {/* 
+          ========================================================================
+          1. MUSEMIND-STYLE BIG CALL-TO-ACTION HEADER
+          ======================================================================== 
+        */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center',
+          alignItems: 'flex-end',
           flexWrap: 'wrap',
-          gap: '15px',
-          paddingBottom: '36px',
+          gap: '30px',
+          paddingBottom: '60px',
           marginBottom: '50px',
-          borderBottom: isLight ? '1px solid rgba(15, 23, 42, 0.06)' : '1px solid rgba(255, 255, 255, 0.06)'
+          borderBottom: isLight ? '1px solid rgba(15, 23, 42, 0.08)' : '1px solid rgba(255, 255, 255, 0.08)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ 
-              width: '7px', 
-              height: '7px', 
-              borderRadius: '50%', 
-              background: '#22C55E', 
-              boxShadow: '0 0 8px #22C55E',
-              display: 'inline-block' 
-            }}></span>
-            <span className="mono-spec" style={{ color: isLight ? '#090E1A' : '#FFFFFF', fontWeight: '700', fontSize: '0.78rem' }}>
-              GLOBAL POST-PRODUCTION PIPELINE ACTIVE
-            </span>
+          <div style={{ maxWidth: '640px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+              <span style={{ 
+                width: '7px', 
+                height: '7px', 
+                borderRadius: '50%', 
+                background: '#22C55E', 
+                boxShadow: '0 0 8px #22C55E',
+                display: 'inline-block' 
+              }}></span>
+              <span className="mono-spec" style={{ 
+                color: '#22C55E', 
+                fontSize: '0.72rem', 
+                fontWeight: '700',
+                letterSpacing: '0.06em'
+              }}>
+                ACCEPTING NEW RETAINERS // 2 SLOTS OPEN
+              </span>
+            </div>
+
+            <h2 style={{
+              fontSize: 'clamp(2.2rem, 4.5vw, 3.6rem)',
+              lineHeight: '1.1',
+              fontWeight: '800',
+              color: isLight ? '#05070B' : '#FFFFFF',
+              letterSpacing: '-0.04em',
+              margin: '0 0 16px',
+              fontFamily: 'var(--font-display)'
+            }}>
+              Have a Project in Mind? <br />
+              <span 
+                className="serif-accent"
+                style={{
+                  background: 'linear-gradient(180deg, #FFFFFF 20%, #CBD5E1 65%, #94A3B8 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: isLight ? '#0F172A' : 'transparent',
+                  fontWeight: '400',
+                  paddingRight: '6px'
+                }}
+              >
+                Let’s Build Something Iconic.
+              </span>
+            </h2>
+
+            <p style={{
+              fontSize: '0.96rem',
+              color: isLight ? '#64748B' : '#94A3B8',
+              lineHeight: '1.6',
+              margin: 0
+            }}>
+              Venture-backed post-production lab. 48-hour delivery SLA, Frame.io instant review sync, and dedicated creative pods.
+            </p>
           </div>
 
-          <div className="mono-spec" style={{ color: isLight ? '#64748B' : '#94A3B8', fontSize: '0.72rem' }}>
-            DISPATCH LATENCY: &lt;48H SLA • PRORES 422 HQ • -14 LUFS AUDIO
+          {/* Action CTAs */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', alignItems: 'flex-start' }}>
+            <Link
+              href="/book-a-call"
+              className="btn btn-primary pop-btn"
+              style={{
+                padding: '14px 30px',
+                borderRadius: '10px',
+                fontSize: '0.92rem',
+                fontWeight: '800',
+                background: '#FFFFFF',
+                color: '#05070B',
+                border: '1px solid #FFFFFF',
+                boxShadow: '0 8px 30px rgba(255, 255, 255, 0.2)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              <span>Book 15-Min Strategy Audit</span>
+              <i className="fa-solid fa-arrow-right" style={{ fontSize: '0.78rem' }}></i>
+            </Link>
+
+            <a
+              href="mailto:theeditlyfoundry@gmail.com"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 18px',
+                borderRadius: '8px',
+                background: isLight ? 'rgba(15, 23, 42, 0.04)' : 'rgba(255, 255, 255, 0.04)',
+                border: isLight ? '1px solid rgba(15, 23, 42, 0.1)' : '1px solid rgba(255, 255, 255, 0.08)',
+                color: isLight ? '#0F172A' : '#E2E8F0',
+                fontSize: '0.86rem',
+                fontWeight: '600',
+                textDecoration: 'none',
+                transition: 'all 0.15s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = isLight ? 'rgba(15, 23, 42, 0.2)' : 'rgba(255, 255, 255, 0.25)';
+                e.currentTarget.style.color = isLight ? '#000000' : '#FFFFFF';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = isLight ? 'rgba(15, 23, 42, 0.1)' : 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.color = isLight ? '#0F172A' : '#E2E8F0';
+              }}
+            >
+              <i className="fa-solid fa-envelope" style={{ fontSize: '0.8rem', color: isLight ? '#05070B' : '#94A3B8' }}></i>
+              <span>theeditlyfoundry@gmail.com</span>
+              <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: '0.65rem', opacity: 0.6 }}></i>
+            </a>
           </div>
         </div>
 
-        {/* 4-Column Structured Agency Grid */}
+        {/* 
+          ========================================================================
+          2. ELEVATED MONUMENTAL BRAND WORDMARK (PascalCase "EditlyFoundry")
+          ======================================================================== 
+        */}
+        <div 
+          style={{
+            width: '100%',
+            textAlign: 'center',
+            padding: '20px 0 50px',
+            overflow: 'hidden',
+            userSelect: 'none'
+          }}
+        >
+          <span
+            style={{
+              display: 'block',
+              fontFamily: "'Syne', var(--font-display), sans-serif",
+              fontSize: 'clamp(3.8rem, 12.8vw, 12.5rem)',
+              fontWeight: '900',
+              letterSpacing: '-0.04em',
+              lineHeight: '0.9',
+              whiteSpace: 'nowrap',
+              background: isLight 
+                ? 'linear-gradient(180deg, #090E1A 0%, #475569 80%, rgba(100, 116, 139, 0.3) 100%)'
+                : 'linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 40%, rgba(148, 163, 184, 0.35) 85%, rgba(148, 163, 184, 0.05) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textShadow: isLight ? 'none' : '0 20px 60px rgba(0,0,0,0.8)',
+              transition: 'opacity 0.3s ease'
+            }}
+          >
+            EditlyFoundry
+          </span>
+        </div>
+
+        {/* 
+          ========================================================================
+          3. STRUCTURED 4-COLUMN AGENCY DIRECTORY GRID
+          ======================================================================== 
+        */}
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
           gap: '40px', 
-          marginBottom: '60px', 
+          paddingTop: '30px',
+          marginBottom: '50px', 
+          borderTop: isLight ? '1px solid rgba(15, 23, 42, 0.06)' : '1px solid rgba(255, 255, 255, 0.06)',
           textAlign: 'left' 
         }}>
           
-          {/* Col 1: Brand & Identity */}
-          <div style={{ maxWidth: '320px' }}>
-            <Link 
-              href="/" 
-              style={{ 
-                fontSize: '1.35rem', 
-                fontWeight: 800, 
-                color: isLight ? '#090E1A' : '#FFFFFF', 
-                textDecoration: 'none', 
-                display: 'inline-flex', 
-                alignItems: 'center',
-                gap: '8px',
-                marginBottom: '14px', 
-                letterSpacing: '-0.03em',
-                fontFamily: 'var(--font-display)'
-              }}
-            >
-              <span>EditlyFoundry</span>
-              <span className="mono-spec" style={{ 
-                fontSize: '0.62rem', 
-                color: isLight ? '#475569' : '#94A3B8', 
-                background: isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)',
-                padding: '2px 6px',
-                borderRadius: '4px'
-              }}>
-                LAB
+          {/* Col 1: Studio Identity & Socials */}
+          <div style={{ maxWidth: '300px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+              <span style={{ fontSize: '1rem', fontWeight: '800', color: isLight ? '#05070B' : '#FFFFFF' }}>
+                The Editly Foundry Co.
               </span>
-            </Link>
-            <p style={{ color: isLight ? '#64748B' : '#94A3B8', fontSize: '0.86rem', marginBottom: '20px', lineHeight: '1.6' }}>
-              Post-production engineering studio crafting high-retention video content, SaaS launch motion, and creator authority systems.
+            </div>
+            <p style={{ color: isLight ? '#64748B' : '#94A3B8', fontSize: '0.85rem', marginBottom: '18px', lineHeight: '1.55' }}>
+              Specialized post-production partner for venture-backed SaaS, YouTube creators, and high-growth brands.
             </p>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               <a href="https://www.facebook.com/editly.foundry/" target="_blank" rel="noopener noreferrer" className="mono-tag" style={{ color: 'inherit', textDecoration: 'none', fontSize: '0.72rem', padding: '4px 8px' }}>FB</a>
@@ -119,23 +234,23 @@ export default function Footer({ menu }) {
             </div>
           </div>
           
-          {/* Col 2: Disciplines & Services */}
+          {/* Col 2: Disciplines */}
           <div>
-            <h4 className="mono-spec" style={{ fontSize: '0.75rem', marginBottom: '16px', color: isLight ? '#090E1A' : '#FFFFFF', fontWeight: '800', letterSpacing: '0.06em' }}>
+            <h4 className="mono-spec" style={{ fontSize: '0.74rem', marginBottom: '16px', color: isLight ? '#090E1A' : '#FFFFFF', fontWeight: '800', letterSpacing: '0.06em' }}>
               DISCIPLINES
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <li><Link href="/services/reels-shorts" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>Reels &amp; Shorts Retention</Link></li>
+              <li><Link href="/services/reels-shorts" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>Reels &amp; Shorts Retention (9:16)</Link></li>
               <li><Link href="/services/podcasts" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>Multi-Cam Podcasts (1-to-30)</Link></li>
               <li><Link href="/services/talking-head" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>YouTube Authority Films</Link></li>
-              <li><Link href="/services/ugc-ads" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>Performance UGC Ads</Link></li>
+              <li><Link href="/services/ugc-ads" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>Performance Video Ads</Link></li>
               <li><Link href="/services/saas-motion" className="footer-link" style={{ color: isLight ? '#475569' : '#94A3B8', fontSize: '0.86rem', textDecoration: 'none' }}>3D SaaS UI &amp; Product Demos</Link></li>
             </ul>
           </div>
 
-          {/* Col 3: Platform & Pipeline */}
+          {/* Col 3: Platform & OS */}
           <div>
-            <h4 className="mono-spec" style={{ fontSize: '0.75rem', marginBottom: '16px', color: isLight ? '#090E1A' : '#FFFFFF', fontWeight: '800', letterSpacing: '0.06em' }}>
+            <h4 className="mono-spec" style={{ fontSize: '0.74rem', marginBottom: '16px', color: isLight ? '#090E1A' : '#FFFFFF', fontWeight: '800', letterSpacing: '0.06em' }}>
               PIPELINE &amp; OS
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -147,9 +262,9 @@ export default function Footer({ menu }) {
             </ul>
           </div>
           
-          {/* Col 4: Studio Operations */}
+          {/* Col 4: Studio Hubs */}
           <div>
-            <h4 className="mono-spec" style={{ fontSize: '0.75rem', marginBottom: '16px', color: isLight ? '#090E1A' : '#FFFFFF', fontWeight: '800', letterSpacing: '0.06em' }}>
+            <h4 className="mono-spec" style={{ fontSize: '0.74rem', marginBottom: '16px', color: isLight ? '#090E1A' : '#FFFFFF', fontWeight: '800', letterSpacing: '0.06em' }}>
               STUDIO HUBS
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -167,7 +282,11 @@ export default function Footer({ menu }) {
           
         </div>
         
-        {/* Bottom Legal Copyright & Meta */}
+        {/* 
+          ========================================================================
+          4. BOTTOM LEGAL COPYRIGHT & META
+          ======================================================================== 
+        */}
         <div style={{ 
           display: 'flex',
           justifyContent: 'space-between',
@@ -176,7 +295,6 @@ export default function Footer({ menu }) {
           gap: '12px',
           borderTop: isLight ? '1px solid rgba(15, 23, 42, 0.06)' : '1px solid rgba(255, 255, 255, 0.06)', 
           paddingTop: '25px', 
-          paddingBottom: '40px',
           color: isLight ? '#94A3B8' : '#64748B', 
           fontSize: '0.8rem' 
         }}>
@@ -188,50 +306,13 @@ export default function Footer({ menu }) {
             <Link href="/legal/privacy" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</Link>
           </div>
           <div className="mono-spec" style={{ fontSize: '0.7rem' }}>
-            ENGINEERED WITH NEXT.JS &amp; TURBOPACK
+            ENGINEERED WITH NEXT.JS 16 &amp; TURBOPACK
           </div>
-        </div>
-
-        {/* 
-          ========================================================================
-          GIANT MONUMENTAL BRAND TYPOGRAPHY WATERMARK (Design Monks / Momkai / MzMedia)
-          ======================================================================== 
-        */}
-        <div 
-          style={{
-            width: '100%',
-            textAlign: 'center',
-            paddingTop: '20px',
-            paddingBottom: '10px',
-            overflow: 'hidden',
-            userSelect: 'none',
-            pointerEvents: 'none'
-          }}
-        >
-          <span
-            style={{
-              display: 'block',
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(3.4rem, 12.2vw, 11.5rem)',
-              fontWeight: '900',
-              letterSpacing: '-0.05em',
-              lineHeight: '0.88',
-              whiteSpace: 'nowrap',
-              background: isLight 
-                ? 'linear-gradient(180deg, rgba(15, 23, 42, 0.14) 0%, rgba(15, 23, 42, 0.03) 100%)'
-                : 'linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.01) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textTransform: 'lowercase',
-              transition: 'opacity 0.3s ease'
-            }}
-          >
-            editlyfoundry
-          </span>
         </div>
 
       </div>
     </footer>
   );
 }
+
 
