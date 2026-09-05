@@ -7,63 +7,63 @@ export default function ComparisonSection() {
     {
       feature: "Studio-Grade Editing Quality",
       editly: true,
-      editlyText: "Elite Trained Team",
+      editlyText: "Elite Trained Senior Pod",
       inHouse: true,
-      inHouseText: "Depends on Hire",
+      inHouseText: "Depends on Hire Quality",
       freelance: false,
       freelanceText: "Inconsistent & Hit-or-Miss"
     },
     {
-      feature: "Fast Turnaround Time",
+      feature: "Guaranteed Turnaround Time",
       editly: true,
-      editlyText: "24 - 48 Hours Guaranteed",
+      editlyText: "24 - 48 Hours SLA Backed",
       inHouse: false,
-      inHouseText: "Slow (Weeks per project)",
+      inHouseText: "Slow (Weeks per cut)",
       freelance: false,
       freelanceText: "Unpredictable Deadlines"
     },
     {
-      feature: "Cost Efficiency & Flexibility",
+      feature: "Cost Structure & Overhead",
       editly: true,
-      editlyText: "Fixed Monthly, Pause/Cancel Anytime",
+      editlyText: "Flat Monthly, Pause/Cancel Anytime",
       inHouse: false,
-      inHouseText: "$65k - $90k/yr + Benefits & Taxes",
+      inHouseText: "$75k - $110k/yr + Benefits & Taxes",
       freelance: false,
-      freelanceText: "Hourly creep & expensive revisions"
+      freelanceText: "Hourly creep & billable revisions"
     },
     {
-      feature: "Hiring & Onboarding Friction",
+      feature: "Onboarding & Ramp-Up Time",
       editly: true,
-      editlyText: "Starts within 24 Hours",
+      editlyText: "Active in 24 Hours",
       inHouse: false,
-      inHouseText: "30 - 60 Days Recruitment",
+      inHouseText: "30 - 60 Days Recruiting",
       freelance: false,
-      freelanceText: "Constant trial and error"
+      freelanceText: "Constant trial & error churn"
     },
     {
       feature: "Revision Policy",
       editly: true,
-      editlyText: "Unlimited until 100% Satisfied",
+      editlyText: "Unlimited Iterations Guarantee",
       inHouse: true,
-      inHouseText: "Internal rounds",
+      inHouseText: "Internal bandwidth limited",
       freelance: false,
-      freelanceText: "Charged extra per round"
+      freelanceText: "$50-$150 charged per extra round"
     },
     {
-      feature: "Multi-Disciplinary Skillset (Motion, Sound, 4K)",
+      feature: "Multidisciplinary Stack (Color, Sound, 3D)",
       editly: true,
-      editlyText: "Full Pod: Colorist, Motion Designer, Editor",
+      editlyText: "Full Pod: Colorist + Sound + Motion",
       inHouse: false,
-      inHouseText: "Usually 1 person with limited scope",
+      inHouseText: "Usually 1 generalist with limits",
       freelance: false,
-      freelanceText: "Requires hiring multiple people"
+      freelanceText: "Requires hiring multiple contractors"
     },
     {
       feature: "Reliability & Zero Ghosting",
       editly: true,
-      editlyText: "Backed by Agency SLA & Support Pod",
+      editlyText: "100% Backed by Agency Pod & SLA",
       inHouse: true,
-      inHouseText: "Employee attendance",
+      inHouseText: "PTO / Sick days create backlog",
       freelance: false,
       freelanceText: "High risk of disappearing"
     }
@@ -71,57 +71,78 @@ export default function ComparisonSection() {
 
   return (
     <section className="section-padding" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="section-header text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 50px' }}>
-          <span className="section-subtitle">The Clear Choice</span>
-          <h2 className="section-title" style={{ fontSize: '2.8rem', marginBottom: '15px' }}>
-            Why High-Growth Brands Choose <span className="combination-font">The Editly Foundry</span>
+      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1180px' }}>
+        
+        {/* Header */}
+        <div className="section-header text-center reveal-on-scroll" style={{ maxWidth: '820px', margin: '0 auto 48px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '16px' }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#EF4444' }}></span>
+            <span className="mono-spec" style={{ fontSize: '0.74rem', color: '#E2E8F0', letterSpacing: '0.05em' }}>
+              CAPABILITY BENCHMARK
+            </span>
+          </div>
+          <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', margin: '0 0 14px', fontWeight: '900', letterSpacing: '-0.03em' }}>
+            Why Leading Brands Choose <br />
+            <span className="combination-font" style={{ color: '#EF4444' }}>The Editly Foundry OS</span>
           </h2>
-          <p className="section-description" style={{ color: 'var(--text-secondary)' }}>
-            See how our studio model outperforms traditional in-house hiring and risky freelancer marketplaces.
+          <p style={{ color: 'rgba(255, 255, 255, 0.68)', fontSize: '1.02rem', lineHeight: '1.6', margin: 0 }}>
+            Compare our dedicated post-production engine against traditional full-time hiring and risky freelance platforms.
           </p>
         </div>
 
-        {/* Comparison Table (Musemind Architecture - Mobile Scrollable & Clean) */}
+        {/* Comparison Table */}
         <div className="comparison-table-wrapper" style={{
           width: '100%',
           overflowX: 'auto',
           WebkitOverflowScrolling: 'touch',
           paddingBottom: '10px'
         }}>
-          <div className="glass-card reveal-on-scroll" style={{
-            minWidth: '700px',
-            maxWidth: '1050px',
+          <div style={{
+            minWidth: '780px',
+            maxWidth: '1120px',
             margin: '0 auto',
-            borderRadius: '24px',
+            borderRadius: '20px',
             overflow: 'hidden',
-            border: '1px solid var(--glass-border)',
-            boxShadow: 'var(--glass-shadow)'
+            background: 'rgba(10, 14, 22, 0.88)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: '0 25px 80px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.12)'
           }}>
             {/* Table Header */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: '2.2fr 1.8fr 1.5fr 1.5fr',
-              background: 'var(--card-bg)',
-              borderBottom: '1px solid var(--glass-border)',
-              padding: '24px 20px',
+              gridTemplateColumns: '2.2fr 2.1fr 1.6fr 1.6fr',
+              background: 'rgba(255, 255, 255, 0.02)',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+              padding: '20px 24px',
               alignItems: 'center',
-              fontWeight: '700',
-              fontSize: '1rem'
+              fontWeight: '700'
             }}>
-              <div style={{ color: 'var(--text-muted)' }}>Capability / Factor</div>
+              <div className="mono-spec" style={{ fontSize: '0.74rem', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.06em' }}>
+                PRODUCTION CRITERIA
+              </div>
+              
               <div style={{
-                color: '#38BDF8',
+                color: '#FFFFFF',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                fontSize: '1.15rem'
+                fontSize: '1rem',
+                fontWeight: '800'
               }}>
-                <i className="fa-solid fa-crown" style={{ color: '#F59E0B' }}></i>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EF4444', boxShadow: '0 0 10px #EF4444' }}></span>
                 <span>The Editly Foundry</span>
+                <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#EF4444', background: 'rgba(239,68,68,0.12)', padding: '2px 6px', borderRadius: '4px' }}>
+                  STUDIO OS
+                </span>
               </div>
-              <div style={{ color: 'var(--text-secondary)' }}>In-House Full-Time</div>
-              <div style={{ color: 'var(--text-secondary)' }}>Freelancers</div>
+
+              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
+                In-House Team
+              </div>
+
+              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
+                Freelancer Network
+              </div>
             </div>
 
             {/* Table Rows */}
@@ -131,55 +152,55 @@ export default function ComparisonSection() {
                   key={idx}
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: '2.2fr 1.8fr 1.5fr 1.5fr',
-                    padding: '20px 20px',
-                    borderBottom: idx === comparisonData.length - 1 ? 'none' : '1px solid var(--glass-border)',
-                    background: idx % 2 === 0 ? 'transparent' : 'var(--input-bg)',
+                    gridTemplateColumns: '2.2fr 2.1fr 1.6fr 1.6fr',
+                    padding: '18px 24px',
+                    borderBottom: idx === comparisonData.length - 1 ? 'none' : '1px solid rgba(255, 255, 255, 0.05)',
+                    background: idx % 2 === 0 ? 'transparent' : 'rgba(255, 255, 255, 0.015)',
                     alignItems: 'center'
                   }}
                 >
                   {/* Feature Name */}
-                  <div style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                  <div style={{ fontWeight: '600', color: '#FFFFFF', fontSize: '0.92rem' }}>
                     {row.feature}
                   </div>
 
-                  {/* Editly Foundry Column (Highlighted) */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)' }}>
+                  {/* Editly Foundry Highlight Column */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div style={{
-                      width: '24px',
-                      height: '24px',
+                      width: '20px',
+                      height: '20px',
                       borderRadius: '50%',
-                      background: 'rgba(16, 185, 129, 0.2)',
+                      background: 'rgba(239, 68, 68, 0.2)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#10B981',
-                      fontSize: '0.8rem',
+                      color: '#EF4444',
+                      fontSize: '0.65rem',
                       flexShrink: 0
                     }}>
                       <i className="fa-solid fa-check"></i>
                     </div>
-                    <span style={{ fontWeight: '600', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
+                    <span style={{ fontWeight: '700', fontSize: '0.9rem', color: '#FFFFFF' }}>
                       {row.editlyText}
                     </span>
                   </div>
 
                   {/* In-House Column */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(255,255,255,0.5)', fontSize: '0.86rem' }}>
                     {row.inHouse ? (
-                      <i className="fa-solid fa-check" style={{ color: '#94A3B8' }}></i>
+                      <i className="fa-solid fa-check" style={{ color: '#94A3B8', fontSize: '0.75rem' }}></i>
                     ) : (
-                      <i className="fa-solid fa-xmark" style={{ color: '#EF4444' }}></i>
+                      <i className="fa-solid fa-xmark" style={{ color: 'rgba(239,68,68,0.7)', fontSize: '0.75rem' }}></i>
                     )}
                     <span>{row.inHouseText}</span>
                   </div>
 
                   {/* Freelancer Column */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(255,255,255,0.45)', fontSize: '0.86rem' }}>
                     {row.freelance ? (
-                      <i className="fa-solid fa-check" style={{ color: '#94A3B8' }}></i>
+                      <i className="fa-solid fa-check" style={{ color: '#94A3B8', fontSize: '0.75rem' }}></i>
                     ) : (
-                      <i className="fa-solid fa-xmark" style={{ color: '#EF4444' }}></i>
+                      <i className="fa-solid fa-xmark" style={{ color: 'rgba(239,68,68,0.7)', fontSize: '0.75rem' }}></i>
                     )}
                     <span>{row.freelanceText}</span>
                   </div>
@@ -188,7 +209,9 @@ export default function ComparisonSection() {
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
 }
+

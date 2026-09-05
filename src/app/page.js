@@ -158,38 +158,67 @@ export default async function Home() {
       <InteractiveVideoScrubber />
 
       {/* ABOUT & FOUNDER VIDEO SECTION */}
-      <section className="about section-padding section-target" id="about" style={{"position": "relative"}}>
-        <div className="container" style={{position: "relative", zIndex: 1}}>
-          <div className="section-header text-center reveal-on-scroll">
+      <section className="about section-padding section-target" id="about" style={{ position: "relative" }}>
+        <div className="container" style={{ position: "relative", zIndex: 1, maxWidth: "1180px" }}>
+          <div className="section-header text-center reveal-on-scroll" style={{ maxWidth: "780px", margin: "0 auto 48px" }}>
             <span className="section-subtitle">{aboutSubtitle}</span>
-            <h2 className="section-title" style={{fontSize: "3rem"}}>{aboutTitle1} <span className="combination-font">{aboutTitle2}</span></h2>
-            <p className="section-description">{aboutDescription}</p>
+            <h2 className="section-title" style={{ fontSize: "clamp(2.2rem, 4vw, 3.2rem)", margin: "0 0 14px" }}>
+              {aboutTitle1} <span className="combination-font">{aboutTitle2}</span>
+            </h2>
+            <p className="section-description" style={{ color: "rgba(255,255,255,0.7)" }}>{aboutDescription}</p>
           </div>
 
           {/* About Founder Explainer Video Card */}
-          <div className="about-video-card glow-border-card glass-card reveal-on-scroll pop-hover" style={{"maxWidth": "1200px", "margin": "0 auto", "padding": "0", "overflow": "hidden"}}>
-            <div className="about-video-grid" style={{"gridTemplateColumns": "40% 60%", "alignItems": "center", "gap": "40px"}}>
-              <div className="about-content" style={{"padding": "20px 20px 20px 40px", "display": "flex", "flexDirection": "column", "justifyContent": "center"}}>
-                <h3 style={{"fontSize": "2rem", "marginTop": "10px"}}>{founderVideoTitle1}<br /><span className="combination-font" style={{"color": "var(--accent-blue-light)"}}>{founderVideoTitle2}</span></h3>
-                <p style={{"marginBottom": "25px"}}>{founderVideoDesc}</p>
-                <div className="about-highlights" style={{"marginBottom": "30px"}}>
-                  <div className="highlight-item"><i className="fa-solid fa-check-circle" style={{"color": "var(--primary)"}}></i> Retention-Engineered Hook Systems</div>
-                  <div className="highlight-item"><i className="fa-solid fa-check-circle" style={{"color": "var(--primary)"}}></i> Direct Slack & WhatsApp Channels</div>
-                  <div className="highlight-item"><i className="fa-solid fa-check-circle" style={{"color": "var(--primary)"}}></i> Unlimited Edit Revision Guarantee</div>
+          <div 
+            className="about-video-card glass-card reveal-on-scroll pop-hover" 
+            style={{
+              maxWidth: "1100px", 
+              margin: "0 auto", 
+              padding: "0", 
+              overflow: "hidden",
+              borderRadius: "20px",
+              background: "rgba(10, 14, 22, 0.88)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              boxShadow: "0 25px 80px rgba(0,0,0,0.9)"
+            }}
+          >
+            <div className="about-video-grid" style={{ gridTemplateColumns: "40% 60%", alignItems: "center", gap: "30px" }}>
+              <div className="about-content" style={{ padding: "30px 30px 30px 40px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <h3 style={{ fontSize: "1.8rem", marginTop: "10px", fontWeight: "800", color: "#FFFFFF" }}>
+                  {founderVideoTitle1}<br />
+                  <span className="combination-font" style={{ color: "#EF4444" }}>{founderVideoTitle2}</span>
+                </h3>
+                <p style={{ marginBottom: "22px", color: "rgba(255,255,255,0.7)", fontSize: "0.92rem", lineHeight: "1.55" }}>
+                  {founderVideoDesc}
+                </p>
+                <div className="about-highlights" style={{ marginBottom: "26px" }}>
+                  <div className="highlight-item" style={{ color: "#FFFFFF", fontSize: "0.88rem", marginBottom: "8px", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <i className="fa-solid fa-check" style={{ color: "#EF4444", fontSize: "0.8rem" }}></i> Retention-Engineered Hook Systems
+                  </div>
+                  <div className="highlight-item" style={{ color: "#FFFFFF", fontSize: "0.88rem", marginBottom: "8px", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <i className="fa-solid fa-check" style={{ color: "#EF4444", fontSize: "0.8rem" }}></i> Direct Slack & WhatsApp Channels
+                  </div>
+                  <div className="highlight-item" style={{ color: "#FFFFFF", fontSize: "0.88rem", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <i className="fa-solid fa-check" style={{ color: "#EF4444", fontSize: "0.8rem" }}></i> Unlimited Edit Revision Guarantee
+                  </div>
                 </div>
-                <a href="#" id="founder-video-play-btn" className="btn btn-primary pop-btn" style={{"display": "inline-flex", "alignSelf": "flex-start"}}>Watch Full Overview <i className="fa-solid fa-play-circle"></i></a>
+                <a href="#" id="founder-video-play-btn" className="btn btn-primary pop-btn" style={{ display: "inline-flex", alignSelf: "flex-start", padding: "10px 22px", borderRadius: "8px", fontSize: "0.88rem", fontWeight: "700", background: "#EF4444", borderColor: "#EF4444" }}>
+                  <span>Watch Full Overview</span>
+                  <i className="fa-solid fa-play" style={{ marginLeft: "8px", fontSize: "0.75rem" }}></i>
+                </a>
               </div>
 
-              <div className="about-video-wrapper" style={{"position": "relative", "width": "100%", "padding": "0"}}>
-                <div className="about-video-container" style={{"position": "relative", "width": "100%", "borderRadius": "20px", "overflow": "hidden", "background": "transparent", "aspectRatio": "16/9", "border": "2px solid rgba(255,255,255,0.4)", "boxShadow": "0 20px 40px rgba(0,0,0,0.1)", "display": "block"}}>
+              <div className="about-video-wrapper" style={{ position: "relative", width: "100%", padding: "20px 20px 20px 0" }}>
+                <div className="about-video-container" style={{ position: "relative", width: "100%", borderRadius: "14px", overflow: "hidden", background: "transparent", aspectRatio: "16/9", border: "1px solid rgba(255,255,255,0.15)", boxShadow: "0 20px 40px rgba(0,0,0,0.8)", display: "block" }}>
                   <InlineVideoPlayer 
                     videoUrl={founderVideoUrl} 
                     thumbnailUrl={founderVideoThumbnail ? urlFor(founderVideoThumbnail).url() : "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80"}
                     altText="Founder Explainer Video Thumbnail"
                     playButtonId="founder-video-play-btn"
                     badge={
-                      <div className="badge glass-badge-blue" style={{"position": "absolute", "top": "15px", "left": "15px", "zIndex": "15", "fontSize": "0.85rem", "padding": "6px 16px", "margin": "0", "borderRadius": "30px", "whiteSpace": "nowrap", "display": "flex", "alignItems": "center", "pointerEvents": "none"}}>
-                        <i className="fa-solid fa-bolt" style={{"marginRight": "8px", "color": "#F59E0B", "fontSize": "0.9rem"}}></i> <span style={{"fontWeight": "600"}}>The Studio Pipeline</span>
+                      <div className="badge" style={{ position: "absolute", top: "12px", left: "12px", zIndex: "15", fontSize: "0.75rem", padding: "4px 12px", borderRadius: "999px", background: "rgba(0,0,0,0.8)", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", gap: "6px" }}>
+                        <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#EF4444" }}></span>
+                        <span style={{ fontWeight: "700", color: "#FFFFFF" }}>THE STUDIO PIPELINE</span>
                       </div>
                     }
                   />
@@ -202,38 +231,44 @@ export default async function Home() {
 
       {/* Metrics Bar */}
       <section className="metrics-bar section-padding-sm" style={{ position: 'relative' }}>
-        <div className="container">
-          <div className="metrics-grid">
-            <div className="metric-item">
-              <div className="metric-number-wrapper">
-                <span className="metric-number" data-target={viewsCount}>{viewsCount}</span><span className="metric-suffix">M+</span>
+        <div className="container" style={{ maxWidth: '1180px' }}>
+          <div className="metrics-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '16px',
+            background: 'rgba(10, 14, 22, 0.75)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderRadius: '16px',
+            padding: '24px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.8)'
+          }}>
+            <div className="metric-item" style={{ textAlign: 'center' }}>
+              <div className="metric-number-wrapper" style={{ fontSize: '2.4rem', fontWeight: '900', color: '#FFFFFF' }}>
+                <span className="metric-number" data-target={viewsCount}>{viewsCount}</span><span style={{ color: '#EF4444' }}>M+</span>
               </div>
-              <div className="metric-label">Total Views Generated</div>
+              <div className="metric-label" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '4px' }}>Total Views Generated</div>
             </div>
-            <div className="metric-item">
-              <div className="metric-number-wrapper">
-                <span className="metric-number" data-target={deliveredCount}>{deliveredCount}</span><span className="metric-suffix">+</span>
+            <div className="metric-item" style={{ textAlign: 'center' }}>
+              <div className="metric-number-wrapper" style={{ fontSize: '2.4rem', fontWeight: '900', color: '#FFFFFF' }}>
+                <span className="metric-number" data-target={deliveredCount}>{deliveredCount}</span><span style={{ color: '#EF4444' }}>+</span>
               </div>
-              <div className="metric-label">Videos Delivered</div>
+              <div className="metric-label" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '4px' }}>Videos Delivered</div>
             </div>
-            <div className="metric-item">
-              <div className="metric-number-wrapper">
-                <span className="metric-number" data-target={onTimeRate}>{onTimeRate}</span><span className="metric-suffix">%</span>
+            <div className="metric-item" style={{ textAlign: 'center' }}>
+              <div className="metric-number-wrapper" style={{ fontSize: '2.4rem', fontWeight: '900', color: '#FFFFFF' }}>
+                <span className="metric-number" data-target={onTimeRate}>{onTimeRate}</span><span style={{ color: '#EF4444' }}>%</span>
               </div>
-              <div className="metric-label">On-Time Turnaround</div>
+              <div className="metric-label" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '4px' }}>On-Time SLA Dispatch</div>
             </div>
-            <div className="metric-item">
-              <div className="metric-number-wrapper">
-                <span className="metric-number" data-target={rating}>{rating}</span>
+            <div className="metric-item" style={{ textAlign: 'center' }}>
+              <div className="metric-number-wrapper" style={{ fontSize: '2.4rem', fontWeight: '900', color: '#FFFFFF' }}>
+                <span className="metric-number" data-target={rating}>{rating}</span><span style={{ color: '#EF4444' }}>★</span>
               </div>
-              <div className="metric-label">Client Satisfaction</div>
+              <div className="metric-label" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '4px' }}>Client Satisfaction Rate</div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* BASEMENT STUDIO INTERACTIVE VIDEO SCRUBBER LAB */}
-      <InteractiveVideoScrubber />
 
       {/* SERVICES SECTION */}
       <ServicesSection 
