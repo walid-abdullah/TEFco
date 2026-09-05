@@ -18,7 +18,7 @@ export default function HomepageGSAPOrchestrator({ children }) {
     if (reducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // 1. Initial Hero Kinetic Entrance Animation
+      // 1. Hero Kinetic Entrance Animation (Smooth Soft Fade-Up)
       const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       const heroSubtitle = containerRef.current.querySelector('.home-foundry-hero-copy .section-subtitle');
@@ -30,7 +30,7 @@ export default function HomepageGSAPOrchestrator({ children }) {
       if (heroSubtitle) {
         heroTl.fromTo(
           heroSubtitle,
-          { opacity: 0, y: -25, filter: 'blur(8px)' },
+          { opacity: 0, y: -20, filter: 'blur(6px)' },
           { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.8 }
         );
       }
@@ -38,8 +38,8 @@ export default function HomepageGSAPOrchestrator({ children }) {
       if (heroTitle) {
         heroTl.fromTo(
           heroTitle,
-          { opacity: 0, y: 50, filter: 'blur(12px)', scale: 0.95 },
-          { opacity: 1, y: 0, filter: 'blur(0px)', scale: 1, duration: 1.1 },
+          { opacity: 0, y: 45, filter: 'blur(10px)', scale: 0.96 },
+          { opacity: 1, y: 0, filter: 'blur(0px)', scale: 1, duration: 1 },
           '-=0.5'
         );
       }
@@ -47,7 +47,7 @@ export default function HomepageGSAPOrchestrator({ children }) {
       if (heroDesc) {
         heroTl.fromTo(
           heroDesc,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 25 },
           { opacity: 1, y: 0, duration: 0.8 },
           '-=0.6'
         );
@@ -56,7 +56,7 @@ export default function HomepageGSAPOrchestrator({ children }) {
       if (heroActions) {
         heroTl.fromTo(
           heroActions.children,
-          { opacity: 0, y: 25, scale: 0.92 },
+          { opacity: 0, y: 20, scale: 0.94 },
           { opacity: 1, y: 0, scale: 1, duration: 0.65, stagger: 0.12 },
           '-=0.5'
         );
@@ -71,69 +71,41 @@ export default function HomepageGSAPOrchestrator({ children }) {
         );
       }
 
-      // 2. FULL-VIEWPORT DYNAMIC THEME MORPH: DARK ➔ CERAMIC LIGHT ➔ DARK
-      const morphStage = containerRef.current.querySelector('.home-ceramic-morph-stage');
-      if (morphStage) {
-        ScrollTrigger.create({
-          trigger: morphStage,
-          start: 'top 48%',
-          end: 'bottom 48%',
-          onEnter: () => {
-            document.documentElement.setAttribute('data-theme', 'light');
-            document.documentElement.classList.add('scroll-light-active');
-            window.dispatchEvent(new Event('themechange'));
-          },
-          onLeave: () => {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            document.documentElement.classList.remove('scroll-light-active');
-            window.dispatchEvent(new Event('themechange'));
-          },
-          onEnterBack: () => {
-            document.documentElement.setAttribute('data-theme', 'light');
-            document.documentElement.classList.add('scroll-light-active');
-            window.dispatchEvent(new Event('themechange'));
-          },
-          onLeaveBack: () => {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            document.documentElement.classList.remove('scroll-light-active');
-            window.dispatchEvent(new Event('themechange'));
-          }
-        });
-      }
-
-      // 3. Work Grid Parallax Depth
+      // 2. Work Grid Parallax Depth & Smooth Fade-Up
       const workCards = containerRef.current.querySelectorAll('.home-foundry-work-card');
       if (workCards.length > 0) {
         workCards.forEach((card, i) => {
-          const speed = (i % 2 === 0) ? -35 : 35;
+          const speed = (i % 2 === 0) ? -20 : 20;
           gsap.fromTo(
             card,
-            { y: speed },
+            { opacity: 0, y: 40 + speed },
             {
+              opacity: 1,
               y: -speed,
-              ease: 'none',
+              duration: 0.9,
+              ease: 'power3.out',
               scrollTrigger: {
                 trigger: card,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 1.2
+                start: 'top 88%',
+                toggleActions: 'play none none none'
               }
             }
           );
         });
       }
 
-      // 4. Service List Item Stagger On Scroll
+      // 3. Service List Item Staggered Fade-Up
       const serviceItems = containerRef.current.querySelectorAll('.home-foundry-service-list a');
       if (serviceItems.length > 0) {
         gsap.fromTo(
           serviceItems,
-          { opacity: 0, x: -40 },
+          { opacity: 0, x: -30, filter: 'blur(4px)' },
           {
             opacity: 1,
             x: 0,
-            duration: 0.8,
-            stagger: 0.12,
+            filter: 'blur(0px)',
+            duration: 0.75,
+            stagger: 0.1,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: '.home-foundry-service-list',
@@ -143,17 +115,17 @@ export default function HomepageGSAPOrchestrator({ children }) {
         );
       }
 
-      // 5. Proof Grid Stagger Reveal
+      // 4. Proof Grid Stagger Reveal
       const proofDivs = containerRef.current.querySelectorAll('.home-foundry-proof-grid div');
       if (proofDivs.length > 0) {
         gsap.fromTo(
           proofDivs,
-          { opacity: 0, y: 35 },
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
             duration: 0.75,
-            stagger: 0.15,
+            stagger: 0.12,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: '.home-foundry-proof-grid',
@@ -163,15 +135,31 @@ export default function HomepageGSAPOrchestrator({ children }) {
         );
       }
 
+      // 5. Benefits Bento Cards Smooth Fade-Up
+      const bentoCards = containerRef.current.querySelectorAll('.benefits-bento-grid .workflow-card');
+      if (bentoCards.length > 0) {
+        gsap.fromTo(
+          bentoCards,
+          { opacity: 0, y: 35, scale: 0.97 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '.benefits-bento-grid',
+              start: 'top 80%'
+            }
+          }
+        );
+      }
+
       ScrollTrigger.refresh();
     }, containerRef);
 
-    return () => {
-      // Revert theme to dark on unmount
-      document.documentElement.setAttribute('data-theme', 'dark');
-      document.documentElement.classList.remove('scroll-light-active');
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (

@@ -18,63 +18,50 @@ export default function GlobalGSAPTransition() {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion) return;
 
-    // Small delay to ensure DOM is ready after navigation
+    // Smooth page entrance timeline on navigation
     const timer = setTimeout(() => {
-      // 1. Animate Hero and Main Page Headings on Every Page Entrance
-      const heroHeadings = document.querySelectorAll('h1, .hero-title, .section-title, .section-subtitle, .about-eyebrow-line, .service-detail-number');
-      if (heroHeadings.length > 0) {
+      // 1. Animate Hero Headings & Subtitles (Silky Soft Fade-Up)
+      const headings = document.querySelectorAll('h1, .hero-title, .section-title, .section-subtitle, .about-eyebrow-line');
+      if (headings.length > 0) {
         gsap.fromTo(
-          Array.from(heroHeadings).slice(0, 8),
+          Array.from(headings).slice(0, 6),
           {
             opacity: 0,
-            y: 40,
-            filter: 'blur(8px)',
-            scale: 0.98
+            y: 35,
+            filter: 'blur(6px)'
           },
           {
             opacity: 1,
             y: 0,
             filter: 'blur(0px)',
-            scale: 1,
-            duration: 0.9,
+            duration: 0.85,
             stagger: 0.08,
             ease: 'power3.out'
           }
         );
       }
 
-      // 2. Animate Hero Paragraphs & Buttons
-      const heroParas = document.querySelectorAll('.hero-subtitle, .section-description, main > section:first-of-type p, main > div:first-of-type p, .service-detail-hero-statement, .service-detail-hero-description');
-      if (heroParas.length > 0) {
+      // 2. Animate Main Paragraphs & CTA Buttons
+      const paras = document.querySelectorAll('.hero-subtitle, .section-description, main > section:first-of-type p');
+      if (paras.length > 0) {
         gsap.fromTo(
-          Array.from(heroParas).slice(0, 4),
-          {
-            opacity: 0,
-            y: 25
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power3.out',
-            delay: 0.15
-          }
+          Array.from(paras).slice(0, 4),
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.75, stagger: 0.1, ease: 'power3.out', delay: 0.1 }
         );
       }
 
-      // 3. ScrollTrigger Reveal for all .reveal-on-scroll elements across the site
+      // 3. ScrollTrigger Reveal for all .reveal-on-scroll elements smoothly
       const revealElements = document.querySelectorAll('.reveal-on-scroll');
       revealElements.forEach((el) => {
-        // Remove static opacity if any
         el.classList.add('visible');
         
         gsap.fromTo(
           el,
           {
             opacity: 0,
-            y: 35,
-            filter: 'blur(4px)'
+            y: 30,
+            filter: 'blur(3px)'
           },
           {
             opacity: 1,
@@ -91,35 +78,8 @@ export default function GlobalGSAPTransition() {
         );
       });
 
-      // 4. Stagger Glass Cards on scroll
-      const cardGrids = document.querySelectorAll('.benefits-bento-grid, .home-foundry-work-grid, .work-vault-grid, .about-team-grid, .pricing-grid, .service-atlas-grid');
-      cardGrids.forEach((grid) => {
-        if (grid.children.length > 0) {
-          gsap.fromTo(
-            grid.children,
-            {
-              opacity: 0,
-              y: 40,
-              scale: 0.96
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.75,
-              stagger: 0.1,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: grid,
-                start: 'top 82%'
-              }
-            }
-          );
-        }
-      });
-
       ScrollTrigger.refresh();
-    }, 60);
+    }, 40);
 
     return () => {
       clearTimeout(timer);

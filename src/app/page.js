@@ -54,10 +54,6 @@ export default async function Home() {
   return (
     <HomepageGSAPOrchestrator>
       <main className="home-foundry-page">
-        
-        {/* =========================================================================
-            STAGE 1: CINEMATIC DARKROOM HERO & METRICS (DARK)
-            ========================================================================= */}
         <HomepageFoundryHero />
 
         <HomepageMetrics />
@@ -68,47 +64,39 @@ export default async function Home() {
           </section>
         )}
 
-        {/* =========================================================================
-            STAGE 2: SCROLL-DRIVEN CERAMIC LIGHT MORPHING ZONE (LIGHT MORPH)
-            ========================================================================= */}
-        <div className="home-ceramic-morph-stage">
-          <section className="home-foundry-positioning reveal-on-scroll">
-            <div className="container">
-              <span className="section-subtitle">The point of the edit</span>
-              <h2>Less content noise.<br /><span className="combination-font">More signal.</span></h2>
-              <div className="home-foundry-proof-grid">
-                <div><strong>01</strong><span>Retention-led editing</span></div>
-                <div><strong>02</strong><span>Dedicated creative pod</span></div>
-                <div><strong>03</strong><span>Consistent delivery rhythm</span></div>
-              </div>
+        <section className="home-foundry-positioning reveal-on-scroll">
+          <div className="container">
+            <span className="section-subtitle">The point of the edit</span>
+            <h2>Less content noise.<br /><span className="combination-font">More signal.</span></h2>
+            <div className="home-foundry-proof-grid">
+              <div><strong>01</strong><span>Retention-led editing</span></div>
+              <div><strong>02</strong><span>Dedicated creative pod</span></div>
+              <div><strong>03</strong><span>Consistent delivery rhythm</span></div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className="home-foundry-work section-padding reveal-on-scroll">
-            <div className="container">
-              <div className="home-foundry-section-head"><div><span className="section-subtitle">Selected work</span><h2>Made to be <span className="combination-font">watched.</span></h2></div><Link href="/work" className="about-text-link">Explore all work <span aria-hidden="true">↗</span></Link></div>
-              <div className="home-foundry-work-grid">
-                {work.slice(0, 4).map((item, index) => {
-                  const image = item.image?.asset ? urlFor(item.image).url() : item.image;
-                  return <Link href="/work" className={`home-foundry-work-card card-${index + 1}`} key={item._id}><div style={{ backgroundImage: `url(${image})` }}><span>{item.category || "Selected work"}</span><span aria-hidden="true">↗</span></div></Link>;
-                })}
-              </div>
+        <section className="home-foundry-work section-padding reveal-on-scroll">
+          <div className="container">
+            <div className="home-foundry-section-head"><div><span className="section-subtitle">Selected work</span><h2>Made to be <span className="combination-font">watched.</span></h2></div><Link href="/work" className="about-text-link">Explore all work <span aria-hidden="true">↗</span></Link></div>
+            <div className="home-foundry-work-grid">
+              {work.slice(0, 4).map((item, index) => {
+                const image = item.image?.asset ? urlFor(item.image).url() : item.image;
+                return <Link href="/work" className={`home-foundry-work-card card-${index + 1}`} key={item._id}><div style={{ backgroundImage: `url(${image})` }}><span>{item.category || "Selected work"}</span><span aria-hidden="true">↗</span></div></Link>;
+              })}
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className="home-foundry-services section-padding reveal-on-scroll">
-            <div className="container">
-              <div className="home-foundry-section-head"><div><span className="section-subtitle">What we make</span><h2>One studio.<br /><span className="combination-font">Every useful format.</span></h2></div><Link href="/services" className="about-text-link">See services <span aria-hidden="true">↗</span></Link></div>
-              <div className="home-foundry-service-list">{services.map(([number, title, text, href]) => <Link href={href} key={number}><span className="mono-spec">{number}</span><strong>{title}</strong><span>{text}</span><b aria-hidden="true">↗</b></Link>)}</div>
-            </div>
-          </section>
+        <section className="home-foundry-services section-padding reveal-on-scroll">
+          <div className="container">
+            <div className="home-foundry-section-head"><div><span className="section-subtitle">What we make</span><h2>One studio.<br /><span className="combination-font">Every useful format.</span></h2></div><Link href="/services" className="about-text-link">See services <span aria-hidden="true">↗</span></Link></div>
+            <div className="home-foundry-service-list">{services.map(([number, title, text, href]) => <Link href={href} key={number}><span className="mono-spec">{number}</span><strong>{title}</strong><span>{text}</span><b aria-hidden="true">↗</b></Link>)}</div>
+          </div>
+        </section>
 
-          <BenefitsBento />
-        </div>
+        <BenefitsBento />
 
-        {/* =========================================================================
-            STAGE 3: RETURN TO DEEP TITANIUM DARK (REVIEWS, FAQ, CONTACT)
-            ========================================================================= */}
         <ClientReviewsSection reviews={testimonialData} />
 
         <FAQSection faqs={faqs} />
