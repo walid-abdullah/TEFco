@@ -37,17 +37,17 @@ export default function BenefitsBento() {
   return (
     <section style={{ position: 'relative', background: '#05070B', padding: '130px 0', overflow: 'hidden' }}>
       
-      {/* Background Subtle Ambience */}
+      {/* Ambient Backdrop */}
       <div 
         style={{
           position: 'absolute',
-          top: '25%',
+          top: '20%',
           left: '50%',
           transform: 'translateX(-50%)',
           width: '100%',
           maxWidth: '1200px',
-          height: '700px',
-          background: 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.035) 0%, rgba(56, 189, 248, 0.02) 50%, transparent 75%)',
+          height: '800px',
+          background: 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.035) 0%, transparent 70%)',
           pointerEvents: 'none',
           zIndex: 0
         }}
@@ -56,7 +56,7 @@ export default function BenefitsBento() {
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1160px', margin: '0 auto', padding: '0 24px' }}>
         
         {/* Section Header */}
-        <div className="text-center reveal-on-scroll" style={{ maxWidth: '820px', margin: '0 auto 80px' }}>
+        <div className="text-center reveal-on-scroll" style={{ maxWidth: '820px', margin: '0 auto 85px' }}>
           <h2 className="section-title" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', margin: '0 0 16px', fontWeight: '800', letterSpacing: '-0.03em', color: '#FFFFFF' }}>
             Systematic Velocity. <br />
             <span 
@@ -99,15 +99,15 @@ export default function BenefitsBento() {
           />
 
           {/* 4 Connected Step Rows */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '90px' }}>
-            {steps.map((step, idx) => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '95px' }}>
+            {steps.map((step) => (
               <div 
                 key={step.id}
                 className="step-timeline-row"
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'minmax(280px, 1fr) minmax(320px, 1.25fr)',
-                  gap: '60px',
+                  gridTemplateColumns: 'minmax(280px, 1fr) minmax(340px, 1.25fr)',
+                  gap: '64px',
                   alignItems: 'center',
                   position: 'relative'
                 }}
@@ -118,7 +118,7 @@ export default function BenefitsBento() {
                   LEFT: NODE & CLEAN EDITORIAL TEXT
                   ----------------------------------------------------------------
                 */}
-                <div style={{ position: 'relative', paddingLeft: '36px', textAlign: 'left' }}>
+                <div style={{ position: 'relative', paddingLeft: '38px', textAlign: 'left' }}>
                   
                   {/* Square Node Marker */}
                   <div 
@@ -175,269 +175,469 @@ export default function BenefitsBento() {
 
                 {/* 
                   ----------------------------------------------------------------
-                  RIGHT: HIGH-END REFINED VISUAL ARTBOARD
+                  RIGHT: EXACT SCREENSHOT 2 ARTBOARD REPLICAS
                   ----------------------------------------------------------------
                 */}
                 <div style={{ position: 'relative', width: '100%', maxWidth: '520px', justifySelf: 'center' }}>
                   
-                  {/* Ambient Radiant Glow Under Visual */}
-                  <div 
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      width: '90%',
-                      height: '80%',
-                      background: idx === 0 
-                        ? 'radial-gradient(ellipse at center, rgba(56, 189, 248, 0.3) 0%, rgba(99, 102, 241, 0.12) 50%, transparent 75%)'
-                        : idx === 1 
-                        ? 'radial-gradient(ellipse at center, rgba(236, 72, 153, 0.3) 0%, rgba(168, 85, 247, 0.12) 50%, transparent 75%)'
-                        : idx === 2 
-                        ? 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.35) 0%, rgba(56, 189, 248, 0.15) 50%, transparent 75%)'
-                        : 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.45) 0%, rgba(99, 102, 241, 0.2) 50%, transparent 75%)',
-                      filter: 'blur(50px)',
-                      pointerEvents: 'none',
-                      zIndex: 0
-                    }}
-                  />
-
                   {/* 
                     ==============================================================
-                    VISUAL 1: QUESTIONNAIRE & CHAT INTERVIEW ARTBOARD
+                    VISUAL 1: CHAT CONVERSATION DIALOGUE (Exact Match)
                     ============================================================== 
                   */}
                   {step.visualType === 'chat' && (
                     <div 
-                      className="artboard-box pop-hover"
+                      className="artboard-box"
                       style={{
                         position: 'relative',
                         aspectRatio: '16/11',
-                        minHeight: '290px',
-                        background: '#070A12',
+                        minHeight: '300px',
+                        background: '#090D18',
                         border: '1px solid rgba(255, 255, 255, 0.09)',
                         borderRadius: '24px',
-                        padding: '24px',
+                        padding: '24px 22px',
                         overflow: 'hidden',
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'space-between',
+                        justifyContent: 'center',
+                        gap: '12px',
                         boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.08)'
                       }}
                     >
-                      {/* Top Header */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22C55E' }}></span>
-                          <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#FFFFFF', fontWeight: '700' }}>CREATIVE BRIEF & INGEST</span>
+                      {/* Ambient Bottom Blue Glow */}
+                      <div 
+                        style={{
+                          position: 'absolute',
+                          bottom: '-15%',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          width: '85%',
+                          height: '65%',
+                          background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.45) 0%, rgba(99, 102, 241, 0.25) 45%, transparent 75%)',
+                          filter: 'blur(40px)',
+                          pointerEvents: 'none',
+                          zIndex: 0
+                        }}
+                      />
+
+                      {/* Row 1: Question (Right Aligned) */}
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
+                        <div style={{
+                          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.8) 0%, rgba(59, 130, 246, 0.7) 100%)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          padding: '7px 14px',
+                          borderRadius: '12px 12px 2px 12px',
+                          color: '#FFFFFF',
+                          fontSize: '0.74rem',
+                          fontWeight: '500',
+                          boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
+                        }}>
+                          What does your product do?
                         </div>
-                        <span className="mono-spec" style={{ fontSize: '0.66rem', color: '#38BDF8', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.25)', padding: '3px 8px', borderRadius: '4px' }}>
-                          5 MIN ONBOARDING
-                        </span>
+                        <div style={{ width: '26px', height: '26px', borderRadius: '50%', background: 'linear-gradient(135deg, #818CF8, #38BDF8)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.4)', flexShrink: 0 }}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
                       </div>
 
-                      {/* Main Speech Card */}
-                      <div style={{ position: 'relative', zIndex: 1, background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '16px', backdropFilter: 'blur(16px)' }}>
-                        <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                          <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #6366F1, #38BDF8)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontWeight: '700', fontSize: '0.8rem', color: '#FFF' }}>
-                            T
-                          </div>
-                          <div style={{ flex: 1 }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                              <span style={{ fontSize: '0.78rem', fontWeight: '700', color: '#FFFFFF' }}>Target Audience & Core Offer</span>
-                              <span style={{ fontSize: '0.65rem', color: '#64748B' }}>Just now</span>
-                            </div>
-                            <p style={{ fontSize: '0.75rem', color: '#CBD5E1', margin: 0, lineHeight: '1.45' }}>
-                              "Direct-to-consumer founders looking for high-retention 4K organic hooks and paid ads."
-                            </p>
-                          </div>
+                      {/* Row 2: Answer (Left Aligned) */}
+                      <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
+                        <div style={{ width: '26px', height: '26px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255,255,255,0.15)', flexShrink: 0 }}>
+                          <i className="fa-solid fa-user" style={{ color: '#E2E8F0', fontSize: '0.65rem' }}></i>
+                        </div>
+                        <div style={{
+                          background: 'rgba(30, 41, 59, 0.8)',
+                          border: '1px solid rgba(255, 255, 255, 0.1)',
+                          backdropFilter: 'blur(12px)',
+                          padding: '7px 14px',
+                          borderRadius: '12px 12px 12px 2px',
+                          color: '#E2E8F0',
+                          fontSize: '0.74rem',
+                          lineHeight: '1.35',
+                          maxWidth: '250px'
+                        }}>
+                          SaaS project management tool for startups
                         </div>
                       </div>
 
-                      {/* Voice Note & Meta Tags */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1, background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <i className="fa-solid fa-microphone-lines" style={{ color: '#38BDF8', fontSize: '0.85rem' }}></i>
-                          <span style={{ fontSize: '0.72rem', color: '#E2E8F0', fontWeight: '600' }}>Audio Memo Ingested</span>
+                      {/* Row 3: Question 2 (Right Aligned) */}
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
+                        <div style={{
+                          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.8) 0%, rgba(59, 130, 246, 0.7) 100%)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          padding: '7px 14px',
+                          borderRadius: '12px 12px 2px 12px',
+                          color: '#FFFFFF',
+                          fontSize: '0.74rem',
+                          fontWeight: '500',
+                          boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
+                        }}>
+                          Who is your ideal customer?
                         </div>
-                        <span className="mono-spec" style={{ fontSize: '0.65rem', color: '#22C55E', fontWeight: '700' }}>SYNCED ✓</span>
+                        <div style={{ width: '26px', height: '26px', borderRadius: '50%', background: 'linear-gradient(135deg, #818CF8, #38BDF8)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.4)', flexShrink: 0 }}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
                       </div>
+
+                      {/* Row 4: Answer 2 (Left Aligned) */}
+                      <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
+                        <div style={{ width: '26px', height: '26px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255,255,255,0.15)', flexShrink: 0 }}>
+                          <i className="fa-solid fa-user" style={{ color: '#E2E8F0', fontSize: '0.65rem' }}></i>
+                        </div>
+                        <div style={{
+                          background: 'rgba(30, 41, 59, 0.8)',
+                          border: '1px solid rgba(255, 255, 255, 0.1)',
+                          backdropFilter: 'blur(12px)',
+                          padding: '7px 14px',
+                          borderRadius: '12px 12px 12px 2px',
+                          color: '#E2E8F0',
+                          fontSize: '0.74rem',
+                          lineHeight: '1.35',
+                          maxWidth: '260px'
+                        }}>
+                          Founders & operation teams at early-stage startups
+                        </div>
+                      </div>
+
+                      {/* Row 5: Typing Bubble (Right Aligned) */}
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
+                        <div style={{
+                          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.6) 0%, rgba(59, 130, 246, 0.5) 100%)',
+                          border: '1px solid rgba(255, 255, 255, 0.15)',
+                          padding: '6px 14px',
+                          borderRadius: '12px 12px 2px 12px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px'
+                        }}>
+                          <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#FFFFFF', opacity: 0.7 }}></span>
+                          <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#FFFFFF', opacity: 0.9 }}></span>
+                          <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#FFFFFF', opacity: 0.7 }}></span>
+                        </div>
+                        <div style={{ width: '26px', height: '26px', borderRadius: '50%', background: 'linear-gradient(135deg, #818CF8, #38BDF8)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                      </div>
+
                     </div>
                   )}
 
                   {/* 
                     ==============================================================
-                    VISUAL 2: STORYBOARDING & MOODBOARD 4-GRID ARTBOARD
+                    VISUAL 2: 5 FLOATING MOODBOARD CARDS (Exact Match)
                     ============================================================== 
                   */}
                   {step.visualType === 'moodboard' && (
                     <div 
-                      className="artboard-box pop-hover"
+                      className="artboard-box"
                       style={{
                         position: 'relative',
                         aspectRatio: '16/11',
-                        minHeight: '290px',
-                        background: '#070A12',
+                        minHeight: '300px',
+                        background: '#090D18',
                         border: '1px solid rgba(255, 255, 255, 0.09)',
                         borderRadius: '24px',
-                        padding: '24px',
+                        padding: '16px',
                         overflow: 'hidden',
                         display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.08)'
                       }}
                     >
-                      {/* Top Header */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <i className="fa-solid fa-layer-group" style={{ color: '#EC4899', fontSize: '0.8rem' }}></i>
-                          <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#FFFFFF', fontWeight: '700' }}>FRAME-BY-FRAME STORYBOARD</span>
-                        </div>
-                        <span className="mono-spec" style={{ fontSize: '0.66rem', color: '#EC4899', background: 'rgba(236, 72, 153, 0.12)', border: '1px solid rgba(236, 72, 153, 0.3)', padding: '3px 8px', borderRadius: '4px' }}>
-                          SCENE LOCK
-                        </span>
-                      </div>
+                      {/* Radiant Center Glow */}
+                      <div 
+                        style={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          width: '80%',
+                          height: '70%',
+                          background: 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.5) 0%, rgba(56, 189, 248, 0.25) 40%, transparent 75%)',
+                          filter: 'blur(35px)',
+                          pointerEvents: 'none',
+                          zIndex: 0
+                        }}
+                      />
 
-                      {/* 4-Card Scene Grid */}
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', position: 'relative', zIndex: 1 }}>
+                      {/* 5 Floating Perspective Layout Container */}
+                      <div style={{ position: 'relative', width: '100%', maxWidth: '380px', height: '220px', zIndex: 1 }}>
                         
-                        {/* Scene 1 */}
-                        <div style={{ background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '8px', textAlign: 'center', backdropFilter: 'blur(12px)' }}>
-                          <div style={{ height: '40px', background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(168, 85, 247, 0.2))', borderRadius: '6px', marginBottom: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <i className="fa-solid fa-bolt" style={{ color: '#EC4899', fontSize: '0.75rem' }}></i>
+                        {/* 1. MOTION STYLE (Top Left) */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '0',
+                          left: '6px',
+                          width: '105px',
+                          background: 'rgba(15, 20, 35, 0.88)',
+                          border: '1px solid rgba(255, 255, 255, 0.12)',
+                          borderRadius: '12px',
+                          padding: '10px 8px',
+                          backdropFilter: 'blur(16px)',
+                          boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
+                        }}>
+                          <span style={{ fontSize: '0.52rem', color: '#94A3B8', fontWeight: '700', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>MOTION STYLE</span>
+                          <svg width="100%" height="16" viewBox="0 0 90 16" fill="none">
+                            <path d="M0 8C15 2 30 14 45 8C60 2 75 14 90 8" stroke="#818CF8" strokeWidth="1.5" strokeLinecap="round" />
+                            <path d="M0 12C15 6 30 18 45 12C60 6 75 18 90 12" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+                          </svg>
+                          <div style={{ display: 'flex', gap: '4px', marginTop: '6px' }}>
+                            <span style={{ fontSize: '0.46rem', background: 'rgba(255,255,255,0.06)', padding: '2px 4px', borderRadius: '3px', color: '#CBD5E1' }}>Fast</span>
+                            <span style={{ fontSize: '0.46rem', background: 'rgba(255,255,255,0.06)', padding: '2px 4px', borderRadius: '3px', color: '#CBD5E1' }}>Clean</span>
                           </div>
-                          <span style={{ fontSize: '0.62rem', color: '#FFFFFF', fontWeight: '700', display: 'block' }}>Hook 01</span>
-                          <span className="mono-spec" style={{ fontSize: '0.55rem', color: '#94A3B8' }}>00:03s</span>
                         </div>
 
-                        {/* Scene 2 (Selected) */}
-                        <div style={{ background: 'rgba(15, 23, 42, 0.9)', border: '1.5px solid #EC4899', borderRadius: '10px', padding: '8px', textAlign: 'center', position: 'relative', boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' }}>
-                          <div style={{ height: '40px', background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.4), rgba(99, 102, 241, 0.3))', borderRadius: '6px', marginBottom: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <i className="fa-solid fa-eye" style={{ color: '#FFF', fontSize: '0.75rem' }}></i>
+                        {/* 2. COLOR PALETTE (Top Center) */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '-8px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          width: '120px',
+                          background: 'rgba(15, 20, 35, 0.92)',
+                          border: '1px solid rgba(255, 255, 255, 0.16)',
+                          borderRadius: '12px',
+                          padding: '10px 8px',
+                          backdropFilter: 'blur(16px)',
+                          boxShadow: '0 15px 30px rgba(0,0,0,0.7)',
+                          zIndex: 2
+                        }}>
+                          <span style={{ fontSize: '0.52rem', color: '#94A3B8', fontWeight: '700', letterSpacing: '0.04em', display: 'block', marginBottom: '8px', textAlign: 'center' }}>COLOR PALETTE</span>
+                          <div style={{ display: 'flex', gap: '3px', justifyContent: 'center' }}>
+                            <div style={{ width: '15px', height: '20px', background: '#FFFFFF', borderRadius: '3px' }}></div>
+                            <div style={{ width: '15px', height: '20px', background: '#BAE6FD', borderRadius: '3px' }}></div>
+                            <div style={{ width: '15px', height: '20px', background: '#60A5FA', borderRadius: '3px' }}></div>
+                            <div style={{ width: '15px', height: '20px', background: '#6366F1', borderRadius: '3px' }}></div>
+                            <div style={{ width: '15px', height: '20px', background: '#1E1B4B', borderRadius: '3px' }}></div>
                           </div>
-                          <span style={{ fontSize: '0.62rem', color: '#FFFFFF', fontWeight: '700', display: 'block' }}>Pitch 02</span>
-                          <span className="mono-spec" style={{ fontSize: '0.55rem', color: '#EC4899' }}>Locked</span>
                         </div>
 
-                        {/* Scene 3 */}
-                        <div style={{ background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '8px', textAlign: 'center', backdropFilter: 'blur(12px)' }}>
-                          <div style={{ height: '40px', background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2))', borderRadius: '6px', marginBottom: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <i className="fa-solid fa-chart-line" style={{ color: '#38BDF8', fontSize: '0.75rem' }}></i>
+                        {/* 3. TONE & VOICE (Top Right) */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '6px',
+                          right: '6px',
+                          width: '115px',
+                          background: 'rgba(15, 20, 35, 0.88)',
+                          border: '1px solid rgba(255, 255, 255, 0.12)',
+                          borderRadius: '12px',
+                          padding: '10px 8px',
+                          backdropFilter: 'blur(16px)',
+                          boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
+                        }}>
+                          <span style={{ fontSize: '0.52rem', color: '#94A3B8', fontWeight: '700', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>TONE & VOICE</span>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                            <span style={{ fontSize: '0.46rem', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)', padding: '2px 6px', borderRadius: '8px', color: '#E2E8F0' }}>Bold</span>
+                            <span style={{ fontSize: '0.46rem', background: 'rgba(99, 102, 241, 0.25)', border: '1px solid rgba(99, 102, 241, 0.4)', padding: '2px 6px', borderRadius: '8px', color: '#A5B4FC' }}>Direct</span>
+                            <span style={{ fontSize: '0.46rem', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)', padding: '2px 6px', borderRadius: '8px', color: '#E2E8F0' }}>Punchy</span>
                           </div>
-                          <span style={{ fontSize: '0.62rem', color: '#FFFFFF', fontWeight: '700', display: 'block' }}>Value 03</span>
-                          <span className="mono-spec" style={{ fontSize: '0.55rem', color: '#94A3B8' }}>00:28s</span>
                         </div>
 
-                        {/* Scene 4 */}
-                        <div style={{ background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '8px', textAlign: 'center', backdropFilter: 'blur(12px)' }}>
-                          <div style={{ height: '40px', background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(56, 189, 248, 0.2))', borderRadius: '6px', marginBottom: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <i className="fa-solid fa-bullhorn" style={{ color: '#22C55E', fontSize: '0.75rem' }}></i>
+                        {/* 4. SCENE DIRECTION (Bottom Left) */}
+                        <div style={{
+                          position: 'absolute',
+                          bottom: '10px',
+                          left: '26px',
+                          width: '110px',
+                          background: 'rgba(15, 20, 35, 0.88)',
+                          border: '1px solid rgba(255, 255, 255, 0.12)',
+                          borderRadius: '12px',
+                          padding: '10px 8px',
+                          backdropFilter: 'blur(16px)',
+                          boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
+                        }}>
+                          <span style={{ fontSize: '0.52rem', color: '#94A3B8', fontWeight: '700', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>SCENE DIRECTION</span>
+                          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '4px', height: '22px' }}>
+                            <div style={{ width: '8px', height: '10px', background: '#64748B', borderRadius: '2px' }}></div>
+                            <div style={{ width: '8px', height: '18px', background: '#A855F7', borderRadius: '2px' }}></div>
+                            <div style={{ width: '8px', height: '24px', background: '#C084FC', borderRadius: '2px' }}></div>
+                            <div style={{ width: '8px', height: '14px', background: '#818CF8', borderRadius: '2px' }}></div>
+                            <div style={{ width: '8px', height: '8px', background: '#64748B', borderRadius: '2px' }}></div>
                           </div>
-                          <span style={{ fontSize: '0.62rem', color: '#FFFFFF', fontWeight: '700', display: 'block' }}>CTA 04</span>
-                          <span className="mono-spec" style={{ fontSize: '0.55rem', color: '#94A3B8' }}>00:45s</span>
+                        </div>
+
+                        {/* 5. VISUAL REFERENCE (Bottom Right) */}
+                        <div style={{
+                          position: 'absolute',
+                          bottom: '10px',
+                          right: '26px',
+                          width: '110px',
+                          background: 'rgba(15, 20, 35, 0.88)',
+                          border: '1px solid rgba(255, 255, 255, 0.12)',
+                          borderRadius: '12px',
+                          padding: '10px 8px',
+                          backdropFilter: 'blur(16px)',
+                          boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
+                        }}>
+                          <span style={{ fontSize: '0.52rem', color: '#94A3B8', fontWeight: '700', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>VISUAL REFERENCE</span>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '24px', background: 'rgba(255,255,255,0.03)', borderRadius: '6px', gap: '6px' }}>
+                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#38BDF8' }}></div>
+                            <div style={{ width: '8px', height: '8px', background: '#A855F7', transform: 'rotate(45deg)' }}></div>
+                            <div style={{ width: '8px', height: '8px', background: '#818CF8' }}></div>
+                          </div>
                         </div>
 
                       </div>
 
-                      {/* Approval Bar */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1, background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                        <span style={{ fontSize: '0.72rem', color: '#E2E8F0' }}>Visual Pacing & Shotlist Approved</span>
-                        <span className="mono-spec" style={{ fontSize: '0.65rem', color: '#EC4899', fontWeight: '700' }}>PROCEED TO EDIT</span>
-                      </div>
                     </div>
                   )}
 
                   {/* 
                     ==============================================================
-                    VISUAL 3: TIMELINE / POST-PRODUCTION NLE ARTBOARD
+                    VISUAL 3: SPECTRUM & NLE TIMELINE UI (Exact Match)
                     ============================================================== 
                   */}
                   {step.visualType === 'timeline' && (
                     <div 
-                      className="artboard-box pop-hover"
+                      className="artboard-box"
                       style={{
                         position: 'relative',
                         aspectRatio: '16/11',
-                        minHeight: '290px',
-                        background: '#070A12',
+                        minHeight: '300px',
+                        background: '#090D18',
                         border: '1px solid rgba(255, 255, 255, 0.09)',
                         borderRadius: '24px',
-                        padding: '24px',
+                        padding: '24px 20px',
                         overflow: 'hidden',
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'space-between',
+                        justifyContent: 'center',
+                        gap: '14px',
                         boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.08)'
                       }}
                     >
-                      {/* Top Header */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <i className="fa-solid fa-sliders" style={{ color: '#6366F1', fontSize: '0.8rem' }}></i>
-                          <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#FFFFFF', fontWeight: '700' }}>DAVINCI + AFTER EFFECTS SUITE</span>
-                        </div>
-                        <span className="mono-spec" style={{ fontSize: '0.66rem', color: '#6366F1', background: 'rgba(99, 102, 241, 0.12)', border: '1px solid rgba(99, 102, 241, 0.3)', padding: '3px 8px', borderRadius: '4px' }}>
-                          00:01:24:18
-                        </span>
+                      {/* Ambient Blue Radiant Glow */}
+                      <div 
+                        style={{
+                          position: 'absolute',
+                          top: '30%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          width: '85%',
+                          height: '65%',
+                          background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.45) 0%, rgba(99, 102, 241, 0.2) 50%, transparent 75%)',
+                          filter: 'blur(35px)',
+                          pointerEvents: 'none',
+                          zIndex: 0
+                        }}
+                      />
+
+                      {/* Top Box: Spectrum Bars */}
+                      <div style={{
+                        position: 'relative',
+                        zIndex: 1,
+                        background: 'rgba(15, 20, 35, 0.85)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: '14px',
+                        padding: '16px 20px',
+                        backdropFilter: 'blur(16px)',
+                        display: 'flex',
+                        alignItems: 'flex-end',
+                        justifyContent: 'space-between',
+                        height: '95px'
+                      }}>
+                        {/* Spectrum Bars */}
+                        {[35, 75, 45, 90, 60, 40, 85, 30, 95, 70, 45, 80, 50, 65].map((val, i) => (
+                          <div 
+                            key={i}
+                            style={{
+                              width: '8px',
+                              height: `${val}%`,
+                              background: i === 3 || i === 8 ? 'linear-gradient(180deg, #FFFFFF 0%, #93C5FD 100%)' : 'linear-gradient(180deg, #93C5FD 0%, #3B82F6 100%)',
+                              borderRadius: '3px 3px 0 0',
+                              opacity: val > 60 ? 0.95 : 0.65
+                            }}
+                          />
+                        ))}
                       </div>
 
-                      {/* Multi-Track NLE Timeline View */}
-                      <div style={{ position: 'relative', zIndex: 1, background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '14px', backdropFilter: 'blur(16px)' }}>
-                        
-                        {/* Track Header Labels */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.62rem', color: '#64748B', fontFamily: 'var(--font-mono)', marginBottom: '8px' }}>
-                          <span>V2 // MOTION VFX</span>
-                          <span>V1 // 4K PRORES</span>
-                          <span>A1 // MASTER AUDIO</span>
+                      {/* Bottom Box: NLE Multi-Track Timeline & Playhead */}
+                      <div style={{
+                        position: 'relative',
+                        zIndex: 1,
+                        background: 'rgba(15, 20, 35, 0.85)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: '14px',
+                        padding: '12px 16px',
+                        backdropFilter: 'blur(16px)'
+                      }}>
+                        {/* Timeline Ruler Tick Marks */}
+                        <div style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'flex-end',
+                          height: '8px',
+                          marginBottom: '8px',
+                          opacity: 0.35,
+                          borderBottom: '1px solid rgba(255,255,255,0.2)',
+                          paddingBottom: '2px'
+                        }}>
+                          {Array.from({ length: 22 }).map((_, i) => (
+                            <div key={i} style={{ width: '1px', height: i % 4 === 0 ? '6px' : '3px', background: '#FFFFFF' }}></div>
+                          ))}
                         </div>
 
-                        {/* Tracks */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                          {/* V2 Motion */}
+                        {/* Tracks Container with Playhead Line */}
+                        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                          
+                          {/* Vertical Glowing Playhead Line */}
+                          <div style={{
+                            position: 'absolute',
+                            top: '-12px',
+                            bottom: '0',
+                            left: '32%',
+                            width: '2px',
+                            background: '#FFFFFF',
+                            boxShadow: '0 0 10px rgba(255,255,255,0.9), 0 0 20px rgba(56,189,248,0.8)',
+                            zIndex: 3
+                          }}>
+                            {/* Playhead Top Handle */}
+                            <div style={{
+                              position: 'absolute',
+                              top: '-2px',
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              width: '6px',
+                              height: '6px',
+                              background: '#FFFFFF',
+                              borderRadius: '1px'
+                            }}></div>
+                          </div>
+
+                          {/* Track 1: Purple Blocks */}
                           <div style={{ display: 'flex', gap: '4px', height: '14px' }}>
-                            <div style={{ width: '20%', background: 'rgba(236, 72, 153, 0.5)', borderRadius: '3px' }}></div>
-                            <div style={{ width: '45%', background: 'rgba(236, 72, 153, 0.7)', borderRadius: '3px', border: '1px solid rgba(236, 72, 153, 0.6)' }}></div>
-                            <div style={{ width: '30%', background: 'rgba(236, 72, 153, 0.5)', borderRadius: '3px' }}></div>
+                            <div style={{ width: '30%', background: 'rgba(129, 140, 248, 0.65)', borderRadius: '3px', border: '1px solid rgba(165, 180, 252, 0.4)' }}></div>
+                            <div style={{ width: '38%', background: 'rgba(129, 140, 248, 0.65)', borderRadius: '3px', border: '1px solid rgba(165, 180, 252, 0.4)' }}></div>
+                            <div style={{ width: '28%', background: 'rgba(168, 85, 247, 0.65)', borderRadius: '3px', border: '1px solid rgba(192, 132, 252, 0.4)' }}></div>
                           </div>
 
-                          {/* V1 Video Master */}
-                          <div style={{ display: 'flex', gap: '4px', height: '18px' }}>
-                            <div style={{ width: '35%', background: 'rgba(99, 102, 241, 0.65)', borderRadius: '4px', border: '1px solid rgba(129, 140, 248, 0.5)' }}></div>
-                            <div style={{ width: '35%', background: 'rgba(99, 102, 241, 0.65)', borderRadius: '4px', border: '1px solid rgba(129, 140, 248, 0.5)' }}></div>
-                            <div style={{ width: '26%', background: 'rgba(168, 85, 247, 0.65)', borderRadius: '4px', border: '1px solid rgba(192, 132, 252, 0.5)' }}></div>
-                          </div>
-
-                          {/* A1 Audio Spectrum */}
+                          {/* Track 2: Blue Blocks */}
                           <div style={{ display: 'flex', gap: '4px', height: '14px' }}>
-                            <div style={{ width: '48%', background: 'rgba(56, 189, 248, 0.45)', borderRadius: '3px', border: '1px solid rgba(56, 189, 248, 0.4)' }}></div>
-                            <div style={{ width: '48%', background: 'rgba(56, 189, 248, 0.45)', borderRadius: '3px', border: '1px solid rgba(56, 189, 248, 0.4)' }}></div>
+                            <div style={{ width: '48%', background: 'rgba(56, 189, 248, 0.5)', borderRadius: '3px', border: '1px solid rgba(56, 189, 248, 0.4)' }}></div>
+                            <div style={{ width: '32%', background: 'rgba(56, 189, 248, 0.5)', borderRadius: '3px', border: '1px solid rgba(56, 189, 248, 0.4)' }}></div>
+                            <div style={{ width: '16%', background: 'rgba(129, 140, 248, 0.4)', borderRadius: '3px', border: '1px solid rgba(129, 140, 248, 0.3)' }}></div>
                           </div>
+
                         </div>
 
                       </div>
 
-                      {/* Color Science Readout */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1, background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                        <span style={{ fontSize: '0.72rem', color: '#E2E8F0' }}>ACEScc Color Science + -14 LUFS Audio</span>
-                        <span className="mono-spec" style={{ fontSize: '0.65rem', color: '#6366F1', fontWeight: '700' }}>MASTERED</span>
-                      </div>
                     </div>
                   )}
 
                   {/* 
                     ==============================================================
-                    VISUAL 4: DELIVERY / 3D FROSTED FOLDER ARTBOARD
+                    VISUAL 4: 3D FROSTED FOLDER & DISPATCH (Exact Match)
                     ============================================================== 
                   */}
                   {step.visualType === 'delivery' && (
                     <div 
-                      className="artboard-box pop-hover"
+                      className="artboard-box"
                       style={{
                         position: 'relative',
                         aspectRatio: '16/11',
-                        minHeight: '290px',
-                        background: '#070A12',
+                        minHeight: '300px',
+                        background: '#090D18',
                         border: '1px solid rgba(255, 255, 255, 0.09)',
                         borderRadius: '24px',
                         padding: '24px',
@@ -448,19 +648,37 @@ export default function BenefitsBento() {
                         boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.08)'
                       }}
                     >
+                      {/* Ambient Bottom-Left Blue Glow */}
+                      <div 
+                        style={{
+                          position: 'absolute',
+                          bottom: '-15%',
+                          left: '10%',
+                          width: '75%',
+                          height: '75%',
+                          background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.5) 0%, rgba(99, 102, 241, 0.25) 50%, transparent 75%)',
+                          filter: 'blur(45px)',
+                          pointerEvents: 'none',
+                          zIndex: 0
+                        }}
+                      />
+
+                      {/* Subtle Background Vector Accent Curve */}
+                      <div style={{ position: 'absolute', right: '14px', bottom: '14px', width: '90px', height: '90px', borderRight: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', borderRadius: '0 0 20px 0', pointerEvents: 'none' }}></div>
+
                       {/* 3D Frosted Glass Delivery Folder Structure */}
-                      <div style={{ position: 'relative', width: '220px', height: '150px', zIndex: 1 }}>
+                      <div style={{ position: 'relative', width: '230px', height: '160px', zIndex: 1 }}>
                         
                         {/* Folder Backing Tab */}
                         <div style={{
                           position: 'absolute',
                           top: '0',
                           left: '0',
-                          width: '75px',
+                          width: '80px',
                           height: '24px',
-                          background: 'rgba(99, 102, 241, 0.4)',
+                          background: 'rgba(99, 102, 241, 0.5)',
                           borderRadius: '10px 10px 0 0',
-                          border: '1px solid rgba(255, 255, 255, 0.15)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
                           borderBottom: 'none'
                         }}></div>
 
@@ -470,10 +688,10 @@ export default function BenefitsBento() {
                           top: '18px',
                           left: '0',
                           width: '100%',
-                          height: '132px',
-                          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%)',
+                          height: '142px',
+                          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%)',
                           border: '1.5px solid rgba(255, 255, 255, 0.2)',
-                          borderRadius: '0 16px 16px 16px',
+                          borderRadius: '0 18px 18px 18px',
                           backdropFilter: 'blur(20px)',
                           WebkitBackdropFilter: 'blur(20px)',
                           boxShadow: '0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3)',
@@ -484,10 +702,10 @@ export default function BenefitsBento() {
                           {/* Inner Media Sheets Preview */}
                           <div style={{
                             position: 'absolute',
-                            top: '-8px',
-                            left: '20px',
-                            right: '20px',
-                            height: '45px',
+                            top: '-10px',
+                            left: '22px',
+                            right: '22px',
+                            height: '50px',
                             background: 'rgba(255, 255, 255, 0.12)',
                             borderRadius: '8px',
                             border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -496,40 +714,40 @@ export default function BenefitsBento() {
 
                           {/* Center Dispatch Circle Button */}
                           <div style={{
-                            width: '46px',
-                            height: '46px',
+                            width: '48px',
+                            height: '48px',
                             borderRadius: '50%',
-                            background: 'rgba(255, 255, 255, 0.15)',
-                            border: '1px solid rgba(255, 255, 255, 0.3)',
+                            background: 'rgba(255, 255, 255, 0.16)',
+                            border: '1px solid rgba(255, 255, 255, 0.35)',
                             backdropFilter: 'blur(10px)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
+                            boxShadow: '0 8px 25px rgba(0,0,0,0.5)',
                             position: 'relative',
                             zIndex: 2
                           }}>
-                            <i className="fa-solid fa-share" style={{ color: '#FFFFFF', fontSize: '1rem' }}></i>
+                            <i className="fa-solid fa-share" style={{ color: '#FFFFFF', fontSize: '1.05rem' }}></i>
                           </div>
 
                           {/* "Final touch" Badge with Cursor */}
                           <div style={{
                             position: 'absolute',
-                            bottom: '14px',
-                            right: '14px',
+                            bottom: '12px',
+                            right: '12px',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '6px',
+                            gap: '5px',
                             zIndex: 3
                           }}>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
                               <path d="M4 0l16 12.279-6.951 1.17 4.325 8.817-3.596 1.734-4.35-8.879-5.428 5.679v-20.8z"/>
                             </svg>
                             <span style={{
-                              fontSize: '0.68rem',
+                              fontSize: '0.66rem',
                               fontWeight: '600',
                               color: '#FFFFFF',
-                              background: 'rgba(0, 0, 0, 0.75)',
+                              background: 'rgba(0, 0, 0, 0.8)',
                               border: '1px solid rgba(255, 255, 255, 0.2)',
                               padding: '3px 8px',
                               borderRadius: '6px',
