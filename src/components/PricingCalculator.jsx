@@ -2,23 +2,17 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useTheme } from '@/context/ThemeContext';
 
 export default function PricingCalculator() {
-  const { theme } = useTheme();
-  const isLight = theme === 'light';
-
-  // Calculator State
-  const [videoCount, setVideoCount] = useState(15);
+  const [videoCount, setVideoCount] = useState(16);
   const [selectedFormats, setSelectedFormats] = useState(['short-form', 'podcasts']);
   const [turnaround, setTurnaround] = useState('standard'); // 'standard' (48h) or 'express' (24h)
-  const [motionGraphics, setMotionGraphics] = useState(true);
 
   const formats = [
-    { id: 'short-form', name: 'Short-Form Reels / TikToks', basePrice: 60, icon: 'fa-solid fa-mobile-screen' },
-    { id: 'podcasts', name: 'YouTube Podcasts / Long-Form', basePrice: 120, icon: 'fa-solid fa-microphone' },
-    { id: 'saas-ads', name: '3D SaaS & Product Demos', basePrice: 180, icon: 'fa-solid fa-cube' },
-    { id: 'ugc-ads', name: 'High-Converting UGC & VSL Ads', basePrice: 90, icon: 'fa-solid fa-bullhorn' }
+    { id: 'short-form', name: 'Shorts & Reels (9:16)', baseRate: 50 },
+    { id: 'podcasts', name: 'Podcasts & Long-Form', baseRate: 75 },
+    { id: 'saas-ads', name: '3D SaaS UI & Demos', baseRate: 110 },
+    { id: 'ugc-ads', name: 'Performance UGC Ads', baseRate: 65 }
   ];
 
   const toggleFormat = (id) => {
@@ -31,109 +25,118 @@ export default function PricingCalculator() {
     }
   };
 
-  // Pricing Calculation Engine: ~ $60/video base, so 25 videos = ~$1,500
-  const avgFormatPrice = selectedFormats.reduce((acc, fId) => {
+  // Dynamic pricing calculation:
+  // Base 12 videos = ~$999
+  // 24 videos = ~$1,499
+  // 40+ videos = ~$2,499
+  const avgRate = selectedFormats.reduce((acc, fId) => {
     const f = formats.find(item => item.id === fId);
-    return acc + (f ? f.basePrice : 60);
+    return acc + (f ? f.baseRate : 60);
   }, 0) / selectedFormats.length;
 
-  let monthlyFoundryPrice = Math.round(videoCount * avgFormatPrice);
-  if (turnaround === 'express') monthlyFoundryPrice += 300;
-  if (motionGraphics) monthlyFoundryPrice += 150;
+  let computedPrice = Math.round(500 + (videoCount * avgRate * 0.75));
+  if (computedPrice < 999) computedPrice = 999;
+  if (turnaround === 'express') computedPrice += 350;
 
-  // In-House Cost Comparison: Senior Editor ($6,500/mo) + Motion Designer ($4,000/mo) + Taxes/Software ($1,500) = $12,000/mo
+  // In-House comparison (Senior Editor $7,000 + Motion Designer $4,500 = $11,500/mo)
   const inHouseCost = 11500;
-  const monthlySavings = Math.max(0, inHouseCost - monthlyFoundryPrice);
+  const monthlySavings = Math.max(0, inHouseCost - computedPrice);
   const annualSavings = monthlySavings * 12;
+
   const serviceSummary = selectedFormats
     .map((formatId) => formats.find((item) => item.id === formatId)?.name)
     .filter(Boolean)
-    .join(', ') || 'Video Editing';
-  const bookCallHref = `/book-a-call?source=calculator&service=${encodeURIComponent(serviceSummary)}&volume=${videoCount}&turnaround=${turnaround}&budget=${encodeURIComponent(`$${monthlyFoundryPrice.toLocaleString()}/mo`)}`;
+    .join(', ') || 'Post-Production';
+
+  const bookCallHref = `/book-a-call?source=calculator&service=${encodeURIComponent(serviceSummary)}&volume=${videoCount}&turnaround=${turnaround}&budget=${encodeURIComponent(`$${computedPrice.toLocaleString()}/mo`)}`;
 
   return (
-    <section className="section-padding" style={{ position: 'relative' }}>
-      <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
+    <section className="section-padding" style={{ position: 'relative', overflow: 'hidden' }}>
+      <div className="container" style={{ maxWidth: '1180px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         
         {/* Section Header */}
-        <div className="text-center reveal-on-scroll" style={{ marginBottom: '50px' }}>
-          <span className="section-subtitle">
-            <i className="fa-solid fa-calculator" style={{ marginRight: '8px' }}></i>
-            Interactive ROI & Retainer Estimator
-          </span>
-          <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: '800', marginBottom: '14px' }}>
-            Calculate Your Output & <span className="combination-font">Annual Savings</span>
+        <div className="text-center reveal-on-scroll" style={{ maxWidth: '780px', margin: '0 auto 44px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '16px' }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#EF4444' }}></span>
+            <span className="mono-spec" style={{ fontSize: '0.74rem', color: '#E2E8F0', letterSpacing: '0.05em' }}>
+              RETAINER SIMULATOR // ROI CALCULATOR
+            </span>
+          </div>
+          <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: '900', letterSpacing: '-0.03em', margin: '0 0 14px' }}>
+            Calculate Output & <span className="combination-font" style={{ color: '#EF4444' }}>Monthly Investment</span>
           </h2>
-          <p className="section-description" style={{ maxWidth: '750px', margin: '0 auto', fontSize: '1.05rem', color: 'var(--text-secondary)' }}>
-            See exactly how much you save with The Editly Foundry Co. dedicated post-production pod compared to hiring full-time in-house editors.
+          <p style={{ maxWidth: '640px', margin: '0 auto', fontSize: '1.02rem', color: 'rgba(255,255,255,0.68)', lineHeight: '1.6' }}>
+            Slide to estimate your video requirements. See instant monthly retainer pricing and annual savings vs. in-house hiring.
           </p>
         </div>
 
         {/* 2-Column Calculator Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '35px',
+          gridTemplateColumns: '1.15fr 0.85fr',
+          gap: '24px',
           alignItems: 'start'
         }}>
 
-          {/* LEFT: Controls & Sliders Card */}
+          {/* LEFT: Clean Controls Card */}
           <div 
             className="glass-card" 
             style={{
-              padding: '35px 30px',
-              borderRadius: '24px',
-              border: '1px solid var(--glass-border)',
-              background: isLight ? 'rgba(255, 255, 255, 0.85)' : 'rgba(10, 18, 38, 0.72)'
+              padding: '36px 32px',
+              borderRadius: '20px',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              background: 'rgba(10, 14, 22, 0.88)',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1)'
             }}
           >
             {/* Control 1: Video Volume Slider */}
-            <div style={{ marginBottom: '30px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <label style={{ fontWeight: '800', fontSize: '1rem', color: 'var(--text-primary)' }}>
-                  Estimated Monthly Videos Needed:
+            <div style={{ marginBottom: '32px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                <label style={{ fontWeight: '700', fontSize: '0.98rem', color: '#FFFFFF' }}>
+                  Monthly Videos Needed:
                 </label>
-                <span style={{
-                  padding: '5px 14px',
-                  borderRadius: '30px',
-                  background: 'linear-gradient(135deg, #2563EB, #0284C7)',
-                  color: '#FFFFFF',
+                <span className="mono-spec" style={{
+                  padding: '4px 14px',
+                  borderRadius: '999px',
+                  background: 'rgba(239, 68, 68, 0.15)',
+                  border: '1px solid rgba(239, 68, 68, 0.4)',
+                  color: '#EF4444',
                   fontWeight: '800',
-                  fontSize: '1.05rem',
-                  boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)'
+                  fontSize: '1rem'
                 }}>
-                  {videoCount} Videos/mo
+                  {videoCount} Videos / mo
                 </span>
               </div>
 
               <input 
                 type="range" 
-                min="4" 
-                max="60" 
+                min="6" 
+                max="50" 
                 step="1"
                 value={videoCount}
                 onChange={(e) => setVideoCount(Number(e.target.value))}
                 style={{
                   width: '100%',
-                  height: '8px',
-                  borderRadius: '5px',
-                  accentColor: '#2563EB',
-                  cursor: 'pointer'
+                  height: '6px',
+                  borderRadius: '3px',
+                  accentColor: '#EF4444',
+                  cursor: 'pointer',
+                  background: 'rgba(255,255,255,0.1)'
                 }}
               />
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '8px' }}>
-                <span>4 Videos (Boutique)</span>
-                <span>30 Videos (Creator Pro)</span>
-                <span>60+ Videos (Enterprise)</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '8px' }} className="mono-spec">
+                <span>Starter (6-12)</span>
+                <span>Growth (24)</span>
+                <span>Scale (50+)</span>
               </div>
             </div>
 
-            {/* Control 2: Format Multi-Select */}
-            <div style={{ marginBottom: '30px' }}>
-              <label style={{ display: 'block', fontWeight: '800', fontSize: '1rem', marginBottom: '12px', color: 'var(--text-primary)' }}>
-                Target Content Formats:
+            {/* Control 2: Target Formats */}
+            <div style={{ marginBottom: '32px' }}>
+              <label style={{ display: 'block', fontWeight: '700', fontSize: '0.98rem', marginBottom: '12px', color: '#FFFFFF' }}>
+                Select Content Formats:
               </label>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                 {formats.map(fmt => {
                   const isSelected = selectedFormats.includes(fmt.id);
                   return (
@@ -142,109 +145,87 @@ export default function PricingCalculator() {
                       type="button"
                       onClick={() => toggleFormat(fmt.id)}
                       style={{
-                        padding: '12px 14px',
-                        borderRadius: '14px',
-                        border: isSelected ? '1.5px solid #2563EB' : '1px solid var(--input-border)',
-                        background: isSelected ? 'rgba(37, 99, 235, 0.12)' : 'var(--input-bg)',
-                        color: isSelected ? 'var(--text-primary)' : 'var(--text-secondary)',
+                        padding: '10px 14px',
+                        borderRadius: '10px',
+                        border: isSelected ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255, 255, 255, 0.08)',
+                        background: isSelected ? 'rgba(239, 68, 68, 0.12)' : 'rgba(255, 255, 255, 0.02)',
+                        color: isSelected ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)',
                         textAlign: 'left',
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '10px',
-                        transition: 'all 0.2s ease'
+                        justifyContent: 'space-between',
+                        transition: 'all 0.14s ease'
                       }}
                     >
-                      <i className={fmt.icon} style={{ color: isSelected ? '#38BDF8' : 'var(--text-muted)', fontSize: '1.1rem' }}></i>
-                      <span style={{ fontSize: '0.85rem', fontWeight: isSelected ? '700' : '500', lineHeight: '1.2' }}>
+                      <span style={{ fontSize: '0.82rem', fontWeight: isSelected ? '700' : '500' }}>
                         {fmt.name}
                       </span>
+                      {isSelected && <i className="fa-solid fa-check" style={{ color: '#EF4444', fontSize: '0.72rem' }}></i>}
                     </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Control 3: Turnaround Speed */}
-            <div style={{ marginBottom: '25px' }}>
-              <label style={{ display: 'block', fontWeight: '800', fontSize: '1rem', marginBottom: '12px', color: 'var(--text-primary)' }}>
-                Turnaround Requirement:
+            {/* Control 3: Turnaround SLA */}
+            <div>
+              <label style={{ display: 'block', fontWeight: '700', fontSize: '0.98rem', marginBottom: '12px', color: '#FFFFFF' }}>
+                Turnaround SLA Speed:
               </label>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                 <button
                   type="button"
                   onClick={() => setTurnaround('standard')}
                   style={{
-                    padding: '12px 14px',
-                    borderRadius: '12px',
-                    border: turnaround === 'standard' ? '1.5px solid #2563EB' : '1px solid var(--input-border)',
-                    background: turnaround === 'standard' ? 'rgba(37, 99, 235, 0.12)' : 'var(--input-bg)',
-                    color: 'var(--text-primary)',
+                    padding: '12px',
+                    borderRadius: '10px',
+                    border: turnaround === 'standard' ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255, 255, 255, 0.08)',
+                    background: turnaround === 'standard' ? 'rgba(239, 68, 68, 0.12)' : 'rgba(255, 255, 255, 0.02)',
+                    color: turnaround === 'standard' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)',
                     cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '2px',
-                    textAlign: 'left'
+                    textAlign: 'left',
+                    transition: 'all 0.14s ease'
                   }}
                 >
-                  <span style={{ fontWeight: '700', fontSize: '0.88rem' }}>Standard Delivery</span>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>24 - 48 Hours Avg</span>
+                  <div style={{ fontSize: '0.86rem', fontWeight: '700' }}>Standard SLA</div>
+                  <div className="mono-spec" style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginTop: '2px' }}>24-48 Hours</div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setTurnaround('express')}
                   style={{
-                    padding: '12px 14px',
-                    borderRadius: '12px',
-                    border: turnaround === 'express' ? '1.5px solid #2563EB' : '1px solid var(--input-border)',
-                    background: turnaround === 'express' ? 'rgba(37, 99, 235, 0.12)' : 'var(--input-bg)',
-                    color: 'var(--text-primary)',
+                    padding: '12px',
+                    borderRadius: '10px',
+                    border: turnaround === 'express' ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255, 255, 255, 0.08)',
+                    background: turnaround === 'express' ? 'rgba(239, 68, 68, 0.12)' : 'rgba(255, 255, 255, 0.02)',
+                    color: turnaround === 'express' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)',
                     cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '2px',
-                    textAlign: 'left'
+                    textAlign: 'left',
+                    transition: 'all 0.14s ease'
                   }}
                 >
-                  <span style={{ fontWeight: '700', fontSize: '0.88rem', color: '#F59E0B' }}>⚡ Same-Day Express</span>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Under 24 Hours</span>
+                  <div style={{ fontSize: '0.86rem', fontWeight: '700' }}>Express Priority</div>
+                  <div className="mono-spec" style={{ fontSize: '0.68rem', color: '#EF4444', marginTop: '2px' }}>Same-Day / 24H</div>
                 </button>
               </div>
             </div>
 
-            {/* Control 4: Advanced Motion Graphics Add-on Toggle */}
-            <div style={{
-              padding: '14px 16px',
-              borderRadius: '14px',
-              background: 'rgba(255, 255, 255, 0.03)',
-              border: '1px solid var(--glass-border)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center'
-            }}>
-              <div>
-                <div style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-primary)' }}>Custom 3D / Motion UI Leads</div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>Includes custom Cinema4D / After Effects assets</div>
-              </div>
-              <input 
-                type="checkbox" 
-                checked={motionGraphics}
-                onChange={(e) => setMotionGraphics(e.target.checked)}
-                style={{ width: '18px', height: '18px', cursor: 'pointer', accentColor: '#2563EB' }}
-              />
-            </div>
-
           </div>
 
-          {/* RIGHT: Live ROI & Cost Savings Display Card */}
+          {/* RIGHT: Live Price & ROI Output Card */}
           <div 
             className="glass-card" 
             style={{
-              padding: '40px 30px',
-              borderRadius: '24px',
-              border: '1px solid var(--glass-border)',
-              background: isLight 
+              padding: '36px 32px',
+              borderRadius: '20px',
+              border: '1px solid rgba(239, 68, 68, 0.35)',
+              background: 'rgba(10, 14, 22, 0.94)',
+              boxShadow: '0 25px 80px rgba(239, 68, 68, 0.12), inset 0 1px 0 rgba(255,255,255,0.15)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
                 ? 'linear-gradient(135deg, rgba(240, 249, 255, 0.95), rgba(255, 255, 255, 0.95))' 
                 : 'linear-gradient(135deg, rgba(13, 27, 62, 0.85), rgba(7, 13, 24, 0.95))',
               boxShadow: '0 25px 60px rgba(0, 0, 0, 0.3)',
