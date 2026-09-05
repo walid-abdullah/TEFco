@@ -1,706 +1,489 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function BenefitsBento() {
+  const [eqHeights, setEqHeights] = useState([45, 80, 60, 95, 70, 85, 40, 90, 65, 100, 50, 75, 90, 60, 85]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEqHeights(prev => prev.map(() => Math.floor(Math.random() * 65) + 35));
+    }, 600);
+    return () => clearInterval(interval);
+  }, []);
+
   const steps = [
     {
       id: 'step-01',
-      title: 'Questionnaire',
+      title: 'Ingest & Sync',
       num: '01',
-      desc: 'You fill out a short form that takes about five minutes, and from your answers we learn what your product does, who buys it, and why anyone should care.',
-      visualType: 'chat'
+      desc: 'Upload your raw camera cards to your dedicated Frame.io or Cloud Pod. Our pipeline automatically organizes multi-cam angles and extracts camera LUT metadata.',
+      visualType: 'ingest',
+      align: 'left' // Text Left, Visual Right
     },
     {
       id: 'step-02',
-      title: 'Story boarding',
+      title: 'Hook Engineering',
       num: '02',
-      desc: 'Before we start editing, you see exactly what the video will say and how every frame will look, and once you give your notes we lock the whole thing in.',
-      visualType: 'moodboard'
+      desc: 'We architect scroll-stopping 3-second pattern interrupts, retention pacing curves, and kinetic vector titles tailored to feed algorithms before locking the rough cut.',
+      visualType: 'retention',
+      align: 'right' // Visual Left, Text Right
     },
     {
       id: 'step-03',
-      title: 'Final Animation',
+      title: 'Studio Mastering',
       num: '03',
-      desc: 'Custom animation, sound design, and color grading all come from the same in-house team, working on your project from the first day to the last.',
-      visualType: 'timeline'
+      desc: 'ACEScc broadcast color grading in DaVinci Studio paired with spectral de-noising and -14.0 LUFS audio sweetening in iZotope RX for crisp multi-device playback.',
+      visualType: 'mastering',
+      align: 'left' // Text Left, Visual Right
     },
     {
       id: 'step-04',
-      title: 'Delivery',
+      title: '48H Dispatch',
       num: '04',
-      desc: 'You get the variations for every platform you post on, usually delivered in full 4K masters within 48 hours from kickoff.',
-      visualType: 'delivery'
+      desc: 'Receive master ProRes deliverables formatted in 9:16 vertical and 16:9 widescreen with instant Frame.io timecoded review and full project archive files.',
+      visualType: 'dispatch',
+      align: 'right' // Visual Left, Text Right
     }
   ];
 
   return (
-    <section style={{ position: 'relative', background: '#05070B', padding: '120px 0', overflow: 'hidden' }}>
+    <section style={{ position: 'relative', background: '#05070B', padding: '130px 0', overflow: 'hidden' }}>
       
       {/* Background Subtle Ambience */}
       <div 
         style={{
           position: 'absolute',
-          top: '20%',
+          top: '25%',
           left: '50%',
           transform: 'translateX(-50%)',
           width: '100%',
           maxWidth: '1200px',
-          height: '600px',
-          background: 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.04) 0%, transparent 70%)',
+          height: '700px',
+          background: 'radial-gradient(ellipse at center, rgba(56, 189, 248, 0.035) 0%, rgba(99, 102, 241, 0.02) 50%, transparent 75%)',
           pointerEvents: 'none',
           zIndex: 0
         }}
       />
 
-      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1140px', margin: '0 auto', padding: '0 24px' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1160px', margin: '0 auto', padding: '0 24px' }}>
         
-        {/* Timeline Container */}
-        <div style={{ position: 'relative' }}>
-          
-          {/* Vertical Connecting Hairline Rail */}
-          <div 
-            className="timeline-vertical-rail"
-            style={{
-              position: 'absolute',
-              top: '24px',
-              bottom: '120px',
-              left: '7px',
-              width: '1px',
-              background: 'rgba(255, 255, 255, 0.15)',
-              zIndex: 0
-            }}
-          />
+        {/* Section Header */}
+        <div className="text-center reveal-on-scroll" style={{ maxWidth: '820px', margin: '0 auto 80px' }}>
+          <h2 className="section-title" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', margin: '0 0 16px', fontWeight: '800', letterSpacing: '-0.03em', color: '#FFFFFF' }}>
+            Systematic Velocity. <br />
+            <span 
+              className="serif-accent"
+              style={{
+                background: 'linear-gradient(180deg, #FFFFFF 20%, #CBD5E1 65%, #94A3B8 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontWeight: '400',
+                paddingRight: '6px'
+              }}
+            >
+              Mastered in 48 Hours.
+            </span>
+          </h2>
+          <p style={{ color: '#94A3B8', fontSize: '1.05rem', lineHeight: '1.6', margin: '0 auto', maxWidth: '640px' }}>
+            An illustrated breakdown of our battle-tested video post-production infrastructure.
+          </p>
+        </div>
 
-          {/* 4 Connected Step Rows */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '90px' }}>
-            {steps.map((step) => (
+        {/* 
+          ========================================================================
+          ALTERNATING (LEFT / RIGHT) CONNECTED WORKFLOW ROADMAP
+          ======================================================================== 
+        */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '90px', position: 'relative' }}>
+          
+          {steps.map((step, idx) => {
+            const isTextLeft = step.align === 'left';
+
+            return (
               <div 
                 key={step.id}
-                className="step-timeline-row"
+                className="alternating-step-row"
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'minmax(280px, 1fr) minmax(320px, 1.25fr)',
+                  gridTemplateColumns: '1fr 1fr',
                   gap: '60px',
                   alignItems: 'center',
                   position: 'relative'
                 }}
               >
                 
-                {/* LEFT: Node & Clean Text */}
-                <div style={{ position: 'relative', paddingLeft: '40px', textAlign: 'left' }}>
-                  
-                  {/* Square Node Marker */}
+                {/* 
+                  ----------------------------------------------------------------
+                  TEXT CONTENT BLOCK (Dynamically Ordered)
+                  ----------------------------------------------------------------
+                */}
+                <div 
+                  style={{
+                    order: isTextLeft ? 1 : 2,
+                    textAlign: 'left',
+                    position: 'relative',
+                    paddingLeft: '32px'
+                  }}
+                >
+                  {/* Glowing Square Node Marker */}
                   <div 
                     style={{
                       position: 'absolute',
                       left: '0',
-                      top: '4px',
-                      width: '15px',
-                      height: '15px',
+                      top: '6px',
+                      width: '14px',
+                      height: '14px',
                       background: '#FFFFFF',
                       borderRadius: '2px',
-                      boxShadow: '0 0 12px rgba(255,255,255,0.6)',
+                      boxShadow: '0 0 16px rgba(255,255,255,0.7)',
                       zIndex: 2
                     }}
                   />
 
-                  {/* Title & Number */}
+                  {/* Title with Step Number in Syne Font */}
                   <h3 style={{ 
-                    fontSize: 'clamp(1.8rem, 2.8vw, 2.4rem)', 
+                    fontSize: 'clamp(2rem, 3vw, 2.6rem)', 
                     fontWeight: '800', 
                     color: '#FFFFFF', 
                     margin: '0 0 16px', 
-                    letterSpacing: '-0.03em', 
+                    letterSpacing: '-0.035em', 
                     lineHeight: '1.15',
                     fontFamily: 'var(--font-heading)',
                     display: 'flex',
                     alignItems: 'baseline',
-                    gap: '12px'
+                    gap: '14px'
                   }}>
                     <span>{step.title}</span>
                     <span style={{ 
-                      fontSize: '0.95rem', 
+                      fontSize: '1rem', 
                       fontFamily: 'var(--font-mono)', 
                       fontWeight: '500', 
-                      color: 'rgba(255, 255, 255, 0.45)',
-                      letterSpacing: '0.02em'
+                      color: 'rgba(255, 255, 255, 0.4)',
+                      letterSpacing: '0.04em'
                     }}>
                       {step.num}
                     </span>
                   </h3>
 
-                  {/* Clean 2-Line Description */}
+                  {/* Clean 2-Line Editorial Description */}
                   <p style={{ 
-                    color: 'rgba(255, 255, 255, 0.65)', 
+                    color: '#94A3B8', 
                     fontSize: '1rem', 
                     lineHeight: '1.65', 
                     margin: 0,
-                    maxWidth: '420px',
+                    maxWidth: '460px',
                     fontWeight: '400'
                   }}>
                     {step.desc}
                   </p>
                 </div>
 
-                {/* RIGHT: Square-Form UI Artboard with Vibrant Ambient Glow */}
-                <div style={{ position: 'relative', width: '100%', maxWidth: '540px', justifySelf: 'center' }}>
-                  
+                {/* 
+                  ----------------------------------------------------------------
+                  BESPOKE ANIMATED VISUAL ARTBOARD
+                  ----------------------------------------------------------------
+                */}
+                <div 
+                  style={{
+                    order: isTextLeft ? 2 : 1,
+                    position: 'relative',
+                    width: '100%',
+                    maxWidth: '520px',
+                    justifySelf: 'center'
+                  }}
+                >
+                  {/* Ambient Radiant Glow Under Visual */}
+                  <div 
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      width: '85%',
+                      height: '75%',
+                      background: idx === 0 
+                        ? 'radial-gradient(ellipse at center, rgba(56, 189, 248, 0.35) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 75%)'
+                        : idx === 1 
+                        ? 'radial-gradient(ellipse at center, rgba(236, 72, 153, 0.35) 0%, rgba(168, 85, 247, 0.15) 50%, transparent 75%)'
+                        : idx === 2 
+                        ? 'radial-gradient(ellipse at center, rgba(34, 197, 94, 0.35) 0%, rgba(56, 189, 248, 0.15) 50%, transparent 75%)'
+                        : 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.4) 0%, rgba(59, 130, 246, 0.2) 50%, transparent 75%)',
+                      filter: 'blur(45px)',
+                      pointerEvents: 'none',
+                      zIndex: 0
+                    }}
+                  />
+
                   {/* 
                     ==============================================================
-                    VISUAL 1: QUESTIONNAIRE / CHAT DIALOGUE ARTBOARD
+                    VISUAL 1: CLOUD INGEST & CODEC SYNC ARTBOARD (Animated)
                     ============================================================== 
                   */}
-                  {step.visualType === 'chat' && (
+                  {step.visualType === 'ingest' && (
                     <div 
+                      className="artboard-box pop-hover"
                       style={{
                         position: 'relative',
                         aspectRatio: '16/11',
-                        minHeight: '300px',
+                        minHeight: '290px',
                         background: '#070A12',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: '24px',
                         padding: '24px',
-                        overflow: 'hidden',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        gap: '12px',
-                        boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.06)'
-                      }}
-                    >
-                      {/* Ambient Bottom Backlight Glow */}
-                      <div 
-                        style={{
-                          position: 'absolute',
-                          bottom: '-25%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '90%',
-                          height: '65%',
-                          background: 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.55) 0%, rgba(59, 130, 246, 0.3) 45%, transparent 75%)',
-                          filter: 'blur(40px)',
-                          pointerEvents: 'none',
-                          zIndex: 0
-                        }}
-                      />
-
-                      {/* Chat Bubble 1: Agency Question */}
-                      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
-                        <div style={{
-                          background: 'rgba(99, 102, 241, 0.28)',
-                          border: '1px solid rgba(129, 140, 248, 0.45)',
-                          borderRadius: '12px 12px 2px 12px',
-                          padding: '8px 14px',
-                          fontSize: '0.8rem',
-                          color: '#F8FAFC',
-                          backdropFilter: 'blur(10px)',
-                          boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
-                        }}>
-                          What does your product do?
-                        </div>
-                        <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'linear-gradient(135deg, #6366F1, #8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.62rem', fontWeight: '800', color: '#FFFFFF', flexShrink: 0 }}>
-                          M
-                        </div>
-                      </div>
-
-                      {/* Chat Bubble 2: Client Answer */}
-                      <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
-                        <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem', color: '#94A3B8', flexShrink: 0 }}>
-                          <i className="fa-solid fa-user" style={{ fontSize: '0.6rem' }}></i>
-                        </div>
-                        <div style={{
-                          background: 'rgba(255, 255, 255, 0.07)',
-                          border: '1px solid rgba(255, 255, 255, 0.12)',
-                          borderRadius: '12px 12px 12px 2px',
-                          padding: '8px 14px',
-                          fontSize: '0.8rem',
-                          color: '#CBD5E1',
-                          backdropFilter: 'blur(10px)'
-                        }}>
-                          SaaS project management tool for startups
-                        </div>
-                      </div>
-
-                      {/* Chat Bubble 3: Agency Question */}
-                      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
-                        <div style={{
-                          background: 'rgba(99, 102, 241, 0.28)',
-                          border: '1px solid rgba(129, 140, 248, 0.45)',
-                          borderRadius: '12px 12px 2px 12px',
-                          padding: '8px 14px',
-                          fontSize: '0.8rem',
-                          color: '#F8FAFC',
-                          backdropFilter: 'blur(10px)',
-                          boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
-                        }}>
-                          Who is your ideal customer?
-                        </div>
-                        <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'linear-gradient(135deg, #6366F1, #8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.62rem', fontWeight: '800', color: '#FFFFFF', flexShrink: 0 }}>
-                          M
-                        </div>
-                      </div>
-
-                      {/* Chat Bubble 4: Client Answer */}
-                      <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
-                        <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem', color: '#94A3B8', flexShrink: 0 }}>
-                          <i className="fa-solid fa-user" style={{ fontSize: '0.6rem' }}></i>
-                        </div>
-                        <div style={{
-                          background: 'rgba(255, 255, 255, 0.07)',
-                          border: '1px solid rgba(255, 255, 255, 0.12)',
-                          borderRadius: '12px 12px 12px 2px',
-                          padding: '8px 14px',
-                          fontSize: '0.78rem',
-                          color: '#CBD5E1',
-                          backdropFilter: 'blur(10px)'
-                        }}>
-                          Founders &amp; operation teams at early-stage startups
-                        </div>
-                      </div>
-
-                      {/* Chat Bubble 5: Typing Indicator */}
-                      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
-                        <div style={{
-                          background: 'rgba(99, 102, 241, 0.28)',
-                          border: '1px solid rgba(129, 140, 248, 0.45)',
-                          borderRadius: '12px',
-                          padding: '6px 14px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '4px'
-                        }}>
-                          <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#FFFFFF', opacity: 0.8 }}></span>
-                          <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#FFFFFF', opacity: 0.8 }}></span>
-                          <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#FFFFFF', opacity: 0.8 }}></span>
-                        </div>
-                        <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'linear-gradient(135deg, #6366F1, #8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.62rem', fontWeight: '800', color: '#FFFFFF', flexShrink: 0 }}>
-                          M
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* 
-                    ==============================================================
-                    VISUAL 2: STORYBOARDING / FLOATING FAN CARDS ARTBOARD
-                    ============================================================== 
-                  */}
-                  {step.visualType === 'moodboard' && (
-                    <div 
-                      style={{
-                        position: 'relative',
-                        aspectRatio: '16/11',
-                        minHeight: '300px',
-                        background: '#070A12',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                        borderRadius: '24px',
-                        padding: '24px',
-                        overflow: 'hidden',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.06)'
-                      }}
-                    >
-                      {/* Ambient Center Glow */}
-                      <div 
-                        style={{
-                          position: 'absolute',
-                          top: '50%',
-                          left: '50%',
-                          transform: 'translate(-50%, -50%)',
-                          width: '90%',
-                          height: '70%',
-                          background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.55) 0%, rgba(139, 92, 246, 0.3) 50%, transparent 75%)',
-                          filter: 'blur(45px)',
-                          pointerEvents: 'none',
-                          zIndex: 0
-                        }}
-                      />
-
-                      {/* 5 Floating Moodboard Cards Container */}
-                      <div style={{ position: 'relative', width: '100%', height: '100%', zIndex: 1 }}>
-                        
-                        {/* Top Left: MOTION STYLE Card */}
-                        <div style={{
-                          position: 'absolute',
-                          top: '12%',
-                          left: '3%',
-                          transform: 'rotate(-8deg)',
-                          background: 'rgba(11, 15, 25, 0.88)',
-                          border: '1px solid rgba(255, 255, 255, 0.16)',
-                          borderRadius: '12px',
-                          padding: '10px 14px',
-                          width: '135px',
-                          backdropFilter: 'blur(16px)',
-                          boxShadow: '0 10px 25px rgba(0,0,0,0.5)'
-                        }}>
-                          <span style={{ fontSize: '0.58rem', fontWeight: '800', color: 'rgba(255,255,255,0.6)', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>
-                            MOTION STYLE
-                          </span>
-                          <svg width="100%" height="16" viewBox="0 0 100 16" fill="none">
-                            <path d="M0 12C20 12 30 4 50 4C70 4 80 12 100 12" stroke="#60A5FA" strokeWidth="1.5" />
-                            <path d="M0 6C25 6 35 14 55 14C75 14 85 6 100 6" stroke="rgba(255,255,255,0.3)" strokeWidth="1" strokeDasharray="2 2" />
-                          </svg>
-                        </div>
-
-                        {/* Top Center: COLOR PALETTE Card */}
-                        <div style={{
-                          position: 'absolute',
-                          top: '6%',
-                          left: '34%',
-                          background: 'rgba(11, 15, 25, 0.92)',
-                          border: '1px solid rgba(255, 255, 255, 0.2)',
-                          borderRadius: '12px',
-                          padding: '10px 16px',
-                          width: '145px',
-                          backdropFilter: 'blur(16px)',
-                          boxShadow: '0 15px 30px rgba(0,0,0,0.6)',
-                          zIndex: 3
-                        }}>
-                          <span style={{ fontSize: '0.58rem', fontWeight: '800', color: 'rgba(255,255,255,0.6)', letterSpacing: '0.04em', display: 'block', marginBottom: '8px' }}>
-                            COLOR PALETTE
-                          </span>
-                          <div style={{ display: 'flex', gap: '4px' }}>
-                            <div style={{ flex: 1, height: '14px', borderRadius: '3px', background: '#FFFFFF' }}></div>
-                            <div style={{ flex: 1, height: '14px', borderRadius: '3px', background: '#93C5FD' }}></div>
-                            <div style={{ flex: 1, height: '14px', borderRadius: '3px', background: '#3B82F6' }}></div>
-                            <div style={{ flex: 1, height: '14px', borderRadius: '3px', background: '#1D4ED8' }}></div>
-                            <div style={{ flex: 1, height: '14px', borderRadius: '3px', background: '#1E293B' }}></div>
-                          </div>
-                        </div>
-
-                        {/* Top Right: TONE & VOICE Card */}
-                        <div style={{
-                          position: 'absolute',
-                          top: '12%',
-                          right: '3%',
-                          transform: 'rotate(8deg)',
-                          background: 'rgba(11, 15, 25, 0.88)',
-                          border: '1px solid rgba(255, 255, 255, 0.16)',
-                          borderRadius: '12px',
-                          padding: '10px 14px',
-                          width: '135px',
-                          backdropFilter: 'blur(16px)',
-                          boxShadow: '0 10px 25px rgba(0,0,0,0.5)'
-                        }}>
-                          <span style={{ fontSize: '0.58rem', fontWeight: '800', color: 'rgba(255,255,255,0.6)', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>
-                            TONE &amp; VOICE
-                          </span>
-                          <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
-                            <span style={{ fontSize: '0.52rem', padding: '2px 5px', borderRadius: '3px', background: 'rgba(255,255,255,0.1)', color: '#FFFFFF' }}>BOLD</span>
-                            <span style={{ fontSize: '0.52rem', padding: '2px 5px', borderRadius: '3px', background: 'rgba(59,130,246,0.3)', color: '#93C5FD' }}>FAST-PACED</span>
-                          </div>
-                        </div>
-
-                        {/* Bottom Left: SCENE DIRECTION Card */}
-                        <div style={{
-                          position: 'absolute',
-                          bottom: '12%',
-                          left: '12%',
-                          transform: 'rotate(-4deg)',
-                          background: 'rgba(11, 15, 25, 0.9)',
-                          border: '1px solid rgba(255, 255, 255, 0.16)',
-                          borderRadius: '12px',
-                          padding: '10px 16px',
-                          width: '140px',
-                          backdropFilter: 'blur(16px)',
-                          boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
-                          zIndex: 2
-                        }}>
-                          <span style={{ fontSize: '0.58rem', fontWeight: '800', color: 'rgba(255,255,255,0.6)', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>
-                            SCENE DIRECTION
-                          </span>
-                          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '4px', height: '18px' }}>
-                            <div style={{ width: '6px', height: '60%', background: '#60A5FA', borderRadius: '2px' }}></div>
-                            <div style={{ width: '6px', height: '90%', background: '#818CF8', borderRadius: '2px' }}></div>
-                            <div style={{ width: '6px', height: '100%', background: '#A855F7', borderRadius: '2px' }}></div>
-                            <div style={{ width: '6px', height: '70%', background: '#818CF8', borderRadius: '2px' }}></div>
-                            <div style={{ width: '6px', height: '40%', background: '#60A5FA', borderRadius: '2px' }}></div>
-                          </div>
-                        </div>
-
-                        {/* Bottom Right: VISUAL REFERENCE Card */}
-                        <div style={{
-                          position: 'absolute',
-                          bottom: '12%',
-                          right: '12%',
-                          transform: 'rotate(4deg)',
-                          background: 'rgba(11, 15, 25, 0.9)',
-                          border: '1px solid rgba(255, 255, 255, 0.16)',
-                          borderRadius: '12px',
-                          padding: '10px 16px',
-                          width: '140px',
-                          backdropFilter: 'blur(16px)',
-                          boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
-                          zIndex: 2
-                        }}>
-                          <span style={{ fontSize: '0.58rem', fontWeight: '800', color: 'rgba(255,255,255,0.6)', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>
-                            VISUAL REFERENCE
-                          </span>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <div style={{ width: '14px', height: '14px', borderRadius: '3px', background: '#A855F7', opacity: 0.8 }}></div>
-                            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#38BDF8', opacity: 0.8 }}></div>
-                            <div style={{ width: '10px', height: '10px', background: '#FFFFFF', opacity: 0.8 }}></div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                  )}
-
-                  {/* 
-                    ==============================================================
-                    VISUAL 3: FINAL ANIMATION / TIMELINE SEQUENCER ARTBOARD
-                    ============================================================== 
-                  */}
-                  {step.visualType === 'timeline' && (
-                    <div 
-                      style={{
-                        position: 'relative',
-                        aspectRatio: '16/11',
-                        minHeight: '300px',
-                        background: '#070A12',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                        borderRadius: '24px',
-                        padding: '22px',
                         overflow: 'hidden',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.06)'
+                        boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.08)'
                       }}
                     >
-                      {/* Ambient Top Glow */}
-                      <div 
-                        style={{
-                          position: 'absolute',
-                          top: '-15%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '90%',
-                          height: '65%',
-                          background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.5) 0%, rgba(99, 102, 241, 0.25) 50%, transparent 75%)',
-                          filter: 'blur(40px)',
-                          pointerEvents: 'none',
-                          zIndex: 0
-                        }}
-                      />
+                      {/* Top Header */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span className="pulsing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22C55E' }}></span>
+                          <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#FFFFFF', fontWeight: '700' }}>FRAME.IO CLOUD POD</span>
+                        </div>
+                        <span className="mono-spec" style={{ fontSize: '0.66rem', color: '#38BDF8', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.25)', padding: '3px 8px', borderRadius: '4px' }}>
+                          1.2 GB/S SYNC
+                        </span>
+                      </div>
 
-                      {/* Top Box: Preview & Retention Curve */}
-                      <div style={{
-                        position: 'relative',
-                        zIndex: 1,
-                        background: 'rgba(11, 15, 25, 0.75)',
-                        border: '1px solid rgba(255, 255, 255, 0.12)',
-                        borderRadius: '14px',
-                        padding: '14px',
-                        display: 'grid',
-                        gridTemplateColumns: '70px 1fr',
-                        gap: '14px',
-                        alignItems: 'center',
-                        backdropFilter: 'blur(12px)'
-                      }}>
-                        {/* Video Thumbnail Placeholder */}
-                        <div style={{
-                          height: '65px',
-                          background: 'rgba(255,255,255,0.06)',
-                          borderRadius: '8px',
-                          border: '1px solid rgba(255,255,255,0.08)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}>
-                          <i className="fa-solid fa-play" style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}></i>
+                      {/* Animated Ingest Stream Box */}
+                      <div style={{ position: 'relative', zIndex: 1, background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '16px', backdropFilter: 'blur(16px)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <i className="fa-solid fa-hard-drive" style={{ color: '#38BDF8', fontSize: '0.9rem' }}></i>
+                            <span style={{ fontSize: '0.82rem', fontWeight: '600', color: '#FFFFFF' }}>A_CAM_SONY_FX3_RAW.mov</span>
+                          </div>
+                          <span className="mono-spec" style={{ fontSize: '0.68rem', color: '#22C55E', fontWeight: '700' }}>100% INGESTED</span>
                         </div>
 
-                        {/* Smooth Retention Curve */}
-                        <div style={{ height: '65px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                          <svg width="100%" height="40" viewBox="0 0 200 40" fill="none">
-                            <path d="M0 32C40 32 60 10 100 18C140 26 160 8 200 6" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" />
-                            <path d="M0 38C40 38 60 22 100 28C140 34 160 18 200 16" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeDasharray="3 3" />
-                          </svg>
+                        {/* Animated Progress Bar */}
+                        <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden', position: 'relative' }}>
+                          <div className="animated-progress-fill" style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg, #38BDF8, #22C55E)' }}></div>
                         </div>
                       </div>
 
-                      {/* Bottom Box: Video Editor Multi-Track Sequencer */}
-                      <div style={{
-                        position: 'relative',
-                        zIndex: 1,
-                        background: 'rgba(11, 15, 25, 0.75)',
-                        border: '1px solid rgba(255, 255, 255, 0.12)',
-                        borderRadius: '14px',
-                        padding: '14px',
-                        backdropFilter: 'blur(12px)'
-                      }}>
-                        {/* Timecode Ruler */}
-                        <div style={{ position: 'relative', height: '12px', borderBottom: '1px solid rgba(255,255,255,0.12)', marginBottom: '10px' }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.55rem', color: 'rgba(255,255,255,0.4)', fontFamily: 'var(--font-mono)' }}>
-                            <span>00:00</span>
-                            <span>00:15</span>
-                            <span>00:30</span>
-                            <span>00:45</span>
-                            <span>01:00</span>
-                          </div>
-
-                          {/* Blue Playhead Line */}
-                          <div style={{ position: 'absolute', top: '-4px', left: '62%', width: '2px', height: '64px', background: '#60A5FA', boxShadow: '0 0 8px #60A5FA', zIndex: 3 }}>
-                            <div style={{ position: 'absolute', top: '0', left: '-3px', width: '8px', height: '6px', background: '#60A5FA', clipPath: 'polygon(0% 0%, 100% 0%, 50% 100%)' }}></div>
-                          </div>
-                        </div>
-
-                        {/* Multi-Track Clips */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                          {/* Track 1: Video */}
-                          <div style={{ display: 'flex', gap: '6px', height: '16px' }}>
-                            <div style={{ width: '24%', background: 'rgba(99, 102, 241, 0.6)', borderRadius: '4px', border: '1px solid rgba(129, 140, 248, 0.5)' }}></div>
-                            <div style={{ width: '38%', background: 'rgba(99, 102, 241, 0.6)', borderRadius: '4px', border: '1px solid rgba(129, 140, 248, 0.5)' }}></div>
-                            <div style={{ width: '34%', background: 'rgba(168, 85, 247, 0.6)', borderRadius: '4px', border: '1px solid rgba(192, 132, 252, 0.5)' }}></div>
-                          </div>
-
-                          {/* Track 2: Audio */}
-                          <div style={{ display: 'flex', gap: '6px', height: '14px' }}>
-                            <div style={{ width: '48%', background: 'rgba(56, 189, 248, 0.45)', borderRadius: '4px', border: '1px solid rgba(56, 189, 248, 0.4)' }}></div>
-                            <div style={{ width: '48%', background: 'rgba(56, 189, 248, 0.45)', borderRadius: '4px', border: '1px solid rgba(56, 189, 248, 0.4)' }}></div>
-                          </div>
-                        </div>
+                      {/* Codec Meta Tags */}
+                      <div style={{ display: 'flex', gap: '8px', position: 'relative', zIndex: 1, flexWrap: 'wrap' }}>
+                        <span className="mono-spec" style={{ fontSize: '0.64rem', padding: '4px 8px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#E2E8F0' }}>
+                          SONY S-LOG3
+                        </span>
+                        <span className="mono-spec" style={{ fontSize: '0.64rem', padding: '4px 8px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#E2E8F0' }}>
+                          RED IPP2
+                        </span>
+                        <span className="mono-spec" style={{ fontSize: '0.64rem', padding: '4px 8px', borderRadius: '6px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38BDF8' }}>
+                          10-BIT 4:2:2 PRORES
+                        </span>
                       </div>
-
                     </div>
                   )}
 
                   {/* 
                     ==============================================================
-                    VISUAL 4: DELIVERY / 3D FROSTED FOLDER & FINAL TOUCH ARTBOARD
+                    VISUAL 2: HOOK RETENTION & PACING MATRIX (Animated)
                     ============================================================== 
                   */}
-                  {step.visualType === 'delivery' && (
+                  {step.visualType === 'retention' && (
                     <div 
+                      className="artboard-box pop-hover"
                       style={{
                         position: 'relative',
                         aspectRatio: '16/11',
-                        minHeight: '300px',
+                        minHeight: '290px',
                         background: '#070A12',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: '24px',
                         padding: '24px',
                         overflow: 'hidden',
                         display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.06)'
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.08)'
                       }}
                     >
-                      {/* Ambient Bottom Blue Glow */}
-                      <div 
-                        style={{
-                          position: 'absolute',
-                          bottom: '-20%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '90%',
-                          height: '70%',
-                          background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.6) 0%, rgba(99, 102, 241, 0.3) 50%, transparent 75%)',
-                          filter: 'blur(45px)',
-                          pointerEvents: 'none',
-                          zIndex: 0
-                        }}
-                      />
+                      {/* Top Header */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <i className="fa-solid fa-bolt" style={{ color: '#F43F5E', fontSize: '0.8rem' }}></i>
+                          <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#FFFFFF', fontWeight: '700' }}>3-SEC HOOK RETENTION CURVE</span>
+                        </div>
+                        <span className="mono-spec" style={{ fontSize: '0.66rem', color: '#EC4899', background: 'rgba(236, 72, 153, 0.12)', border: '1px solid rgba(236, 72, 153, 0.3)', padding: '3px 8px', borderRadius: '4px' }}>
+                          +84% WATCH-TIME
+                        </span>
+                      </div>
 
-                      {/* 3D Frosted Glass Delivery Folder Structure */}
-                      <div style={{ position: 'relative', width: '220px', height: '160px', zIndex: 1 }}>
-                        
-                        {/* Folder Backing Tab */}
-                        <div style={{
-                          position: 'absolute',
-                          top: '0',
-                          left: '0',
-                          width: '75px',
-                          height: '24px',
-                          background: 'rgba(99, 102, 241, 0.4)',
-                          borderRadius: '10px 10px 0 0',
-                          border: '1px solid rgba(255, 255, 255, 0.15)',
-                          borderBottom: 'none'
-                        }}></div>
-
-                        {/* Folder Main Body with Frosted Glass */}
-                        <div style={{
-                          position: 'absolute',
-                          top: '18px',
-                          left: '0',
-                          width: '100%',
-                          height: '140px',
-                          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%)',
-                          border: '1.5px solid rgba(255, 255, 255, 0.2)',
-                          borderRadius: '0 16px 16px 16px',
-                          backdropFilter: 'blur(20px)',
-                          WebkitBackdropFilter: 'blur(20px)',
-                          boxShadow: '0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}>
-                          {/* Inner Media Sheets Preview */}
-                          <div style={{
-                            position: 'absolute',
-                            top: '-10px',
-                            left: '20px',
-                            right: '20px',
-                            height: '50px',
-                            background: 'rgba(255, 255, 255, 0.12)',
-                            borderRadius: '8px',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            zIndex: 0
-                          }}></div>
-
-                          {/* Center Dispatch Circle Button */}
-                          <div style={{
-                            width: '46px',
-                            height: '46px',
-                            borderRadius: '50%',
-                            background: 'rgba(255, 255, 255, 0.15)',
-                            border: '1px solid rgba(255, 255, 255, 0.3)',
-                            backdropFilter: 'blur(10px)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
-                            position: 'relative',
-                            zIndex: 2
-                          }}>
-                            <i className="fa-solid fa-share" style={{ color: '#FFFFFF', fontSize: '1rem' }}></i>
-                          </div>
-
-                          {/* "Final touch" Badge with Cursor */}
-                          <div style={{
-                            position: 'absolute',
-                            bottom: '16px',
-                            right: '16px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '6px',
-                            zIndex: 3
-                          }}>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                              <path d="M4 0l16 12.279-6.951 1.17 4.325 8.817-3.596 1.734-4.35-8.879-5.428 5.679v-20.8z"/>
-                            </svg>
-                            <span style={{
-                              fontSize: '0.68rem',
-                              fontWeight: '600',
-                              color: '#FFFFFF',
-                              background: 'rgba(0, 0, 0, 0.65)',
-                              border: '1px solid rgba(255, 255, 255, 0.2)',
-                              padding: '3px 8px',
-                              borderRadius: '6px',
-                              backdropFilter: 'blur(8px)'
-                            }}>
-                              Final touch
-                            </span>
-                          </div>
-
+                      {/* Retention Graph Visualization */}
+                      <div style={{ position: 'relative', zIndex: 1, background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '14px', backdropFilter: 'blur(16px)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: '#64748B', fontFamily: 'var(--font-mono)', marginBottom: '8px' }}>
+                          <span>00:00 (Hook Intro)</span>
+                          <span>00:03 (Pattern Interrupt)</span>
+                          <span>00:45 (Payoff)</span>
                         </div>
 
+                        {/* Animated SVG Curve */}
+                        <svg width="100%" height="45" viewBox="0 0 280 45" fill="none">
+                          <path d="M0 38C40 38 70 8 120 12C180 16 220 6 280 4" stroke="#F43F5E" strokeWidth="2.5" strokeLinecap="round" />
+                          <path d="M0 42C40 42 70 28 120 30C180 34 220 22 280 20" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeDasharray="3 3" />
+                        </svg>
+                      </div>
+
+                      {/* Hook Variation Chips */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', position: 'relative', zIndex: 1, textAlign: 'center' }}>
+                        <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '6px' }}>
+                          <span style={{ fontSize: '0.62rem', color: '#E2E8F0', fontWeight: '700', display: 'block' }}>HOOK A</span>
+                          <span className="mono-spec" style={{ fontSize: '0.58rem', color: '#22C55E' }}>92% PASS</span>
+                        </div>
+                        <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '6px' }}>
+                          <span style={{ fontSize: '0.62rem', color: '#E2E8F0', fontWeight: '700', display: 'block' }}>HOOK B</span>
+                          <span className="mono-spec" style={{ fontSize: '0.58rem', color: '#38BDF8' }}>88% PASS</span>
+                        </div>
+                        <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '6px' }}>
+                          <span style={{ fontSize: '0.62rem', color: '#E2E8F0', fontWeight: '700', display: 'block' }}>PACING</span>
+                          <span className="mono-spec" style={{ fontSize: '0.58rem', color: '#EC4899' }}>DYNAMIC</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 
+                    ==============================================================
+                    VISUAL 3: DAVINCI COLOR & IZOTOPE AUDIO SUITE (Live EQ Bars)
+                    ============================================================== 
+                  */}
+                  {step.visualType === 'mastering' && (
+                    <div 
+                      className="artboard-box pop-hover"
+                      style={{
+                        position: 'relative',
+                        aspectRatio: '16/11',
+                        minHeight: '290px',
+                        background: '#070A12',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: '24px',
+                        padding: '24px',
+                        overflow: 'hidden',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.08)'
+                      }}
+                    >
+                      {/* Top Header */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <i className="fa-solid fa-sliders" style={{ color: '#22C55E', fontSize: '0.8rem' }}></i>
+                          <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#FFFFFF', fontWeight: '700' }}>DAVINCI + iZOTOPE RX MASTER</span>
+                        </div>
+                        <span className="mono-spec" style={{ fontSize: '0.66rem', color: '#22C55E', background: 'rgba(34, 197, 94, 0.12)', border: '1px solid rgba(34, 197, 94, 0.3)', padding: '3px 8px', borderRadius: '4px' }}>
+                          -14.0 LUFS
+                        </span>
+                      </div>
+
+                      {/* Live Animated Audio Waveform EQ */}
+                      <div style={{ position: 'relative', zIndex: 1, background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '14px', backdropFilter: 'blur(16px)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: '#94A3B8', marginBottom: '8px' }}>
+                          <span>SPECTRAL VOCAL CLARITY</span>
+                          <span className="mono-spec" style={{ color: '#22C55E' }}>DE-NOISE APPLIED</span>
+                        </div>
+
+                        {/* Animated Multi-Bar EQ Spectrum */}
+                        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '4px', height: '36px' }}>
+                          {eqHeights.map((h, i) => (
+                            <div 
+                              key={i} 
+                              style={{ 
+                                flex: 1, 
+                                height: `${h}%`, 
+                                background: h > 80 ? '#22C55E' : h > 60 ? '#38BDF8' : 'rgba(255,255,255,0.4)', 
+                                borderRadius: '2px',
+                                transition: 'height 0.4s ease'
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Color Gamut Readout */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1, background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#C084FC' }}></span>
+                          <span style={{ fontSize: '0.74rem', color: '#E2E8F0' }}>ACEScc 1.3 D65 OLED Calibrated</span>
+                        </div>
+                        <span className="mono-spec" style={{ fontSize: '0.65rem', color: '#C084FC', fontWeight: '700' }}>10-BIT PRORES</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 
+                    ==============================================================
+                    VISUAL 4: MULTI-PLATFORM 4K DISPATCH & 1-CLICK APPROVAL
+                    ============================================================== 
+                  */}
+                  {step.visualType === 'dispatch' && (
+                    <div 
+                      className="artboard-box pop-hover"
+                      style={{
+                        position: 'relative',
+                        aspectRatio: '16/11',
+                        minHeight: '290px',
+                        background: '#070A12',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: '24px',
+                        padding: '24px',
+                        overflow: 'hidden',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        boxShadow: '0 25px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.08)'
+                      }}
+                    >
+                      {/* Top Header */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <i className="fa-solid fa-cloud-arrow-down" style={{ color: '#38BDF8', fontSize: '0.85rem' }}></i>
+                          <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#FFFFFF', fontWeight: '700' }}>4K MULTI-PLATFORM DISPATCH</span>
+                        </div>
+                        <span className="mono-spec" style={{ fontSize: '0.66rem', color: '#22C55E', background: 'rgba(34, 197, 94, 0.12)', border: '1px solid rgba(34, 197, 94, 0.3)', padding: '3px 8px', borderRadius: '4px' }}>
+                          READY &lt; 48H
+                        </span>
+                      </div>
+
+                      {/* Multi-Format Render Previews */}
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', position: 'relative', zIndex: 1 }}>
+                        
+                        {/* 9:16 Reel Asset */}
+                        <div style={{ background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '10px', display: 'flex', alignItems: 'center', gap: '10px', backdropFilter: 'blur(16px)' }}>
+                          <div style={{ width: '22px', height: '36px', background: 'linear-gradient(180deg, #6366F1, #38BDF8)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <i className="fa-solid fa-mobile-screen" style={{ color: '#FFF', fontSize: '0.6rem' }}></i>
+                          </div>
+                          <div>
+                            <span style={{ fontSize: '0.72rem', color: '#FFFFFF', fontWeight: '700', display: 'block' }}>9:16 Vertical</span>
+                            <span className="mono-spec" style={{ fontSize: '0.6rem', color: '#94A3B8' }}>TikTok / Reels / Shorts</span>
+                          </div>
+                        </div>
+
+                        {/* 16:9 Master Asset */}
+                        <div style={{ background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '10px', display: 'flex', alignItems: 'center', gap: '10px', backdropFilter: 'blur(16px)' }}>
+                          <div style={{ width: '36px', height: '22px', background: 'linear-gradient(180deg, #EC4899, #8B5CF6)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <i className="fa-brands fa-youtube" style={{ color: '#FFF', fontSize: '0.65rem' }}></i>
+                          </div>
+                          <div>
+                            <span style={{ fontSize: '0.72rem', color: '#FFFFFF', fontWeight: '700', display: 'block' }}>16:9 Master</span>
+                            <span className="mono-spec" style={{ fontSize: '0.6rem', color: '#94A3B8' }}>YouTube 4K ProRes</span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      {/* 1-Click Frame.io Instant Review Pin */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1, background: 'rgba(34, 197, 94, 0.08)', border: '1px solid rgba(34, 197, 94, 0.25)', padding: '10px 14px', borderRadius: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <i className="fa-solid fa-circle-check" style={{ color: '#22C55E', fontSize: '0.85rem' }}></i>
+                          <span style={{ fontSize: '0.74rem', color: '#FFFFFF', fontWeight: '600' }}>1-Click Client Approval Pod</span>
+                        </div>
+                        <span className="mono-spec" style={{ fontSize: '0.68rem', color: '#22C55E', fontWeight: '700' }}>DISPATCHED ✓</span>
                       </div>
                     </div>
                   )}
@@ -708,26 +491,44 @@ export default function BenefitsBento() {
                 </div>
 
               </div>
-            ))}
-          </div>
+            );
+          })}
 
         </div>
 
       </div>
 
-      {/* Responsive Styles */}
+      {/* Global CSS for Animations and Responsive Mobile Layout */}
       <style jsx>{`
-        @media (max-width: 860px) {
-          .step-timeline-row {
+        @keyframes pulseDot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.85); }
+        }
+        .pulsing-dot {
+          animation: pulseDot 2s infinite ease-in-out;
+        }
+
+        @keyframes fillStream {
+          0% { background-position: 0% 50%; }
+          100% { background-position: 100% 50%; }
+        }
+        .animated-progress-fill {
+          background-size: 200% 200%;
+          animation: fillStream 3s ease infinite;
+        }
+
+        @media (max-width: 880px) {
+          .alternating-step-row {
             grid-template-columns: 1fr !important;
             gap: 36px !important;
           }
-          .timeline-vertical-rail {
-            display: none !important;
+          .alternating-step-row > div {
+            order: unset !important;
           }
         }
       `}</style>
     </section>
   );
 }
+
 
