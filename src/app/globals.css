@@ -8424,7 +8424,119 @@ input::placeholder, textarea::placeholder {
     margin-bottom: 8px !important;
   }
 
-  .service-hub-actions {
+  /* ==========================================================================
+   SCROLL-DRIVEN CERAMIC LIGHT MORPHING STAGE (Awwwards-Level Cinematic Contrast)
+   ========================================================================== */
+.home-ceramic-morph-stage {
+  transition: background 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+              color 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  background: transparent;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active {
+  background: #F8FAFC !important;
+  color: #090E1A !important;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border-radius: 36px;
+  margin: 30px 16px 50px;
+  padding: 30px 0 50px;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-positioning h2,
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-section-head h2,
+.home-ceramic-morph-stage.ceramic-stage-active .benefits-bento-heading h2 {
+  color: #090E1A !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .serif-accent,
+.home-ceramic-morph-stage.ceramic-stage-active .combination-font {
+  background: linear-gradient(180deg, #090E1A 20%, #1E293B 70%, #475569 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: #090E1A !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active p,
+.home-ceramic-morph-stage.ceramic-stage-active .benefits-bento-heading p {
+  color: #334155 !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .section-subtitle,
+.home-ceramic-morph-stage.ceramic-stage-active .mono-spec {
+  color: #0284C7 !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .about-text-link {
+  color: #090E1A !important;
+  border-bottom-color: rgba(15, 23, 42, 0.3) !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-proof-grid {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-proof-grid div {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  color: #334155 !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-services {
+  background: transparent !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-service-list {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-service-list a {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  color: #090E1A !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-service-list a:hover {
+  background: #FFFFFF !important;
+  color: #2563EB !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-service-list strong {
+  color: #090E1A !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .home-foundry-service-list span:not(.mono-spec) {
+  color: #475569 !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .workflow-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.04) !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .workflow-card h3 {
+  color: #090E1A !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .workflow-card p {
+  color: #475569 !important;
+}
+
+.home-ceramic-morph-stage.ceramic-stage-active .workflow-step-number {
+  color: #2563EB !important;
+}
+
+@media (max-width: 768px) {
+  .home-ceramic-morph-stage.ceramic-stage-active {
+    margin: 20px 8px 30px;
+    padding: 20px 0 30px;
+    border-radius: 24px;
+  }
+}
+
+.service-hub-actions {
     flex-direction: column !important;
     width: 100% !important;
     gap: 10px !important;
