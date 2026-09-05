@@ -4,8 +4,6 @@ import FAQSection from '@/components/FAQSection';
 import LogoMarquee from '@/components/LogoMarquee';
 import ServicesSection from '@/components/ServicesSection';
 import PricingSection from '@/components/PricingSection';
-import ServicesMatrix from '@/components/ServicesMatrix';
-import ComparisonSection from '@/components/ComparisonSection';
 import BenefitsBento from '@/components/BenefitsBento';
 import { client } from '@/sanity/client';
 import { urlFor } from '@/sanity/image';
@@ -293,15 +291,13 @@ export default async function Home() {
         </div>
       )}
 
-      {/* PRICING, MATRIX, COMPARISON & BENEFITS */}
+      {/* PRICING & BENEFITS PIPELINE */}
       <PricingSection 
         subtitle={pricingSubtitle} 
         title1={pricingTitle1} 
         title2={pricingTitle2} 
         description={pricingDescription}
       />
-      <ServicesMatrix />
-      <ComparisonSection />
       <BenefitsBento />
 
       {/* TESTIMONIALS REELS MARQUEE SECTION */}

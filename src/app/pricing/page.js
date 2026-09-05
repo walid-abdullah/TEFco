@@ -5,8 +5,6 @@ import Link from 'next/link';
 import PricingSection from '@/components/PricingSection';
 import PricingCalculator from '@/components/PricingCalculator';
 import BenefitsBento from '@/components/BenefitsBento';
-import ServicesMatrix from '@/components/ServicesMatrix';
-import ComparisonSection from '@/components/ComparisonSection';
 import DesignMonksContact from '@/components/DesignMonksContact';
 
 export default function PricingPage() {
@@ -57,14 +55,8 @@ export default function PricingPage() {
       {/* 2. Interactive Calculator & ROI Estimator Embedded Inside Pricing */}
       <PricingCalculator />
 
-      {/* 3. Benefits of Membership Bento Grid */}
+      {/* 3. Benefits of Membership Pipeline */}
       <BenefitsBento />
-
-      {/* 4. Comprehensive 24+ Services Matrix */}
-      <ServicesMatrix />
-
-      {/* 5. The Editly Foundry vs Others Side-by-Side Comparison */}
-      <ComparisonSection />
 
       {/* 5. Deep Pricing FAQ Section (Musemind Style) */}
       <section className="section-padding" style={{ position: 'relative' }}>
