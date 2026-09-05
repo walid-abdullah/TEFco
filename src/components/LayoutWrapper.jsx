@@ -7,6 +7,7 @@ import VideoModal from "./VideoModal";
 import FloatingDock from "./FloatingDock";
 import GlassMeshBackground from "./GlassMeshBackground";
 import RaycastCommandPalette from "./RaycastCommandPalette";
+import GlobalGSAPTransition from "./GlobalGSAPTransition";
 import { ThemeProvider } from "@/context/ThemeContext";
 
 export default function LayoutWrapper({ children, settings }) {
@@ -20,6 +21,7 @@ export default function LayoutWrapper({ children, settings }) {
   return (
     <ThemeProvider>
       <div style={{ position: 'relative', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
+        <GlobalGSAPTransition />
         <GlassMeshBackground />
         <Navbar menu={settings?.headerMenu} />
         <main style={{ position: 'relative', zIndex: 1 }}>{children}</main>

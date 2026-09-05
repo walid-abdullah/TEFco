@@ -30,7 +30,7 @@ export default function HomepageGSAPOrchestrator({ children }) {
       if (heroSubtitle) {
         heroTl.fromTo(
           heroSubtitle,
-          { opacity: 0, y: -20, filter: 'blur(6px)' },
+          { opacity: 0, y: -25, filter: 'blur(8px)' },
           { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.8 }
         );
       }
@@ -38,8 +38,8 @@ export default function HomepageGSAPOrchestrator({ children }) {
       if (heroTitle) {
         heroTl.fromTo(
           heroTitle,
-          { opacity: 0, y: 40, filter: 'blur(10px)', scale: 0.96 },
-          { opacity: 1, y: 0, filter: 'blur(0px)', scale: 1, duration: 1 },
+          { opacity: 0, y: 50, filter: 'blur(12px)', scale: 0.95 },
+          { opacity: 1, y: 0, filter: 'blur(0px)', scale: 1, duration: 1.1 },
           '-=0.5'
         );
       }
@@ -47,7 +47,7 @@ export default function HomepageGSAPOrchestrator({ children }) {
       if (heroDesc) {
         heroTl.fromTo(
           heroDesc,
-          { opacity: 0, y: 25 },
+          { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.8 },
           '-=0.6'
         );
@@ -56,8 +56,8 @@ export default function HomepageGSAPOrchestrator({ children }) {
       if (heroActions) {
         heroTl.fromTo(
           heroActions.children,
-          { opacity: 0, y: 20, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.1 },
+          { opacity: 0, y: 25, scale: 0.92 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.65, stagger: 0.12 },
           '-=0.5'
         );
       }
@@ -71,16 +71,33 @@ export default function HomepageGSAPOrchestrator({ children }) {
         );
       }
 
-      // 2. SCROLL TRIGGER: Ceramic Light Morphing Stage (Dark -> Light -> Dark)
+      // 2. FULL-VIEWPORT DYNAMIC THEME MORPH: DARK ➔ CERAMIC LIGHT ➔ DARK
       const morphStage = containerRef.current.querySelector('.home-ceramic-morph-stage');
       if (morphStage) {
         ScrollTrigger.create({
           trigger: morphStage,
-          start: 'top 55%',
-          end: 'bottom 45%',
-          toggleClass: { targets: morphStage, className: 'ceramic-stage-active' },
-          scrub: false,
-          markers: false
+          start: 'top 48%',
+          end: 'bottom 48%',
+          onEnter: () => {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.classList.add('scroll-light-active');
+            window.dispatchEvent(new Event('themechange'));
+          },
+          onLeave: () => {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.classList.remove('scroll-light-active');
+            window.dispatchEvent(new Event('themechange'));
+          },
+          onEnterBack: () => {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.classList.add('scroll-light-active');
+            window.dispatchEvent(new Event('themechange'));
+          },
+          onLeaveBack: () => {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.classList.remove('scroll-light-active');
+            window.dispatchEvent(new Event('themechange'));
+          }
         });
       }
 
@@ -88,7 +105,7 @@ export default function HomepageGSAPOrchestrator({ children }) {
       const workCards = containerRef.current.querySelectorAll('.home-foundry-work-card');
       if (workCards.length > 0) {
         workCards.forEach((card, i) => {
-          const speed = (i % 2 === 0) ? -25 : 25;
+          const speed = (i % 2 === 0) ? -35 : 35;
           gsap.fromTo(
             card,
             { y: speed },
@@ -111,31 +128,31 @@ export default function HomepageGSAPOrchestrator({ children }) {
       if (serviceItems.length > 0) {
         gsap.fromTo(
           serviceItems,
-          { opacity: 0, x: -30 },
+          { opacity: 0, x: -40 },
           {
             opacity: 1,
             x: 0,
-            duration: 0.7,
+            duration: 0.8,
             stagger: 0.12,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: '.home-foundry-service-list',
-              start: 'top 80%'
+              start: 'top 82%'
             }
           }
         );
       }
 
-      // 5. Proof Grid & Positioning Reveal
+      // 5. Proof Grid Stagger Reveal
       const proofDivs = containerRef.current.querySelectorAll('.home-foundry-proof-grid div');
       if (proofDivs.length > 0) {
         gsap.fromTo(
           proofDivs,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 35 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.75,
             stagger: 0.15,
             ease: 'power3.out',
             scrollTrigger: {
@@ -146,11 +163,15 @@ export default function HomepageGSAPOrchestrator({ children }) {
         );
       }
 
-      // 6. Refresh on layout settle
       ScrollTrigger.refresh();
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      // Revert theme to dark on unmount
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.classList.remove('scroll-light-active');
+      ctx.revert();
+    };
   }, []);
 
   return (
