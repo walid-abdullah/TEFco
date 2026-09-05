@@ -226,9 +226,6 @@ export default function PricingCalculator() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-                ? 'linear-gradient(135deg, rgba(240, 249, 255, 0.95), rgba(255, 255, 255, 0.95))' 
-                : 'linear-gradient(135deg, rgba(13, 27, 62, 0.85), rgba(7, 13, 24, 0.95))',
-              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.3)',
               position: 'relative'
             }}
           >
@@ -250,42 +247,42 @@ export default function PricingCalculator() {
 
             {/* Estimated Retainer */}
             <div style={{ marginBottom: '24px' }}>
-              <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
+              <div style={{ fontSize: '0.88rem', color: '#94A3B8', fontWeight: '600' }}>
                 Estimated Foundry Retainer:
               </div>
-              <div style={{ fontSize: '3rem', fontWeight: '900', color: 'var(--text-primary)', lineHeight: '1.1' }}>
-                ${monthlyFoundryPrice.toLocaleString()}
-                <span style={{ fontSize: '1rem', fontWeight: '500', color: 'var(--text-secondary)' }}> / month</span>
+              <div style={{ fontSize: '3rem', fontWeight: '900', color: '#FFFFFF', lineHeight: '1.1' }}>
+                ${computedPrice.toLocaleString()}
+                <span style={{ fontSize: '1rem', fontWeight: '500', color: '#94A3B8' }}> / month</span>
               </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+              <div style={{ fontSize: '0.8rem', color: '#64748B', marginTop: '4px' }}>
                 Includes dedicated Senior Editor, Motion Designer & Producer Pod.
               </div>
             </div>
 
             {/* In-House vs Foundry Savings Comparison Box */}
             <div style={{
-              background: isLight ? '#FFFFFF' : 'rgba(255, 255, 255, 0.05)',
+              background: 'rgba(255, 255, 255, 0.04)',
               borderRadius: '16px',
               padding: '20px',
-              border: '1px solid var(--glass-border)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
               marginBottom: '28px'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '0.9rem' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>Full-Time In-House Team:</span>
+                <span style={{ color: '#94A3B8' }}>Full-Time In-House Team:</span>
                 <span style={{ fontWeight: '700', textDecoration: 'line-through', color: '#EF4444' }}>${inHouseCost.toLocaleString()}/mo</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', fontSize: '0.9rem' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>The Editly Foundry Pod:</span>
-                <span style={{ fontWeight: '800', color: '#22C55E' }}>${monthlyFoundryPrice.toLocaleString()}/mo</span>
+                <span style={{ color: '#94A3B8' }}>The Editly Foundry Pod:</span>
+                <span style={{ fontWeight: '800', color: '#22C55E' }}>${computedPrice.toLocaleString()}/mo</span>
               </div>
               <div style={{
-                borderTop: '1px dashed var(--glass-border)',
+                borderTop: '1px dashed rgba(255, 255, 255, 0.1)',
                 paddingTop: '12px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}>
-                <span style={{ fontWeight: '800', fontSize: '0.95rem', color: 'var(--text-primary)' }}>Estimated Annual Savings:</span>
+                <span style={{ fontWeight: '800', fontSize: '0.95rem', color: '#FFFFFF' }}>Estimated Annual Savings:</span>
                 <span style={{ fontWeight: '900', fontSize: '1.4rem', color: '#22C55E' }}>
                   ${annualSavings.toLocaleString()}
                 </span>
@@ -300,7 +297,7 @@ export default function PricingCalculator() {
                 data-analytics-id="pricing_calculator_cta"
                 data-analytics-label="Lock In This Retainer"
                 data-analytics-location="pricing_calculator"
-                data-analytics-value={monthlyFoundryPrice}
+                data-analytics-value={computedPrice}
                 style={{ width: '100%', textAlign: 'center', borderRadius: '12px', padding: '14px', fontWeight: '800', fontSize: '0.95rem' }}
               >
                 <span>Lock In This Retainer ➔</span>
@@ -314,7 +311,7 @@ export default function PricingCalculator() {
                 data-analytics-id="pricing_whatsapp_cta"
                 data-analytics-label="Discuss Custom Budget with Walid"
                 data-analytics-location="pricing_calculator"
-                data-analytics-value={monthlyFoundryPrice}
+                data-analytics-value={computedPrice}
                 style={{ width: '100%', textAlign: 'center', borderRadius: '12px', padding: '12px', color: '#22C55E', borderColor: 'rgba(34, 197, 94, 0.4)', fontSize: '0.88rem' }}
               >
                 <i className="fa-brands fa-whatsapp" style={{ marginRight: '8px' }}></i>
