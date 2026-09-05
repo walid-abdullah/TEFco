@@ -112,7 +112,7 @@ export default function ContactSection() {
                 </div>
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>
-                Book a 1-on-1 strategy call directly with our Founder to discuss your brand's potential and viral growth roadmap.
+                Book a 1-on-1 strategy call directly with our Founder to discuss your brand&apos;s potential and viral growth roadmap.
               </p>
             </div>
 

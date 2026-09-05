@@ -100,7 +100,7 @@ export default function CaseStudyDetailPage({ params }) {
               3. Hollywood Film LUT Color Grading & Mastered Audio
             </h3>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
-              We took flat camera sensor colors and applied custom cinematic LUTs tailored to the founder's brand palette, combined with multi-band compression to ensure studio-grade vocal clarity.
+              We took flat camera sensor colors and applied custom cinematic LUTs tailored to the founder&apos;s brand palette, combined with multi-band compression to ensure studio-grade vocal clarity.
             </p>
           </div>
         </div>

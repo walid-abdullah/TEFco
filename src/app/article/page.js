@@ -26,14 +26,14 @@ export default function ArticlePage() {
         <p style={{"marginBottom": "25px"}}>The secret to viral content on TikTok and Instagram Reels lies in the first 3 seconds. To retain viewers, you must combine visual pattern interrupts (sudden zoom-ins, fast typography, optical flares) with an intriguing question or statement.</p>
         
         <h3 style={{"fontSize": "1.8rem", "margin": "40px 0 20px", "color": "var(--text-primary)"}}>The Visual Pattern Interrupt</h3>
-        <p style={{"marginBottom": "25px"}}>Consumers are scrolling faster than ever. If your video starts with a static shot of you breathing in or saying "Hey guys", you've already lost 80% of your audience. The first frame must contain motion.</p>
+        <p style={{"marginBottom": "25px"}}>Consumers are scrolling faster than ever. If your video starts with a static shot of you breathing in or saying &ldquo;Hey guys&rdquo;, you&apos;ve already lost 80% of your audience. The first frame must contain motion.</p>
         
         <div style={{"background": "var(--bg-secondary)", "padding": "30px", "borderRadius": "15px", "borderLeft": "4px solid var(--accent-blue)", "marginBottom": "30px"}}>
           <h4 style={{"marginTop": "0"}}>Key Takeaways:</h4>
           <ul style={{"paddingLeft": "20px", "marginBottom": "0"}}>
             <li style={{"marginBottom": "10px"}}>Start with action already happening.</li>
             <li style={{"marginBottom": "10px"}}>Use dynamic captions right on frame 1.</li>
-            <li>Don't waste time on introductions. Provide value immediately.</li>
+            <li>Don&apos;t waste time on introductions. Provide value immediately.</li>
           </ul>
         </div>
         

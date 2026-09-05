@@ -334,7 +334,7 @@ export default function ReelsTestimonialsMarquee({ videoTestimonials = [] }) {
                   <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginLeft: '4px', fontWeight: '700' }}>{rev.rating}</span>
                 </div>
                 <p style={{ fontSize: '0.88rem', color: 'var(--text-primary)', lineHeight: '1.6', margin: '0 0 20px 0', fontStyle: 'italic' }}>
-                  "{rev.text}"
+                  &ldquo;{rev.text}&rdquo;
                 </p>
               </div>
 

@@ -58,7 +58,7 @@ export default function ContactPage() {
         <div className="text-center" style={{ maxWidth: '850px', margin: '0 auto 28px' }}>
           <span className="section-subtitle" style={{ marginBottom: '6px', display: 'inline-block', fontSize: '0.85rem' }}>Get in Touch</span>
           <h1 className="section-title" style={{ fontSize: '2.6rem', marginBottom: '10px', lineHeight: '1.2' }}>
-            Let's Engineer Your <span className="combination-font">Video Growth</span>
+            Let&apos;s Engineer Your <span className="combination-font">Video Growth</span>
           </h1>
           <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '18px' }}>
             Fill out the project brief below or connect instantly on WhatsApp.

@@ -101,23 +101,18 @@ export default function BeforeAfterSlider({
       <div
         style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          width: `${sliderPosition}%`,
-          overflow: 'hidden',
+          inset: 0,
+          clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
           background: beforeBg,
-          borderRight: '2px solid #FFFFFF',
-          transition: isDragging ? 'none' : 'width 0.1s ease-out'
+          transition: isDragging ? 'none' : 'clip-path 0.1s ease-out'
         }}
       >
         <div
           style={{
-            width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '1000px',
+            width: '100%',
             height: '100%',
             position: 'absolute',
-            top: 0,
-            left: 0,
+            inset: 0,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

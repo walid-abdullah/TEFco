@@ -60,7 +60,7 @@ export default function CalculatorPage() {
             Calculate Your Video Output & <span className="combination-font">Annual Savings</span>
           </h1>
           <p className="section-description" style={{ maxWidth: '750px', margin: '0 auto', fontSize: '1.15rem', color: 'var(--text-secondary)' }}>
-            See exactly how much you save with The Editly Foundry Co.'s dedicated post-production pod compared to hiring full-time in-house editors.
+            See exactly how much you save with The Editly Foundry Co.&apos;s dedicated post-production pod compared to hiring full-time in-house editors.
           </p>
         </div>
 

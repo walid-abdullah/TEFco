@@ -166,7 +166,7 @@ export default function CareerPage() {
             Build the Future of <span className="combination-font">Attention & Media</span>
           </h1>
           <p className="section-description" style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: '1.7' }}>
-            We're scaling our creative studio with the top 1% video editors, motion designers, and strategists. Join a world-class production pod and work with global creators and venture-backed brands.
+            We&apos;re scaling our creative studio with the top 1% video editors, motion designers, and strategists. Join a world-class production pod and work with global creators and venture-backed brands.
           </p>
         </div>
 

@@ -216,7 +216,7 @@ export default function RaycastCommandPalette() {
             <div style={{ maxHeight: '390px', overflowY: 'auto', padding: '8px' }}>
               {filteredActions.length === 0 ? (
                 <div style={{ padding: '32px 20px', textAlign: 'center', color: '#64748B', fontSize: '0.86rem' }}>
-                  No workflows found for "{query}"
+                  No workflows found for &ldquo;{query}&rdquo;
                 </div>
               ) : (
                 filteredActions.map((act, idx) => {

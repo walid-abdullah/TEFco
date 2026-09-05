@@ -20,7 +20,7 @@ export default function FounderCall() {
             <span className="section-subtitle" style={{ fontSize: '1.2rem', fontWeight: '700', display: 'block', marginBottom: '5px', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--accent-blue)' }}>Strategy Session</span>
             <h1 className="section-title" style={{ fontSize: '3rem', marginBottom: '15px' }}>Meet with <span className="combination-font">Walid Abdullah</span></h1>
             <p className="section-description" style={{ maxWidth: '600px', margin: '0 auto', color: 'var(--text-secondary)' }}>
-              Founder & CEO of Editly Foundry. Let's discuss your vision and build a roadmap for viral growth.
+              Founder & CEO of Editly Foundry. Let&apos;s discuss your vision and build a roadmap for viral growth.
             </p>
           </div>
 
@@ -30,7 +30,7 @@ export default function FounderCall() {
             <div className="booking-info">
               <h3 style={{ fontSize: '1.5rem', marginBottom: '15px', fontWeight: '700' }}>Why book this call?</h3>
               <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '25px' }}>
-                As the founder, I personally oversee the creative direction of our top-tier clients. In this exclusive 1-on-1 session, we won't just talk about editing; we'll dissect your current content strategy and identify exact leverage points to maximize your retention and conversion.
+                As the founder, I personally oversee the creative direction of our top-tier clients. In this exclusive 1-on-1 session, we won&apos;t just talk about editing; we&apos;ll dissect your current content strategy and identify exact leverage points to maximize your retention and conversion.
               </p>
 
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '15px' }}>
