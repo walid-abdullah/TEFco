@@ -78,14 +78,14 @@ export default function PricingSection({ subtitle, title1, title2, description, 
         {/* Section Header */}
         <div className="section-header text-center reveal-on-scroll" style={{ maxWidth: '780px', margin: '0 auto 40px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '16px' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#EF4444' }}></span>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22C55E' }}></span>
             <span className="mono-spec" style={{ fontSize: '0.74rem', color: '#E2E8F0', letterSpacing: '0.05em' }}>
               TRANSPARENT STUDIO PRICING
             </span>
           </div>
           <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', margin: '0 0 14px', fontWeight: '900', letterSpacing: '-0.03em' }}>
             Predictable Retainers. <br />
-            <span className="combination-font" style={{ color: '#EF4444' }}>Zero Hidden Fees.</span>
+            <span className="combination-font">Zero Hidden Fees.</span>
           </h2>
           <p style={{ color: 'rgba(255, 255, 255, 0.68)', fontSize: '1.02rem', lineHeight: '1.6', margin: '0 auto 28px', maxWidth: '640px' }}>
             {description || 'Scale your video output with a dedicated post-production pod. No contracts, pause or cancel anytime.'}
@@ -108,9 +108,9 @@ export default function PricingSection({ subtitle, title1, title2, description, 
                 padding: '8px 20px',
                 borderRadius: '999px',
                 border: 'none',
-                background: billingCycle === 'monthly' ? '#EF4444' : 'transparent',
-                color: billingCycle === 'monthly' ? '#FFFFFF' : 'rgba(255,255,255,0.6)',
-                fontWeight: '700',
+                background: billingCycle === 'monthly' ? '#FFFFFF' : 'transparent',
+                color: billingCycle === 'monthly' ? '#05070B' : 'rgba(255,255,255,0.6)',
+                fontWeight: '800',
                 fontSize: '0.85rem',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease'
@@ -125,9 +125,9 @@ export default function PricingSection({ subtitle, title1, title2, description, 
                 padding: '8px 20px',
                 borderRadius: '999px',
                 border: 'none',
-                background: billingCycle === 'quarterly' ? '#EF4444' : 'transparent',
-                color: billingCycle === 'quarterly' ? '#FFFFFF' : 'rgba(255,255,255,0.6)',
-                fontWeight: '700',
+                background: billingCycle === 'quarterly' ? '#FFFFFF' : 'transparent',
+                color: billingCycle === 'quarterly' ? '#05070B' : 'rgba(255,255,255,0.6)',
+                fontWeight: '800',
                 fontSize: '0.85rem',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
@@ -137,7 +137,7 @@ export default function PricingSection({ subtitle, title1, title2, description, 
               }}
             >
               <span>Quarterly</span>
-              <span className="mono-spec" style={{ fontSize: '0.65rem', background: 'rgba(255,255,255,0.2)', padding: '2px 6px', borderRadius: '999px', color: '#FFF' }}>
+              <span className="mono-spec" style={{ fontSize: '0.65rem', background: billingCycle === 'quarterly' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.12)', padding: '2px 6px', borderRadius: '999px', color: billingCycle === 'quarterly' ? '#000' : '#FFF', fontWeight: '800' }}>
                 SAVE 15%
               </span>
             </button>
@@ -162,9 +162,9 @@ export default function PricingSection({ subtitle, title1, title2, description, 
                   borderRadius: '20px',
                   padding: '36px 30px',
                   background: 'rgba(10, 14, 22, 0.88)',
-                  border: plan.isPopular ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255, 255, 255, 0.1)',
+                  border: plan.isPopular ? '1px solid rgba(255, 255, 255, 0.35)' : '1px solid rgba(255, 255, 255, 0.1)',
                   boxShadow: plan.isPopular 
-                    ? '0 25px 80px rgba(239, 68, 68, 0.15), inset 0 1px 0 rgba(255,255,255,0.18)' 
+                    ? '0 25px 80px rgba(255, 255, 255, 0.08), inset 0 1px 0 rgba(255,255,255,0.2)' 
                     : '0 20px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1)',
                   display: 'flex',
                   flexDirection: 'column',
@@ -178,11 +178,12 @@ export default function PricingSection({ subtitle, title1, title2, description, 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
                     <span className="mono-spec" style={{ 
                       fontSize: '0.7rem', 
-                      color: plan.isPopular ? '#EF4444' : '#94A3B8', 
-                      background: plan.isPopular ? 'rgba(239,68,68,0.12)' : 'rgba(255,255,255,0.05)', 
+                      color: plan.isPopular ? '#FFFFFF' : '#94A3B8', 
+                      background: plan.isPopular ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.05)', 
+                      border: plan.isPopular ? '1px solid rgba(255,255,255,0.2)' : '1px solid transparent',
                       padding: '3px 8px', 
                       borderRadius: '4px',
-                      fontWeight: '700'
+                      fontWeight: '800'
                     }}>
                       {plan.badge}
                     </span>
@@ -214,11 +215,11 @@ export default function PricingSection({ subtitle, title1, title2, description, 
                           width: '18px',
                           height: '18px',
                           borderRadius: '50%',
-                          background: plan.isPopular ? 'rgba(239, 68, 68, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                          background: plan.isPopular ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.08)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          color: plan.isPopular ? '#EF4444' : '#FFFFFF',
+                          color: '#FFFFFF',
                           fontSize: '0.62rem',
                           flexShrink: 0,
                           marginTop: '2px'
@@ -242,11 +243,12 @@ export default function PricingSection({ subtitle, title1, title2, description, 
                     padding: '12px 20px',
                     borderRadius: '10px',
                     fontSize: '0.92rem',
-                    fontWeight: '700',
+                    fontWeight: '800',
                     textAlign: 'center',
-                    background: plan.isPopular ? '#EF4444' : 'rgba(255,255,255,0.04)',
-                    borderColor: plan.isPopular ? '#EF4444' : 'rgba(255,255,255,0.15)',
-                    boxShadow: plan.isPopular ? '0 10px 30px rgba(239,68,68,0.3)' : 'none',
+                    background: plan.isPopular ? '#FFFFFF' : 'rgba(255,255,255,0.04)',
+                    color: plan.isPopular ? '#05070B' : '#FFFFFF',
+                    borderColor: plan.isPopular ? '#FFFFFF' : 'rgba(255,255,255,0.15)',
+                    boxShadow: plan.isPopular ? '0 10px 30px rgba(255,255,255,0.25)' : 'none',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

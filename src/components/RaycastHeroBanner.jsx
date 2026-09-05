@@ -92,7 +92,7 @@ export default function RaycastHeroBanner() {
           backdropFilter: 'blur(20px)', 
           marginBottom: '22px' 
         }}>
-          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#EF4444' }}></span>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22C55E' }}></span>
           <span className="mono-spec" style={{ color: '#E2E8F0', fontSize: '0.78rem', letterSpacing: '0.04em' }}>
             POST-PRODUCTION STUDIO // 2026
           </span>
@@ -110,7 +110,7 @@ export default function RaycastHeroBanner() {
         }}>
           Elevate Your Video Projects. <br />
           <span style={{
-            background: 'linear-gradient(180deg, #FFFFFF 20%, #EF4444 85%, #991B1B 100%)',
+            background: 'linear-gradient(180deg, #FFFFFF 20%, #CBD5E1 65%, #94A3B8 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             display: 'inline-block'
@@ -137,13 +137,14 @@ export default function RaycastHeroBanner() {
             href="/book-a-call"
             className="btn btn-primary"
             style={{ 
-              padding: '12px 28px', 
+              padding: '13px 30px', 
               borderRadius: '999px', 
               fontSize: '0.94rem', 
-              fontWeight: '700', 
-              background: '#EF4444', 
-              borderColor: '#EF4444',
-              boxShadow: '0 8px 24px rgba(239, 68, 68, 0.35)'
+              fontWeight: '800', 
+              background: '#FFFFFF', 
+              color: '#05070B',
+              border: '1px solid #FFFFFF',
+              boxShadow: '0 8px 30px rgba(255, 255, 255, 0.25)'
             }}
           >
             <span>Book 15-Min Growth Audit</span>
@@ -154,12 +155,12 @@ export default function RaycastHeroBanner() {
             href="/work"
             className="btn btn-outline"
             style={{ 
-              padding: '12px 24px', 
+              padding: '13px 26px', 
               borderRadius: '999px', 
               fontSize: '0.94rem', 
               fontWeight: '600',
-              background: 'rgba(255, 255, 255, 0.03)',
-              borderColor: 'rgba(255, 255, 255, 0.12)'
+              background: 'rgba(255, 255, 255, 0.04)',
+              borderColor: 'rgba(255, 255, 255, 0.15)'
             }}
           >
             <span>Explore 4K Work Vault</span>
@@ -176,7 +177,7 @@ export default function RaycastHeroBanner() {
             maxWidth: '960px',
             margin: '0 auto',
             borderRadius: '16px',
-            background: 'rgba(10, 14, 22, 0.85)',
+            background: 'rgba(10, 14, 22, 0.88)',
             backdropFilter: 'blur(30px)',
             WebkitBackdropFilter: 'blur(30px)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -205,8 +206,8 @@ export default function RaycastHeroBanner() {
                   style={{
                     padding: '11px 14px',
                     borderRadius: '8px',
-                    border: isSelected ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid transparent',
-                    background: isSelected ? 'rgba(239, 68, 68, 0.12)' : 'transparent',
+                    border: isSelected ? '1px solid rgba(255, 255, 255, 0.22)' : '1px solid transparent',
+                    background: isSelected ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
                     color: isSelected ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)',
                     fontSize: '0.88rem',
                     fontWeight: isSelected ? '700' : '500',
@@ -236,7 +237,7 @@ export default function RaycastHeroBanner() {
             {/* Left Column: Scope Details */}
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#EF4444', background: 'rgba(239,68,68,0.1)', padding: '2px 8px', borderRadius: '4px', fontWeight: '700' }}>
+                <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#FFFFFF', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', padding: '2px 8px', borderRadius: '4px', fontWeight: '700' }}>
                   {current.specs}
                 </span>
               </div>
@@ -257,9 +258,10 @@ export default function RaycastHeroBanner() {
                     padding: '9px 18px',
                     borderRadius: '8px',
                     fontSize: '0.86rem',
-                    fontWeight: '700',
-                    background: '#EF4444',
-                    borderColor: '#EF4444',
+                    fontWeight: '800',
+                    background: '#FFFFFF',
+                    color: '#05070B',
+                    border: '1px solid #FFFFFF',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '6px'
@@ -335,7 +337,7 @@ export default function RaycastHeroBanner() {
                   />
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(1px)' }}></div>
 
-                  {/* Play Button Overlay */}
+                  {/* Play Button Overlay (Monochrome Glass) */}
                   <div style={{
                     position: 'absolute',
                     top: '50%',
@@ -344,13 +346,13 @@ export default function RaycastHeroBanner() {
                     width: '56px',
                     height: '56px',
                     borderRadius: '50%',
-                    background: 'rgba(239, 68, 68, 0.92)',
+                    background: '#FFFFFF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#FFFFFF',
+                    color: '#05070B',
                     fontSize: '1.2rem',
-                    boxShadow: '0 0 30px rgba(239, 68, 68, 0.7)',
+                    boxShadow: '0 0 30px rgba(255, 255, 255, 0.4)',
                     transition: 'transform 0.2s ease'
                   }}>
                     <i className="fa-solid fa-play" style={{ marginLeft: '4px' }}></i>

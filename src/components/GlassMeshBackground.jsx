@@ -45,7 +45,7 @@ export default function GlassMeshBackground() {
 
       {/* 
         ========================================================================
-        2. TOP AMBIENT STUDIO HALO (Soft Luxury Glow)
+        2. TOP AMBIENT STUDIO HALO (Soft Luxury Monochrome Titanium Glow)
         ======================================================================== 
       */}
       <div 
@@ -57,17 +57,9 @@ export default function GlassMeshBackground() {
           width: '1200px',
           maxWidth: '100vw',
           height: '650px',
-          background: isServicePage
-            ? 'radial-gradient(ellipse 60% 45% at 50% 20%, rgba(239, 68, 68, 0.08), rgba(56, 189, 248, 0.04) 50%, transparent 75%)'
-            : isWorkPage
-            ? 'radial-gradient(ellipse 60% 45% at 50% 20%, rgba(56, 189, 248, 0.08), rgba(239, 68, 68, 0.03) 50%, transparent 75%)'
-            : isPricingPage
-            ? 'radial-gradient(ellipse 60% 45% at 50% 20%, rgba(16, 185, 129, 0.08), rgba(239, 68, 68, 0.03) 50%, transparent 75%)'
-            : isBookingPage
-            ? 'radial-gradient(ellipse 60% 45% at 50% 20%, rgba(239, 68, 68, 0.09), rgba(245, 158, 11, 0.04) 50%, transparent 75%)'
-            : 'radial-gradient(ellipse 60% 45% at 50% 20%, rgba(239, 68, 68, 0.07), rgba(56, 189, 248, 0.03) 50%, transparent 75%)',
-          filter: 'blur(50px)',
-          opacity: 0.9
+          background: 'radial-gradient(ellipse 65% 45% at 50% 20%, rgba(255, 255, 255, 0.06), rgba(226, 232, 240, 0.02) 55%, transparent 80%)',
+          filter: 'blur(55px)',
+          opacity: 0.95
         }}
       />
 
@@ -92,7 +84,7 @@ export default function GlassMeshBackground() {
 
       {/* 
         ========================================================================
-        4. BOTTOM FOOTER ANCHOR GLOW
+        4. BOTTOM FOOTER ANCHOR GLOW (Pure Titanium)
         ======================================================================== 
       */}
       <div 
@@ -104,7 +96,7 @@ export default function GlassMeshBackground() {
           width: '1000px',
           maxWidth: '100vw',
           height: '400px',
-          background: 'radial-gradient(ellipse 60% 40% at 50% 100%, rgba(239, 68, 68, 0.04), transparent 75%)',
+          background: 'radial-gradient(ellipse 60% 40% at 50% 100%, rgba(255, 255, 255, 0.03), transparent 75%)',
           filter: 'blur(60px)'
         }}
       />
