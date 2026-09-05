@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import PricingSection from '@/components/PricingSection';
-import PricingCalculator from '@/components/PricingCalculator';
 import BenefitsBento from '@/components/BenefitsBento';
 import DesignMonksContact from '@/components/DesignMonksContact';
 
@@ -52,10 +51,7 @@ export default function PricingPage() {
         description="No hidden fees. No hourly billing surprises. Pause or cancel your membership anytime."
       />
 
-      {/* 2. Interactive Calculator & ROI Estimator Embedded Inside Pricing */}
-      <PricingCalculator />
-
-      {/* 3. Benefits of Membership Pipeline */}
+      {/* 2. Benefits of Membership Pipeline */}
       <BenefitsBento />
 
       {/* 5. Deep Pricing FAQ Section (Musemind Style) */}
