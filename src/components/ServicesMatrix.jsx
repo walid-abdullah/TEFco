@@ -58,7 +58,6 @@ export default function ServicesMatrix() {
     <section className="section-padding section-alt" style={{ position: 'relative', overflow: 'hidden' }}>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="section-header text-center reveal-on-scroll" style={{ maxWidth: '800px', margin: '0 auto 50px' }}>
-          <span className="section-subtitle">Comprehensive Scope</span>
           <h2 className="section-title" style={{ fontSize: '2.6rem', marginBottom: '15px' }}>
             All Creative Editing Services <span className="combination-font">Included in Every Retainer</span>
           </h2>

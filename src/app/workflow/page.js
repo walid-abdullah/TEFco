@@ -55,10 +55,6 @@ export default function WorkflowPage() {
         
         {/* Header */}
         <div className="text-center reveal-on-scroll" style={{ marginBottom: '70px' }}>
-          <span className="section-subtitle">
-            <i className="fa-solid fa-clock-rotate-left" style={{ marginRight: '8px' }}></i>
-            The 48-Hour Systematic Engine
-          </span>
           <h1 className="section-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', fontWeight: '800', marginBottom: '20px' }}>
             From Raw Footage to <span className="combination-font">Viral Asset in 48h</span>
           </h1>

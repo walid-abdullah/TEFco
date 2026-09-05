@@ -25,10 +25,6 @@ export default function InteractiveVideoScrubber() {
         
         {/* Section Header */}
         <div className="text-center" style={{ maxWidth: '820px', margin: '0 auto 35px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '14px' }}>
-            <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#38BDF8' }}>INTERACTIVE POST-PRODUCTION LAB</span>
-          </div>
-
           <h2 className="section-title" style={{ fontSize: '2.8rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '12px', color: '#FFFFFF' }}>
             From Raw Log Footage to <span className="combination-font">Broadcast Perfection</span>
           </h2>

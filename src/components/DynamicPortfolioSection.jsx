@@ -110,7 +110,6 @@ export default function DynamicPortfolioSection({
     <section className="portfolio section-padding section-target section-alt" id="portfolio" style={{ position: 'relative' }}>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="section-header text-center reveal-on-scroll">
-          <span className="section-subtitle">{subtitle}</span>
           <h2 className="section-title" style={{ fontSize: '3rem' }}>
             {title1} <span className="combination-font">{title2}</span>
           </h2>

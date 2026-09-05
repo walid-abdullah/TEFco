@@ -57,25 +57,6 @@ export default function Footer({ menu }) {
           borderBottom: isLight ? '1px solid rgba(15, 23, 42, 0.08)' : '1px solid rgba(255, 255, 255, 0.08)'
         }}>
           <div style={{ maxWidth: '640px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-              <span style={{ 
-                width: '7px', 
-                height: '7px', 
-                borderRadius: '50%', 
-                background: '#22C55E', 
-                boxShadow: '0 0 8px #22C55E',
-                display: 'inline-block' 
-              }}></span>
-              <span className="mono-spec" style={{ 
-                color: '#22C55E', 
-                fontSize: '0.72rem', 
-                fontWeight: '700',
-                letterSpacing: '0.06em'
-              }}>
-                ACCEPTING NEW RETAINERS // 2 SLOTS OPEN
-              </span>
-            </div>
-
             <h2 style={{
               fontSize: 'clamp(2.2rem, 4.5vw, 3.6rem)',
               lineHeight: '1.1',

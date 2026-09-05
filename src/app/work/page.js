@@ -136,10 +136,6 @@ function WorkContent() {
         
         {/* Header */}
         <div className="text-center" style={{ maxWidth: '850px', margin: '0 auto 26px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '12px' }}>
-            <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#38BDF8' }}>4K MASTER POST-PRODUCTION VAULT</span>
-          </div>
-
           <h1 className="section-title" style={{ fontSize: '3rem', marginBottom: '12px', fontWeight: '800', letterSpacing: '-0.03em' }}>
             Work Engineered to <span className="combination-font">Scale Watch-Time</span>
           </h1>
@@ -326,9 +322,6 @@ function WorkContent() {
             boxShadow: '0 25px 60px rgba(0,0,0,0.8)'
           }}
         >
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '10px' }}>
-            <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#38BDF8' }}>DEDICATED POST-PRODUCTION SLOTS</span>
-          </div>
           <h2 style={{ fontSize: '2.2rem', marginBottom: '8px', fontWeight: '800', letterSpacing: '-0.03em', color: '#FFFFFF' }}>
             Lock In Your <span className="combination-font">Monthly Editing Retainer</span>
           </h2>

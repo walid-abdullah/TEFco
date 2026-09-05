@@ -61,21 +61,6 @@ export default function BenefitsBento() {
         
         {/* Section Header */}
         <div className="section-header text-center reveal-on-scroll" style={{ maxWidth: '780px', margin: '0 auto 48px' }}>
-          <div style={{ 
-            display: 'inline-flex', 
-            alignItems: 'center', 
-            gap: '8px', 
-            padding: '4px 14px', 
-            borderRadius: '999px', 
-            background: 'rgba(255, 255, 255, 0.04)', 
-            border: '1px solid rgba(255, 255, 255, 0.08)', 
-            marginBottom: '16px' 
-          }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22C55E', boxShadow: '0 0 6px #22C55E' }}></span>
-            <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#E2E8F0', letterSpacing: '0.05em' }}>
-              AGENCY INFRASTRUCTURE &amp; SLA
-            </span>
-          </div>
           <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', margin: '0 0 14px', fontWeight: '800', letterSpacing: '-0.03em', color: '#FFFFFF' }}>
             Engineered for Velocity. <br />
             <span 

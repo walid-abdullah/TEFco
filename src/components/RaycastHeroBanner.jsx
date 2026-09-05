@@ -147,37 +147,6 @@ export default function RaycastHeroBanner() {
       {/* Main Hero Wrapper */}
       <div style={{ position: 'relative', zIndex: 2, maxWidth: '1120px', width: '100%', margin: '0 auto' }}>
         
-        {/* Top Operational Status HUD Pill */}
-        <div style={{ 
-          display: 'inline-flex', 
-          alignItems: 'center', 
-          gap: '10px', 
-          padding: '6px 16px', 
-          borderRadius: '999px', 
-          background: 'rgba(255, 255, 255, 0.04)', 
-          border: '1px solid rgba(255, 255, 255, 0.1)', 
-          backdropFilter: 'blur(20px)', 
-          WebkitBackdropFilter: 'blur(20px)',
-          marginBottom: '24px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.5)'
-        }}>
-          <span style={{ 
-            width: '6px', 
-            height: '6px', 
-            borderRadius: '50%', 
-            background: '#22C55E',
-            boxShadow: '0 0 8px #22C55E',
-            display: 'inline-block'
-          }}></span>
-          <span className="mono-spec" style={{ color: '#FFFFFF', fontSize: '0.74rem', letterSpacing: '0.06em', fontWeight: '600' }}>
-            STUDIO PIPELINE // 48H SPRINT SLA
-          </span>
-          <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem' }}>|</span>
-          <span className="mono-spec" style={{ color: '#94A3B8', fontSize: '0.72rem' }}>
-            2 SLOTS OPEN
-          </span>
-        </div>
-
         {/* Hero Editorial Headline */}
         <h1 style={{ 
           fontSize: 'clamp(2.7rem, 6vw, 4.9rem)', 

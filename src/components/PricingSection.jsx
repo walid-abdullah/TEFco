@@ -77,12 +77,6 @@ export default function PricingSection({ subtitle, title1, title2, description, 
         
         {/* Section Header */}
         <div className="section-header text-center reveal-on-scroll" style={{ maxWidth: '780px', margin: '0 auto 40px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '16px' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22C55E' }}></span>
-            <span className="mono-spec" style={{ fontSize: '0.74rem', color: '#E2E8F0', letterSpacing: '0.05em' }}>
-              TRANSPARENT STUDIO PRICING
-            </span>
-          </div>
           <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', margin: '0 0 14px', fontWeight: '900', letterSpacing: '-0.03em' }}>
             Predictable Retainers. <br />
             <span className="combination-font">Zero Hidden Fees.</span>

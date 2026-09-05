@@ -56,12 +56,6 @@ export default function PricingCalculator() {
         
         {/* Section Header */}
         <div className="text-center reveal-on-scroll" style={{ maxWidth: '780px', margin: '0 auto 44px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '16px' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#EF4444' }}></span>
-            <span className="mono-spec" style={{ fontSize: '0.74rem', color: '#E2E8F0', letterSpacing: '0.05em' }}>
-              RETAINER SIMULATOR // ROI CALCULATOR
-            </span>
-          </div>
           <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: '900', letterSpacing: '-0.03em', margin: '0 0 14px' }}>
             Calculate Output & <span className="combination-font" style={{ color: '#EF4444' }}>Monthly Investment</span>
           </h2>

@@ -74,11 +74,6 @@ export default function SaasMotionServiceLandingPage() {
         
         {/* HERO */}
         <div className="text-center" style={{ maxWidth: '960px', margin: '0 auto 40px' }}>
-          
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', borderRadius: '999px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '14px' }}>
-            <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#38BDF8' }}>APPLE-GRADE UI VECTOR MOTION</span>
-          </div>
-
           <h1 className="section-title" style={{ fontSize: '3.2rem', lineHeight: '1.12', marginBottom: '12px', fontWeight: '800', letterSpacing: '-0.03em' }}>
             SaaS Motion &amp; <span className="combination-font">Interactive UI Demos</span>
           </h1>

@@ -35,7 +35,6 @@ export default function FAQSection({ faqs }) {
         </div>
 
         <div className="section-header text-center reveal-on-scroll">
-          <span className="section-subtitle">Got Questions?</span>
           <h2 className="section-title" style={{ fontSize: '3rem' }}>Frequently Asked <span className="combination-font">Questions</span></h2>
         </div>
 

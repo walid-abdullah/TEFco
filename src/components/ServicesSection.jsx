@@ -63,21 +63,6 @@ export default function ServicesSection({ subtitle, title1, title2, description 
         
         {/* Section Header */}
         <div className="section-header text-center reveal-on-scroll" style={{ marginBottom: '45px' }}>
-          <div style={{ 
-            display: 'inline-flex', 
-            alignItems: 'center', 
-            gap: '8px', 
-            padding: '4px 12px', 
-            borderRadius: '999px', 
-            background: 'rgba(255,255,255,0.04)', 
-            border: '1px solid rgba(255,255,255,0.08)', 
-            marginBottom: '14px' 
-          }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22C55E', boxShadow: '0 0 6px #22C55E' }}></span>
-            <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#E2E8F0', letterSpacing: '0.05em' }}>
-              CORE PRODUCTION DISCIPLINES
-            </span>
-          </div>
           <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', letterSpacing: '-0.03em', marginBottom: '12px', color: '#FFFFFF', fontWeight: '800' }}>
             Bespoke Post-Production <span className="serif-accent" style={{ color: '#FFFFFF' }}>Infrastructure</span>
           </h2>
