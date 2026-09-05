@@ -186,23 +186,23 @@ export default async function Home() {
               <div className="about-content" style={{ padding: "30px 30px 30px 40px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <h3 style={{ fontSize: "1.8rem", marginTop: "10px", fontWeight: "800", color: "#FFFFFF" }}>
                   {founderVideoTitle1}<br />
-                  <span className="combination-font" style={{ color: "#EF4444" }}>{founderVideoTitle2}</span>
+                  <span className="serif-accent" style={{ color: "#FFFFFF" }}>{founderVideoTitle2}</span>
                 </h3>
-                <p style={{ marginBottom: "22px", color: "rgba(255,255,255,0.7)", fontSize: "0.92rem", lineHeight: "1.55" }}>
+                <p style={{ marginBottom: "22px", color: "#94A3B8", fontSize: "0.92rem", lineHeight: "1.55" }}>
                   {founderVideoDesc}
                 </p>
                 <div className="about-highlights" style={{ marginBottom: "26px" }}>
                   <div className="highlight-item" style={{ color: "#FFFFFF", fontSize: "0.88rem", marginBottom: "8px", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <i className="fa-solid fa-check" style={{ color: "#EF4444", fontSize: "0.8rem" }}></i> Retention-Engineered Hook Systems
+                    <i className="fa-solid fa-check" style={{ color: "#22C55E", fontSize: "0.8rem" }}></i> Retention-Engineered Hook Systems
                   </div>
                   <div className="highlight-item" style={{ color: "#FFFFFF", fontSize: "0.88rem", marginBottom: "8px", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <i className="fa-solid fa-check" style={{ color: "#EF4444", fontSize: "0.8rem" }}></i> Direct Slack & WhatsApp Channels
+                    <i className="fa-solid fa-check" style={{ color: "#22C55E", fontSize: "0.8rem" }}></i> Direct Slack & WhatsApp Channels
                   </div>
                   <div className="highlight-item" style={{ color: "#FFFFFF", fontSize: "0.88rem", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <i className="fa-solid fa-check" style={{ color: "#EF4444", fontSize: "0.8rem" }}></i> Unlimited Edit Revision Guarantee
+                    <i className="fa-solid fa-check" style={{ color: "#22C55E", fontSize: "0.8rem" }}></i> Unlimited Edit Revision Guarantee
                   </div>
                 </div>
-                <a href="#" id="founder-video-play-btn" className="btn btn-primary pop-btn" style={{ display: "inline-flex", alignSelf: "flex-start", padding: "10px 22px", borderRadius: "8px", fontSize: "0.88rem", fontWeight: "700", background: "#EF4444", borderColor: "#EF4444" }}>
+                <a href="#" id="founder-video-play-btn" className="btn btn-primary pop-btn" style={{ display: "inline-flex", alignSelf: "flex-start", padding: "10px 22px", borderRadius: "8px", fontSize: "0.88rem", fontWeight: "700", background: "#FFFFFF", color: "#05070B", borderColor: "#FFFFFF" }}>
                   <span>Watch Full Overview</span>
                   <i className="fa-solid fa-play" style={{ marginLeft: "8px", fontSize: "0.75rem" }}></i>
                 </a>
@@ -217,7 +217,7 @@ export default async function Home() {
                     playButtonId="founder-video-play-btn"
                     badge={
                       <div className="badge" style={{ position: "absolute", top: "12px", left: "12px", zIndex: "15", fontSize: "0.75rem", padding: "4px 12px", borderRadius: "999px", background: "rgba(0,0,0,0.8)", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", gap: "6px" }}>
-                        <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#EF4444" }}></span>
+                        <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#22C55E" }}></span>
                         <span style={{ fontWeight: "700", color: "#FFFFFF" }}>THE STUDIO PIPELINE</span>
                       </div>
                     }
@@ -244,27 +244,27 @@ export default async function Home() {
           }}>
             <div className="metric-item" style={{ textAlign: 'center' }}>
               <div className="metric-number-wrapper" style={{ fontSize: '2.4rem', fontWeight: '900', color: '#FFFFFF' }}>
-                <span className="metric-number" data-target={viewsCount}>{viewsCount}</span><span style={{ color: '#EF4444' }}>M+</span>
+                <span className="metric-number" data-target={viewsCount}>{viewsCount}</span><span style={{ color: '#94A3B8' }}>M+</span>
               </div>
-              <div className="metric-label" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '4px' }}>Total Views Generated</div>
+              <div className="metric-label" style={{ color: '#94A3B8', fontSize: '0.82rem', marginTop: '4px' }}>Total Views Generated</div>
             </div>
             <div className="metric-item" style={{ textAlign: 'center' }}>
               <div className="metric-number-wrapper" style={{ fontSize: '2.4rem', fontWeight: '900', color: '#FFFFFF' }}>
-                <span className="metric-number" data-target={deliveredCount}>{deliveredCount}</span><span style={{ color: '#EF4444' }}>+</span>
+                <span className="metric-number" data-target={deliveredCount}>{deliveredCount}</span><span style={{ color: '#94A3B8' }}>+</span>
               </div>
-              <div className="metric-label" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '4px' }}>Videos Delivered</div>
+              <div className="metric-label" style={{ color: '#94A3B8', fontSize: '0.82rem', marginTop: '4px' }}>Videos Delivered</div>
             </div>
             <div className="metric-item" style={{ textAlign: 'center' }}>
               <div className="metric-number-wrapper" style={{ fontSize: '2.4rem', fontWeight: '900', color: '#FFFFFF' }}>
-                <span className="metric-number" data-target={onTimeRate}>{onTimeRate}</span><span style={{ color: '#EF4444' }}>%</span>
+                <span className="metric-number" data-target={onTimeRate}>{onTimeRate}</span><span style={{ color: '#94A3B8' }}>%</span>
               </div>
-              <div className="metric-label" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '4px' }}>On-Time SLA Dispatch</div>
+              <div className="metric-label" style={{ color: '#94A3B8', fontSize: '0.82rem', marginTop: '4px' }}>On-Time SLA Dispatch</div>
             </div>
             <div className="metric-item" style={{ textAlign: 'center' }}>
               <div className="metric-number-wrapper" style={{ fontSize: '2.4rem', fontWeight: '900', color: '#FFFFFF' }}>
-                <span className="metric-number" data-target={rating}>{rating}</span><span style={{ color: '#EF4444' }}>★</span>
+                <span className="metric-number" data-target={rating}>{rating}</span><span style={{ color: '#94A3B8' }}>★</span>
               </div>
-              <div className="metric-label" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '4px' }}>Client Satisfaction Rate</div>
+              <div className="metric-label" style={{ color: '#94A3B8', fontSize: '0.82rem', marginTop: '4px' }}>Client Satisfaction Rate</div>
             </div>
           </div>
         </div>
