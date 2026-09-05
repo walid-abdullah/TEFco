@@ -1,107 +1,148 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
 
 export default function WorkflowPage() {
   const [activeStep, setActiveStep] = useState(0);
+  const contentBodyRef = useRef(null);
 
   const steps = [
     {
       num: '01',
-      stage: 'STAGE // 01',
+      code: 'STAGE_MOD_01',
       time: 'HOUR 00 — 04',
-      status: 'AUTO-SYNCED ✓',
+      name: 'INGEST & SYNC',
+      status: 'POD ACTIVE',
+      progressPercent: '10%',
       title: 'Automated Cloud Ingest & Multi-Cam Sync',
-      desc: 'Drag and drop raw camera cards to your private cloud pod. Multi-cam angles auto-align, proxy files generate, and camera LUT metadata is extracted within minutes.',
-      tags: [
-        'Sony S-Log3 / RED IPP2 / ProRes 422',
-        'Frame.io Dedicated Cloud Vault',
-        'Sub-Frame Audio Waveform Auto-Align',
-        'Automated Asset Ingestion Pipeline'
+      headline: 'Zero-loss asset ingestion with automated sub-frame waveform alignment.',
+      desc: 'Simply drop your raw camera cards into your dedicated Frame.io or Cloud Pod. Our pipeline instantly extracts camera LUT metadata (Sony S-Log3, RED IPP2, ProRes 422), auto-aligns multi-cam angles, and generates lightweight proxy files for immediate editing.',
+      specs: [
+        { label: 'INGEST SPEED', val: '1.2 GB/S SYNC' },
+        { label: 'COLOR SPACE', val: 'S-LOG3 / RED IPP2' },
+        { label: 'AUDIO ALIGN', val: 'SUB-FRAME AUTO' },
+        { label: 'SECURITY', val: 'ENCRYPTED VAULT' }
       ]
     },
     {
       num: '02',
-      stage: 'STAGE // 02',
+      code: 'STAGE_MOD_02',
       time: 'HOUR 04 — 12',
-      status: 'HOOK LOCKED ✓',
+      name: 'HOOK ARCHITECTURE',
+      status: 'HOOK LOCKED',
+      progressPercent: '28%',
       title: 'Script Doctor & Retention Hook Architecture',
-      desc: 'Our Lead Editor dissects the narrative to construct scroll-stopping 3-second pattern interrupts, retention pacing curves, and kinetic vector titles before cutting a single frame.',
-      tags: [
-        '3-Second Scroll-Stop Pattern Interrupt',
-        'Retention Drop-Off Prevention Curve',
-        'Kinetic Typography & Vector Accents',
-        'Rough Cut Storyboard Lock'
+      headline: 'Engineering scroll-stopping 3-second pattern interrupts to conquer feed algorithms.',
+      desc: 'Our Lead Editor and Creative Director dissect your raw footage. We isolate the most electrifying 3-second hook to prevent viewer drop-off, architect kinetic vector accents, and establish dynamic narrative pacing before locking the rough cut.',
+      specs: [
+        { label: 'HOOK RETENTION', val: '+84% WATCH-TIME' },
+        { label: 'PATTERN INTERRUPT', val: '00:03s LOCK' },
+        { label: 'KINETIC TITLES', val: 'FRAME-BY-FRAME' },
+        { label: 'PACING CURVE', val: 'ALGORITHM NATIVE' }
       ]
     },
     {
       num: '03',
-      stage: 'STAGE // 03',
+      code: 'STAGE_MOD_03',
       time: 'HOUR 12 — 24',
-      status: 'NLE ASSEMBLED ✓',
+      name: 'NLE PRECISION CUT',
+      status: 'ASSEMBLY LOCK',
+      progressPercent: '50%',
       title: 'A-Roll & B-Roll Precision Assembly',
-      desc: 'Using DaVinci Resolve Studio & Premiere Pro, we eliminate filler words, breaths, and micro-pauses. Dynamic jump-cuts and visual B-roll are placed to sustain narrative velocity.',
-      tags: [
-        'Filler Words & Micro-Breath Removal',
-        'Dynamic Multi-Angle Punch-Ins',
-        'Curated Contextual B-Roll Placement',
-        'Airtight Narrative Rhythm'
+      headline: 'Eliminating filler words, micro-pauses, and breaths to create hypnotic pacing.',
+      desc: 'Using DaVinci Resolve Studio & Premiere Pro, we execute sub-frame jump cuts, multi-angle camera punches, and visual B-roll placement to ensure every second moves the viewer toward taking action with zero dead air.',
+      specs: [
+        { label: 'BREATH REMOVAL', val: '100% CLEANSED' },
+        { label: 'CAMERA SWITCH', val: 'SUB-FRAME CUTS' },
+        { label: 'B-ROLL SYNC', val: 'CONTEXTUAL 4K' },
+        { label: 'NARRATIVE SPEED', val: 'HIGH-VELOCITY' }
       ]
     },
     {
       num: '04',
-      stage: 'STAGE // 04',
+      code: 'STAGE_MOD_04',
       time: 'HOUR 24 — 38',
-      status: 'STUDIO MASTERED ✓',
+      name: 'STUDIO MASTERING',
+      status: 'ACEScc MASTERED',
+      progressPercent: '78%',
       title: 'Studio Color Science & Spectral Audio Sweetening',
-      desc: 'DaVinci Studio broadcast color grading calibrated to ACEScc OLED standards, paired with spectral vocal isolation and -14.0 LUFS audio sweetening in iZotope RX.',
-      tags: [
-        'ACEScc 1.3 D65 OLED Color Calibration',
-        'iZotope RX Spectral Vocal Clarity',
-        '-14.0 LUFS Broadcast Audio Standards',
-        '3D Motion Tracking & Custom Sound FX'
+      headline: 'Hollywood ACEScc broadcast grading combined with -14.0 LUFS vocal sweetening.',
+      desc: 'Every frame is color-graded on calibrated OLED monitors using ACEScc 1.3 color management. In parallel, vocal stems undergo spectral isolation and de-noising in iZotope RX for broadcast-grade acoustic clarity across mobile and studio speakers.',
+      specs: [
+        { label: 'COLOR STANDARD', val: 'ACEScc 1.3 OLED' },
+        { label: 'AUDIO LEVEL', val: '-14.0 LUFS MASTER' },
+        { label: 'DE-NOISING', val: 'iZOTOPE RX SUITE' },
+        { label: 'BIT DEPTH', val: '10-BIT 4:2:2 PRORES' }
       ]
     },
     {
       num: '05',
-      stage: 'STAGE // 05',
+      code: 'STAGE_MOD_05',
       time: 'HOUR 38 — 48',
-      status: 'DISPATCHED ✓',
-      title: '48H Multi-Platform Master Delivery',
-      desc: 'Your finished 4K master is uploaded to Frame.io. Click directly on any video frame to leave timecoded notes or approve for instant cross-platform distribution.',
-      tags: [
-        '9:16 Vertical (Reels / TikTok / Shorts)',
-        '16:9 Cinema 4K ProRes Master',
-        '1-Click Frame.io Timecoded Review Pod',
-        'Full Project Source Archive Files'
+      name: 'MULTI-PLATFORM DISPATCH',
+      status: 'DISPATCH READY',
+      progressPercent: '100%',
+      title: '48-Hour Multi-Platform Delivery & 1-Click Review',
+      headline: 'Master deliverables formatted for TikTok, Reels, YouTube 4K, and paid ad channels.',
+      desc: 'Your finished 4K master is uploaded to your private Frame.io review pod. Click directly on any video frame to leave timecoded notes or approve with a single click. Receive all source .AEP files, fonts, and multi-aspect ratio renders.',
+      specs: [
+        { label: 'VERTICAL 9:16', val: 'TIKTOK / REELS' },
+        { label: 'HORIZONTAL 16:9', val: 'YOUTUBE 4K PRORES' },
+        { label: 'CLIENT REVIEW', val: '1-CLICK FRAME.IO' },
+        { label: 'SLA GUARANTEE', val: 'UNDER 48 HOURS' }
       ]
     }
   ];
 
+  // GSAP Kinetic Slide-In Animation on Active Step Change
+  useEffect(() => {
+    if (contentBodyRef.current) {
+      gsap.fromTo(
+        contentBodyRef.current.children,
+        {
+          x: 40,
+          opacity: 0,
+          filter: 'blur(4px)'
+        },
+        {
+          x: 0,
+          opacity: 1,
+          filter: 'blur(0px)',
+          duration: 0.5,
+          stagger: 0.08,
+          ease: 'power3.out'
+        }
+      );
+    }
+  }, [activeStep]);
+
+  const current = steps[activeStep];
+
   return (
     <div className="workflow-page" style={{ minHeight: '100vh', padding: '140px 0 110px', background: '#05070B', position: 'relative', overflow: 'hidden' }}>
       
-      {/* Background Subtle Ambient Glow */}
+      {/* Ambient Backdrop Radiance */}
       <div 
         style={{
           position: 'absolute',
-          top: '20%',
+          top: '15%',
           left: '50%',
           transform: 'translateX(-50%)',
           width: '100%',
           maxWidth: '1200px',
           height: '800px',
-          background: 'radial-gradient(ellipse at center, rgba(56, 189, 248, 0.035) 0%, rgba(99, 102, 241, 0.02) 50%, transparent 75%)',
+          background: 'radial-gradient(ellipse at center, rgba(56, 189, 248, 0.04) 0%, rgba(99, 102, 241, 0.02) 50%, transparent 75%)',
           pointerEvents: 'none',
           zIndex: 0
         }}
       />
 
-      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1080px', margin: '0 auto', padding: '0 24px' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1220px', margin: '0 auto', padding: '0 24px' }}>
         
-        {/* Header */}
-        <div className="text-center reveal-on-scroll" style={{ maxWidth: '840px', margin: '0 auto 85px' }}>
+        {/* Section Header */}
+        <div className="text-center reveal-on-scroll" style={{ maxWidth: '840px', margin: '0 auto 75px' }}>
           <h1 
             className="section-title" 
             style={{ 
@@ -134,207 +175,240 @@ export default function WorkflowPage() {
 
         {/* 
           ========================================================================
-          CONCEPT 3: VERTICAL LASER STEP-BY-STEP FLOW WITH KINETIC HOVER
+          CYBER-HUD STUDIO CONTROL RAIL & DYNAMIC KINETIC SLIDE CANVAS
           ======================================================================== 
         */}
-        <div style={{ position: 'relative', margin: '0 auto 90px' }}>
+        <div 
+          className="workflow-hud-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'minmax(280px, 340px) minmax(460px, 1fr)',
+            gap: '40px',
+            alignItems: 'stretch',
+            maxWidth: '1180px',
+            margin: '0 auto 85px'
+          }}
+        >
           
-          {/* Vertical Connecting Laser Rail */}
-          <div 
-            className="timeline-laser-rail"
-            style={{
-              position: 'absolute',
-              top: '32px',
-              bottom: '100px',
-              left: '9px',
-              width: '2px',
-              background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(56,189,248,0.6) 50%, rgba(99,102,241,0.2) 100%)',
-              boxShadow: '0 0 12px rgba(56,189,248,0.4)',
-              zIndex: 0
-            }}
-          />
-
-          {/* 5 Connected Step Nodes */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
-            {steps.map((step, idx) => {
+          {/* 
+            ----------------------------------------------------------------------
+            LEFT COLUMN: FUTURISTIC STUDIO STAGE TRACKER (HUD RAIL)
+            ----------------------------------------------------------------------
+          */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {steps.map((st, idx) => {
               const isActive = activeStep === idx;
 
               return (
                 <div 
-                  key={step.num}
+                  key={st.num}
                   onMouseEnter={() => setActiveStep(idx)}
-                  className={`workflow-interactive-card ${isActive ? 'active-step' : ''}`}
+                  onClick={() => setActiveStep(idx)}
                   style={{
-                    position: 'relative',
-                    paddingLeft: '50px',
                     cursor: 'pointer',
-                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                    position: 'relative',
+                    padding: '16px 20px',
+                    borderRadius: '14px',
+                    background: isActive 
+                      ? 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%)' 
+                      : 'rgba(255, 255, 255, 0.02)',
+                    border: isActive 
+                      ? '1px solid rgba(56, 189, 248, 0.4)' 
+                      : '1px solid rgba(255, 255, 255, 0.05)',
+                    boxShadow: isActive 
+                      ? '0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(56, 189, 248, 0.15), inset 0 1px 0 rgba(255,255,255,0.15)' 
+                      : 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                   }}
                 >
-                  
-                  {/* Glowing Laser Node Marker */}
-                  <div 
-                    style={{
-                      position: 'absolute',
-                      left: '0',
-                      top: '24px',
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '4px',
-                      background: isActive 
-                        ? '#FFFFFF' 
-                        : 'rgba(15, 23, 42, 0.9)',
-                      border: isActive 
-                        ? '2px solid #38BDF8' 
-                        : '1.5px solid rgba(255, 255, 255, 0.2)',
-                      boxShadow: isActive 
-                        ? '0 0 25px rgba(56, 189, 248, 0.9), 0 0 40px rgba(255, 255, 255, 0.6)' 
-                        : 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                      zIndex: 2
-                    }}
-                  >
-                    <span style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '1px',
-                      background: isActive ? '#05070B' : 'rgba(255,255,255,0.4)'
-                    }}></span>
-                  </div>
-
-                  {/* Step Card Container with Pure Negative Space & Spotlight Glow */}
-                  <div 
-                    style={{
-                      position: 'relative',
-                      background: isActive 
-                        ? 'linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(7, 10, 20, 0.9) 100%)' 
-                        : 'rgba(7, 10, 20, 0.3)',
-                      border: isActive 
-                        ? '1px solid rgba(56, 189, 248, 0.35)' 
-                        : '1px solid rgba(255, 255, 255, 0.05)',
-                      borderRadius: '20px',
-                      padding: '28px 32px',
-                      backdropFilter: 'blur(16px)',
-                      boxShadow: isActive 
-                        ? '0 20px 50px rgba(0,0,0,0.85), 0 0 40px rgba(56,189,248,0.1), inset 0 1px 0 rgba(255,255,255,0.15)' 
-                        : 'none',
-                      transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                      overflow: 'hidden'
-                    }}
-                  >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                     
-                    {/* Top Telemetry Header Row */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <span className="mono-spec" style={{ 
-                          fontSize: '0.72rem', 
-                          color: isActive ? '#38BDF8' : '#64748B', 
-                          fontWeight: '700', 
-                          letterSpacing: '0.06em',
-                          transition: 'color 0.3s ease'
-                        }}>
-                          {step.stage}
+                    {/* Glowing Live State Dot */}
+                    <div style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      background: isActive ? '#38BDF8' : 'rgba(255, 255, 255, 0.2)',
+                      boxShadow: isActive ? '0 0 12px #38BDF8' : 'none',
+                      transition: 'all 0.3s ease'
+                    }}></div>
+
+                    {/* Step Title & Index */}
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
+                        <span className="mono-spec" style={{ fontSize: '0.66rem', color: isActive ? '#38BDF8' : '#64748B', fontWeight: '700' }}>
+                          {st.code}
                         </span>
-                        <span style={{ color: 'rgba(255,255,255,0.15)', fontSize: '0.7rem' }}>/</span>
-                        <span className="mono-spec" style={{ 
-                          fontSize: '0.68rem', 
-                          color: isActive ? '#FFFFFF' : '#94A3B8', 
-                          background: isActive ? 'rgba(56, 189, 248, 0.12)' : 'rgba(255,255,255,0.04)',
-                          border: isActive ? '1px solid rgba(56, 189, 248, 0.3)' : '1px solid rgba(255,255,255,0.08)',
-                          padding: '3px 8px', 
-                          borderRadius: '4px',
-                          fontWeight: '600'
-                        }}>
-                          ⏱️ {step.time}
+                        <span style={{ color: 'rgba(255,255,255,0.15)', fontSize: '0.6rem' }}>/</span>
+                        <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#94A3B8' }}>
+                          {st.time}
                         </span>
                       </div>
-
-                      <span className="mono-spec telemetry-badge" style={{ 
-                        fontSize: '0.68rem', 
-                        color: isActive ? '#38BDF8' : '#475569', 
-                        fontWeight: '700',
-                        letterSpacing: '0.04em',
-                        transition: 'all 0.3s ease'
+                      <span style={{ 
+                        fontSize: '0.92rem', 
+                        fontWeight: '700', 
+                        color: isActive ? '#FFFFFF' : '#64748B',
+                        fontFamily: 'var(--font-heading)',
+                        letterSpacing: '-0.01em',
+                        transition: 'color 0.3s ease'
                       }}>
-                        {step.status}
+                        {st.name}
                       </span>
                     </div>
 
-                    {/* Step Title with Kinetic Slide */}
-                    <h2 
-                      className="step-title-text"
-                      style={{ 
-                        fontSize: 'clamp(1.5rem, 2.8vw, 2.1rem)', 
-                        fontWeight: '800', 
-                        color: isActive ? '#FFFFFF' : '#94A3B8', 
-                        margin: '0 0 12px', 
-                        letterSpacing: '-0.025em', 
-                        lineHeight: '1.2',
-                        fontFamily: 'var(--font-heading)',
-                        transition: 'all 0.35s ease'
-                      }}
-                    >
-                      {step.title}
-                    </h2>
-
-                    {/* Editorial Description */}
-                    <p style={{ 
-                      color: isActive ? '#CBD5E1' : '#64748B', 
-                      fontSize: '0.96rem', 
-                      lineHeight: '1.65', 
-                      margin: '0 0 20px', 
-                      maxWidth: '780px',
-                      fontWeight: '400',
-                      transition: 'color 0.3s ease'
-                    }}>
-                      {step.desc}
-                    </p>
-
-                    {/* Kinetic Capability Tag Chips (Glide from Corner) */}
-                    <div 
-                      className="tags-container"
-                      style={{ 
-                        display: 'flex', 
-                        flexWrap: 'wrap', 
-                        gap: '8px' 
-                      }}
-                    >
-                      {step.tags.map((tag, i) => (
-                        <div 
-                          key={i}
-                          className="kinetic-tag"
-                          style={{
-                            fontSize: '0.74rem',
-                            color: isActive ? '#E2E8F0' : '#64748B',
-                            background: isActive ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.02)',
-                            border: isActive ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(255,255,255,0.04)',
-                            padding: '5px 12px',
-                            borderRadius: '8px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '6px',
-                            transition: `all 0.3s ease ${i * 0.05}s`
-                          }}
-                        >
-                          <span style={{ 
-                            width: '4px', 
-                            height: '4px', 
-                            borderRadius: '50%', 
-                            background: isActive ? '#38BDF8' : '#475569' 
-                          }}></span>
-                          <span>{tag}</span>
-                        </div>
-                      ))}
-                    </div>
-
                   </div>
 
+                  {/* Active Indicator Arrow */}
+                  <i 
+                    className="fa-solid fa-chevron-right" 
+                    style={{ 
+                      color: isActive ? '#38BDF8' : 'transparent', 
+                      fontSize: '0.75rem',
+                      transform: isActive ? 'translateX(0)' : 'translateX(-6px)',
+                      transition: 'all 0.3s ease'
+                    }}
+                  />
                 </div>
               );
             })}
+          </div>
+
+          {/* 
+            ----------------------------------------------------------------------
+            RIGHT COLUMN: DYNAMIC GSAP KINETIC SLIDE CANVAS (FULL BODY ANIMATION)
+            ----------------------------------------------------------------------
+          */}
+          <div 
+            style={{
+              position: 'relative',
+              background: '#070A14',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '24px',
+              padding: '36px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.95), inset 0 1px 0 rgba(255,255,255,0.08)',
+              overflow: 'hidden'
+            }}
+          >
+            {/* Ambient Spotlight Behind Active Canvas */}
+            <div 
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '85%',
+                height: '80%',
+                background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.35) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 75%)',
+                filter: 'blur(45px)',
+                pointerEvents: 'none',
+                zIndex: 0
+              }}
+            />
+
+            {/* GSAP Animated Content Container */}
+            <div ref={contentBodyRef} style={{ position: 'relative', zIndex: 1 }}>
+              
+              {/* Telemetry Header Badge Row */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '14px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span className="mono-spec" style={{ fontSize: '0.75rem', color: '#38BDF8', fontWeight: '800', letterSpacing: '0.08em' }}>
+                    {current.stage}
+                  </span>
+                  <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem' }}>—</span>
+                  <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#FFFFFF', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '3px 8px', borderRadius: '4px' }}>
+                    ⏱️ {current.time}
+                  </span>
+                </div>
+
+                <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#38BDF8', fontWeight: '800', letterSpacing: '0.06em' }}>
+                  ● {current.status}
+                </span>
+              </div>
+
+              {/* Title in Syne */}
+              <h2 style={{ 
+                fontSize: 'clamp(1.8rem, 3.2vw, 2.4rem)', 
+                fontWeight: '800', 
+                color: '#FFFFFF', 
+                margin: '0 0 12px', 
+                letterSpacing: '-0.025em', 
+                lineHeight: '1.2',
+                fontFamily: 'var(--font-heading)'
+              }}>
+                {current.title}
+              </h2>
+
+              {/* Headline */}
+              <p style={{ fontSize: '1.02rem', fontWeight: '600', color: '#38BDF8', margin: '0 0 14px', lineHeight: '1.45' }}>
+                "{current.headline}"
+              </p>
+
+              {/* Detailed Breakdown */}
+              <p style={{ color: '#94A3B8', fontSize: '0.96rem', lineHeight: '1.65', margin: '0 0 28px', maxWidth: '640px' }}>
+                {current.desc}
+              </p>
+
+              {/* 4 Telemetry Spec Blocks (Sliding from Right) */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginBottom: '28px' }}>
+                {current.specs.map((sp, i) => (
+                  <div 
+                    key={i}
+                    style={{
+                      background: 'rgba(15, 23, 42, 0.8)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '12px',
+                      padding: '12px 14px',
+                      backdropFilter: 'blur(16px)'
+                    }}
+                  >
+                    <span className="mono-spec" style={{ fontSize: '0.58rem', color: '#64748B', display: 'block', marginBottom: '4px', letterSpacing: '0.04em' }}>
+                      {sp.label}
+                    </span>
+                    <span style={{ fontSize: '0.78rem', color: '#FFFFFF', fontWeight: '700' }}>
+                      {sp.val}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+
+            {/* Bottom 48H Timeline Progress Meter */}
+            <div style={{ position: 'relative', zIndex: 1, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.64rem', color: '#94A3B8', fontFamily: 'var(--font-mono)', marginBottom: '6px' }}>
+                  <span>PIPELINE VELOCITY</span>
+                  <span style={{ color: '#38BDF8', fontWeight: '700' }}>{current.progressPercent} OF 48H SLA</span>
+                </div>
+                <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden' }}>
+                  <div style={{ width: current.progressPercent, height: '100%', background: 'linear-gradient(90deg, #6366F1, #38BDF8)', transition: 'width 0.5s ease' }}></div>
+                </div>
+              </div>
+
+              <Link
+                href="/book-a-call"
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  background: '#FFFFFF',
+                  color: '#05070B',
+                  fontSize: '0.78rem',
+                  fontWeight: '800',
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 0 15px rgba(255,255,255,0.3)'
+                }}
+              >
+                Onboard Pod ➔
+              </Link>
+            </div>
+
           </div>
 
         </div>
@@ -386,25 +460,11 @@ export default function WorkflowPage() {
 
       </div>
 
-      {/* Global CSS for Kinetic Hover Glides & Micro-Transitions */}
+      {/* Responsive Styles */}
       <style jsx>{`
-        .workflow-interactive-card.active-step .step-title-text {
-          transform: translateX(4px);
-        }
-        .workflow-interactive-card.active-step .kinetic-tag {
-          transform: translateY(-2px);
-          border-color: rgba(56, 189, 248, 0.35) !important;
-        }
-        .workflow-interactive-card.active-step .telemetry-badge {
-          transform: scale(1.05);
-        }
-
-        @media (max-width: 768px) {
-          .workflow-interactive-card {
-            padding-left: 36px !important;
-          }
-          .timeline-laser-rail {
-            left: 6px !important;
+        @media (max-width: 900px) {
+          .workflow-hud-grid {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>
