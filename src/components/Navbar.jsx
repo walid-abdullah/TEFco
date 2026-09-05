@@ -161,6 +161,7 @@ export default function Navbar({ menu }) {
             <div 
               className="nav-dropdown-menu"
               style={{
+                display: isServicesOpen ? 'grid' : 'none',
                 position: 'absolute',
                 top: 'calc(100% + 12px)',
                 left: '50%',

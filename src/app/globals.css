@@ -2179,10 +2179,14 @@ input::placeholder, textarea::placeholder {
   align-items: center;
 }
 
+.nav-dropdown-menu {
+  display: none;
+}
+
 .nav-dropdown-wrapper:hover .nav-dropdown-menu,
 .nav-dropdown-menu:hover {
   display: grid !important;
-  animation: dropdownFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .nav-dropdown-wrapper:hover .nav-link i.fa-chevron-down {
@@ -2190,14 +2194,14 @@ input::placeholder, textarea::placeholder {
 }
 
 .dropdown-item-hover:hover {
-  background: rgba(56, 189, 248, 0.08) !important;
-  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.06) !important;
+  transform: translateX(3px);
 }
 
 @keyframes dropdownFadeIn {
   0% {
     opacity: 0;
-    transform: translate(-50%, 8px);
+    transform: translate(-50%, 6px);
   }
   100% {
     opacity: 1;
