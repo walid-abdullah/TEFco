@@ -45,7 +45,6 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
   ];
 
   const [selectedBudget, setSelectedBudget] = useState('$999/mo (Starter Pod)');
-  const [isMuted, setIsMuted] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -265,7 +264,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
             alignItems: 'start'
           }}
         >
-          {/* LEFT COLUMN: Headings, Value Points & Mini Video Player */}
+          {/* LEFT COLUMN: Headings, Value Points & Studio Brief */}
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <h2 style={{
@@ -341,72 +340,38 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
               </ul>
             </div>
 
-            {/* Luxury Video Production Studio Badge / Reel */}
-            <div style={{
-              position: 'relative',
-              borderRadius: '20px',
-              overflow: 'hidden',
-              background: isLight 
-                ? 'linear-gradient(135deg, #E0F2FE 0%, #EDE9FE 100%)' 
-                : 'linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%)',
-              border: isLight ? '1px solid rgba(37, 99, 235, 0.2)' : '1px solid rgba(56, 189, 248, 0.25)',
-              aspectRatio: '16/10',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              {/* Studio Badge */}
-              <div style={{
-                textAlign: 'center',
-                color: isLight ? '#0F172A' : '#FFFFFF'
-              }}>
-                <div style={{
-                  background: isLight ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.1)',
-                  color: isLight ? '#090E1A' : '#FFFFFF',
-                  padding: '8px 24px',
-                  borderRadius: '50px',
-                  fontWeight: '800',
-                  fontSize: '1.05rem',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  boxShadow: isLight ? '0 10px 25px rgba(0,0,0,0.06)' : '0 10px 30px rgba(0,0,0,0.4)',
-                  marginBottom: '10px',
-                  backdropFilter: 'blur(20px)',
-                  border: isLight ? '1px solid rgba(15, 23, 42, 0.08)' : '1px solid rgba(255, 255, 255, 0.15)'
-                }}>
-                  <i className="fa-solid fa-clapperboard" style={{ color: '#38BDF8' }}></i>
-                  <span>The Editly Foundry Co.</span>
+            {/* Studio Brief: a useful conversion signal without a distracting video */}
+            <div className={`studio-brief-panel ${isLight ? 'is-light' : ''}`}>
+              <div className="studio-brief-topline">
+                <span className="mono-spec">THE EDITLY FOUNDRY / LIVE BRIEF</span>
+                <span className="studio-brief-status">
+                  <span />
+                  ACCEPTING PROJECTS
+                </span>
+              </div>
+              <div className="studio-brief-main">
+                <div className="studio-brief-mark" aria-hidden="true">
+                  <i className="fa-solid fa-arrow-trend-up" />
                 </div>
-                <div style={{ fontSize: '0.82rem', color: isLight ? '#475569' : 'rgba(255, 255, 255, 0.7)', letterSpacing: '0.5px' }}>
-                  Post-Production Pods for High-Growth Brands
+                <div>
+                  <span className="mono-spec">YOUR RAW MATERIAL</span>
+                  <h3>Arrives messy.</h3>
+                  <p>Leaves as a repeatable content engine.</p>
                 </div>
               </div>
-
-              {/* Sound Mute/Unmute Toggle Button */}
-              <button
-                type="button"
-                onClick={() => setIsMuted(!isMuted)}
-                style={{
-                  position: 'absolute',
-                  bottom: '12px',
-                  right: '12px',
-                  background: 'rgba(0, 0, 0, 0.6)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  color: '#FFFFFF',
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  fontSize: '0.85rem'
-                }}
-                aria-label="Toggle Sound"
-              >
-                <i className={`fa-solid ${isMuted ? 'fa-volume-xmark' : 'fa-volume-high'}`}></i>
-              </button>
+              <div className="studio-brief-track" aria-hidden="true">
+                <span className="studio-brief-track-line" />
+                <span className="studio-brief-track-node">RAW</span>
+                <span className="studio-brief-track-node">SHAPE</span>
+                <span className="studio-brief-track-node">RELEASE</span>
+              </div>
+              <div className="studio-brief-footer">
+                <span>EDITORIAL DIRECTION</span>
+                <span>×</span>
+                <span>MOTION CRAFT</span>
+                <span>×</span>
+                <span>RELIABLE DELIVERY</span>
+              </div>
             </div>
           </div>
 

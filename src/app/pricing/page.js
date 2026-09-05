@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import PricingSection from '@/components/PricingSection';
 import BenefitsBento from '@/components/BenefitsBento';
 import DesignMonksContact from '@/components/DesignMonksContact';
@@ -41,25 +40,25 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="pricing-page-full" style={{ minHeight: '100vh', paddingTop: '100px', paddingBottom: '100px' }}>
+    <main className="pricing-page-full">
       
       {/* 1. Main Pricing Section with Monthly/Quarterly Toggle */}
       <PricingSection 
         subtitle="Transparent Studio Retainers"
         title1="World-Class Video Production at a"
         title2="Predictable Monthly Rate"
-        description="No hidden fees. No hourly billing surprises. Pause or cancel your membership anytime."
+        description="Dedicated post-production capacity without the overhead of building an in-house team. Choose the rhythm that matches your ambition."
       />
 
       {/* 2. Benefits of Membership Pipeline */}
       <BenefitsBento />
 
       {/* 5. Deep Pricing FAQ Section (Musemind Style) */}
-      <section className="section-padding" style={{ position: 'relative' }}>
-        <div className="container" style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div className="text-center reveal-on-scroll" style={{ marginBottom: '50px' }}>
+      <section className="pricing-faq-section section-padding" style={{ position: 'relative' }}>
+        <div className="container pricing-faq-container">
+          <div className="pricing-faq-heading text-center reveal-on-scroll">
             <span className="section-subtitle">Got Questions?</span>
-            <h2 style={{ fontSize: '2.6rem', fontWeight: '800' }}>
+            <h2>
               Frequently Asked <span className="combination-font">Questions</span>
             </h2>
             <p style={{ color: 'var(--text-secondary)' }}>
@@ -67,65 +66,25 @@ export default function PricingPage() {
             </p>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="pricing-faq-list">
             {pricingFaqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="glass-card"
-                style={{
-                  borderRadius: '18px',
-                  overflow: 'hidden',
-                  border: openFaq === idx ? '1px solid #38BDF8' : '1px solid var(--glass-border)',
-                  transition: 'border-color 0.3s ease'
-                }}
+                className={`pricing-faq-item glass-card ${openFaq === idx ? 'is-open' : ''}`}
               >
                 <button
                   type="button"
                   onClick={() => toggleFaq(idx)}
-                  style={{
-                    width: '100%',
-                    padding: '24px 28px',
-                    background: 'transparent',
-                    border: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    textAlign: 'left',
-                    color: 'var(--text-primary)',
-                    fontSize: '1.1rem',
-                    fontWeight: '700',
-                    cursor: 'pointer'
-                  }}
+                  className="pricing-faq-trigger"
+                  aria-expanded={openFaq === idx}
+                  aria-controls={`pricing-faq-answer-${idx}`}
                 >
                   <span>{faq.q}</span>
-                  <div style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: openFaq === idx ? 'var(--accent-blue-primary)' : 'rgba(255,255,255,0.06)',
-                    color: openFaq === idx ? '#FFFFFF' : 'var(--text-secondary)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '0.85rem',
-                    transition: 'transform 0.3s ease',
-                    transform: openFaq === idx ? 'rotate(180deg)' : 'none',
-                    flexShrink: 0,
-                    marginLeft: '15px'
-                  }}>
-                    <i className="fa-solid fa-chevron-down"></i>
-                  </div>
+                  <i className="fa-solid fa-arrow-down" aria-hidden="true"></i>
                 </button>
 
                 {openFaq === idx && (
-                  <div style={{
-                    padding: '0 28px 24px 28px',
-                    color: 'var(--text-secondary)',
-                    fontSize: '0.96rem',
-                    lineHeight: '1.7',
-                    borderTop: '1px solid var(--glass-border)',
-                    paddingTop: '16px'
-                  }}>
+                  <div id={`pricing-faq-answer-${idx}`} className="pricing-faq-answer">
                     {faq.a}
                   </div>
                 )}
@@ -138,6 +97,6 @@ export default function PricingPage() {
       {/* 6. Design Monks Project Inquiry Section */}
       <DesignMonksContact />
 
-    </div>
+    </main>
   );
 }
