@@ -135,31 +135,35 @@ export default function BenefitsBento() {
 
     const mm = gsap.matchMedia();
 
-    // DESKTOP: Silky Smooth, Jitter-Free Pinned Deck (Stable ScrollTrigger)
+    // DESKTOP: Snapped Discrete Stage Deck (Never stuck half-way, 1 step per scroll)
     mm.add("(min-width: 961px)", () => {
       // 1. Initial State
-      gsap.set(textItems, { opacity: 0, y: 30, filter: "blur(6px)", pointerEvents: "none" });
+      gsap.set(textItems, { opacity: 0, y: 24, filter: "blur(5px)", pointerEvents: "none" });
       gsap.set(textItems[0], { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto" });
 
       gsap.set(cardItems, { yPercent: 100, zIndex: (i) => i + 1 });
       gsap.set(cardItems[0], { yPercent: 0, zIndex: 1 });
 
-      // 2. Continuous Master Timeline with butter-smooth scrub
+      // 2. Master Timeline with Mandatory Step Snapping
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=1600", // Natural, comfortable scroll track
+          end: "+=2100", // Generous track so 1 scroll moves exactly 1 card
           pin: true,
-          scrub: 0.6, // Silky smooth interpolation without jitter
+          scrub: 0.5,
+          snap: {
+            snapTo: [0, 1 / 3, 2 / 3, 1], // Snaps cleanly to each stage, never stopping midway
+            duration: { min: 0.2, max: 0.45 },
+            delay: 0.05,
+            ease: "power2.out",
+          },
           anticipatePin: 1,
           onUpdate: (self) => {
             const p = self.progress;
-            // 4 steps: 0, 1, 2, 3
-            const currentIdx = Math.min(3, Math.floor(p * 3.99));
+            const currentIdx = Math.min(3, Math.round(p * 3));
             setActiveStepIndex(currentIdx);
 
-            // Directly update button active styles for instantaneous feedback
             if (tracker) {
               const btns = tracker.querySelectorAll(".industrial-tracker-btn");
               btns.forEach((btn, bIdx) => {
@@ -178,26 +182,34 @@ export default function BenefitsBento() {
 
       scrollTriggerRef.current = tl.scrollTrigger;
 
-      // 3. Mathematical Clean Continuous Transitions (3 Segments: 0->1, 1->2, 2->3)
-      // Segment 1 (Ingest -> Shape): Timeline position 0.0 to 1.0
-      tl.to(textItems[0], { opacity: 0, y: -25, filter: "blur(6px)", pointerEvents: "none", ease: "power1.inOut", duration: 0.4 }, 0.1)
-        .fromTo(textItems[1], { opacity: 0, y: 25, filter: "blur(6px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power1.out", duration: 0.4 }, 0.4)
-        .fromTo(cardItems[1], { yPercent: 100 }, { yPercent: 0, ease: "power1.inOut", duration: 0.8 }, 0.1)
-        .to(cardItems[0], { scale: 0.95, opacity: 0.35, ease: "power1.inOut", duration: 0.8 }, 0.1);
+      // 3. Timeline with generous rest zones:
+      // t = 0.0 to 0.15: Rest at Stage 0
+      // t = 0.15 to 0.85: Transition Stage 0 -> 1
+      // t = 0.85 to 1.15: Rest at Stage 1
+      // t = 1.15 to 1.85: Transition Stage 1 -> 2
+      // t = 1.85 to 2.15: Rest at Stage 2
+      // t = 2.15 to 2.85: Transition Stage 2 -> 3
+      // t = 2.85 to 3.0: Rest at Stage 3
 
-      // Segment 2 (Shape -> Craft): Timeline position 1.0 to 2.0
-      tl.to(textItems[1], { opacity: 0, y: -25, filter: "blur(6px)", pointerEvents: "none", ease: "power1.inOut", duration: 0.4 }, 1.1)
-        .fromTo(textItems[2], { opacity: 0, y: 25, filter: "blur(6px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power1.out", duration: 0.4 }, 1.4)
-        .fromTo(cardItems[2], { yPercent: 100 }, { yPercent: 0, ease: "power1.inOut", duration: 0.8 }, 1.1)
-        .to(cardItems[1], { scale: 0.95, opacity: 0.35, ease: "power1.inOut", duration: 0.8 }, 1.1);
+      // Transition 0 -> 1
+      tl.to(textItems[0], { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", ease: "power2.inOut", duration: 0.35 }, 0.2)
+        .fromTo(textItems[1], { opacity: 0, y: 20, filter: "blur(5px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power2.out", duration: 0.4 }, 0.45)
+        .fromTo(cardItems[1], { yPercent: 100 }, { yPercent: 0, ease: "power2.inOut", duration: 0.7 }, 0.2)
+        .to(cardItems[0], { scale: 0.95, opacity: 0.35, ease: "power2.inOut", duration: 0.7 }, 0.2);
 
-      // Segment 3 (Craft -> Release): Timeline position 2.0 to 3.0
-      tl.to(textItems[2], { opacity: 0, y: -25, filter: "blur(6px)", pointerEvents: "none", ease: "power1.inOut", duration: 0.4 }, 2.1)
-        .fromTo(textItems[3], { opacity: 0, y: 25, filter: "blur(6px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power1.out", duration: 0.4 }, 2.4)
-        .fromTo(cardItems[3], { yPercent: 100 }, { yPercent: 0, ease: "power1.inOut", duration: 0.8 }, 2.1)
-        .to(cardItems[2], { scale: 0.95, opacity: 0.35, ease: "power1.inOut", duration: 0.8 }, 2.1);
+      // Transition 1 -> 2
+      tl.to(textItems[1], { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", ease: "power2.inOut", duration: 0.35 }, 1.2)
+        .fromTo(textItems[2], { opacity: 0, y: 20, filter: "blur(5px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power2.out", duration: 0.4 }, 1.45)
+        .fromTo(cardItems[2], { yPercent: 100 }, { yPercent: 0, ease: "power2.inOut", duration: 0.7 }, 1.2)
+        .to(cardItems[1], { scale: 0.95, opacity: 0.35, ease: "power2.inOut", duration: 0.7 }, 1.2);
 
-      // Settle buffer before unpin
+      // Transition 2 -> 3
+      tl.to(textItems[2], { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", ease: "power2.inOut", duration: 0.35 }, 2.2)
+        .fromTo(textItems[3], { opacity: 0, y: 20, filter: "blur(5px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power2.out", duration: 0.4 }, 2.45)
+        .fromTo(cardItems[3], { yPercent: 100 }, { yPercent: 0, ease: "power2.inOut", duration: 0.7 }, 2.2)
+        .to(cardItems[2], { scale: 0.95, opacity: 0.35, ease: "power2.inOut", duration: 0.7 }, 2.2);
+
+      // Buffer settle at end
       tl.to({}, { duration: 0.2 }, 3.0);
     });
 
@@ -221,7 +233,7 @@ export default function BenefitsBento() {
     });
 
     return () => mm.revert();
-  }, []); // EMPTY DEPENDENCY ARRAY to ensure ScrollTrigger is never destroyed during scroll
+  }, []);
 
   const handleStepClick = (idx) => {
     setActiveStepIndex(idx);
