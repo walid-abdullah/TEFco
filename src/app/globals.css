@@ -2437,298 +2437,442 @@ img { max-width: 100%; height: auto; display: block; }
   opacity: 0.7;
 }
 
-/* OPTION A: STICKY STACKING CARDS SYSTEM */
-.benefits-bento-section {
+/* ==========================================================================
+   PINNED PIPELINE DECK ARCHITECTURE (TITANIUM MONOCHROME SYSTEM)
+   ========================================================================== */
+.benefits-pinned-section {
   position: relative;
-  padding: 120px 0 140px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  background: var(--bg-primary, #05070B);
+  overflow: hidden;
 }
 
-.benefits-bento-heading {
-  margin-bottom: 50px;
+.benefits-pinned-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
-/* Minimalist Titanium Step Tracker Pills */
-.benefits-stack-tracker {
+/* Header & Industrial Step Tracker */
+.benefits-pinned-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.benefits-pinned-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.benefits-pinned-main-title {
+  margin: 0;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+/* Industrial Titanium Step Tracker (12px outer, 8px inner buttons - NO ROUNDED PILLS) */
+.benefits-industrial-tracker {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: rgba(10, 14, 22, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+}
+
+.industrial-tracker-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 6px 10px;
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: 24px;
-}
-
-.stack-tracker-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 16px;
-  border-radius: 50px;
+  padding: 8px 14px;
+  border-radius: 8px;
   border: none;
   background: transparent;
-  color: var(--text-muted);
+  color: var(--text-secondary, #94A3B8);
   font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.stack-tracker-btn:hover {
+.industrial-tracker-btn:hover {
   color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.stack-tracker-btn.tracker-btn-active {
-  color: #05070B;
+.industrial-tracker-btn.active {
   background: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+  color: #05070B;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.2);
 }
 
-.tracker-num {
+.industrial-tracker-btn .tracker-num {
   font-weight: 800;
+  opacity: 0.65;
 }
 
-/* STACK CONTAINER & CARDS */
-.benefits-stack-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  max-width: 1240px;
-  margin: 0 auto;
+.industrial-tracker-btn.active .tracker-num {
+  opacity: 1;
+  color: #05070B;
 }
 
-.benefits-stack-card {
-  position: sticky;
+/* 2-Column Master Pinned Viewport Stage */
+.benefits-pinned-stage {
   display: grid;
-  grid-template-columns: 1.15fr 1.35fr;
-  gap: 40px;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 48px;
   align-items: center;
-  padding: 44px 48px;
   min-height: 480px;
-  border-radius: 32px;
-  background: rgba(8, 12, 20, 0.94);
-  backdrop-filter: blur(32px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  transform-origin: center top;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
 }
 
-.benefits-stack-card:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 35px 100px rgba(0, 0, 0, 0.85), 0 0 40px rgba(255, 255, 255, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+/* LEFT COLUMN: Narrative Text Container (Outside the Cards) */
+.pinned-narrative-col {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  display: flex;
+  align-items: center;
 }
 
-/* LEFT COLUMN */
-.stack-card-left {
+.pinned-text-panes-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.pinned-text-pane {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 18px;
+  pointer-events: none;
 }
 
-.stack-card-meta {
+.pinned-text-pane.is-active {
+  pointer-events: auto;
+}
+
+.pinned-meta-row {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
-.stack-pill-tag {
+.pinned-stage-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 50px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.stack-step-num {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: #FFFFFF;
-}
-
-.stack-step-label {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
   color: #CBD5E1;
-  text-transform: uppercase;
 }
 
-.stack-tagline {
-  font-size: 0.72rem;
+.pinned-tagline {
+  font-size: 0.7rem;
   letter-spacing: 1.5px;
-  color: var(--text-muted);
+  color: var(--text-muted, #64748B);
 }
 
-.stack-card-title {
+.pinned-step-headline {
   margin: 0;
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-size: clamp(1.8rem, 2.8vw, 2.5rem);
   font-weight: 800;
   color: #FFFFFF;
   line-height: 1.2;
   letter-spacing: -0.5px;
 }
 
-.stack-card-desc {
+.pinned-step-description {
   margin: 0;
-  font-size: 1.05rem;
-  color: var(--text-secondary);
+  font-size: 1.02rem;
+  color: var(--text-secondary, #94A3B8);
   line-height: 1.7;
+  max-width: 480px;
 }
 
-.stack-chips-grid {
+/* Feature Chips (8px radius) */
+.pinned-chips-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
-.stack-chip {
+.pinned-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 14px;
+  padding: 7px 13px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  font-size: 0.82rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8rem;
   color: #E2E8F0;
   font-weight: 600;
 }
 
-.stack-chip i {
+.pinned-chip i {
   color: #FFFFFF;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   opacity: 0.85;
 }
 
-/* RIGHT COLUMN: CINEMA STAGE BOX */
-.stack-card-right {
-  width: 100%;
-}
-
-.stack-visual-cinema-box {
-  position: relative;
-  width: 100%;
-  min-height: 380px;
-  border-radius: 24px;
-  background: radial-gradient(circle at 50% 30%, rgba(30, 41, 59, 0.35) 0%, rgba(5, 7, 11, 0.95) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.cinema-box-top-bar {
+/* Progress Indicator */
+.pinned-progress-indicator {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(255, 255, 255, 0.015);
+  gap: 12px;
+  margin-top: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: var(--text-muted, #64748B);
 }
 
-.cinema-box-dot {
+.progress-bar-track {
+  width: 120px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: #FFFFFF;
+  transition: width 0.3s ease;
+}
+
+/* RIGHT COLUMN: Pinned Cinema Card Deck (Cards cover one another in stable viewport) */
+.pinned-visual-col {
+  position: relative;
+  width: 100%;
+  height: 480px;
+}
+
+.pinned-deck-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85);
+}
+
+.pinned-deck-cards-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.pinned-deck-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background: rgba(10, 14, 22, 0.97);
+  backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transform-origin: center center;
+}
+
+.deck-card-topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.deck-window-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.deck-window-dots .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
 }
 
-.cinema-box-dot.red { background: rgba(239, 68, 68, 0.6); }
-.cinema-box-dot.yellow { background: rgba(245, 158, 11, 0.6); }
-.cinema-box-dot.green { background: rgba(16, 185, 129, 0.6); }
+.deck-window-dots .dot-red { background: rgba(239, 68, 68, 0.7); }
+.deck-window-dots .dot-yellow { background: rgba(245, 158, 11, 0.7); }
+.deck-window-dots .dot-green { background: rgba(16, 185, 129, 0.7); }
 
-.cinema-box-tag {
+.deck-module-tag {
   font-size: 0.68rem;
   letter-spacing: 1.5px;
-  color: var(--text-muted);
+  color: var(--text-muted, #64748B);
   margin-left: auto;
 }
 
-.cinema-visual-content {
+.deck-card-number {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  opacity: 0.4;
+}
+
+.deck-card-cinema-body {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
   position: relative;
+  background: radial-gradient(circle at 50% 30%, rgba(30, 41, 59, 0.3) 0%, rgba(5, 7, 11, 0.95) 100%);
+}
+
+.deck-card-bottombar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  color: var(--text-muted, #64748B);
+}
+
+.status-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+}
+
+.status-text {
+  letter-spacing: 1px;
+}
+
+.status-format {
+  margin-left: auto;
+  opacity: 0.6;
 }
 
 /* Light Mode Adaptations */
-[data-theme="light"] .benefits-stack-card {
-  background: rgba(255, 255, 255, 0.96);
-  border-color: rgba(15, 23, 42, 0.12);
-  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+[data-theme="light"] .benefits-pinned-section {
+  background: var(--bg-primary, #F8FAFC);
 }
 
-[data-theme="light"] .stack-card-title {
+[data-theme="light"] .benefits-pinned-main-title,
+[data-theme="light"] .pinned-step-headline {
   color: #0F172A;
 }
 
-[data-theme="light"] .stack-pill-tag {
-  background: rgba(15, 23, 42, 0.05);
+[data-theme="light"] .benefits-industrial-tracker {
+  background: rgba(241, 245, 249, 0.9);
   border-color: rgba(15, 23, 42, 0.1);
 }
 
-[data-theme="light"] .stack-step-num {
-  color: #0F172A;
+[data-theme="light"] .industrial-tracker-btn.active {
+  background: #0F172A;
+  color: #FFFFFF;
 }
 
-[data-theme="light"] .stack-step-label {
+[data-theme="light"] .industrial-tracker-btn.active .tracker-num {
+  color: #FFFFFF;
+}
+
+[data-theme="light"] .pinned-stage-badge {
+  background: rgba(15, 23, 42, 0.05);
+  border-color: rgba(15, 23, 42, 0.1);
   color: #334155;
 }
 
-[data-theme="light"] .stack-chip {
+[data-theme="light"] .pinned-chip {
   background: rgba(15, 23, 42, 0.03);
   border-color: rgba(15, 23, 42, 0.08);
   color: #1E293B;
 }
 
-[data-theme="light"] .stack-chip i {
+[data-theme="light"] .pinned-chip i {
   color: #0F172A;
 }
 
-[data-theme="light"] .stack-visual-cinema-box {
+[data-theme="light"] .pinned-deck-card {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .deck-card-cinema-body {
   background: radial-gradient(circle at 50% 30%, rgba(241, 245, 249, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);
-  border-color: rgba(15, 23, 42, 0.08);
 }
 
-[data-theme="light"] .stack-tracker-btn.tracker-btn-active {
-  color: #FFFFFF;
-  background: #0F172A;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.2);
-}
-
-/* Responsive Media Queries */
+/* Responsive Breakdown */
 @media (max-width: 960px) {
-  .benefits-stack-card {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 32px 24px;
+  .benefits-pinned-section {
     min-height: auto;
+    padding: 80px 0;
   }
-  .stack-visual-cinema-box {
-    min-height: 280px;
+  .benefits-pinned-stage {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .pinned-narrative-col {
+    height: auto;
+    min-height: 380px;
+  }
+  .pinned-visual-col {
+    height: 360px;
   }
 }
 
 @media (max-width: 640px) {
-  .benefits-stack-tracker {
-    display: none;
+  .benefits-industrial-tracker {
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
   }
-  .benefits-stack-card {
-    padding: 24px 18px;
-    border-radius: 24px;
+  .industrial-tracker-btn {
+    padding: 7px 11px;
+    font-size: 0.68rem;
+  }
+  .pinned-narrative-col {
+    min-height: 420px;
+  }
+  .pinned-visual-col {
+    height: 300px;
   }
 }
 

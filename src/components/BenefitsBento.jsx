@@ -111,81 +111,115 @@ function StageVisual({ type }) {
 
 export default function BenefitsBento() {
   const sectionRef = useRef(null);
-  const stackContainerRef = useRef(null);
+  const pinnedStageRef = useRef(null);
+  const textGroupRef = useRef(null);
+  const cardDeckRef = useRef(null);
+  const scrollTriggerInstanceRef = useRef(null);
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) return;
-
     const section = sectionRef.current;
-    const stackContainer = stackContainerRef.current;
-    if (!section || !stackContainer) return;
+    const pinnedStage = pinnedStageRef.current;
+    const textGroup = textGroupRef.current;
+    const cardDeck = cardDeckRef.current;
+    if (!section || !pinnedStage || !textGroup || !cardDeck) return;
 
-    const cards = stackContainer.querySelectorAll(".benefits-stack-card");
-    if (cards.length < 4) return;
+    const textItems = textGroup.querySelectorAll(".pinned-text-pane");
+    const cardItems = cardDeck.querySelectorAll(".pinned-deck-card");
+    if (textItems.length < 4 || cardItems.length < 4) return;
 
     const ctx = gsap.context(() => {
-      // 1. Entrance animation for the Section Header
-      const heading = section.querySelector(".benefits-bento-heading");
-      if (heading) {
-        gsap.fromTo(
-          heading,
-          { opacity: 0, y: 30, filter: "blur(6px)" },
+      // 1. Initial State Setup
+      gsap.set(textItems, { opacity: 0, y: 30, filter: "blur(8px)", pointerEvents: "none" });
+      gsap.set(textItems[0], { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto" });
+
+      gsap.set(cardItems, { yPercent: 100, zIndex: (i) => i + 1 });
+      gsap.set(cardItems[0], { yPercent: 0, zIndex: 1 });
+
+      // 2. Master ScrollTrigger Pinned Timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=2800",
+          pin: true,
+          scrub: 0.8,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            const p = self.progress;
+            const idx = Math.min(3, Math.floor(p * 4));
+            setActiveStepIndex(idx);
+          },
+        },
+      });
+
+      scrollTriggerInstanceRef.current = tl.scrollTrigger;
+
+      // Build Step Transitions (1 -> 2 -> 3 -> 4)
+      const stepDuration = 1;
+      const overlap = 0.2;
+
+      for (let i = 1; i < 4; i++) {
+        const insertTime = (i - 1) * stepDuration;
+
+        // Animate previous text OUT
+        tl.to(
+          textItems[i - 1],
+          {
+            opacity: 0,
+            y: -25,
+            filter: "blur(6px)",
+            pointerEvents: "none",
+            duration: 0.45,
+            ease: "power2.inOut",
+          },
+          insertTime
+        );
+
+        // Animate next text IN
+        tl.to(
+          textItems[i],
           {
             opacity: 1,
             y: 0,
             filter: "blur(0px)",
-            duration: 0.85,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: heading,
-              start: "top 85%",
-            },
-          }
+            pointerEvents: "auto",
+            duration: 0.45,
+            ease: "power2.out",
+          },
+          insertTime + 0.2
+        );
+
+        // Card Deck: Next card covers the previous card completely
+        tl.fromTo(
+          cardItems[i],
+          { yPercent: 100 },
+          {
+            yPercent: 0,
+            duration: stepDuration,
+            ease: "power2.inOut",
+          },
+          insertTime
+        );
+
+        // Preceding card slight depth scale & shadow darkening
+        tl.to(
+          cardItems[i - 1],
+          {
+            scale: 0.96,
+            opacity: 0.6,
+            filter: "brightness(0.7)",
+            duration: stepDuration,
+            ease: "power2.inOut",
+          },
+          insertTime
         );
       }
 
-      // 2. Sticky Stacking Cards Animation (Option A)
-      cards.forEach((card, i) => {
-        // Initial soft reveal when entering view
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 50, filter: "blur(8px)" },
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.8,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 80%",
-              onEnter: () => setActiveStepIndex(i),
-              onEnterBack: () => setActiveStepIndex(i),
-            },
-          }
-        );
-
-        // Scale down preceding cards when next card scrolls over them
-        if (i < cards.length - 1) {
-          const nextCard = cards[i + 1];
-          gsap.to(card, {
-            scale: 0.94 - i * 0.015,
-            opacity: 0.4,
-            filter: "blur(3px)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: nextCard,
-              start: "top 75%",
-              end: "top 25%",
-              scrub: true,
-            },
-          });
-        }
-      });
+      // Small pause at the end of stage 4 before unpinning
+      tl.to({}, { duration: 0.4 });
 
       ScrollTrigger.refresh();
     }, sectionRef);
@@ -193,37 +227,38 @@ export default function BenefitsBento() {
     return () => ctx.revert();
   }, []);
 
-  const scrollToCard = (index) => {
-    if (!stackContainerRef.current) return;
-    const cards = stackContainerRef.current.querySelectorAll(".benefits-stack-card");
-    if (cards[index]) {
-      const topOffset = cards[index].getBoundingClientRect().top + window.scrollY - 130;
-      window.scrollTo({ top: topOffset, behavior: "smooth" });
+  const handleStepClick = (idx) => {
+    const st = scrollTriggerInstanceRef.current;
+    if (st) {
+      const targetProgress = idx / 3.2;
+      const targetScroll = st.start + targetProgress * (st.end - st.start);
+      window.scrollTo({ top: targetScroll, behavior: "smooth" });
     }
   };
 
   return (
-    <section ref={sectionRef} className="benefits-bento-section">
-      <div className="container benefits-bento-container">
+    <section ref={sectionRef} className="benefits-pinned-section">
+      <div className="container benefits-pinned-container">
         
-        {/* Section Header */}
-        <div className="benefits-bento-heading text-center">
-          <span className="section-subtitle">The Production System</span>
-          <h2>
-            From raw to <span className="combination-font">remarkable.</span>
-          </h2>
-          <p>
-            A high-velocity, four-step post-production pipeline engineered for viral retention and cinematic conversion.
-          </p>
+        {/* Top Header Bar with Industrial Styled Step Navigator */}
+        <div className="benefits-pinned-header">
+          <div className="benefits-pinned-header-left">
+            <span className="section-subtitle">The Production Pipeline</span>
+            <h2 className="benefits-pinned-main-title">
+              From raw to <span className="combination-font">remarkable.</span>
+            </h2>
+          </div>
 
-          {/* Minimalist Titanium Step Tracker Pills */}
-          <div className="benefits-stack-tracker">
+          {/* Industrial Titanium Step Tracker (Rounded-lg / 8px inner buttons) */}
+          <div className="benefits-industrial-tracker" role="tablist" aria-label="Pipeline Stages">
             {steps.map((step, idx) => (
               <button
                 key={step.id}
                 type="button"
-                className={`stack-tracker-btn ${activeStepIndex === idx ? "tracker-btn-active" : ""}`}
-                onClick={() => scrollToCard(idx)}
+                role="tab"
+                aria-selected={activeStepIndex === idx}
+                className={`industrial-tracker-btn ${activeStepIndex === idx ? "active" : ""}`}
+                onClick={() => handleStepClick(idx)}
               >
                 <span className="tracker-num">{step.id}</span>
                 <span className="tracker-label">{step.label}</span>
@@ -232,59 +267,94 @@ export default function BenefitsBento() {
           </div>
         </div>
 
-        {/* STICKY STACKING CARDS CONTAINER (OPTION A) */}
-        <div ref={stackContainerRef} className="benefits-stack-container">
-          {steps.map((step, index) => {
-            return (
-              <article
-                key={step.id}
-                className="benefits-stack-card glass-card"
-                style={{
-                  top: `calc(110px + ${index * 18}px)`,
-                  zIndex: index + 1,
-                }}
-              >
-                {/* LEFT COLUMN: 45% Typography & Copy */}
-                <div className="stack-card-left">
-                  <div className="stack-card-meta">
-                    <div className="stack-pill-tag">
-                      <span className="stack-step-num">{step.id}</span>
-                      <span className="stack-step-label">{step.label}</span>
-                    </div>
-                    <span className="mono-spec stack-tagline">{step.tagline}</span>
+        {/* PINNED VIEWPORT STAGE: 2-Column Synchronized Master Deck */}
+        <div ref={pinnedStageRef} className="benefits-pinned-stage">
+          
+          {/* LEFT COLUMN: Narrative Text Container (Texts outside the card) */}
+          <div className="pinned-narrative-col">
+            <div ref={textGroupRef} className="pinned-text-panes-wrapper">
+              {steps.map((step, idx) => (
+                <div
+                  key={step.id}
+                  className={`pinned-text-pane ${activeStepIndex === idx ? "is-active" : ""}`}
+                  aria-hidden={activeStepIndex !== idx}
+                >
+                  {/* Step Metadata Header */}
+                  <div className="pinned-meta-row">
+                    <span className="pinned-stage-badge">
+                      STAGE {step.id}{" // "}{step.badge}
+                    </span>
+                    <span className="mono-spec pinned-tagline">{step.tagline}</span>
                   </div>
 
-                  <h3 className="stack-card-title">{step.title}</h3>
-                  <p className="stack-card-desc">{step.desc}</p>
+                  {/* Headline & Description */}
+                  <h3 className="pinned-step-headline">{step.title}</h3>
+                  <p className="pinned-step-description">{step.desc}</p>
 
-                  {/* Production Chips */}
-                  <div className="stack-chips-grid">
+                  {/* Feature Chips */}
+                  <div className="pinned-chips-grid">
                     {step.chips.map((chip) => (
-                      <div key={chip} className="stack-chip">
-                        <i className="fa-solid fa-check" />
+                      <div key={chip} className="pinned-chip">
+                        <i className="fa-solid fa-check" aria-hidden="true" />
                         <span>{chip}</span>
                       </div>
                     ))}
                   </div>
-                </div>
 
-                {/* RIGHT COLUMN: 55% Large Interactive Cinema Visual Stage */}
-                <div className="stack-card-right">
-                  <div className="stack-visual-cinema-box">
-                    <div className="cinema-box-top-bar">
-                      <span className="cinema-box-dot red" />
-                      <span className="cinema-box-dot yellow" />
-                      <span className="cinema-box-dot green" />
-                      <span className="mono-spec cinema-box-tag">MODULE // {step.badge}</span>
-                    </div>
-                    <div className="cinema-visual-content">
-                      <StageVisual type={step.visual} />
+                  {/* Progress Indicator Dots */}
+                  <div className="pinned-progress-indicator">
+                    <span className="progress-step-text">0{idx + 1} / 04</span>
+                    <div className="progress-bar-track">
+                      <div
+                        className="progress-bar-fill"
+                        style={{ width: `${((idx + 1) / 4) * 100}%` }}
+                      />
                     </div>
                   </div>
                 </div>
-              </article>
-            );
-          })}
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: Pinned Cinema Card Deck (Cards cover one another) */}
+          <div className="pinned-visual-col">
+            <div className="pinned-deck-frame">
+              <div ref={cardDeckRef} className="pinned-deck-cards-wrapper">
+                {steps.map((step, idx) => (
+                  <article
+                    key={step.id}
+                    className="pinned-deck-card glass-card"
+                  >
+                    {/* Visual Card Top Header */}
+                    <div className="deck-card-topbar">
+                      <div className="deck-window-dots">
+                        <span className="dot dot-red" />
+                        <span className="dot dot-yellow" />
+                        <span className="dot dot-green" />
+                      </div>
+                      <span className="mono-spec deck-module-tag">
+                        MODULE {step.id}{" // "}{step.badge}
+                      </span>
+                      <span className="deck-card-number">#{step.id}</span>
+                    </div>
+
+                    {/* Visual Cinema Screen */}
+                    <div className="deck-card-cinema-body">
+                      <StageVisual type={step.visual} />
+                    </div>
+
+                    {/* Bottom Status Bar */}
+                    <div className="deck-card-bottombar">
+                      <span className="status-live-dot" />
+                      <span className="status-text">{step.tagline}</span>
+                      <span className="status-format">4K 60FPS ACES</span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
