@@ -113,7 +113,8 @@ export default function BenefitsBento() {
   const sectionRef = useRef(null);
   const textGroupRef = useRef(null);
   const cardDeckRef = useRef(null);
-  const scrollTriggerInstanceRef = useRef(null);
+  const trackerRef = useRef(null);
+  const scrollTriggerRef = useRef(null);
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   useEffect(() => {
@@ -125,6 +126,7 @@ export default function BenefitsBento() {
     const section = sectionRef.current;
     const textGroup = textGroupRef.current;
     const cardDeck = cardDeckRef.current;
+    const tracker = trackerRef.current;
     if (!section || !textGroup || !cardDeck) return;
 
     const textItems = textGroup.querySelectorAll(".pinned-text-pane");
@@ -133,121 +135,120 @@ export default function BenefitsBento() {
 
     const mm = gsap.matchMedia();
 
+    // DESKTOP: Silky Smooth, Jitter-Free Pinned Deck (Stable ScrollTrigger)
     mm.add("(min-width: 961px)", () => {
-      // Desktop: Ultra-responsive, low friction, effortless pinned flow
-      gsap.set(textItems, { opacity: 0, y: 16, filter: "blur(4px)", pointerEvents: "none" });
+      // 1. Initial State
+      gsap.set(textItems, { opacity: 0, y: 30, filter: "blur(6px)", pointerEvents: "none" });
       gsap.set(textItems[0], { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto" });
 
       gsap.set(cardItems, { yPercent: 100, zIndex: (i) => i + 1 });
       gsap.set(cardItems[0], { yPercent: 0, zIndex: 1 });
 
+      // 2. Continuous Master Timeline with butter-smooth scrub
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=600", // Effortless short scroll distance (~1.5 natural wheel spins)
+          end: "+=1600", // Natural, comfortable scroll track
           pin: true,
-          scrub: 0.2, // Instant friction-free response
+          scrub: 0.6, // Silky smooth interpolation without jitter
           anticipatePin: 1,
           onUpdate: (self) => {
             const p = self.progress;
-            const idx = Math.min(3, Math.floor(p * 3.99));
-            setActiveStepIndex(idx);
+            // 4 steps: 0, 1, 2, 3
+            const currentIdx = Math.min(3, Math.floor(p * 3.99));
+            setActiveStepIndex(currentIdx);
+
+            // Directly update button active styles for instantaneous feedback
+            if (tracker) {
+              const btns = tracker.querySelectorAll(".industrial-tracker-btn");
+              btns.forEach((btn, bIdx) => {
+                if (bIdx === currentIdx) {
+                  btn.classList.add("active");
+                  btn.setAttribute("aria-selected", "true");
+                } else {
+                  btn.classList.remove("active");
+                  btn.setAttribute("aria-selected", "false");
+                }
+              });
+            }
           },
         },
       });
 
-      scrollTriggerInstanceRef.current = tl.scrollTrigger;
+      scrollTriggerRef.current = tl.scrollTrigger;
 
-      // 1 -> 2
-      tl.to(
-        textItems[0],
-        { opacity: 0, y: -14, filter: "blur(4px)", pointerEvents: "none", duration: 0.25, ease: "power1.inOut" },
-        0.1
-      )
-        .to(
-          textItems[1],
-          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.25, ease: "power1.out" },
-          0.2
-        )
-        .fromTo(
-          cardItems[1],
-          { yPercent: 100 },
-          { yPercent: 0, duration: 0.5, ease: "power2.out" },
-          0.1
-        )
-        .to(cardItems[0], { scale: 0.97, opacity: 0.4, duration: 0.5, ease: "power1.out" }, 0.1);
+      // 3. Mathematical Clean Continuous Transitions (3 Segments: 0->1, 1->2, 2->3)
+      // Segment 1 (Ingest -> Shape): Timeline position 0.0 to 1.0
+      tl.to(textItems[0], { opacity: 0, y: -25, filter: "blur(6px)", pointerEvents: "none", ease: "power1.inOut", duration: 0.4 }, 0.1)
+        .fromTo(textItems[1], { opacity: 0, y: 25, filter: "blur(6px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power1.out", duration: 0.4 }, 0.4)
+        .fromTo(cardItems[1], { yPercent: 100 }, { yPercent: 0, ease: "power1.inOut", duration: 0.8 }, 0.1)
+        .to(cardItems[0], { scale: 0.95, opacity: 0.35, ease: "power1.inOut", duration: 0.8 }, 0.1);
 
-      // 2 -> 3
-      tl.to(
-        textItems[1],
-        { opacity: 0, y: -14, filter: "blur(4px)", pointerEvents: "none", duration: 0.25, ease: "power1.inOut" },
-        0.75
-      )
-        .to(
-          textItems[2],
-          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.25, ease: "power1.out" },
-          0.85
-        )
-        .fromTo(
-          cardItems[2],
-          { yPercent: 100 },
-          { yPercent: 0, duration: 0.5, ease: "power2.out" },
-          0.75
-        )
-        .to(cardItems[1], { scale: 0.97, opacity: 0.4, duration: 0.5, ease: "power1.out" }, 0.75);
+      // Segment 2 (Shape -> Craft): Timeline position 1.0 to 2.0
+      tl.to(textItems[1], { opacity: 0, y: -25, filter: "blur(6px)", pointerEvents: "none", ease: "power1.inOut", duration: 0.4 }, 1.1)
+        .fromTo(textItems[2], { opacity: 0, y: 25, filter: "blur(6px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power1.out", duration: 0.4 }, 1.4)
+        .fromTo(cardItems[2], { yPercent: 100 }, { yPercent: 0, ease: "power1.inOut", duration: 0.8 }, 1.1)
+        .to(cardItems[1], { scale: 0.95, opacity: 0.35, ease: "power1.inOut", duration: 0.8 }, 1.1);
 
-      // 3 -> 4
-      tl.to(
-        textItems[2],
-        { opacity: 0, y: -14, filter: "blur(4px)", pointerEvents: "none", duration: 0.25, ease: "power1.inOut" },
-        1.4
-      )
-        .to(
-          textItems[3],
-          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.25, ease: "power1.out" },
-          1.5
-        )
-        .fromTo(
-          cardItems[3],
-          { yPercent: 100 },
-          { yPercent: 0, duration: 0.5, ease: "power2.out" },
-          1.4
-        )
-        .to(cardItems[2], { scale: 0.97, opacity: 0.4, duration: 0.5, ease: "power1.out" }, 1.4);
+      // Segment 3 (Craft -> Release): Timeline position 2.0 to 3.0
+      tl.to(textItems[2], { opacity: 0, y: -25, filter: "blur(6px)", pointerEvents: "none", ease: "power1.inOut", duration: 0.4 }, 2.1)
+        .fromTo(textItems[3], { opacity: 0, y: 25, filter: "blur(6px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power1.out", duration: 0.4 }, 2.4)
+        .fromTo(cardItems[3], { yPercent: 100 }, { yPercent: 0, ease: "power1.inOut", duration: 0.8 }, 2.1)
+        .to(cardItems[2], { scale: 0.95, opacity: 0.35, ease: "power1.inOut", duration: 0.8 }, 2.1);
 
-      tl.to({}, { duration: 0.15 });
+      // Settle buffer before unpin
+      tl.to({}, { duration: 0.2 }, 3.0);
     });
 
-    // Mobile / Tablet (< 960px): Tab Switch Mode (No Scroll Trap)
+    // MOBILE / TABLET (< 961px): Non-pinned Interactive Tabs
     mm.add("(max-width: 960px)", () => {
       textItems.forEach((item, idx) => {
         gsap.set(item, {
-          opacity: idx === activeStepIndex ? 1 : 0,
+          opacity: idx === 0 ? 1 : 0,
           y: 0,
           filter: "blur(0px)",
-          pointerEvents: idx === activeStepIndex ? "auto" : "none",
+          pointerEvents: idx === 0 ? "auto" : "none",
         });
       });
       cardItems.forEach((card, idx) => {
         gsap.set(card, {
-          yPercent: idx === activeStepIndex ? 0 : 100,
-          zIndex: idx === activeStepIndex ? 2 : 1,
-          opacity: idx === activeStepIndex ? 1 : 0,
+          yPercent: idx === 0 ? 0 : 100,
+          zIndex: idx === 0 ? 2 : 1,
+          opacity: idx === 0 ? 1 : 0,
         });
       });
     });
 
     return () => mm.revert();
-  }, [activeStepIndex]);
+  }, []); // EMPTY DEPENDENCY ARRAY to ensure ScrollTrigger is never destroyed during scroll
 
   const handleStepClick = (idx) => {
     setActiveStepIndex(idx);
-    const st = scrollTriggerInstanceRef.current;
+    const st = scrollTriggerRef.current;
     if (st && window.innerWidth > 960) {
-      const targetProgress = idx / 3.1;
+      const targetProgress = idx / 3;
       const targetScroll = st.start + targetProgress * (st.end - st.start);
       window.scrollTo({ top: targetScroll, behavior: "smooth" });
+    } else {
+      // Mobile direct toggle
+      const textGroup = textGroupRef.current;
+      const cardDeck = cardDeckRef.current;
+      if (textGroup && cardDeck) {
+        const textItems = textGroup.querySelectorAll(".pinned-text-pane");
+        const cardItems = cardDeck.querySelectorAll(".pinned-deck-card");
+        textItems.forEach((item, i) => {
+          gsap.to(item, { opacity: i === idx ? 1 : 0, duration: 0.3 });
+          item.style.pointerEvents = i === idx ? "auto" : "none";
+        });
+        cardItems.forEach((card, i) => {
+          gsap.to(card, {
+            yPercent: i === idx ? 0 : 100,
+            opacity: i === idx ? 1 : 0,
+            duration: 0.35,
+          });
+        });
+      }
     }
   };
 
@@ -265,7 +266,12 @@ export default function BenefitsBento() {
           </div>
 
           {/* Industrial Step Tracker (12px container, 8px inner buttons) */}
-          <div className="benefits-industrial-tracker" role="tablist" aria-label="Pipeline Stages">
+          <div
+            ref={trackerRef}
+            className="benefits-industrial-tracker"
+            role="tablist"
+            aria-label="Pipeline Stages"
+          >
             {steps.map((step, idx) => (
               <button
                 key={step.id}
@@ -327,7 +333,7 @@ export default function BenefitsBento() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Large, Clean, Uncluttered Cinema Cards */}
+          {/* RIGHT COLUMN: Large, Clean Cinema Cards (Each smoothly covers previous) */}
           <div className="pinned-visual-col">
             <div className="pinned-deck-frame">
               <div ref={cardDeckRef} className="pinned-deck-cards-wrapper">
