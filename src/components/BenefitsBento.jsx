@@ -135,28 +135,27 @@ export default function BenefitsBento() {
 
     const mm = gsap.matchMedia();
 
-    // DESKTOP: Snapped Discrete Stage Deck (Never stuck half-way, 1 step per scroll)
+    // DESKTOP: Perfectly Synchronized, Fluid Linear Scrubbing
     mm.add("(min-width: 961px)", () => {
       // 1. Initial State
-      gsap.set(textItems, { opacity: 0, y: 24, filter: "blur(5px)", pointerEvents: "none" });
+      gsap.set(textItems, { opacity: 0, y: 20, filter: "blur(4px)", pointerEvents: "none" });
       gsap.set(textItems[0], { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto" });
 
       gsap.set(cardItems, { yPercent: 100, zIndex: (i) => i + 1 });
       gsap.set(cardItems[0], { yPercent: 0, zIndex: 1 });
 
-      // 2. Master Timeline with Mandatory Step Snapping
+      // 2. Continuous Master Timeline with Harmonious Linear Scrub
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=2100", // Generous track so 1 scroll moves exactly 1 card
+          end: "+=1800", // Exactly 600px natural pace per stage
           pin: true,
-          scrub: 0.5,
+          scrub: 0.8, // Silky fluid momentum without compounding lag
           snap: {
-            snapTo: [0, 1 / 3, 2 / 3, 1], // Snaps cleanly to each stage, never stopping midway
-            duration: { min: 0.2, max: 0.45 },
-            delay: 0.05,
-            ease: "power2.out",
+            snapTo: [0, 1 / 3, 2 / 3, 1], // Locks cleanly to each card
+            duration: { min: 0.2, max: 0.38 },
+            ease: "power1.out",
           },
           anticipatePin: 1,
           onUpdate: (self) => {
@@ -182,38 +181,31 @@ export default function BenefitsBento() {
 
       scrollTriggerRef.current = tl.scrollTrigger;
 
-      // 3. Timeline with generous rest zones:
-      // t = 0.0 to 0.15: Rest at Stage 0
-      // t = 0.15 to 0.85: Transition Stage 0 -> 1
-      // t = 0.85 to 1.15: Rest at Stage 1
-      // t = 1.15 to 1.85: Transition Stage 1 -> 2
-      // t = 1.85 to 2.15: Rest at Stage 2
-      // t = 2.15 to 2.85: Transition Stage 2 -> 3
-      // t = 2.85 to 3.0: Rest at Stage 3
+      // 3. Mathematical 1:1 Synchronized Segments (0->1 at t=0..1, 1->2 at t=1..2, 2->3 at t=2..3)
+      
+      // Segment 1 (Stage 0 -> 1): 0.0 to 1.0
+      tl.to(textItems[0], { opacity: 0, y: -16, filter: "blur(4px)", pointerEvents: "none", ease: "none", duration: 0.4 }, 0.0)
+        .fromTo(textItems[1], { opacity: 0, y: 16, filter: "blur(4px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "none", duration: 0.4 }, 0.3)
+        .fromTo(cardItems[1], { yPercent: 100 }, { yPercent: 0, ease: "none", duration: 1.0 }, 0.0)
+        .to(cardItems[0], { scale: 0.96, opacity: 0.35, ease: "none", duration: 1.0 }, 0.0);
 
-      // Transition 0 -> 1
-      tl.to(textItems[0], { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", ease: "power2.inOut", duration: 0.35 }, 0.2)
-        .fromTo(textItems[1], { opacity: 0, y: 20, filter: "blur(5px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power2.out", duration: 0.4 }, 0.45)
-        .fromTo(cardItems[1], { yPercent: 100 }, { yPercent: 0, ease: "power2.inOut", duration: 0.7 }, 0.2)
-        .to(cardItems[0], { scale: 0.95, opacity: 0.35, ease: "power2.inOut", duration: 0.7 }, 0.2);
+      // Segment 2 (Stage 1 -> 2): 1.0 to 2.0
+      tl.to(textItems[1], { opacity: 0, y: -16, filter: "blur(4px)", pointerEvents: "none", ease: "none", duration: 0.4 }, 1.0)
+        .fromTo(textItems[2], { opacity: 0, y: 16, filter: "blur(4px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "none", duration: 0.4 }, 1.3)
+        .fromTo(cardItems[2], { yPercent: 100 }, { yPercent: 0, ease: "none", duration: 1.0 }, 1.0)
+        .to(cardItems[1], { scale: 0.96, opacity: 0.35, ease: "none", duration: 1.0 }, 1.0);
 
-      // Transition 1 -> 2
-      tl.to(textItems[1], { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", ease: "power2.inOut", duration: 0.35 }, 1.2)
-        .fromTo(textItems[2], { opacity: 0, y: 20, filter: "blur(5px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power2.out", duration: 0.4 }, 1.45)
-        .fromTo(cardItems[2], { yPercent: 100 }, { yPercent: 0, ease: "power2.inOut", duration: 0.7 }, 1.2)
-        .to(cardItems[1], { scale: 0.95, opacity: 0.35, ease: "power2.inOut", duration: 0.7 }, 1.2);
+      // Segment 3 (Stage 2 -> 3): 2.0 to 3.0
+      tl.to(textItems[2], { opacity: 0, y: -16, filter: "blur(4px)", pointerEvents: "none", ease: "none", duration: 0.4 }, 2.0)
+        .fromTo(textItems[3], { opacity: 0, y: 16, filter: "blur(4px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "none", duration: 0.4 }, 2.3)
+        .fromTo(cardItems[3], { yPercent: 100 }, { yPercent: 0, ease: "none", duration: 1.0 }, 2.0)
+        .to(cardItems[2], { scale: 0.96, opacity: 0.35, ease: "none", duration: 1.0 }, 2.0);
 
-      // Transition 2 -> 3
-      tl.to(textItems[2], { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", ease: "power2.inOut", duration: 0.35 }, 2.2)
-        .fromTo(textItems[3], { opacity: 0, y: 20, filter: "blur(5px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "power2.out", duration: 0.4 }, 2.45)
-        .fromTo(cardItems[3], { yPercent: 100 }, { yPercent: 0, ease: "power2.inOut", duration: 0.7 }, 2.2)
-        .to(cardItems[2], { scale: 0.95, opacity: 0.35, ease: "power2.inOut", duration: 0.7 }, 2.2);
-
-      // Buffer settle at end
-      tl.to({}, { duration: 0.2 }, 3.0);
+      // Soft end buffer
+      tl.to({}, { duration: 0.15 }, 3.0);
     });
 
-    // MOBILE / TABLET (< 961px): Non-pinned Interactive Tabs
+    // MOBILE / TABLET (< 961px): Interactive Tabs
     mm.add("(max-width: 960px)", () => {
       textItems.forEach((item, idx) => {
         gsap.set(item, {
@@ -243,7 +235,6 @@ export default function BenefitsBento() {
       const targetScroll = st.start + targetProgress * (st.end - st.start);
       window.scrollTo({ top: targetScroll, behavior: "smooth" });
     } else {
-      // Mobile direct toggle
       const textGroup = textGroupRef.current;
       const cardDeck = cardDeckRef.current;
       if (textGroup && cardDeck) {
@@ -345,7 +336,7 @@ export default function BenefitsBento() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Large, Clean Cinema Cards (Each smoothly covers previous) */}
+          {/* RIGHT COLUMN: Large, Clean Cinema Cards */}
           <div className="pinned-visual-col">
             <div className="pinned-deck-frame">
               <div ref={cardDeckRef} className="pinned-deck-cards-wrapper">
