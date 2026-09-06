@@ -1,5 +1,28 @@
 @import "tailwindcss";
 
+/* --------------------------------------------------------------------------
+   LENIS SMOOTH SCROLL INTEGRATION
+   -------------------------------------------------------------------------- */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 /* ==========================================================================
    THE EDITLY FOUNDRY CO. - STYLESHEET
    Color Scheme: White & Bluish Gradient Combination (Reduced Purple)
