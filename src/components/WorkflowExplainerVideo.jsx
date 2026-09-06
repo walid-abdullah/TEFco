@@ -8,6 +8,26 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+function getEmbedUrl(url) {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes("youtube.com") && parsed.searchParams.has("v")) {
+      return `https://www.youtube.com/embed/${parsed.searchParams.get("v")}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3`;
+    }
+    if (parsed.hostname.includes("youtu.be")) {
+      return `https://www.youtube.com/embed${parsed.pathname}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3`;
+    }
+    if (parsed.hostname.includes("vimeo.com")) {
+      const id = parsed.pathname.replace("/", "");
+      return `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0`;
+    }
+  } catch (e) {
+    return null;
+  }
+  return null;
+}
+
 export default function WorkflowExplainerVideo({
   videoUrl = "",
   posterUrl = "",
@@ -18,6 +38,8 @@ export default function WorkflowExplainerVideo({
   const frameRef = useRef(null);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const embedUrl = getEmbedUrl(videoUrl);
 
   useEffect(() => {
     const context = gsap.context(() => {
@@ -37,7 +59,7 @@ export default function WorkflowExplainerVideo({
 
       gsap.fromTo(
         frameRef.current,
-        { width: compactWidth, scale: 0.92, borderRadius: "32px", opacity: 0.78 },
+        { width: compactWidth, scale: 0.92, borderRadius: "28px", opacity: 0.8 },
         {
           width: expandedWidth,
           scale: 1,
@@ -57,6 +79,24 @@ export default function WorkflowExplainerVideo({
     return () => context.revert();
   }, [aspectRatio]);
 
+  const handlePlayToggle = () => {
+    if (embedUrl) {
+      setIsPlaying(!isPlaying);
+      return;
+    }
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
+    } else {
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <section className="workflow-explainer" ref={sectionRef} aria-label={ariaLabel}>
       <div
@@ -65,33 +105,66 @@ export default function WorkflowExplainerVideo({
         style={{ "--workflow-video-ratio": aspectRatio }}
         data-video-ratio={aspectRatio.replace(/\s/g, "")}
       >
-        <video
-          ref={videoRef}
-          src={videoUrl || undefined}
-          poster={posterUrl || undefined}
-          playsInline
-          preload="metadata"
-          aria-label={ariaLabel}
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
-        />
-        <button
-          className={`workflow-video-play ${isPlaying ? "is-playing" : ""}`}
-          type="button"
-          onClick={() => {
-            if (!videoRef.current || !videoUrl) return;
-            if (videoRef.current.paused) {
-              videoRef.current.play();
-            } else {
-              videoRef.current.pause();
-            }
-          }}
-          disabled={!videoUrl}
-          aria-label={isPlaying ? `Pause ${ariaLabel}` : `Play ${ariaLabel}`}
-        >
-          <span aria-hidden="true">{isPlaying ? "Ⅱ" : "▶"}</span>
-          <span>{isPlaying ? "Pause" : "Play explainer"}</span>
-        </button>
+        {isPlaying && embedUrl ? (
+          <iframe
+            src={embedUrl}
+            title={ariaLabel}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              border: "none",
+              borderRadius: "inherit",
+            }}
+          />
+        ) : (
+          <>
+            {videoUrl && !embedUrl ? (
+              <video
+                ref={videoRef}
+                src={videoUrl}
+                poster={posterUrl || undefined}
+                playsInline
+                preload="metadata"
+                aria-label={ariaLabel}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+            ) : (
+              <img
+                src={posterUrl || "/Picture/square.png"}
+                alt={ariaLabel}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                  cursor: "pointer",
+                }}
+                onClick={handlePlayToggle}
+              />
+            )}
+
+            <button
+              className={`workflow-video-play ${isPlaying ? "is-playing" : ""}`}
+              type="button"
+              onClick={handlePlayToggle}
+              aria-label={isPlaying ? `Pause ${ariaLabel}` : `Play ${ariaLabel}`}
+            >
+              <span aria-hidden="true">{isPlaying ? "Ⅱ" : "▶"}</span>
+              <span>{isPlaying ? "Pause" : "Play founder overview"}</span>
+            </button>
+          </>
+        )}
       </div>
     </section>
   );

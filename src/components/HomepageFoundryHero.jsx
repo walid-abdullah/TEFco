@@ -3,7 +3,13 @@
 import Link from "next/link";
 import WorkflowExplainerVideo from "./WorkflowExplainerVideo";
 
-export default function HomepageFoundryHero() {
+export default function HomepageFoundryHero({
+  videoUrl,
+  posterUrl,
+}) {
+  const finalVideoUrl = videoUrl || process.env.NEXT_PUBLIC_FOUNDER_VIDEO_URL || process.env.NEXT_PUBLIC_HOME_SHOWREEL_URL || "";
+  const finalPosterUrl = posterUrl || "/Picture/square.png";
+
   return (
     <section className="home-foundry-hero">
       <div className="container home-foundry-hero-container">
@@ -17,9 +23,9 @@ export default function HomepageFoundryHero() {
           </div>
         </div>
         <WorkflowExplainerVideo
-          videoUrl={process.env.NEXT_PUBLIC_HOME_SHOWREEL_URL || ""}
-          posterUrl="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1800&q=85"
-          ariaLabel="Editly Foundry showreel"
+          videoUrl={finalVideoUrl}
+          posterUrl={finalPosterUrl}
+          ariaLabel="Editly Foundry showreel & founder video"
           aspectRatio="16 / 9"
         />
         <div className="home-foundry-formats mono-spec">REELS <span>·</span> PODCASTS <span>·</span> TALKING HEAD <span>·</span> UGC <span>·</span> SAAS MOTION</div>

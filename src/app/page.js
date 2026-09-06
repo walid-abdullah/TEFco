@@ -13,13 +13,15 @@ import HomepageGSAPOrchestrator from "@/components/HomepageGSAPOrchestrator";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
+  let homepageData = null;
   let logoData = [];
   let faqData = [];
   let portfolioData = [];
   let testimonialData = [];
 
   try {
-    [logoData, faqData, portfolioData, testimonialData] = await Promise.all([
+    [homepageData, logoData, faqData, portfolioData, testimonialData] = await Promise.all([
+      client.fetch(`*[_type == "homepage"][0]`),
       client.fetch(`*[_type == "clientLogo"] | order(order asc)`),
       client.fetch(`*[_type == "faq"] | order(order asc)`),
       client.fetch(`*[_type == "portfolio"] | order(_createdAt desc)[0...6]`),
@@ -28,6 +30,11 @@ export default async function Home() {
   } catch (error) {
     console.error("Homepage content fetch failed:", error);
   }
+
+  const heroVideoUrl = homepageData?.founderVideoUrl || process.env.NEXT_PUBLIC_FOUNDER_VIDEO_URL || process.env.NEXT_PUBLIC_HOME_SHOWREEL_URL || "";
+  const heroPosterUrl = homepageData?.founderVideoThumbnail?.asset 
+    ? urlFor(homepageData.founderVideoThumbnail).url() 
+    : "/Picture/square.png";
 
   const faqs = faqData?.length ? faqData.slice(0, 4) : [
     { _id: "home-faq-1", question: "How quickly can we start?", answer: "Most projects begin within a few working days, with a first cut typically delivered within 24–48 hours." },
@@ -54,7 +61,10 @@ export default async function Home() {
   return (
     <HomepageGSAPOrchestrator>
       <main className="home-foundry-page">
-        <HomepageFoundryHero />
+        <HomepageFoundryHero
+          videoUrl={heroVideoUrl}
+          posterUrl={heroPosterUrl}
+        />
 
         <HomepageMetrics />
 
