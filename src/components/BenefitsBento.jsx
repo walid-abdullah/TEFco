@@ -131,32 +131,27 @@ export default function BenefitsBento() {
     const cardItems = cardDeck.querySelectorAll(".pinned-deck-card");
     if (textItems.length < 4 || cardItems.length < 4) return;
 
-    const ctx = gsap.context(() => {
-      // Set initial states
-      gsap.set(textItems, { opacity: 0, y: 24, filter: "blur(6px)", pointerEvents: "none" });
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 961px)", () => {
+      // Desktop: Ultra-responsive, low friction, effortless pinned flow
+      gsap.set(textItems, { opacity: 0, y: 16, filter: "blur(4px)", pointerEvents: "none" });
       gsap.set(textItems[0], { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto" });
 
       gsap.set(cardItems, { yPercent: 100, zIndex: (i) => i + 1 });
       gsap.set(cardItems[0], { yPercent: 0, zIndex: 1 });
 
-      // Fast, responsive, snappy ScrollTrigger
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=1200", // Snappy scroll distance: fast response, no multiple scrolls needed
+          end: "+=600", // Effortless short scroll distance (~1.5 natural wheel spins)
           pin: true,
-          scrub: 0.35, // Instant scrub response
-          snap: {
-            snapTo: [0, 1 / 3, 2 / 3, 1],
-            duration: 0.3,
-            delay: 0.05,
-            ease: "power2.out",
-          },
+          scrub: 0.2, // Instant friction-free response
           anticipatePin: 1,
           onUpdate: (self) => {
             const p = self.progress;
-            const idx = Math.min(3, Math.round(p * 3));
+            const idx = Math.min(3, Math.floor(p * 3.99));
             setActiveStepIndex(idx);
           },
         },
@@ -164,77 +159,93 @@ export default function BenefitsBento() {
 
       scrollTriggerInstanceRef.current = tl.scrollTrigger;
 
-      // Card covering & synchronized text transitions
-      // Step 1 -> 2
+      // 1 -> 2
       tl.to(
         textItems[0],
-        { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", duration: 0.35, ease: "power2.inOut" },
-        0.15
+        { opacity: 0, y: -14, filter: "blur(4px)", pointerEvents: "none", duration: 0.25, ease: "power1.inOut" },
+        0.1
       )
         .to(
           textItems[1],
-          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.4, ease: "power2.out" },
-          0.35
+          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.25, ease: "power1.out" },
+          0.2
         )
         .fromTo(
           cardItems[1],
           { yPercent: 100 },
-          { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
-          0.2
+          { yPercent: 0, duration: 0.5, ease: "power2.out" },
+          0.1
         )
-        .to(cardItems[0], { scale: 0.96, opacity: 0.4, duration: 0.8, ease: "power2.inOut" }, 0.2);
+        .to(cardItems[0], { scale: 0.97, opacity: 0.4, duration: 0.5, ease: "power1.out" }, 0.1);
 
-      // Step 2 -> 3
+      // 2 -> 3
       tl.to(
         textItems[1],
-        { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", duration: 0.35, ease: "power2.inOut" },
-        1.15
+        { opacity: 0, y: -14, filter: "blur(4px)", pointerEvents: "none", duration: 0.25, ease: "power1.inOut" },
+        0.75
       )
         .to(
           textItems[2],
-          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.4, ease: "power2.out" },
-          1.35
+          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.25, ease: "power1.out" },
+          0.85
         )
         .fromTo(
           cardItems[2],
           { yPercent: 100 },
-          { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
-          1.2
+          { yPercent: 0, duration: 0.5, ease: "power2.out" },
+          0.75
         )
-        .to(cardItems[1], { scale: 0.96, opacity: 0.4, duration: 0.8, ease: "power2.inOut" }, 1.2);
+        .to(cardItems[1], { scale: 0.97, opacity: 0.4, duration: 0.5, ease: "power1.out" }, 0.75);
 
-      // Step 3 -> 4
+      // 3 -> 4
       tl.to(
         textItems[2],
-        { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", duration: 0.35, ease: "power2.inOut" },
-        2.15
+        { opacity: 0, y: -14, filter: "blur(4px)", pointerEvents: "none", duration: 0.25, ease: "power1.inOut" },
+        1.4
       )
         .to(
           textItems[3],
-          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.4, ease: "power2.out" },
-          2.35
+          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.25, ease: "power1.out" },
+          1.5
         )
         .fromTo(
           cardItems[3],
           { yPercent: 100 },
-          { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
-          2.2
+          { yPercent: 0, duration: 0.5, ease: "power2.out" },
+          1.4
         )
-        .to(cardItems[2], { scale: 0.96, opacity: 0.4, duration: 0.8, ease: "power2.inOut" }, 2.2);
+        .to(cardItems[2], { scale: 0.97, opacity: 0.4, duration: 0.5, ease: "power1.out" }, 1.4);
 
-      // Brief settle before release
-      tl.to({}, { duration: 0.3 });
+      tl.to({}, { duration: 0.15 });
+    });
 
-      ScrollTrigger.refresh();
-    }, sectionRef);
+    // Mobile / Tablet (< 960px): Tab Switch Mode (No Scroll Trap)
+    mm.add("(max-width: 960px)", () => {
+      textItems.forEach((item, idx) => {
+        gsap.set(item, {
+          opacity: idx === activeStepIndex ? 1 : 0,
+          y: 0,
+          filter: "blur(0px)",
+          pointerEvents: idx === activeStepIndex ? "auto" : "none",
+        });
+      });
+      cardItems.forEach((card, idx) => {
+        gsap.set(card, {
+          yPercent: idx === activeStepIndex ? 0 : 100,
+          zIndex: idx === activeStepIndex ? 2 : 1,
+          opacity: idx === activeStepIndex ? 1 : 0,
+        });
+      });
+    });
 
-    return () => ctx.revert();
-  }, []);
+    return () => mm.revert();
+  }, [activeStepIndex]);
 
   const handleStepClick = (idx) => {
+    setActiveStepIndex(idx);
     const st = scrollTriggerInstanceRef.current;
-    if (st) {
-      const targetProgress = idx / 3;
+    if (st && window.innerWidth > 960) {
+      const targetProgress = idx / 3.1;
       const targetScroll = st.start + targetProgress * (st.end - st.start);
       window.scrollTo({ top: targetScroll, behavior: "smooth" });
     }
@@ -316,7 +327,7 @@ export default function BenefitsBento() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Large, Clean, Uncluttered Cinema Cards (Each covers previous) */}
+          {/* RIGHT COLUMN: Large, Clean, Uncluttered Cinema Cards */}
           <div className="pinned-visual-col">
             <div className="pinned-deck-frame">
               <div ref={cardDeckRef} className="pinned-deck-cards-wrapper">
