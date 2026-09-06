@@ -133,41 +133,7 @@ export default function HomepageGSAPOrchestrator({ children }) {
         });
       }
 
-      // 3. Benefits Bento Cards: Velocity 3D Tilt & Spring Stagger (Option 3)
-      const bentoContainer = containerRef.current.querySelector('.benefits-bento-grid');
-      const bentoCards = containerRef.current.querySelectorAll('.benefits-bento-grid .workflow-card, .benefits-bento-grid > div');
-      if (bentoContainer && bentoCards.length > 0) {
-        gsap.set(bentoContainer, { perspective: 1200 });
-
-        gsap.fromTo(
-          bentoCards,
-          {
-            opacity: 0,
-            y: 50,
-            rotateX: 8,
-            scale: 0.93,
-            filter: 'blur(6px)',
-            transformOrigin: '50% 100%',
-          },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            scale: 1,
-            filter: 'blur(0px)',
-            duration: 0.9,
-            stagger: 0.12,
-            ease: 'power4.out',
-            scrollTrigger: {
-              trigger: bentoContainer,
-              start: 'top 82%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      }
-
-      // 4. Service List Item: Kinetic Magnetic Slide & Focus
+      // 3. Service List Item: Kinetic Magnetic Slide & Focus
       const serviceList = containerRef.current.querySelector('.home-foundry-service-list');
       const serviceItems = containerRef.current.querySelectorAll('.home-foundry-service-list a');
       if (serviceList && serviceItems.length > 0) {
