@@ -111,7 +111,6 @@ function StageVisual({ type }) {
 
 export default function BenefitsBento() {
   const sectionRef = useRef(null);
-  const pinnedStageRef = useRef(null);
   const textGroupRef = useRef(null);
   const cardDeckRef = useRef(null);
   const scrollTriggerInstanceRef = useRef(null);
@@ -120,36 +119,44 @@ export default function BenefitsBento() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
     const section = sectionRef.current;
-    const pinnedStage = pinnedStageRef.current;
     const textGroup = textGroupRef.current;
     const cardDeck = cardDeckRef.current;
-    if (!section || !pinnedStage || !textGroup || !cardDeck) return;
+    if (!section || !textGroup || !cardDeck) return;
 
     const textItems = textGroup.querySelectorAll(".pinned-text-pane");
     const cardItems = cardDeck.querySelectorAll(".pinned-deck-card");
     if (textItems.length < 4 || cardItems.length < 4) return;
 
     const ctx = gsap.context(() => {
-      // 1. Initial State Setup
-      gsap.set(textItems, { opacity: 0, y: 30, filter: "blur(8px)", pointerEvents: "none" });
+      // Set initial states
+      gsap.set(textItems, { opacity: 0, y: 24, filter: "blur(6px)", pointerEvents: "none" });
       gsap.set(textItems[0], { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto" });
 
       gsap.set(cardItems, { yPercent: 100, zIndex: (i) => i + 1 });
       gsap.set(cardItems[0], { yPercent: 0, zIndex: 1 });
 
-      // 2. Master ScrollTrigger Pinned Timeline
+      // Fast, responsive, snappy ScrollTrigger
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=2800",
+          end: "+=1200", // Snappy scroll distance: fast response, no multiple scrolls needed
           pin: true,
-          scrub: 0.8,
+          scrub: 0.35, // Instant scrub response
+          snap: {
+            snapTo: [0, 1 / 3, 2 / 3, 1],
+            duration: 0.3,
+            delay: 0.05,
+            ease: "power2.out",
+          },
           anticipatePin: 1,
           onUpdate: (self) => {
             const p = self.progress;
-            const idx = Math.min(3, Math.floor(p * 4));
+            const idx = Math.min(3, Math.round(p * 3));
             setActiveStepIndex(idx);
           },
         },
@@ -157,69 +164,66 @@ export default function BenefitsBento() {
 
       scrollTriggerInstanceRef.current = tl.scrollTrigger;
 
-      // Build Step Transitions (1 -> 2 -> 3 -> 4)
-      const stepDuration = 1;
-      const overlap = 0.2;
-
-      for (let i = 1; i < 4; i++) {
-        const insertTime = (i - 1) * stepDuration;
-
-        // Animate previous text OUT
-        tl.to(
-          textItems[i - 1],
-          {
-            opacity: 0,
-            y: -25,
-            filter: "blur(6px)",
-            pointerEvents: "none",
-            duration: 0.45,
-            ease: "power2.inOut",
-          },
-          insertTime
-        );
-
-        // Animate next text IN
-        tl.to(
-          textItems[i],
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            pointerEvents: "auto",
-            duration: 0.45,
-            ease: "power2.out",
-          },
-          insertTime + 0.2
-        );
-
-        // Card Deck: Next card covers the previous card completely
-        tl.fromTo(
-          cardItems[i],
+      // Card covering & synchronized text transitions
+      // Step 1 -> 2
+      tl.to(
+        textItems[0],
+        { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", duration: 0.35, ease: "power2.inOut" },
+        0.15
+      )
+        .to(
+          textItems[1],
+          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.4, ease: "power2.out" },
+          0.35
+        )
+        .fromTo(
+          cardItems[1],
           { yPercent: 100 },
-          {
-            yPercent: 0,
-            duration: stepDuration,
-            ease: "power2.inOut",
-          },
-          insertTime
-        );
+          { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
+          0.2
+        )
+        .to(cardItems[0], { scale: 0.96, opacity: 0.4, duration: 0.8, ease: "power2.inOut" }, 0.2);
 
-        // Preceding card slight depth scale & shadow darkening
-        tl.to(
-          cardItems[i - 1],
-          {
-            scale: 0.96,
-            opacity: 0.6,
-            filter: "brightness(0.7)",
-            duration: stepDuration,
-            ease: "power2.inOut",
-          },
-          insertTime
-        );
-      }
+      // Step 2 -> 3
+      tl.to(
+        textItems[1],
+        { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", duration: 0.35, ease: "power2.inOut" },
+        1.15
+      )
+        .to(
+          textItems[2],
+          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.4, ease: "power2.out" },
+          1.35
+        )
+        .fromTo(
+          cardItems[2],
+          { yPercent: 100 },
+          { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
+          1.2
+        )
+        .to(cardItems[1], { scale: 0.96, opacity: 0.4, duration: 0.8, ease: "power2.inOut" }, 1.2);
 
-      // Small pause at the end of stage 4 before unpinning
-      tl.to({}, { duration: 0.4 });
+      // Step 3 -> 4
+      tl.to(
+        textItems[2],
+        { opacity: 0, y: -20, filter: "blur(5px)", pointerEvents: "none", duration: 0.35, ease: "power2.inOut" },
+        2.15
+      )
+        .to(
+          textItems[3],
+          { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.4, ease: "power2.out" },
+          2.35
+        )
+        .fromTo(
+          cardItems[3],
+          { yPercent: 100 },
+          { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
+          2.2
+        )
+        .to(cardItems[2], { scale: 0.96, opacity: 0.4, duration: 0.8, ease: "power2.inOut" }, 2.2);
+
+      // Brief settle before release
+      tl.to({}, { duration: 0.3 });
 
       ScrollTrigger.refresh();
     }, sectionRef);
@@ -230,7 +234,7 @@ export default function BenefitsBento() {
   const handleStepClick = (idx) => {
     const st = scrollTriggerInstanceRef.current;
     if (st) {
-      const targetProgress = idx / 3.2;
+      const targetProgress = idx / 3;
       const targetScroll = st.start + targetProgress * (st.end - st.start);
       window.scrollTo({ top: targetScroll, behavior: "smooth" });
     }
@@ -240,7 +244,7 @@ export default function BenefitsBento() {
     <section ref={sectionRef} className="benefits-pinned-section">
       <div className="container benefits-pinned-container">
         
-        {/* Top Header Bar with Industrial Styled Step Navigator */}
+        {/* Top Header Row with Industrial Step Navigator */}
         <div className="benefits-pinned-header">
           <div className="benefits-pinned-header-left">
             <span className="section-subtitle">The Production Pipeline</span>
@@ -249,7 +253,7 @@ export default function BenefitsBento() {
             </h2>
           </div>
 
-          {/* Industrial Titanium Step Tracker (Rounded-lg / 8px inner buttons) */}
+          {/* Industrial Step Tracker (12px container, 8px inner buttons) */}
           <div className="benefits-industrial-tracker" role="tablist" aria-label="Pipeline Stages">
             {steps.map((step, idx) => (
               <button
@@ -267,10 +271,10 @@ export default function BenefitsBento() {
           </div>
         </div>
 
-        {/* PINNED VIEWPORT STAGE: 2-Column Synchronized Master Deck */}
-        <div ref={pinnedStageRef} className="benefits-pinned-stage">
+        {/* 2-Column Master Pinned Viewport Stage */}
+        <div className="benefits-pinned-stage">
           
-          {/* LEFT COLUMN: Narrative Text Container (Texts outside the card) */}
+          {/* LEFT COLUMN: Clean Narrative (Outside the Card) */}
           <div className="pinned-narrative-col">
             <div ref={textGroupRef} className="pinned-text-panes-wrapper">
               {steps.map((step, idx) => (
@@ -279,7 +283,6 @@ export default function BenefitsBento() {
                   className={`pinned-text-pane ${activeStepIndex === idx ? "is-active" : ""}`}
                   aria-hidden={activeStepIndex !== idx}
                 >
-                  {/* Step Metadata Header */}
                   <div className="pinned-meta-row">
                     <span className="pinned-stage-badge">
                       STAGE {step.id}{" // "}{step.badge}
@@ -287,11 +290,9 @@ export default function BenefitsBento() {
                     <span className="mono-spec pinned-tagline">{step.tagline}</span>
                   </div>
 
-                  {/* Headline & Description */}
                   <h3 className="pinned-step-headline">{step.title}</h3>
                   <p className="pinned-step-description">{step.desc}</p>
 
-                  {/* Feature Chips */}
                   <div className="pinned-chips-grid">
                     {step.chips.map((chip) => (
                       <div key={chip} className="pinned-chip">
@@ -301,9 +302,8 @@ export default function BenefitsBento() {
                     ))}
                   </div>
 
-                  {/* Progress Indicator Dots */}
                   <div className="pinned-progress-indicator">
-                    <span className="progress-step-text">0{idx + 1} / 04</span>
+                    <span className="progress-step-text">STEP 0{idx + 1} OF 04</span>
                     <div className="progress-bar-track">
                       <div
                         className="progress-bar-fill"
@@ -316,38 +316,17 @@ export default function BenefitsBento() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Pinned Cinema Card Deck (Cards cover one another) */}
+          {/* RIGHT COLUMN: Large, Clean, Uncluttered Cinema Cards (Each covers previous) */}
           <div className="pinned-visual-col">
             <div className="pinned-deck-frame">
               <div ref={cardDeckRef} className="pinned-deck-cards-wrapper">
-                {steps.map((step, idx) => (
+                {steps.map((step) => (
                   <article
                     key={step.id}
                     className="pinned-deck-card glass-card"
                   >
-                    {/* Visual Card Top Header */}
-                    <div className="deck-card-topbar">
-                      <div className="deck-window-dots">
-                        <span className="dot dot-red" />
-                        <span className="dot dot-yellow" />
-                        <span className="dot dot-green" />
-                      </div>
-                      <span className="mono-spec deck-module-tag">
-                        MODULE {step.id}{" // "}{step.badge}
-                      </span>
-                      <span className="deck-card-number">#{step.id}</span>
-                    </div>
-
-                    {/* Visual Cinema Screen */}
                     <div className="deck-card-cinema-body">
                       <StageVisual type={step.visual} />
-                    </div>
-
-                    {/* Bottom Status Bar */}
-                    <div className="deck-card-bottombar">
-                      <span className="status-live-dot" />
-                      <span className="status-text">{step.tagline}</span>
-                      <span className="status-format">4K 60FPS ACES</span>
                     </div>
                   </article>
                 ))}
