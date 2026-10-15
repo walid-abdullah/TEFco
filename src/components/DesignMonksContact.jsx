@@ -130,13 +130,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
     <div
       className="apple-glass-panel"
       style={{
-        background: isLight ? 'rgba(255, 255, 255, 0.88)' : 'rgba(13, 19, 36, 0.72)',
-        backdropFilter: 'blur(40px) saturate(200%)',
-        WebkitBackdropFilter: 'blur(40px) saturate(200%)',
+        background: isLight ? '#ffffff' : '#151515',
         border: isLight ? '1px solid rgba(15, 23, 42, 0.12)' : '1px solid rgba(255, 255, 255, 0.14)',
-        borderRadius: '24px',
+        borderRadius: '14px',
         padding: '28px 36px',
-        boxShadow: isLight ? '0 20px 50px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255,255,255,1)' : '0 25px 60px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.2)',
+        boxShadow: 'none',
         position: 'relative',
         maxWidth: '1280px',
         margin: '0 auto',
@@ -340,39 +338,6 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
               </ul>
             </div>
 
-            {/* Studio Brief: a useful conversion signal without a distracting video */}
-            <div className={`studio-brief-panel ${isLight ? 'is-light' : ''}`}>
-              <div className="studio-brief-topline">
-                <span className="mono-spec">THE EDITLY FOUNDRY / LIVE BRIEF</span>
-                <span className="studio-brief-status">
-                  <span />
-                  ACCEPTING PROJECTS
-                </span>
-              </div>
-              <div className="studio-brief-main">
-                <div className="studio-brief-mark" aria-hidden="true">
-                  <i className="fa-solid fa-arrow-trend-up" />
-                </div>
-                <div>
-                  <span className="mono-spec">YOUR RAW MATERIAL</span>
-                  <h3>Arrives messy.</h3>
-                  <p>Leaves as a repeatable content engine.</p>
-                </div>
-              </div>
-              <div className="studio-brief-track" aria-hidden="true">
-                <span className="studio-brief-track-line" />
-                <span className="studio-brief-track-node">RAW</span>
-                <span className="studio-brief-track-node">SHAPE</span>
-                <span className="studio-brief-track-node">RELEASE</span>
-              </div>
-              <div className="studio-brief-footer">
-                <span>EDITORIAL DIRECTION</span>
-                <span>×</span>
-                <span>MOTION CRAFT</span>
-                <span>×</span>
-                <span>RELIABLE DELIVERY</span>
-              </div>
-            </div>
           </div>
 
           {/* RIGHT COLUMN: Interactive Form */}

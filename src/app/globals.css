@@ -7806,7 +7806,15 @@ input::placeholder, textarea::placeholder {
 .home-foundry-hero .workflow-explainer-frame {
   min-height: 0;
   border-radius: 22px;
-  box-shadow: 0 32px 100px rgba(0, 0, 0, 0.58);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: #111111;
+  box-shadow: none;
+}
+
+.home-foundry-hero .workflow-explainer::before,
+.home-foundry-hero .workflow-explainer::after,
+.home-foundry-hero .workflow-explainer-frame::after {
+  display: none;
 }
 
 .home-foundry-formats {
@@ -8125,10 +8133,10 @@ input::placeholder, textarea::placeholder {
   gap: 0;
   margin: 44px 0 56px;
   padding: 14px;
-  border: 1px solid rgba(56, 189, 248, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 34px;
-  background: linear-gradient(135deg, rgba(16, 27, 52, 0.82), rgba(8, 12, 25, 0.94));
-  box-shadow: 0 0 36px rgba(56, 189, 248, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: #151515;
+  box-shadow: none;
 }
 
 .home-foundry-proof-capsule > div {
@@ -8140,7 +8148,7 @@ input::placeholder, textarea::placeholder {
   min-height: 76px;
   padding: 0 34px;
   border-radius: 26px;
-  background: rgba(255, 255, 255, 0.045);
+  background: #1d1d1d;
 }
 
 .home-foundry-proof-capsule strong {
@@ -8159,7 +8167,23 @@ input::placeholder, textarea::placeholder {
   width: 1px;
   height: 42px;
   margin: 0 10px;
-  background: rgba(125, 211, 252, 0.5);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.home-foundry-page .faq-section {
+  background: #0b0b0b !important;
+}
+
+.home-foundry-page .faq-section .faq-item {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  border-radius: 12px;
+  background: #151515;
+  box-shadow: none;
+}
+
+.home-foundry-page .faq-section .faq-item.active {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  box-shadow: none;
 }
 
 .home-foundry-review-rail {
