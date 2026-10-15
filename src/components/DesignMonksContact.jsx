@@ -130,7 +130,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
     <div
       className="apple-glass-panel"
       style={{
-        background: isLight ? '#ffffff' : '#151515',
+        background: isLight ? '#ffffff' : 'rgba(10, 14, 22, 0.92)',
         border: isLight ? '1px solid rgba(15, 23, 42, 0.12)' : '1px solid rgba(255, 255, 255, 0.14)',
         borderRadius: '14px',
         padding: '28px 36px',

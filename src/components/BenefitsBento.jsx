@@ -102,9 +102,12 @@ function StageVisual({ type }) {
 
   return (
     <div className="workflow-visual workflow-visual-release" aria-hidden="true">
-      <div className="workflow-device workflow-device-vertical" />
-      <div className="workflow-device workflow-device-wide" />
-      <div className="workflow-release-arrow">↗</div>
+      <div className="workflow-release-formats">
+        <div className="workflow-device workflow-device-vertical"><span>9:16</span></div>
+        <div className="workflow-device workflow-device-square"><span>1:1</span></div>
+        <div className="workflow-device workflow-device-wide"><span>16:9</span></div>
+      </div>
+      <div className="workflow-release-arrow">READY TO PUBLISH <b>↗</b></div>
     </div>
   );
 }
@@ -138,8 +141,8 @@ export default function BenefitsBento() {
     // DESKTOP: Perfectly Synchronized, Fluid Linear Scrubbing
     mm.add("(min-width: 961px)", () => {
       // 1. Initial State
-      gsap.set(textItems, { opacity: 0, y: 20, filter: "blur(4px)", pointerEvents: "none" });
-      gsap.set(textItems[0], { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto" });
+      gsap.set(textItems, { opacity: 0, y: 14, pointerEvents: "none" });
+      gsap.set(textItems[0], { opacity: 1, y: 0, pointerEvents: "auto" });
 
       gsap.set(cardItems, { yPercent: 100, zIndex: (i) => i + 1 });
       gsap.set(cardItems[0], { yPercent: 0, zIndex: 1 });
@@ -184,20 +187,20 @@ export default function BenefitsBento() {
       // 3. Mathematical 1:1 Synchronized Segments (0->1 at t=0..1, 1->2 at t=1..2, 2->3 at t=2..3)
       
       // Segment 1 (Stage 0 -> 1): 0.0 to 1.0
-      tl.to(textItems[0], { opacity: 0, y: -16, filter: "blur(4px)", pointerEvents: "none", ease: "none", duration: 0.4 }, 0.0)
-        .fromTo(textItems[1], { opacity: 0, y: 16, filter: "blur(4px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "none", duration: 0.4 }, 0.3)
+      tl.to(textItems[0], { opacity: 0, y: -14, pointerEvents: "none", ease: "none", duration: 0.4 }, 0.0)
+        .fromTo(textItems[1], { opacity: 0, y: 14, pointerEvents: "none" }, { opacity: 1, y: 0, pointerEvents: "auto", ease: "none", duration: 0.4 }, 0.3)
         .fromTo(cardItems[1], { yPercent: 100 }, { yPercent: 0, ease: "none", duration: 1.0 }, 0.0)
         .to(cardItems[0], { scale: 0.96, opacity: 0.35, ease: "none", duration: 1.0 }, 0.0);
 
       // Segment 2 (Stage 1 -> 2): 1.0 to 2.0
-      tl.to(textItems[1], { opacity: 0, y: -16, filter: "blur(4px)", pointerEvents: "none", ease: "none", duration: 0.4 }, 1.0)
-        .fromTo(textItems[2], { opacity: 0, y: 16, filter: "blur(4px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "none", duration: 0.4 }, 1.3)
+      tl.to(textItems[1], { opacity: 0, y: -14, pointerEvents: "none", ease: "none", duration: 0.4 }, 1.0)
+        .fromTo(textItems[2], { opacity: 0, y: 14, pointerEvents: "none" }, { opacity: 1, y: 0, pointerEvents: "auto", ease: "none", duration: 0.4 }, 1.3)
         .fromTo(cardItems[2], { yPercent: 100 }, { yPercent: 0, ease: "none", duration: 1.0 }, 1.0)
         .to(cardItems[1], { scale: 0.96, opacity: 0.35, ease: "none", duration: 1.0 }, 1.0);
 
       // Segment 3 (Stage 2 -> 3): 2.0 to 3.0
-      tl.to(textItems[2], { opacity: 0, y: -16, filter: "blur(4px)", pointerEvents: "none", ease: "none", duration: 0.4 }, 2.0)
-        .fromTo(textItems[3], { opacity: 0, y: 16, filter: "blur(4px)", pointerEvents: "none" }, { opacity: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", ease: "none", duration: 0.4 }, 2.3)
+      tl.to(textItems[2], { opacity: 0, y: -14, pointerEvents: "none", ease: "none", duration: 0.4 }, 2.0)
+        .fromTo(textItems[3], { opacity: 0, y: 14, pointerEvents: "none" }, { opacity: 1, y: 0, pointerEvents: "auto", ease: "none", duration: 0.4 }, 2.3)
         .fromTo(cardItems[3], { yPercent: 100 }, { yPercent: 0, ease: "none", duration: 1.0 }, 2.0)
         .to(cardItems[2], { scale: 0.96, opacity: 0.35, ease: "none", duration: 1.0 }, 2.0);
 
@@ -211,7 +214,6 @@ export default function BenefitsBento() {
         gsap.set(item, {
           opacity: idx === 0 ? 1 : 0,
           y: 0,
-          filter: "blur(0px)",
           pointerEvents: idx === 0 ? "auto" : "none",
         });
       });

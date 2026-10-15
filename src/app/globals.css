@@ -76,7 +76,7 @@ html.lenis, html.lenis body {
   --accent-green: #22C55E; /* Reserved exclusively for live production/availability dots */
 
   /* Precision Studio Micro-Grid & Ambient Spec */
-  --bg-gradient: radial-gradient(circle at 50% 0%, #0D1424 0%, #080C14 45%, #05070B 100%);
+  --bg-gradient: radial-gradient(circle at 50% 0%, #12161D 0%, #0B0E13 45%, #05070B 100%);
   --section-alt-bg: rgba(13, 18, 27, 0.65);
   --grid-line: rgba(255, 255, 255, 0.035);
   
@@ -120,10 +120,10 @@ html.lenis, html.lenis body {
   --accent-violet: #CBD5E1;
   --accent-ice: #CBD5E1;
   --glow-color: rgba(255, 255, 255, 0.08);
-  --bg-secondary: #090909;
-  --bg-tertiary: #111111;
-  --bg-elevated: #171717;
-  --bg-gradient: radial-gradient(circle at 50% 0%, #181818 0%, #0C0C0C 45%, #050505 100%);
+  --bg-secondary: #080C14;
+  --bg-tertiary: #0D121B;
+  --bg-elevated: #111722;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #12161D 0%, #0B0E13 45%, #05070B 100%);
 }
 
 /* Neutralize legacy inline blue treatments while preserving the green status signal. */
@@ -163,7 +163,7 @@ html.lenis, html.lenis body {
 
 /* Pure Apple Frosted Glass Panels */
 .apple-glass-panel {
-  background: rgba(13, 19, 36, 0.65);
+  background: rgba(10, 14, 22, 0.72);
   backdrop-filter: blur(40px) saturate(200%);
   -webkit-backdrop-filter: blur(40px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -2494,9 +2494,9 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 4px;
   padding: 4px;
   border-radius: 12px;
-  background: rgba(10, 14, 22, 0.86);
+  background: var(--glass-bg);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
+  backdrop-filter: none;
 }
 
 .industrial-tracker-btn {
@@ -2524,7 +2524,7 @@ img { max-width: 100%; height: auto; display: block; }
 .industrial-tracker-btn.active {
   background: #FFFFFF;
   color: #05070B;
-  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.25);
+  box-shadow: none;
 }
 
 .industrial-tracker-btn .tracker-num {
@@ -2685,7 +2685,7 @@ img { max-width: 100%; height: auto; display: block; }
   height: 100%;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9);
+  box-shadow: none;
 }
 
 .pinned-deck-cards-wrapper {
@@ -2701,11 +2701,10 @@ img { max-width: 100%; height: auto; display: block; }
   height: 100%;
   display: flex;
   border-radius: 24px;
-  background: rgba(10, 14, 22, 0.97);
-  backdrop-filter: blur(32px);
+  background: var(--card-bg);
   border: 1px solid rgba(255, 255, 255, 0.12);
   overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  box-shadow: none;
   transform-origin: center center;
 }
 
@@ -2716,7 +2715,7 @@ img { max-width: 100%; height: auto; display: block; }
   justify-content: center;
   padding: 36px;
   position: relative;
-  background: radial-gradient(circle at 50% 30%, rgba(30, 41, 59, 0.4) 0%, rgba(5, 7, 11, 0.98) 100%);
+  background: var(--bg-secondary);
 }
 
 /* Light Mode Adaptations */
@@ -3020,30 +3019,27 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .workflow-visual-craft {
-  background:
-    radial-gradient(circle at 48% 42%, rgba(255, 255, 255, 0.12), transparent 22%),
-    #070a12;
+  background: var(--bg-secondary);
 }
 
 .workflow-color-orb {
   position: absolute;
   width: 145px;
   height: 145px;
-  border-radius: 50%;
-  filter: blur(6px);
-  mix-blend-mode: screen;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .workflow-color-orb-one {
   top: 14%;
   left: 18%;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .workflow-color-orb-two {
   right: 12%;
   bottom: 16%;
-  background: rgba(148, 163, 184, 0.24);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .workflow-color-orb-three {
@@ -3051,7 +3047,7 @@ img { max-width: 100%; height: auto; display: block; }
   top: 30%;
   width: 80px;
   height: 80px;
-  background: rgba(226, 232, 240, 0.25);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .workflow-craft-frame {
@@ -3078,8 +3074,8 @@ img { max-width: 100%; height: auto; display: block; }
   position: absolute;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 8px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.025));
-  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
+  background: var(--bg-tertiary);
+  box-shadow: none;
 }
 
 .workflow-device::after {
@@ -3093,12 +3089,37 @@ img { max-width: 100%; height: auto; display: block; }
   background: rgba(255, 255, 255, 0.7);
 }
 
+.workflow-device span {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  left: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.workflow-release-formats {
+  position: absolute;
+  inset: 16% 13% 25%;
+}
+
 .workflow-device-vertical {
   top: 17%;
   left: 27%;
   width: 90px;
   height: 145px;
   transform: rotate(-8deg);
+}
+
+.workflow-device-square {
+  top: 25%;
+  left: 50%;
+  width: 112px;
+  height: 112px;
+  transform: translateX(-50%);
 }
 
 .workflow-device-wide {
@@ -3111,13 +3132,21 @@ img { max-width: 100%; height: auto; display: block; }
 
 .workflow-release-arrow {
   position: absolute;
-  top: 50%;
+  right: 14%;
+  bottom: 12%;
   left: 50%;
   z-index: 2;
   color: #fff;
-  font-size: 2.3rem;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.workflow-release-arrow b {
+  margin-left: 8px;
+  font-size: 1rem;
 }
 
 @keyframes workflow-scan {
@@ -7807,7 +7836,7 @@ input::placeholder, textarea::placeholder {
   min-height: 0;
   border-radius: 22px;
   border-color: rgba(255, 255, 255, 0.12);
-  background: #111111;
+  background: var(--bg-secondary);
   box-shadow: none;
 }
 
@@ -8135,7 +8164,7 @@ input::placeholder, textarea::placeholder {
   padding: 14px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 34px;
-  background: #151515;
+  background: var(--bg-secondary);
   box-shadow: none;
 }
 
@@ -8148,7 +8177,7 @@ input::placeholder, textarea::placeholder {
   min-height: 76px;
   padding: 0 34px;
   border-radius: 26px;
-  background: #1d1d1d;
+  background: rgba(17, 23, 34, 0.92);
 }
 
 .home-foundry-proof-capsule strong {
@@ -8171,13 +8200,13 @@ input::placeholder, textarea::placeholder {
 }
 
 .home-foundry-page .faq-section {
-  background: #0b0b0b !important;
+  background: var(--bg-primary) !important;
 }
 
 .home-foundry-page .faq-section .faq-item {
   border-color: rgba(255, 255, 255, 0.14) !important;
   border-radius: 12px;
-  background: #151515;
+  background: var(--bg-secondary);
   box-shadow: none;
 }
 
