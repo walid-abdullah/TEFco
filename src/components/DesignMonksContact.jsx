@@ -128,7 +128,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
 
   const formCardContent = (
     <div
-      className="apple-glass-panel"
+      className="apple-glass-panel contact-form-card"
       style={{
         background: isLight ? '#ffffff' : 'rgba(10, 14, 22, 0.92)',
         border: isLight ? '1px solid rgba(15, 23, 42, 0.12)' : '1px solid rgba(255, 255, 255, 0.14)',
@@ -336,12 +336,13 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                   <span>Dedicated Senior Video Editor + Motion Graphics Lead</span>
                 </li>
               </ul>
+
             </div>
 
           </div>
 
           {/* RIGHT COLUMN: Interactive Form */}
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <form className="contact-main-form" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             
             {/* First Name & Last Name Row */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>

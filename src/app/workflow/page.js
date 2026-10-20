@@ -132,7 +132,6 @@ export default function WorkflowPage() {
           <article className="workflow-featured-stage" id={`workflow-stage-${current.number}`} key={current.number} role="tabpanel">
             <div className="workflow-stage-orbit" aria-hidden="true"><span /><span /><span /></div>
             <div className="workflow-stage-topline">
-              <span className="workflow-stage-live">● IN PROGRESS</span>
               <span className="mono-spec">{current.timing}</span>
             </div>
             <div className="workflow-stage-number">{current.number}</div>
@@ -164,7 +163,10 @@ export default function WorkflowPage() {
           </article>
         </section>
 
-        <WorkflowExplainerVideo videoUrl={process.env.NEXT_PUBLIC_WORKFLOW_VIDEO_URL} />
+        <WorkflowExplainerVideo
+          videoUrl={process.env.NEXT_PUBLIC_WORKFLOW_VIDEO_URL}
+          aspectRatio="16 / 9"
+        />
 
         <section className="workflow-principles reveal-on-scroll">
           <div className="workflow-section-heading">

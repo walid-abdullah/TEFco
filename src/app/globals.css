@@ -3803,7 +3803,7 @@ img { max-width: 100%; height: auto; display: block; }
   position: relative;
   display: flex;
   justify-content: center;
-  min-height: clamp(260px, 34vw, 460px);
+  min-height: clamp(220px, 30vw, 420px);
   margin: 132px 0 0;
   overflow: hidden;
   isolation: isolate;
@@ -3817,17 +3817,11 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .workflow-explainer::before {
-  inset: 10% 8%;
-  z-index: -1;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  filter: blur(70px);
+  display: none;
 }
 
 .workflow-explainer::after {
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(90deg, var(--bg-primary), transparent 15%, transparent 85%, var(--bg-primary));
+  display: none;
 }
 
 .workflow-explainer-frame {
@@ -3835,25 +3829,16 @@ img { max-width: 100%; height: auto; display: block; }
   z-index: 0;
   align-self: center;
   max-width: 1200px;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  background:
-    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.11), transparent 42%),
-    #070a12;
-  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.58), 0 0 50px rgba(255, 255, 255, 0.06);
+  background: var(--bg-secondary);
+  box-shadow: none;
   will-change: width, transform;
 }
 
 .workflow-explainer-frame::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  pointer-events: none;
-  background:
-    linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.08), transparent 62%),
-    radial-gradient(circle at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.35));
-  mix-blend-mode: screen;
+  display: none;
 }
 
 .workflow-explainer-frame video {
@@ -8056,6 +8041,77 @@ input::placeholder, textarea::placeholder {
 .home-foundry-contact {
   padding-top: 0;
  }
+
+/* Compact contact brief: keep the two-column form balanced without empty panel space. */
+.contact-form-card {
+  padding: 24px 30px !important;
+}
+
+.contact-main-grid {
+  grid-template-columns: minmax(300px, 0.82fr) minmax(520px, 1.18fr) !important;
+  gap: 30px !important;
+}
+
+.contact-main-grid > div:first-child {
+  justify-content: center !important;
+}
+
+.contact-main-form {
+  gap: 12px !important;
+}
+
+.contact-main-form > div {
+  gap: 10px !important;
+}
+
+.contact-main-form label {
+  margin-bottom: 4px !important;
+  font-size: 0.78rem !important;
+}
+
+.contact-main-form input,
+.contact-main-form select {
+  min-height: 38px;
+  padding: 9px 12px !important;
+  border-radius: 8px !important;
+  font-size: 0.82rem !important;
+}
+
+.contact-main-form textarea {
+  min-height: 58px;
+  padding: 9px 12px !important;
+  border-radius: 8px !important;
+  font-size: 0.82rem !important;
+}
+
+.contact-main-form .pop-btn {
+  padding: 11px 24px !important;
+  border-radius: 9px !important;
+  font-size: 0.86rem !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .contact-main-grid {
+    grid-template-columns: minmax(260px, 0.72fr) minmax(460px, 1.28fr) !important;
+    gap: 22px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .contact-form-card {
+    padding: 22px 20px !important;
+  }
+
+  .contact-main-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .contact-main-grid > div:first-child {
+    justify-content: flex-start !important;
+  }
+
+}
 
  .home-foundry-results {
   padding-top: 110px;
