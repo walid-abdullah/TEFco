@@ -74,7 +74,7 @@ export default function ContactPage() {
         <div className="container">
           <div className="sg-cn-book-head">
             <span className="section-subtitle">Prefer to talk?</span>
-            <h2>Book a <span className="combination-font">15-minute call.</span></h2>
+            <h2>Book a <span className="combination-font">call.</span></h2>
             <p>Pick a time on the calendar to speak with Walid Abdullah.</p>
           </div>
           <div className="sg-calendly-box">

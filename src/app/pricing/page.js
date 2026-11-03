@@ -27,7 +27,7 @@ export default function PricingPage() {
     },
     {
       q: "Are source files (Premiere / After Effects) included?",
-      a: "Yes, on our Growth and Enterprise retainers, we deliver full editable project files (.prproj / .aep) along with all exported assets upon request."
+      a: "Yes, on our Growth and Scale packages, we deliver full editable project files (.prproj / .aep) along with all exported assets upon request."
     },
     {
       q: "Do you sign NDAs for confidential footage?",
@@ -42,13 +42,8 @@ export default function PricingPage() {
   return (
     <main className="pricing-page-full">
       
-      {/* 1. Main Pricing Section with Monthly/Quarterly Toggle */}
-      <PricingSection 
-        subtitle="Transparent Studio Retainers"
-        title1="World-Class Video Production at a"
-        title2="Predictable Monthly Rate"
-        description="Dedicated post-production capacity without the overhead of building an in-house team. Choose the rhythm that matches your ambition."
-      />
+      {/* 1. Monthly packages */}
+      <PricingSection />
 
       {/* 2. How the work happens */}
       <HowItWorks />

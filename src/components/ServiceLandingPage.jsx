@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import ServicePricing from "@/components/ServicePricing";
 import WorkflowExplainerVideo from "@/components/WorkflowExplainerVideo";
 
 const CATEGORY_LABELS = (text = "") => text.charAt(0) + text.slice(1).toLowerCase();
@@ -112,6 +113,8 @@ export default function ServiceLandingPage({ service }) {
           </ol>
         </div>
       </section>
+
+      <ServicePricing service={service.serviceName} />
 
       <section className="sg-faq">
         <div className="container sg-faq-grid">

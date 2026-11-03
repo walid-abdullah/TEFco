@@ -2,12 +2,13 @@ import Link from "next/link";
 import LogoMarquee from "./LogoMarquee";
 import WorkflowExplainerVideo from "./WorkflowExplainerVideo";
 
-// Background options to compare with ?hero=flat, black, fade or white. Remove once one is chosen.
+// Background options to compare with ?hero=flat, black, fade, white or arc. Remove once one is chosen.
 const HERO_STYLES = {
   flat: "sg-group-iris on-iris hero-flat",
   black: "sg-group-ink on-ink hero-black",
   fade: "on-iris hero-fade",
   white: "hero-white",
+  arc: "hero-white hero-arc",
 };
 
 export default function HomepageFoundryHero({ videoUrl, posterUrl, logos = [], heroStyle }) {

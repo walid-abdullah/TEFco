@@ -12,13 +12,13 @@ export default function CalculatorPage() {
   const [videoCount, setVideoCount] = useState(15);
   const [selectedFormats, setSelectedFormats] = useState(['short-form', 'podcasts']);
   const [turnaround, setTurnaround] = useState('standard'); // 'standard' (48h) or 'express' (24h)
-  const [motionGraphics, setMotionGraphics] = useState(true);
+  const [motionGraphics, setMotionGraphics] = useState(false);
 
   const formats = [
-    { id: 'short-form', name: 'Short-Form Reels / TikToks', basePrice: 120, icon: 'fa-solid fa-mobile-screen' },
-    { id: 'podcasts', name: 'YouTube Podcasts / Long-Form', basePrice: 280, icon: 'fa-solid fa-microphone' },
-    { id: 'saas-ads', name: 'Motion Graphics', basePrice: 450, icon: 'fa-solid fa-cube' },
-    { id: 'ugc-ads', name: 'High-Converting UGC & VSL Ads', basePrice: 220, icon: 'fa-solid fa-bullhorn' }
+    { id: 'short-form', name: 'Short-Form Reels / TikToks', basePrice: 30, icon: 'fa-solid fa-mobile-screen' },
+    { id: 'podcasts', name: 'YouTube Podcasts / Long-Form', basePrice: 200, icon: 'fa-solid fa-microphone' },
+    { id: 'saas-ads', name: 'Motion Graphics', basePrice: 500, icon: 'fa-solid fa-cube' },
+    { id: 'ugc-ads', name: 'High-Converting UGC & VSL Ads', basePrice: 30, icon: 'fa-solid fa-bullhorn' }
   ];
 
   const toggleFormat = (id) => {

@@ -21,6 +21,12 @@ export default function PricingPreview() {
               <em>{plan.features[0]}</em>
             </Link>
           ))}
+          <Link href="/pricing" className="is-custom" data-rise>
+            <h3>Custom</h3>
+            <p>For any other volume or budget.</p>
+            <strong>Your budget</strong>
+            <em>We build the package around it.</em>
+          </Link>
         </div>
         <Link href="/pricing" className="btn btn-primary sg-plans-cta">Compare all plans <span aria-hidden="true">→</span></Link>
       </div>

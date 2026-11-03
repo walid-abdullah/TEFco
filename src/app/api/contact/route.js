@@ -157,7 +157,7 @@ export async function POST(request) {
           to: raw.email,
           replyTo: process.env.EMAIL_USER,
           subject: `Your Project Brief with The Editly Foundry Co.`,
-          text: `Hi ${rawName},\n\nThank you for reaching out to The Editly Foundry Co. We have received your project brief.\n\nOur Executive Producer Walid Abdullah is currently reviewing your content.\n\nTo lock in your 48-hour turnaround, you can book a quick 15-minute slot on Walid's calendar here:\n${process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/w-abdullah5588/30min'}\n\nLooking forward to speaking with you!\n\nWalid Abdullah\nFounder & CEO, The Editly Foundry Co.\nWhatsApp: +880 1886 755 888`,
+          text: `Hi ${rawName},\n\nThank you for reaching out to The Editly Foundry Co. We have received your project brief.\n\nOur Executive Producer Walid Abdullah is currently reviewing your content.\n\nTo lock in your 48-hour turnaround, you can book a quick short slot on Walid's calendar here:\n${process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/w-abdullah5588/30min'}\n\nLooking forward to speaking with you!\n\nWalid Abdullah\nFounder & CEO, The Editly Foundry Co.\nWhatsApp: +880 1886 755 888`,
           html: `
             <!DOCTYPE html>
             <html>
@@ -186,7 +186,7 @@ export async function POST(request) {
                   </p>
 
                   <p style="font-size: 15px; line-height: 1.7; color: #334155; margin-bottom: 28px;">
-                    Our Executive Producer Walid Abdullah is currently reviewing your channel and brand details. To skip the email back-and-forth and lock in your 48-hour production turnaround, you can grab a quick 15-minute slot directly on Walid's calendar:
+                    Our Executive Producer Walid Abdullah is currently reviewing your channel and brand details. To skip the email back-and-forth and lock in your 48-hour production turnaround, you can grab a quick short slot directly on Walid's calendar:
                   </p>
 
                   <!-- Sleek & Classy Action Buttons -->

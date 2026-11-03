@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import { useTheme } from '@/context/ThemeContext';
+import BudgetPicker, { formatBudget } from './BudgetPicker';
+
+const STARTING_BUDGET = 500;
 
 export default function DesignMonksContact({ isModal = false, onClose = null }) {
   const { theme } = useTheme();
@@ -29,22 +32,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
   ];
   const [selectedVideoCount, setSelectedVideoCount] = useState('12 - 16 Videos / mo');
 
-  // Refined Lower-Entry Budget Options
-  const monthlyBudgetOptions = [
-    '$999/mo (Starter Pod)',
-    '$1,499/mo (Growth Retainer)',
-    '$2,499/mo (Scale)',
-    '$3.5K - $5K/mo',
-    '$5K+/mo (Enterprise)'
-  ];
-  const onetimeBudgetOptions = [
-    'Under $500',
-    '$500 - $1K',
-    '$1K - $2.5K',
-    'Custom Scope'
-  ];
-
-  const [selectedBudget, setSelectedBudget] = useState('$999/mo (Starter Pod)');
+  const [selectedBudget, setSelectedBudget] = useState(formatBudget(STARTING_BUDGET));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -58,14 +46,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
     }
   };
 
-  const handleProjectTypeChange = (type) => {
-    setProjectType(type);
-    if (type === 'monthly') {
-      setSelectedBudget(monthlyBudgetOptions[0]);
-    } else {
-      setSelectedBudget(onetimeBudgetOptions[1]);
-    }
-  };
+  const handleProjectTypeChange = (type) => setProjectType(type);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +66,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
       projectType: projectType === 'monthly' ? 'Monthly Dedicated Retainer' : 'One-Time Project',
       services: selectedServices.join(', '),
       videoCount: projectType === 'monthly' ? selectedVideoCount : 'N/A (One-Time)',
-      budget: selectedBudget,
+      budget: projectType === 'monthly' ? `${selectedBudget} per month` : selectedBudget,
       details: formData.get('details')
     };
 
@@ -562,34 +543,13 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                 </div>
               )}
 
-              {/* Dynamic Budget Dropdown */}
-              <div>
-                <label style={{ display: 'block', fontWeight: '700', fontSize: '0.88rem', marginBottom: '6px', color: 'var(--text-primary)' }}>
-                  Estimated Budget {projectType === 'monthly' ? '(Per Month)' : '(One-Off Scope)'}
-                </label>
-                <select
-                  value={selectedBudget}
-                  onChange={(e) => setSelectedBudget(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '10px',
-                    background: 'var(--input-bg)',
-                    border: '1px solid var(--input-border)',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.9rem',
-                    fontWeight: '600',
-                    outline: 'none',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {(projectType === 'monthly' ? monthlyBudgetOptions : onetimeBudgetOptions).map(b => (
-                    <option key={b} value={b} style={{ background: isLight ? '#fff' : '#0B132B', color: isLight ? '#000' : '#fff' }}>
-                      {b}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {/* Any budget, from $0 to no limit */}
+              <BudgetPicker
+                id="contact-budget"
+                initial={STARTING_BUDGET}
+                label={projectType === 'monthly' ? 'Your budget (per month)' : 'Your budget (this project)'}
+                onChange={setSelectedBudget}
+              />
 
             </div>
 

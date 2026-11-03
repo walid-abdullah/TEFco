@@ -119,7 +119,7 @@ export default function CaseStudyDetailPage({ params }) {
             Ready to Re-Engineer Your Video Content?
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto 30px' }}>
-            Book a 15-minute intro call to see how our dedicated post-production pod scales your output in 24–48 hours.
+            Book an intro call to see how our dedicated post-production pod scales your output in 24–48 hours.
           </p>
           <Link href="/book-a-call" className="btn btn-primary btn-lg pop-btn">
             <span>Book a 15-Min Intro Call ➔</span>
