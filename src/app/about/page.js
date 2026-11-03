@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import WorkflowExplainerVideo from "@/components/WorkflowExplainerVideo";
 import LogoMarquee from "@/components/LogoMarquee";
-import { clientLogos } from "@/data/clientLogos";
+import { useClientLogos } from "@/lib/useClientLogos";
 import { client } from "@/sanity/client";
 
 const pipelineSteps = [
@@ -195,6 +195,7 @@ const aboutStructuredData = {
 };
 
 export default function AboutPage() {
+  const logos = useClientLogos();
   const [founderVideoUrl, setFounderVideoUrl] = useState(process.env.NEXT_PUBLIC_FOUNDER_VIDEO_URL || "");
 
   useEffect(() => {
@@ -219,7 +220,7 @@ export default function AboutPage() {
       </section>
 
       <section className="sg-ab-names band-ink on-ink" aria-label="Selected clients">
-        <LogoMarquee logos={clientLogos} />
+        <LogoMarquee logos={logos} />
       </section>
 
       <section className="sg-band">

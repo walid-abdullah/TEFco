@@ -5,9 +5,10 @@ import { useSearchParams } from 'next/navigation';
 import BudgetPicker from '@/components/BudgetPicker';
 import CalendlyEmbed from '@/components/CalendlyEmbed';
 import LogoMarquee from '@/components/LogoMarquee';
-import { clientLogos } from '@/data/clientLogos';
+import { useClientLogos } from '@/lib/useClientLogos';
 
 function BookACallPageContent() {
+  const logos = useClientLogos();
   const searchParams = useSearchParams();
   
   const rawService = searchParams.get('service');
@@ -143,7 +144,7 @@ function BookACallPageContent() {
           )}
 
         </div>
-        <div className="sg-book-logos" aria-label="Selected clients"><LogoMarquee logos={clientLogos} /></div>
+        <div className="sg-book-logos" aria-label="Selected clients"><LogoMarquee logos={logos} /></div>
       </section>
 
       <section className="sg-book-calendar" id="calendar">

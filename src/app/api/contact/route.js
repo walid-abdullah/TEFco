@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
-import { createClient } from 'next-sanity';
 import { clip, escapeFields, escapeHtml, isEmail, isRateLimited, safeUrl } from '@/lib/requestSafety';
 import { sendWhatsAppText } from '@/lib/whatsapp';
 
@@ -26,7 +25,7 @@ export async function POST(request) {
 
     // Everything placed into email HTML uses the escaped copy; plain-text channels use raw.
     const data = escapeFields(raw);
-    const delivered = { whatsapp: false, email: false, cms: false };
+    const delivered = { whatsapp: false, email: false };
 
     // Check if credentials exist
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
@@ -241,42 +240,7 @@ export async function POST(request) {
       }
     }
 
-    // 4. Attempt to save to Sanity CMS if a write token is provided
-    if (process.env.SANITY_API_TOKEN) {
-      try {
-        const sanityClient = createClient({
-          projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-          dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-          apiVersion: '2024-01-01',
-          useCdn: false,
-          token: process.env.SANITY_API_TOKEN
-        });
-        
-        let messageText = '';
-        if (raw.needs || raw.bottleneck) {
-          messageText = `Channel: ${raw.channelLink || 'N/A'}\nBottleneck: ${raw.needs || raw.bottleneck}`;
-        } else if (raw.message) {
-          messageText = raw.message;
-        }
-
-        await sanityClient.create({
-          _type: 'contactMessage',
-          name: rawName,
-          email: raw.email,
-          type: (raw.needs || raw.bottleneck) ? 'booking' : 'general',
-          message: messageText,
-          status: 'unread',
-          submittedAt: new Date().toISOString()
-        });
-        delivered.cms = true;
-      } catch (sanityError) {
-        console.error("Failed to save lead to Sanity:", sanityError);
-      }
-    } else {
-      console.log("SANITY_API_TOKEN is not set. Skipping saving lead to Sanity.");
-    }
-
-    if (!delivered.whatsapp && !delivered.email && !delivered.cms) {
+    if (!delivered.whatsapp && !delivered.email) {
       console.error("Lead could not be delivered through any channel.");
       return NextResponse.json({ error: "We could not deliver your inquiry." }, { status: 502 });
     }

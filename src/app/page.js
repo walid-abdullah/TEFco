@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { client } from "@/sanity/client";
+import { mergeClientLogos } from "@/sanity/content";
 import { urlFor } from "@/sanity/image";
 import AudienceSection from "@/components/AudienceSection";
 import CompareSection from "@/components/CompareSection";
 import PricingPreview from "@/components/PricingPreview";
-import { clientLogos } from "@/data/clientLogos";
 import HowItWorks from "@/components/HowItWorks";
 import FAQSection from "@/components/FAQSection";
 import DesignMonksContact from "@/components/DesignMonksContact";
@@ -13,7 +13,17 @@ import ClientReviewsSection from "@/components/ClientReviewsSection";
 import HomepageMetrics from "@/components/HomepageMetrics";
 import HomepageGSAPOrchestrator from "@/components/HomepageGSAPOrchestrator";
 
-export const dynamic = "force-dynamic";
+// Changes made in Sanity appear within a minute.
+export const revalidate = 60;
+
+// One request for the whole page, with only the fields it uses.
+const HOME_QUERY = `{
+  "homepage": *[_type == "homepage"][0]{ founderVideoUrl, founderVideoThumbnail },
+  "logos": *[_type == "clientLogo" && defined(logo.asset)] | order(order asc){ _id, name, logo },
+  "faqs": *[_type == "faq"] | order(order asc)[0...4]{ _id, question, answer },
+  "work": *[_type == "portfolio" && defined(videoUrl) && videoUrl != ""] | order(order asc, _createdAt desc)[0...3]{ _id, title, category, orientation, thumbnail, videoUrl },
+  "reviews": *[_type == "testimonial"] | order(_createdAt desc){ _id, clientName, clientRole, clientImage, isVideo, videoUrl, videoThumbnail, review, rating }
+}`;
 
 export const metadata = { alternates: { canonical: "/" } };
 
@@ -21,27 +31,17 @@ const CATEGORY_LABELS = { reels: "Reels & Shorts", saas: "Motion Graphics", podc
 const formatLabel = (category) => CATEGORY_LABELS[category] || category || "Selected work";
 
 export default async function Home() {
-  let homepageData = null;
-  let logoData = [];
-  let faqData = [];
-  let portfolioData = [];
-  let testimonialData = [];
-
+  let content = {};
   try {
-    [homepageData, logoData, faqData, portfolioData, testimonialData] = await Promise.all([
-      client.fetch(`*[_type == "homepage"][0]`),
-      client.fetch(`*[_type == "clientLogo"] | order(order asc)`),
-      client.fetch(`*[_type == "faq"] | order(order asc)`),
-      client.fetch(`*[_type == "portfolio"] | order(_createdAt desc)[0...6]`),
-      client.fetch(`*[_type == "testimonial"] | order(_createdAt desc)`),
-    ]);
+    content = await client.fetch(HOME_QUERY);
   } catch (error) {
     console.error("Homepage content fetch failed:", error);
   }
+  const { homepage: homepageData, logos: logoData, faqs: faqData, work: portfolioData, reviews: testimonialData = [] } = content;
 
   const heroVideoUrl = homepageData?.founderVideoUrl || process.env.NEXT_PUBLIC_FOUNDER_VIDEO_URL || process.env.NEXT_PUBLIC_HOME_SHOWREEL_URL || "";
   const heroPosterUrl = homepageData?.founderVideoThumbnail?.asset 
-    ? urlFor(homepageData.founderVideoThumbnail).url() 
+    ? urlFor(homepageData.founderVideoThumbnail).width(1600).auto("format").url() 
     : "/Picture/square.png";
 
   const faqs = faqData?.length ? faqData.slice(0, 4) : [
@@ -51,12 +51,14 @@ export default async function Home() {
     { _id: "home-faq-4", question: "Do you work on retainers?", answer: "Yes. Ongoing creative pods are available for teams that need a consistent publishing rhythm." },
   ];
 
-  const work = portfolioData?.length ? portfolioData : [
+  const sampleWork = [
     { _id: "home-work-1", title: "Podcast edit", category: "Podcast", image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=85" },
     { _id: "home-work-2", title: "Short-form system", category: "Reels", image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=900&q=85" },
     { _id: "home-work-3", title: "Product motion", category: "SaaS", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85" },
     { _id: "home-work-4", title: "Authority film", category: "Talking head", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=85" },
   ];
+  // Real videos come first. Samples fill any empty places until there are three.
+  const work = [...(portfolioData || []), ...sampleWork].slice(0, 3);
 
   const services = [
     { number: "01", title: "Reels & Shorts", text: "Retention-led cuts for the feed, built around the first three seconds.", href: "/services/reels-shorts", tone: "1", tags: ["Hooks", "Kinetic captions", "9:16"], image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85" },
@@ -68,16 +70,9 @@ export default async function Home() {
 
   const toImage = (item) => {
     const source = item.thumbnail || item.image;
-    return source?.asset ? urlFor(source).width(900).url() : source;
+    return source?.asset ? urlFor(source).width(1000).auto("format").url() : source;
   };
-  // Logos added in Sanity join the local set. The local version wins on a matching name.
-  const knownLogos = new Set(clientLogos.map((logo) => logo.name.toLowerCase()));
-  const logos = [
-    ...clientLogos,
-    ...(logoData || [])
-      .filter((logo) => logo?.logo?.asset && !knownLogos.has((logo.name || "").toLowerCase()))
-      .map((logo) => ({ name: logo.name || "Client logo", src: urlFor(logo.logo).height(96).url(), raw: true })),
-  ];
+  const logos = mergeClientLogos(logoData);
 
   return (
     <HomepageGSAPOrchestrator>
@@ -114,7 +109,7 @@ export default async function Home() {
               {work.slice(0, 3).map((item) => {
                 const image = toImage(item);
                 return (
-                  <Link href="/work" className={`sg-work-card${item.category === "reels" ? " is-portrait" : ""}`} key={item._id}>
+                  <Link href="/work" className={`sg-work-card${(item.orientation ? item.orientation === "portrait" : item.category === "reels") ? " is-portrait" : ""}`} key={item._id}>
                     <div className="sg-work-media" style={image ? { backgroundImage: `url(${image})` } : undefined}><span className="sg-play" aria-hidden="true">▶</span></div>
                     <div className="sg-work-meta"><strong>{item.title}</strong><em>{formatLabel(item.category)}</em></div>
                   </Link>
