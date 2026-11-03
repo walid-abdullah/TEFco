@@ -2,33 +2,28 @@ import Link from "next/link";
 import LogoMarquee from "./LogoMarquee";
 import WorkflowExplainerVideo from "./WorkflowExplainerVideo";
 
-// Background options to compare with ?hero=flat, black, fade, white or arc. Remove once one is chosen.
-const HERO_STYLES = {
-  flat: "sg-group-iris on-iris hero-flat",
-  black: "sg-group-ink on-ink hero-black",
-  fade: "on-iris hero-fade",
-  white: "hero-white",
-  arc: "hero-white hero-arc",
-};
-
-export default function HomepageFoundryHero({ videoUrl, posterUrl, logos = [], heroStyle }) {
-  const groupStyle = Object.hasOwn(HERO_STYLES, heroStyle ?? "") ? HERO_STYLES[heroStyle] : "sg-group-iris on-iris";
+export default function HomepageFoundryHero({ videoUrl, posterUrl, logos = [] }) {
   const finalVideoUrl = videoUrl || process.env.NEXT_PUBLIC_FOUNDER_VIDEO_URL || process.env.NEXT_PUBLIC_HOME_SHOWREEL_URL || "";
   const finalPosterUrl = posterUrl || "/Picture/square.png";
 
   return (
-    <div className={`sg-group is-first ${groupStyle}`}>
+    <div className="sg-group is-first on-ink hero-beam">
       <section className="sg-hero">
         <div className="container home-foundry-hero-copy">
-          <span className="section-subtitle">Independent post-production studio</span>
+          <span className="section-subtitle">Independent Video Editing Agency</span>
           <h1>Video that keeps<br /><span className="combination-font">people watching.</span></h1>
           <div className="sg-hero-foot">
-            <p>We edit reels, podcasts, talking-head videos, UGC ads and motion graphics for founders and brands. First cut in 24–48 hours.</p>
+            <p>We edit reels, podcasts, talking-head videos, UGC ads and motion graphics for founders and brands.</p>
             <div className="home-foundry-hero-actions">
               <Link href="/work" className="btn btn-primary">See the work <span aria-hidden="true">→</span></Link>
               <Link href="/book-a-call" className="sg-link">Start a project <span aria-hidden="true">→</span></Link>
             </div>
           </div>
+          <ul className="sg-hero-proof">
+            <li><b aria-hidden="true">★</b> 4.9/5 on Trustpilot</li>
+            <li>2,000+ projects delivered</li>
+            <li>First cut in 24–48 hours</li>
+          </ul>
         </div>
       </section>
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import CustomPriceCard from "./CustomPriceCard";
 import { pricingPlans } from "@/data/pricingPlans";
-import { servicePrices } from "@/data/servicePrices";
+import { serviceLinks, servicePrices } from "@/data/servicePrices";
 
 export default function PricingSection() {
   return (
@@ -30,22 +30,31 @@ export default function PricingSection() {
       </section>
 
       <section className="sg-band sg-rates">
-        <div className="container sg-split">
-          <div>
-            <span className="section-subtitle">No package needed</span>
-            <h2>Just need<br /><span className="combination-font">one project?</span></h2>
+        <div className="container">
+          <div className="home-foundry-section-head">
+            <div>
+              <span className="section-subtitle">No package needed</span>
+              <h2>Just need <span className="combination-font">one project?</span></h2>
+            </div>
+            <p>Pay per video. Choose a service to see the full details.</p>
           </div>
-          <div className="sg-rates-list">
+          <div className="sg-rates-grid">
             {Object.entries(servicePrices).map(([service, items]) => (
-              <div key={service} data-rise>
+              <Link href={serviceLinks[service]} key={service} data-rise>
                 <h3>{service}</h3>
                 <ul>
                   {items.map((item) => (
                     <li key={item.name}><span>{item.name}<em>{item.note}</em></span><strong>${item.price}</strong></li>
                   ))}
                 </ul>
-              </div>
+                <b>See {service} <span aria-hidden="true">→</span></b>
+              </Link>
             ))}
+            <Link href="/book-a-call" className="is-custom" data-rise>
+              <h3>Something else?</h3>
+              <p>Tell us your budget and what you need. We will price it for you.</p>
+              <b>Talk to us <span aria-hidden="true">→</span></b>
+            </Link>
           </div>
         </div>
       </section>

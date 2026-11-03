@@ -71,20 +71,18 @@ export default function HomepageGSAPOrchestrator({ children }) {
         );
       }
 
-      // Founder video settles in once, so nothing moves while it plays.
-      const showreelFrame = containerRef.current.querySelector('.sg-showreel .workflow-explainer-frame');
+      // Founder video starts small and grows as it scrolls up. Only transforms
+      // change, so the page never recalculates layout while scrolling.
+      const showreel = containerRef.current.querySelector('.sg-showreel .workflow-explainer');
+      const showreelFrame = showreel?.querySelector('.workflow-explainer-frame');
       if (showreelFrame) {
+        const startScale = window.innerWidth < 720 ? 0.82 : 0.6;
+        const scrollRange = { trigger: showreel, start: 'top 68%', end: 'top 14%', scrub: true };
+        // The play button holds its size while the video around it grows.
         gsap.fromTo(
           showreelFrame,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: 'power3.out',
-            clearProps: 'transform,opacity',
-            scrollTrigger: { trigger: showreelFrame, start: 'top 92%', once: true },
-          }
+          { scale: startScale, '--play-scale': 1 / startScale },
+          { scale: 1, '--play-scale': 1, ease: 'none', transformOrigin: 'center top', scrollTrigger: scrollRange }
         );
       }
 
@@ -184,6 +182,35 @@ export default function HomepageGSAPOrchestrator({ children }) {
             ease: 'none',
             scrollTrigger: { trigger: stackCards[i + 1], start: 'top bottom', end: 'top 120px', scrub: true },
           });
+        });
+      }
+
+      // The service card nearest the middle of the screen stays highlighted.
+      const stack = containerRef.current.querySelector('.sg-stack');
+      if (stack) {
+        const cards = gsap.utils.toArray(stack.querySelectorAll('.sg-stack-card'));
+        let focused = null;
+        const updateFocus = () => {
+          const middle = window.innerHeight / 2;
+          const distanceToMiddle = (card) => {
+            const box = card.getBoundingClientRect();
+            return Math.abs(box.top + box.height / 2 - middle);
+          };
+          const nearest = cards.reduce((best, card) => (distanceToMiddle(card) < distanceToMiddle(best) ? card : best));
+          if (nearest === focused) return;
+          focused?.classList.remove('is-focus');
+          nearest.classList.add('is-focus');
+          focused = nearest;
+        };
+        ScrollTrigger.create({
+          trigger: stack,
+          start: 'top 70%',
+          end: 'bottom 30%',
+          onToggle: (self) => {
+            stack.classList.toggle('has-focus', self.isActive);
+            if (self.isActive) updateFocus();
+          },
+          onUpdate: updateFocus,
         });
       }
 

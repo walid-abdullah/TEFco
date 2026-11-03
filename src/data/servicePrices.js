@@ -4,6 +4,14 @@ const shortForm = (item, items) => [
   { name: `20 ${items} a month`, price: 450, unit: "per month", note: `$22.50 per ${item}.`, isPopular: true },
 ];
 
+export const serviceLinks = {
+  Podcast: "/services/podcasts",
+  "Reels & Shorts": "/services/reels-shorts",
+  "UGC Ads": "/services/ugc-ads",
+  "Talking Head": "/services/talking-head",
+  "Motion Graphics": "/services/motion-graphics",
+};
+
 // One-off prices per service, keyed by the service name used across the site.
 export const servicePrices = {
   Podcast: [

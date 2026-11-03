@@ -115,7 +115,6 @@ export default async function RootLayout({ children }) {
         <PromoBanner banner={bannerSettings} />
         <ClientScripts />
         <LayoutWrapper settings={settings}>{children}</LayoutWrapper>
-        <script src="https://awliaa.com/widget.js" data-key="pk_WXGfdiY391hTXQjn8pGkt0uZ" async></script>
         <Analytics />
         <SpeedInsights />
       </body>

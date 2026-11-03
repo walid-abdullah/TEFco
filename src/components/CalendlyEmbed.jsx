@@ -7,7 +7,7 @@ const STARTING_HEIGHT = 760;
 const SMALLEST_REAL_HEIGHT = 400; // Ignore the tiny size Calendly reports while it is still loading.
 
 // Calendly reports its content height to the page, so the frame grows to fit and never scrolls inside.
-export default function CalendlyEmbed({ note = "", title = "Book a call with Walid Abdullah" }) {
+export default function CalendlyEmbed({ note = "", name = "", email = "", title = "Book a call with Walid Abdullah" }) {
   const frameRef = useRef(null);
   const [height, setHeight] = useState(STARTING_HEIGHT);
   const [host, setHost] = useState(null);
@@ -33,6 +33,8 @@ export default function CalendlyEmbed({ note = "", title = "Book a call with Wal
     primary_color: "5b2eff",
   });
   if (note) params.set("a1", note);
+  if (name) params.set("name", name);
+  if (email) params.set("email", email);
 
   return (
     <div className="sg-calendly" style={{ height }}>

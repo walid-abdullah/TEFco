@@ -149,7 +149,7 @@ function BookACallPageContent() {
       <section className="sg-book-calendar" id="calendar">
         <div className="container">
           <div className="sg-calendly-box">
-            <CalendlyEmbed note={calendlyNote} title="Book a call with Walid Abdullah" />
+            <CalendlyEmbed note={calendlyNote} name={searchParams.get('name') || ''} email={searchParams.get('email') || ''} title="Book a call with Walid Abdullah" />
           </div>
           <ul className="sg-book-points">
             <li><strong>No commitment</strong><span>Ask anything. There is nothing to sign on the call.</span></li>

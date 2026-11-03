@@ -20,8 +20,7 @@ export const metadata = { alternates: { canonical: "/" } };
 const CATEGORY_LABELS = { reels: "Reels & Shorts", saas: "Motion Graphics", podcast: "Podcast", "talking-head": "Talking Head", promo: "Paid Creative" };
 const formatLabel = (category) => CATEGORY_LABELS[category] || category || "Selected work";
 
-export default async function Home({ searchParams }) {
-  const { hero } = await searchParams;
+export default async function Home() {
   let homepageData = null;
   let logoData = [];
   let faqData = [];
@@ -83,7 +82,7 @@ export default async function Home({ searchParams }) {
   return (
     <HomepageGSAPOrchestrator>
       <main className="home-foundry-page">
-        <HomepageFoundryHero videoUrl={heroVideoUrl} posterUrl={heroPosterUrl} logos={logos} heroStyle={hero} />
+        <HomepageFoundryHero videoUrl={heroVideoUrl} posterUrl={heroPosterUrl} logos={logos} />
 
         <section className="sg-section sg-signal reveal-on-scroll">
           <div className="container">
