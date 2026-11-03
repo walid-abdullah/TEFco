@@ -26,9 +26,9 @@ export class Scene01ContentUniverse {
     const frameGeo = this.assetManager.getPlaneGeometry(160, 100);
 
     const colors = [
-      ['#38BDF8', '#818CF8'],
+      ['#5B2EFF', '#818CF8'],
       ['#A855F7', '#EC4899'],
-      ['#10B981', '#38BDF8'],
+      ['#10B981', '#5B2EFF'],
       ['#F59E0B', '#EF4444']
     ];
 

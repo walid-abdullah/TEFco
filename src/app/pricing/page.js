@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import PricingSection from '@/components/PricingSection';
-import BenefitsBento from '@/components/BenefitsBento';
+import HowItWorks from '@/components/HowItWorks';
 import DesignMonksContact from '@/components/DesignMonksContact';
 
 export default function PricingPage() {
@@ -50,8 +50,8 @@ export default function PricingPage() {
         description="Dedicated post-production capacity without the overhead of building an in-house team. Choose the rhythm that matches your ambition."
       />
 
-      {/* 2. Benefits of Membership Pipeline */}
-      <BenefitsBento />
+      {/* 2. How the work happens */}
+      <HowItWorks />
 
       {/* 5. Deep Pricing FAQ Section (Musemind Style) */}
       <section className="pricing-faq-section section-padding" style={{ position: 'relative' }}>

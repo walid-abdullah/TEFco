@@ -1,3 +1,5 @@
+import { SITE_URL } from './site';
+
 export const KEYWORDS = [
   'video editing agency USA',
   'video editing agency Europe',
@@ -19,8 +21,7 @@ export const GLOBAL_META = {
   siteTitle: 'The Editly Foundry Co. | Global Video Production & Editing Agency (US • Europe • Global)',
   siteDescription:
     'The Editly Foundry Co. is a premier global video editing agency serving high-growth brands and top creators across the United States, Europe, North America, and worldwide. 48-hour turnarounds, dedicated editor pods, and conversion-engineered video post-production.',
-  ogImage:
-    'https://images.unsplash.com/photo-1517817748493-52f2d5b0f3b0?auto=format&fit=crop&w=1200&q=80'
+  ogImage: '/Picture/square.png'
 };
 
 export const PRIORITY_PAGES = [
@@ -36,9 +37,9 @@ export const CANONICAL_OVERRIDES = [];
 
 export const ORGANIZATION = {
   name: 'The Editly Foundry Co.',
-  url: 'https://theeditlyfoundry.co',
-  logo: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=600&q=80',
-  phone: '+1 555 675-0125',
+  url: SITE_URL,
+  logo: `${SITE_URL}/Logo/editly-foundry-logo.svg`,
+  phone: '+8801886755888',
   email: 'theeditlyfoundry@gmail.com',
   areaServed: [
     'United States',
@@ -138,7 +139,7 @@ export const SERVICE_FAQS = {
       answer: 'We deliver assets in any required aspect ratio: 9:16, 1:1, and 4:5 for ads.'
     }
   ],
-  'saas-motion': [
+  'motion-graphics': [
     {
       question: 'Can you recreate UI interactions for motion demos?',
       answer:
@@ -197,7 +198,7 @@ export const BLOGS_DATA = [
     ]
   },
   {
-    slug: 'high-converting-saas-motion-demos',
+    slug: 'high-converting-motion-graphics-demos',
     title: 'High-Converting SaaS Demos: Engineered Motion That Sells Software',
     category: 'Product Motion',
     readTime: '5 min read',

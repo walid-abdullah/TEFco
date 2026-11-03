@@ -17,7 +17,7 @@ export default function CalculatorPage() {
   const formats = [
     { id: 'short-form', name: 'Short-Form Reels / TikToks', basePrice: 120, icon: 'fa-solid fa-mobile-screen' },
     { id: 'podcasts', name: 'YouTube Podcasts / Long-Form', basePrice: 280, icon: 'fa-solid fa-microphone' },
-    { id: 'saas-ads', name: '3D SaaS & Product Demos', basePrice: 450, icon: 'fa-solid fa-cube' },
+    { id: 'saas-ads', name: 'Motion Graphics', basePrice: 450, icon: 'fa-solid fa-cube' },
     { id: 'ugc-ads', name: 'High-Converting UGC & VSL Ads', basePrice: 220, icon: 'fa-solid fa-bullhorn' }
   ];
 
@@ -51,7 +51,7 @@ export default function CalculatorPage() {
       <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
         
         {/* Page Header */}
-        <div className="text-center reveal-on-scroll" style={{ marginBottom: '60px' }}>
+        <div className="on-iris sg-page-hero reveal-on-scroll">
           <span className="section-subtitle">
             <i className="fa-solid fa-calculator" style={{ marginRight: '8px' }}></i>
             Interactive Retainer & ROI Estimator
@@ -91,11 +91,11 @@ export default function CalculatorPage() {
                 <span style={{
                   padding: '6px 18px',
                   borderRadius: '30px',
-                  background: 'linear-gradient(135deg, #2563EB, #0284C7)',
+                  background: 'linear-gradient(135deg, #5B2EFF, #5B2EFF)',
                   color: '#FFFFFF',
                   fontWeight: '800',
                   fontSize: '1.2rem',
-                  boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)'
+                  boxShadow: '0 4px 15px rgba(91, 46, 255, 0.3)'
                 }}>
                   {videoCount} Videos/mo
                 </span>
@@ -108,7 +108,7 @@ export default function CalculatorPage() {
                 onChange={(e) => setVideoCount(Number(e.target.value))}
                 style={{
                   width: '100%',
-                  accentColor: '#2563EB',
+                  accentColor: '#5B2EFF',
                   cursor: 'pointer',
                   height: '8px',
                   borderRadius: '4px'
@@ -138,10 +138,10 @@ export default function CalculatorPage() {
                         padding: '16px 18px',
                         borderRadius: '16px',
                         border: active 
-                          ? (isLight ? '2px solid #2563EB' : '2px solid #38BDF8')
+                          ? (isLight ? '2px solid #5B2EFF' : '2px solid #5B2EFF')
                           : '1px solid var(--glass-border)',
                         background: active
-                          ? (isLight ? 'rgba(37, 99, 235, 0.08)' : 'rgba(56, 189, 248, 0.14)')
+                          ? (isLight ? 'rgba(91, 46, 255, 0.08)' : 'rgba(91, 46, 255, 0.14)')
                           : 'var(--input-bg)',
                         color: 'var(--text-primary)',
                         display: 'flex',
@@ -152,7 +152,7 @@ export default function CalculatorPage() {
                         transition: 'all 0.2s ease'
                       }}
                     >
-                      <i className={f.icon} style={{ color: active ? '#2563EB' : 'var(--text-muted)', fontSize: '1.2rem' }}></i>
+                      <i className={f.icon} style={{ color: active ? '#5B2EFF' : 'var(--text-muted)', fontSize: '1.2rem' }}></i>
                       <div>
                         <div style={{ fontWeight: '700', fontSize: '0.92rem' }}>{f.name}</div>
                       </div>
@@ -176,8 +176,8 @@ export default function CalculatorPage() {
                       flex: 1,
                       padding: '12px',
                       borderRadius: '12px',
-                      border: turnaround === 'standard' ? '2px solid #2563EB' : '1px solid var(--glass-border)',
-                      background: turnaround === 'standard' ? 'rgba(37, 99, 235, 0.12)' : 'var(--input-bg)',
+                      border: turnaround === 'standard' ? '2px solid #5B2EFF' : '1px solid var(--glass-border)',
+                      background: turnaround === 'standard' ? 'rgba(91, 46, 255, 0.12)' : 'var(--input-bg)',
                       color: 'var(--text-primary)',
                       fontWeight: '700',
                       fontSize: '0.88rem',
@@ -193,8 +193,8 @@ export default function CalculatorPage() {
                       flex: 1,
                       padding: '12px',
                       borderRadius: '12px',
-                      border: turnaround === 'express' ? '2px solid #2563EB' : '1px solid var(--glass-border)',
-                      background: turnaround === 'express' ? 'rgba(37, 99, 235, 0.12)' : 'var(--input-bg)',
+                      border: turnaround === 'express' ? '2px solid #5B2EFF' : '1px solid var(--glass-border)',
+                      background: turnaround === 'express' ? 'rgba(91, 46, 255, 0.12)' : 'var(--input-bg)',
                       color: 'var(--text-primary)',
                       fontWeight: '700',
                       fontSize: '0.88rem',
@@ -243,7 +243,7 @@ export default function CalculatorPage() {
             style={{
               padding: '45px 36px',
               borderRadius: '28px',
-              border: isLight ? '2px solid rgba(37, 99, 235, 0.3)' : '2px solid rgba(56, 189, 248, 0.35)',
+              border: isLight ? '2px solid rgba(91, 46, 255, 0.3)' : '2px solid rgba(91, 46, 255, 0.35)',
               background: isLight 
                 ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%)' 
                 : 'linear-gradient(135deg, rgba(13, 22, 48, 0.9) 0%, rgba(7, 13, 29, 0.9) 100%)',
@@ -252,9 +252,9 @@ export default function CalculatorPage() {
               top: '120px'
             }}
           >
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '30px', background: 'rgba(16, 185, 129, 0.15)', color: '#10B981', fontWeight: '800', fontSize: '0.82rem', marginBottom: '20px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '30px', background: 'rgba(16, 185, 129, 0.15)', color: '#0B7A55', fontWeight: '800', fontSize: '0.82rem', marginBottom: '20px' }}>
               <i className="fa-solid fa-shield-halved"></i>
-              <span>Guaranteed 48h Turnaround</span>
+              <span>Guaranteed 24–48h Turnaround</span>
             </div>
 
             <div style={{ marginBottom: '25px' }}>
@@ -269,7 +269,7 @@ export default function CalculatorPage() {
 
             {/* Savings Comparison Breakdown */}
             <div style={{
-              background: isLight ? 'rgba(37, 99, 235, 0.05)' : 'rgba(255, 255, 255, 0.04)',
+              background: isLight ? 'rgba(91, 46, 255, 0.05)' : 'rgba(255, 255, 255, 0.04)',
               border: '1px solid var(--glass-border)',
               borderRadius: '20px',
               padding: '20px',
@@ -282,7 +282,7 @@ export default function CalculatorPage() {
 
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', fontSize: '0.9rem' }}>
                 <span style={{ color: 'var(--text-secondary)' }}>The Editly Foundry Co.:</span>
-                <span style={{ fontWeight: '700', color: '#10B981' }}>${monthlyFoundryPrice.toLocaleString()}/mo</span>
+                <span style={{ fontWeight: '700', color: '#0B7A55' }}>${monthlyFoundryPrice.toLocaleString()}/mo</span>
               </div>
 
               <div style={{ height: '1px', background: 'var(--glass-border)', margin: '12px 0' }} />
@@ -290,11 +290,11 @@ export default function CalculatorPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Your Annual Savings</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: '900', color: '#10B981' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: '900', color: '#0B7A55' }}>
                     ${annualSavings.toLocaleString()} / year
                   </div>
                 </div>
-                <div style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.15)', color: '#10B981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.15)', color: '#0B7A55', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
                   <i className="fa-solid fa-piggy-bank"></i>
                 </div>
               </div>
@@ -303,15 +303,15 @@ export default function CalculatorPage() {
             {/* Retainer Features Included */}
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 30px 0', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <i className="fa-solid fa-circle-check" style={{ color: '#10B981' }}></i>
+                <i className="fa-solid fa-circle-check" style={{ color: '#0B7A55' }}></i>
                 <span>Dedicated Senior Video Editor + Motion Lead</span>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <i className="fa-solid fa-circle-check" style={{ color: '#10B981' }}></i>
+                <i className="fa-solid fa-circle-check" style={{ color: '#0B7A55' }}></i>
                 <span>Unlimited Revisions until 100% satisfied</span>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <i className="fa-solid fa-circle-check" style={{ color: '#10B981' }}></i>
+                <i className="fa-solid fa-circle-check" style={{ color: '#0B7A55' }}></i>
                 <span>Pause or cancel retainer anytime</span>
               </li>
             </ul>

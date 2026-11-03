@@ -1,12 +1,14 @@
 import ServiceLandingPage from "@/components/ServiceLandingPage";
 
 export const metadata = {
+  alternates: { canonical: '/services/podcasts' },
   title: "Podcast Editing | The Editly Foundry",
   description: "Podcast editing and content systems for conversations people want to finish.",
 };
 
 export default function PodcastsPage() {
   return <ServiceLandingPage service={{
+    serviceName: "Podcast",
     category: "PODCAST EDITING", number: "02", signal: "CONVERSATION / 42:18",
     videoUrl: process.env.NEXT_PUBLIC_PODCAST_VIDEO_URL || process.env.NEXT_PUBLIC_SERVICE_INTRO_VIDEO_URL || "",
     videoPoster: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1800&q=80",

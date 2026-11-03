@@ -2,75 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { pricingPlans as defaultPlans } from "@/data/pricingPlans";
 
-const defaultPlans = [
-  {
-    id: "starter",
-    name: "Starter Pod",
-    badge: "3 SLOTS REMAINING",
-    audience: "For a consistent short-form cadence.",
-    description:
-      "A focused editing partner for creators and growing brands building a dependable publishing rhythm.",
-    monthlyPrice: 999,
-    quarterlyPrice: 849,
-    duration: "/ month",
-    isPopular: false,
-    features: [
-      "12 Short-Form Videos (Reels, TikTok, Shorts)",
-      "48-Hour Standard SLA Turnaround",
-      "Kinetic Typography & Sound Design",
-      "Frame.io Timecode Reviewing",
-      "Dedicated Slack & WhatsApp Channel",
-      "1 Active Concurrent Request",
-      "Unlimited Edit Revisions",
-      "Pause or Cancel Anytime",
-    ],
-  },
-  {
-    id: "growth",
-    name: "Growth Retainer",
-    badge: "MOST POPULAR // 2 SLOTS LEFT",
-    audience: "For teams ready to increase output.",
-    description:
-      "The flagship studio tier for authority creators and high-growth businesses demanding quality at speed.",
-    monthlyPrice: 1499,
-    quarterlyPrice: 1275,
-    duration: "/ month",
-    isPopular: true,
-    features: [
-      "24 Short-Form Videos + 2 Long-Form (Podcasts/YT)",
-      "24 to 48-Hour Priority Turnaround",
-      "DaVinci Resolve ACES Color Science",
-      "iZotope RX Audio Mastering (-14 LUFS)",
-      "Senior Lead Editor & Art Director",
-      "2 Active Concurrent Requests",
-      "Custom High-CTR YouTube Thumbnails",
-      "Unlimited Revisions & VIP Slack Support",
-    ],
-  },
-  {
-    id: "scale",
-    name: "Scale & Enterprise",
-    badge: "DEDICATED TEAM",
-    audience: "For high-volume content operations.",
-    description:
-      "A dedicated multi-editor production pod for venture-backed startups and media brands with serious volume.",
-    monthlyPrice: 2499,
-    quarterlyPrice: 2125,
-    duration: "/ month",
-    isPopular: false,
-    features: [
-      "Dedicated 3-Editor Video Production Pod",
-      "Unlimited Video Queue & High Volume Output",
-      "24-Hour Express Turnaround SLA",
-      "Full 3D SaaS Motion & Product Demos",
-      "Multi-Camera Podcast Ingest & 1-to-30 Engine",
-      "Creative Director & Content Strategist",
-      "Source File Deliveries (.AEP / .PRPROJ)",
-      "Custom SLA Guarantee & NDA Protection",
-    ],
-  },
-];
 
 export default function PricingSection({ description, pricingData = [] }) {
   const [billingCycle, setBillingCycle] = useState("monthly");
@@ -79,14 +12,14 @@ export default function PricingSection({ description, pricingData = [] }) {
   return (
     <section id="pricing" className="pricing-section pricing-hero-section">
       <div className="container pricing-container">
-        <div className="pricing-intro reveal-on-scroll">
+        <div className="pricing-intro on-iris sg-page-hero reveal-on-scroll">
           <div className="pricing-eyebrow">
             <span className="about-eyebrow-line" />
             <span className="mono-spec">THE EDITLY FOUNDRY / RETAINERS</span>
           </div>
           <h1 className="pricing-title">
-            A better edit starts with
-            <span className="combination-font"> a better system.</span>
+            Simple monthly plans
+            <span className="combination-font"> for steady video.</span>
           </h1>
           <p className="pricing-lede">
             {description ||

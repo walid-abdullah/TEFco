@@ -9,11 +9,15 @@ export async function generateMetadata({ params }) {
   const page = await client.fetch(query, { slug });
 
   if (!page) {
-    return { title: 'Page Not Found' };
+    const fallbackTitle = { 'privacy-policy': 'Privacy Policy', privacy: 'Privacy Policy', terms: 'Terms of Service', 'terms-of-service': 'Terms of Service' }[slug];
+    return fallbackTitle
+      ? { title: `${fallbackTitle} | The Editly Foundry Co.`, alternates: { canonical: `/legal/${slug}` } }
+      : { title: 'Page Not Found' };
   }
 
   return {
     title: `${page.title} | The Editly Foundry Co.`,
+    alternates: { canonical: `/legal/${slug}` },
   };
 }
 
@@ -74,7 +78,7 @@ export default async function LegalPage({ params }) {
 
   // Built-in standard legal document fallbacks
   if (!page) {
-    if (slug === 'privacy-policy') {
+    if (slug === 'privacy-policy' || slug === 'privacy') {
       page = {
         title: 'Privacy Policy',
         isDefault: true,

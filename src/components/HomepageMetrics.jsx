@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const metrics = [
-  { target: 500, suffix: "+", label: "projects delivered" },
-  { target: 48, suffix: "h", label: "first-cut target" },
-  { target: 99, suffix: "%", label: "on-time delivery" },
-  { target: 4.9, suffix: "/5", label: "client rating", decimals: 1 },
+  { target: 2000, suffix: "+", label: "projects delivered", tone: "ink" },
+  { target: 48, prefix: "24–", suffix: "h", label: "first-cut time", tone: "1" },
+  { target: 99, suffix: "%", label: "on-time delivery", tone: "4" },
+  { target: 4.9, suffix: "/5", label: "client rating", decimals: 1, tone: "2" },
 ];
 
 export default function HomepageMetrics() {
@@ -51,17 +51,13 @@ export default function HomepageMetrics() {
   }, [started]);
 
   return (
-    <section ref={sectionRef} className="home-foundry-results section-padding" aria-label="Studio metrics">
-      <div className="container">
-        <div className="home-foundry-metrics">
-          {metrics.map((metric, index) => (
-            <div key={metric.label}>
-              <strong>{values[index]}{metric.suffix}</strong>
-              <span>{metric.label}</span>
-            </div>
-          ))}
+    <div ref={sectionRef} className="sg-metrics" aria-label="Studio metrics">
+      {metrics.map((metric, index) => (
+        <div key={metric.label} className={`tone-${metric.tone}`}>
+          <strong>{metric.prefix}{values[index]}{metric.suffix}</strong>
+          <span>{metric.label}</span>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
   );
 }

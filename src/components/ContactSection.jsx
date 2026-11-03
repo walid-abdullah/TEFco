@@ -117,7 +117,7 @@ export default function ContactSection() {
             </div>
 
             <div className="glass-card" style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <div style={{ fontSize: '2rem', color: '#1976D2', width: '40px', textAlign: 'center' }}><i className="fa-solid fa-envelope"></i></div>
+              <div style={{ fontSize: '2rem', color: '#5B2EFF', width: '40px', textAlign: 'center' }}><i className="fa-solid fa-envelope"></i></div>
               <div>
                 <h4 style={{ fontSize: '1.1rem', marginBottom: '4px' }}>Email Us</h4>
                 <a href="mailto:theeditlyfoundry@gmail.com" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.3s' }} onMouseOver={e => e.target.style.color='var(--accent-blue)'} onMouseOut={e => e.target.style.color='var(--text-secondary)'}>theeditlyfoundry@gmail.com</a>
@@ -213,7 +213,7 @@ export default function ContactSection() {
                     <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Current Bottleneck</label>
                     <textarea name="bottleneck" rows="3" placeholder="Tell us what's holding you back..." required style={{ width: '100%', padding: '12px 15px', border: '1px solid var(--glass-border)', borderRadius: '8px', background: 'var(--bg-secondary)', color: 'var(--text-primary)', outline: 'none', resize: 'vertical', transition: 'border-color 0.3s' }}></textarea>
                   </div>
-                  <button type="submit" className="btn btn-primary pulse-anim" style={{ width: '100%', justifyContent: 'center', padding: '15px', background: 'linear-gradient(135deg, #1976D2 0%, #0d47a1 100%)', border: 'none' }}>
+                  <button type="submit" className="btn btn-primary pulse-anim" style={{ width: '100%', justifyContent: 'center', padding: '15px', background: 'linear-gradient(135deg, #5B2EFF 0%, #5B2EFF 100%)', border: 'none' }}>
                     {contactCopy.bookCta}
                   </button>
                 </form>

@@ -77,12 +77,12 @@ export default function BeforeAfterSlider({
       >
         {/* Cinematic Asset Visual Simulation */}
         <div style={{ textAlign: 'center', maxWidth: '420px', zIndex: 1 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '50px', background: 'rgba(16, 185, 129, 0.2)', border: '1px solid #10B981', color: '#10B981', fontWeight: '800', fontSize: '0.8rem', marginBottom: '14px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '50px', background: 'rgba(16, 185, 129, 0.2)', border: '1px solid #10B981', color: '#0B7A55', fontWeight: '800', fontSize: '0.8rem', marginBottom: '14px' }}>
             <i className="fa-solid fa-wand-magic-sparkles"></i>
             <span>THE EDITLY TRANSFORMATION</span>
           </div>
           <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontWeight: '900', color: '#FFFFFF', marginBottom: '8px', textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
-            Hook Engineered & <span style={{ color: '#38BDF8' }}>Color Graded</span>
+            Hook Engineered & <span style={{ color: '#5B2EFF' }}>Color Graded</span>
           </h3>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px', marginTop: '14px' }}>
             <span style={{ padding: '4px 10px', borderRadius: '6px', background: 'rgba(255,255,255,0.1)', fontSize: '0.78rem', color: '#E2E8F0' }}>✨ 3s Retention Hook</span>

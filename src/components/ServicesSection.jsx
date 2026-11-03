@@ -48,8 +48,8 @@ export default function ServicesSection() {
       desc: 'Direct-response video creatives with 5x split-test hook variations for rapid media buying scalability on Meta & TikTok.'
     },
     {
-      id: 'saas-motion',
-      slug: 'saas-motion',
+      id: 'motion-graphics',
+      slug: 'motion-graphics',
       num: '05',
       tag: 'APPLE-GRADE MOTION',
       title: '3D SaaS & Product Demos',
@@ -81,7 +81,7 @@ export default function ServicesSection() {
           width: '100%',
           maxWidth: '1200px',
           height: '700px',
-          background: 'radial-gradient(ellipse at center, rgba(56, 189, 248, 0.035) 0%, rgba(99, 102, 241, 0.02) 50%, transparent 75%)',
+          background: 'radial-gradient(ellipse at center, rgba(91, 46, 255, 0.035) 0%, rgba(99, 102, 241, 0.02) 50%, transparent 75%)',
           pointerEvents: 'none',
           zIndex: 0
         }}
@@ -236,7 +236,7 @@ export default function ServicesSection() {
                       style={{
                         fontSize: '0.74rem',
                         fontWeight: '700',
-                        color: '#38BDF8',
+                        color: '#5B2EFF',
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '5px',
@@ -272,7 +272,7 @@ export default function ServicesSection() {
             <div style={{
               width: '1px',
               height: '100%',
-              background: 'linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.3) 25%, #38BDF8 50%, rgba(99, 102, 241, 0.3) 75%, transparent 100%)',
+              background: 'linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.3) 25%, #5B2EFF 50%, rgba(99, 102, 241, 0.3) 75%, transparent 100%)',
               position: 'relative'
             }}>
               {/* Center Flare */}
@@ -283,9 +283,9 @@ export default function ServicesSection() {
                 transform: 'translate(-50%, -50%)',
                 width: '18px',
                 height: '18px',
-                background: 'radial-gradient(circle, #FFFFFF 0%, #38BDF8 40%, transparent 75%)',
+                background: 'radial-gradient(circle, #FFFFFF 0%, #5B2EFF 40%, transparent 75%)',
                 filter: 'blur(1px)',
-                boxShadow: '0 0 18px #38BDF8, 0 0 35px #6366F1'
+                boxShadow: '0 0 18px #5B2EFF, 0 0 35px #6366F1'
               }} />
             </div>
           </div>
@@ -322,7 +322,7 @@ export default function ServicesSection() {
                   transform: 'translate(-50%, -50%)',
                   width: '90%',
                   height: '85%',
-                  background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.45) 0%, rgba(99, 102, 241, 0.25) 50%, transparent 75%)',
+                  background: 'radial-gradient(ellipse at center, rgba(91, 46, 255, 0.45) 0%, rgba(99, 102, 241, 0.25) 50%, transparent 75%)',
                   filter: 'blur(35px)',
                   pointerEvents: 'none',
                   zIndex: 0
@@ -355,7 +355,7 @@ export default function ServicesSection() {
 
                     {/* Center TikTok Play Bubble */}
                     <div style={{ textAlign: 'center' }}>
-                      <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'linear-gradient(135deg, #6366F1, #38BDF8)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 6px', boxShadow: '0 4px 15px rgba(56, 189, 248, 0.4)' }}>
+                      <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'linear-gradient(135deg, #6366F1, #5B2EFF)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 6px', boxShadow: '0 4px 15px rgba(91, 46, 255, 0.4)' }}>
                         <i className="fa-brands fa-tiktok" style={{ color: '#FFF', fontSize: '0.95rem' }}></i>
                       </div>
                       <span style={{ fontSize: '0.62rem', color: '#FFF', fontWeight: '700', display: 'block' }}>Kinetic Hook</span>
@@ -363,7 +363,7 @@ export default function ServicesSection() {
 
                     {/* Bottom Progress Bar */}
                     <div style={{ width: '100%', height: '3px', background: 'rgba(255,255,255,0.15)', borderRadius: '999px', overflow: 'hidden' }}>
-                      <div style={{ width: '75%', height: '100%', background: 'linear-gradient(90deg, #6366F1, #38BDF8)' }}></div>
+                      <div style={{ width: '75%', height: '100%', background: 'linear-gradient(90deg, #6366F1, #5B2EFF)' }}></div>
                     </div>
                   </div>
 
@@ -374,16 +374,16 @@ export default function ServicesSection() {
                     <div style={{ background: 'rgba(15, 23, 42, 0.85)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '12px', padding: '10px 12px', backdropFilter: 'blur(16px)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.62rem', color: '#94A3B8', marginBottom: '4px' }}>
                         <span>3-SEC HOOK RETENTION</span>
-                        <span style={{ color: '#38BDF8', fontWeight: '700' }}>+84% PASS</span>
+                        <span style={{ color: '#5B2EFF', fontWeight: '700' }}>+84% PASS</span>
                       </div>
                       <svg width="100%" height="28" viewBox="0 0 200 28" fill="none">
-                        <path d="M0 24C35 24 60 4 100 8C145 12 170 4 200 2" stroke="#38BDF8" strokeWidth="2.5" strokeLinecap="round" />
+                        <path d="M0 24C35 24 60 4 100 8C145 12 170 4 200 2" stroke="#5B2EFF" strokeWidth="2.5" strokeLinecap="round" />
                       </svg>
                     </div>
 
                     {/* Subtitle Sync Card */}
                     <div style={{ background: 'rgba(15, 23, 42, 0.85)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '12px', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '8px', backdropFilter: 'blur(16px)' }}>
-                      <i className="fa-solid fa-bolt" style={{ color: '#38BDF8', fontSize: '0.8rem' }}></i>
+                      <i className="fa-solid fa-bolt" style={{ color: '#5B2EFF', fontSize: '0.8rem' }}></i>
                       <div>
                         <span style={{ fontSize: '0.68rem', color: '#FFF', fontWeight: '700', display: 'block' }}>Word-by-Word Kinetic VFX</span>
                         <span className="mono-spec" style={{ fontSize: '0.55rem', color: '#94A3B8' }}>AUTO-SYNCED CAPTIONS</span>
@@ -413,13 +413,13 @@ export default function ServicesSection() {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                     
                     {/* CAM A Host */}
-                    <div style={{ background: 'rgba(15, 23, 42, 0.88)', border: '1.5px solid #38BDF8', borderRadius: '12px', padding: '10px 12px', backdropFilter: 'blur(16px)', boxShadow: '0 0 20px rgba(56, 189, 248, 0.25)' }}>
+                    <div style={{ background: 'rgba(15, 23, 42, 0.88)', border: '1.5px solid #5B2EFF', borderRadius: '12px', padding: '10px 12px', backdropFilter: 'blur(16px)', boxShadow: '0 0 20px rgba(91, 46, 255, 0.25)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                        <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#38BDF8', fontWeight: '700' }}>CAM A // HOST</span>
-                        <span style={{ fontSize: '0.52rem', background: '#38BDF8', color: '#000', padding: '1px 5px', borderRadius: '3px', fontWeight: '800' }}>LIVE</span>
+                        <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#5B2EFF', fontWeight: '700' }}>CAM A // HOST</span>
+                        <span style={{ fontSize: '0.52rem', background: '#5B2EFF', color: '#000', padding: '1px 5px', borderRadius: '3px', fontWeight: '800' }}>LIVE</span>
                       </div>
-                      <div style={{ height: '48px', background: 'rgba(56, 189, 248, 0.1)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                        <i className="fa-solid fa-microphone-lines" style={{ color: '#38BDF8', fontSize: '1.1rem' }}></i>
+                      <div style={{ height: '48px', background: 'rgba(91, 46, 255, 0.1)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                        <i className="fa-solid fa-microphone-lines" style={{ color: '#5B2EFF', fontSize: '1.1rem' }}></i>
                         <span style={{ fontSize: '0.65rem', color: '#E2E8F0', fontWeight: '600' }}>Speaker Tracked</span>
                       </div>
                     </div>
@@ -441,21 +441,21 @@ export default function ServicesSection() {
                   {/* Middle: Live Audio Waveform Rack */}
                   <div style={{ background: 'rgba(15, 23, 42, 0.88)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '12px', padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', backdropFilter: 'blur(16px)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <i className="fa-solid fa-sliders" style={{ color: '#38BDF8', fontSize: '0.9rem' }}></i>
+                      <i className="fa-solid fa-sliders" style={{ color: '#5B2EFF', fontSize: '0.9rem' }}></i>
                       <div>
                         <span style={{ fontSize: '0.72rem', color: '#FFF', fontWeight: '700', display: 'block' }}>iZotope RX Studio De-Noise</span>
                         <span className="mono-spec" style={{ fontSize: '0.58rem', color: '#94A3B8' }}>SPECTRAL VOCAL ISOLATION</span>
                       </div>
                     </div>
-                    <span className="mono-spec" style={{ fontSize: '0.66rem', color: '#38BDF8', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '3px 8px', borderRadius: '4px', fontWeight: '700' }}>
+                    <span className="mono-spec" style={{ fontSize: '0.66rem', color: '#5B2EFF', background: 'rgba(91, 46, 255, 0.12)', border: '1px solid rgba(91, 46, 255, 0.3)', padding: '3px 8px', borderRadius: '4px', fontWeight: '700' }}>
                       -14.0 LUFS
                     </span>
                   </div>
 
                   {/* Bottom: Batch Output Extract Card */}
-                  <div style={{ background: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.25)', borderRadius: '10px', padding: '8px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ background: 'rgba(91, 46, 255, 0.08)', border: '1px solid rgba(91, 46, 255, 0.25)', borderRadius: '10px', padding: '8px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.7rem', color: '#FFFFFF', fontWeight: '600' }}>1-to-30 Viral Content Engine</span>
-                    <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#38BDF8', fontWeight: '700' }}>10–20 CLIPS EXTRACTED ✓</span>
+                    <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#5B2EFF', fontWeight: '700' }}>10–20 CLIPS EXTRACTED ✓</span>
                   </div>
 
                 </div>
@@ -484,18 +484,18 @@ export default function ServicesSection() {
                   }}>
                     {/* Top Bar */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span className="mono-spec" style={{ fontSize: '0.64rem', color: '#38BDF8', fontWeight: '700' }}>4K PRORES MASTER</span>
+                      <span className="mono-spec" style={{ fontSize: '0.64rem', color: '#5B2EFF', fontWeight: '700' }}>4K PRORES MASTER</span>
                       <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#CBD5E1' }}>ACEScc 1.3 D65 OLED</span>
                     </div>
 
                     {/* Center Play Button with Glow */}
-                    <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'linear-gradient(135deg, #6366F1, #38BDF8)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto', boxShadow: '0 0 25px rgba(56, 189, 248, 0.5)' }}>
+                    <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'linear-gradient(135deg, #6366F1, #5B2EFF)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto', boxShadow: '0 0 25px rgba(91, 46, 255, 0.5)' }}>
                       <i className="fa-solid fa-play" style={{ color: '#FFF', fontSize: '0.95rem', marginLeft: '3px' }}></i>
                     </div>
 
                     {/* Scrubber Progress Bar */}
                     <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.12)', borderRadius: '999px', overflow: 'hidden' }}>
-                      <div style={{ width: '68%', height: '100%', background: 'linear-gradient(90deg, #6366F1, #38BDF8)' }}></div>
+                      <div style={{ width: '68%', height: '100%', background: 'linear-gradient(90deg, #6366F1, #5B2EFF)' }}></div>
                     </div>
                   </div>
 
@@ -505,7 +505,7 @@ export default function ServicesSection() {
                       <span style={{ fontSize: '0.72rem', color: '#FFF', fontWeight: '700', display: 'block' }}>J-Cut Narrative & Custom 3D Thumbnails</span>
                       <span className="mono-spec" style={{ fontSize: '0.58rem', color: '#94A3B8' }}>00:04:18 (HOOK) — 00:18:42 (OUTRO)</span>
                     </div>
-                    <span className="mono-spec" style={{ fontSize: '0.65rem', color: '#38BDF8', fontWeight: '700' }}>LOCKED ✓</span>
+                    <span className="mono-spec" style={{ fontSize: '0.65rem', color: '#5B2EFF', fontWeight: '700' }}>LOCKED ✓</span>
                   </div>
 
                 </div>
@@ -523,21 +523,21 @@ export default function ServicesSection() {
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                       <span className="mono-spec" style={{ fontSize: '0.65rem', color: '#FFFFFF', fontWeight: '700' }}>5X HOOK SPLIT-TEST BATCH</span>
-                      <span className="mono-spec" style={{ fontSize: '0.65rem', color: '#38BDF8', fontWeight: '700' }}>3.8X ROAS</span>
+                      <span className="mono-spec" style={{ fontSize: '0.65rem', color: '#5B2EFF', fontWeight: '700' }}>3.8X ROAS</span>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '6px' }}>
                       {['H1 (Winner)', 'H2', 'H3', 'H4', 'H5'].map((h, i) => (
                         <div key={i} style={{
-                          background: i === 0 ? 'rgba(56, 189, 248, 0.2)' : 'rgba(15, 23, 42, 0.88)',
-                          border: i === 0 ? '1.5px solid #38BDF8' : '1px solid rgba(255,255,255,0.12)',
+                          background: i === 0 ? 'rgba(91, 46, 255, 0.2)' : 'rgba(15, 23, 42, 0.88)',
+                          border: i === 0 ? '1.5px solid #5B2EFF' : '1px solid rgba(255,255,255,0.12)',
                           borderRadius: '8px',
                           padding: '10px 4px',
                           textAlign: 'center',
                           backdropFilter: 'blur(16px)',
-                          boxShadow: i === 0 ? '0 0 15px rgba(56, 189, 248, 0.35)' : 'none'
+                          boxShadow: i === 0 ? '0 0 15px rgba(91, 46, 255, 0.35)' : 'none'
                         }}>
-                          <span style={{ fontSize: '0.58rem', color: i === 0 ? '#38BDF8' : '#E2E8F0', fontWeight: '700', display: 'block' }}>H{i + 1}</span>
+                          <span style={{ fontSize: '0.58rem', color: i === 0 ? '#5B2EFF' : '#E2E8F0', fontWeight: '700', display: 'block' }}>H{i + 1}</span>
                           <span className="mono-spec" style={{ fontSize: '0.52rem', color: i === 0 ? '#FFFFFF' : '#64748B' }}>
                             {i === 0 ? '94%' : `${80 - i * 5}%`}
                           </span>
@@ -550,10 +550,10 @@ export default function ServicesSection() {
                   <div style={{ background: 'rgba(15, 23, 42, 0.88)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '12px', padding: '10px 14px', backdropFilter: 'blur(16px)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.62rem', color: '#94A3B8', marginBottom: '6px' }}>
                       <span>Direct-Response Conversion Scaling</span>
-                      <span style={{ color: '#38BDF8', fontWeight: '700' }}>Meta & TikTok Paid Feeds</span>
+                      <span style={{ color: '#5B2EFF', fontWeight: '700' }}>Meta & TikTok Paid Feeds</span>
                     </div>
                     <svg width="100%" height="32" viewBox="0 0 280 32" fill="none">
-                      <path d="M0 28C50 28 90 18 140 10C190 2 230 4 280 2" stroke="#38BDF8" strokeWidth="2.5" strokeLinecap="round" />
+                      <path d="M0 28C50 28 90 18 140 10C190 2 230 4 280 2" stroke="#5B2EFF" strokeWidth="2.5" strokeLinecap="round" />
                     </svg>
                   </div>
 
@@ -561,7 +561,7 @@ export default function ServicesSection() {
                   <div style={{ display: 'flex', gap: '8px' }}>
                     <span style={{ flex: 1, textAlign: 'center', fontSize: '0.6rem', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', padding: '4px 8px', borderRadius: '6px', color: '#E2E8F0' }}>9:16 Vertical Video</span>
                     <span style={{ flex: 1, textAlign: 'center', fontSize: '0.6rem', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', padding: '4px 8px', borderRadius: '6px', color: '#E2E8F0' }}>4:5 Feed Format</span>
-                    <span style={{ flex: 1, textAlign: 'center', fontSize: '0.6rem', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '4px 8px', borderRadius: '6px', color: '#38BDF8', fontWeight: '700' }}>Dynamic Popups</span>
+                    <span style={{ flex: 1, textAlign: 'center', fontSize: '0.6rem', background: 'rgba(91, 46, 255, 0.12)', border: '1px solid rgba(91, 46, 255, 0.3)', padding: '4px 8px', borderRadius: '6px', color: '#5B2EFF', fontWeight: '700' }}>Dynamic Popups</span>
                   </div>
 
                 </div>
@@ -600,7 +600,7 @@ export default function ServicesSection() {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 2.5fr', gap: '10px' }}>
                       <div style={{ height: '65px', background: 'rgba(255,255,255,0.06)', borderRadius: '8px' }}></div>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        <div style={{ height: '30px', background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(56, 189, 248, 0.2))', borderRadius: '6px', border: '1px solid rgba(56, 189, 248, 0.4)' }}></div>
+                        <div style={{ height: '30px', background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(91, 46, 255, 0.2))', borderRadius: '6px', border: '1px solid rgba(91, 46, 255, 0.4)' }}></div>
                         <div style={{ height: '30px', background: 'rgba(255,255,255,0.06)', borderRadius: '6px' }}></div>
                       </div>
                     </div>
@@ -611,25 +611,25 @@ export default function ServicesSection() {
                       bottom: '10px',
                       right: '12px',
                       background: '#0F172A',
-                      border: '1px solid #38BDF8',
+                      border: '1px solid #5B2EFF',
                       padding: '3px 8px',
                       borderRadius: '6px',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '5px',
-                      boxShadow: '0 0 15px rgba(56, 189, 248, 0.5)'
+                      boxShadow: '0 0 15px rgba(91, 46, 255, 0.5)'
                     }}>
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="white">
                         <path d="M4 0l16 12.279-6.951 1.17 4.325 8.817-3.596 1.734-4.35-8.879-5.428 5.679v-20.8z"/>
                       </svg>
-                      <span className="mono-spec" style={{ fontSize: '0.6rem', color: '#38BDF8', fontWeight: '700' }}>60FPS BEZIER</span>
+                      <span className="mono-spec" style={{ fontSize: '0.6rem', color: '#5B2EFF', fontWeight: '700' }}>60FPS BEZIER</span>
                     </div>
                   </div>
 
                   {/* Bottom: Deliverables Bar */}
                   <div style={{ background: 'rgba(15, 23, 42, 0.88)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '12px', padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backdropFilter: 'blur(16px)' }}>
                     <span style={{ fontSize: '0.72rem', color: '#FFF', fontWeight: '700' }}>Pixel-Perfect Vector Reconstruction</span>
-                    <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#38BDF8', fontWeight: '700' }}>SOURCE .AEP INCLUDED ✓</span>
+                    <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#5B2EFF', fontWeight: '700' }}>SOURCE .AEP INCLUDED ✓</span>
                   </div>
 
                 </div>

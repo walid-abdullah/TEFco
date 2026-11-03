@@ -14,7 +14,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
   const serviceList = [
     'Podcast & Clips Editing',
     'Long-Form Content (YouTube)',
-    'SaaS & 3D Motion UI',
+    'Motion Graphics',
     'Shorts / Reels / TikTok',
     'Others'
   ];
@@ -61,9 +61,9 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
   const handleProjectTypeChange = (type) => {
     setProjectType(type);
     if (type === 'monthly') {
-      setSelectedBudget('Less than $1K');
+      setSelectedBudget(monthlyBudgetOptions[0]);
     } else {
-      setSelectedBudget('$500 - $1K');
+      setSelectedBudget(onetimeBudgetOptions[1]);
     }
   };
 
@@ -115,12 +115,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
         setSubmitted(true);
         e.target.reset();
       } else {
-        alert("Thank you! We received your inquiry.");
-        setSubmitted(true);
+        alert("Sorry, your message could not be sent. Please try again or WhatsApp us at +880 1886 755 888.");
       }
     } catch (err) {
       console.error(err);
-      setSubmitted(true);
+      alert("Sorry, your message could not be sent. Please try again or WhatsApp us at +880 1886 755 888.");
     } finally {
       setIsSubmitting(false);
     }
@@ -176,7 +175,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
             height: '60px',
             borderRadius: '50%',
             background: 'rgba(34, 197, 94, 0.15)',
-            color: '#22C55E',
+            color: '#0B7A55',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -272,9 +271,9 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                 marginBottom: '18px',
                 color: 'var(--text-primary)'
               }}>
-                Build Your Next High-Impact <br />
+                Tell us what you <br />
                 <span className="combination-font" style={{ fontStyle: 'italic', fontWeight: '400', color: 'var(--accent-silver)' }}>
-                  Video Campaign
+                  need edited.
                 </span>
               </h2>
 
@@ -284,11 +283,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                     width: '20px',
                     height: '20px',
                     borderRadius: '50%',
-                    border: '1.5px solid #38BDF8',
+                    border: '1.5px solid #5B2EFF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#38BDF8',
+                    color: '#5B2EFF',
                     fontSize: '0.7rem',
                     flexShrink: 0,
                     marginTop: '2px'
@@ -303,11 +302,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                     width: '20px',
                     height: '20px',
                     borderRadius: '50%',
-                    border: '1.5px solid #38BDF8',
+                    border: '1.5px solid #5B2EFF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#38BDF8',
+                    color: '#5B2EFF',
                     fontSize: '0.7rem',
                     flexShrink: 0,
                     marginTop: '2px'
@@ -322,11 +321,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                     width: '20px',
                     height: '20px',
                     borderRadius: '50%',
-                    border: '1.5px solid #38BDF8',
+                    border: '1.5px solid #5B2EFF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#38BDF8',
+                    color: '#5B2EFF',
                     fontSize: '0.7rem',
                     flexShrink: 0,
                     marginTop: '2px'
@@ -498,7 +497,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                       padding: '8px 10px',
                       borderRadius: '7px',
                       border: 'none',
-                      background: projectType === 'monthly' ? (isLight ? '#2563EB' : '#38BDF8') : 'transparent',
+                      background: projectType === 'monthly' ? (isLight ? '#5B2EFF' : '#5B2EFF') : 'transparent',
                       color: projectType === 'monthly' ? '#FFFFFF' : 'var(--text-secondary)',
                       fontSize: '0.82rem',
                       fontWeight: projectType === 'monthly' ? '700' : '500',
@@ -515,7 +514,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                       padding: '8px 10px',
                       borderRadius: '7px',
                       border: 'none',
-                      background: projectType === 'onetime' ? (isLight ? '#2563EB' : '#38BDF8') : 'transparent',
+                      background: projectType === 'onetime' ? (isLight ? '#5B2EFF' : '#5B2EFF') : 'transparent',
                       color: projectType === 'onetime' ? '#FFFFFF' : 'var(--text-secondary)',
                       fontSize: '0.82rem',
                       fontWeight: projectType === 'onetime' ? '700' : '500',
@@ -625,10 +624,8 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn pop-btn"
+                className="btn btn-primary pop-btn"
                 style={{
-                  background: 'linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 100%)',
-                  color: '#FFFFFF',
                   padding: '16px 36px',
                   borderRadius: '12px',
                   border: 'none',

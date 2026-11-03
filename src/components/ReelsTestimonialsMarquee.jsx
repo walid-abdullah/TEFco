@@ -241,7 +241,7 @@ export default function ReelsTestimonialsMarquee({ videoTestimonials = [] }) {
                     width: '52px',
                     height: '52px',
                     borderRadius: '50%',
-                    background: 'rgba(37, 99, 235, 0.4)',
+                    background: 'rgba(91, 46, 255, 0.4)',
                     backdropFilter: 'blur(16px)',
                     WebkitBackdropFilter: 'blur(16px)',
                     border: '2px solid rgba(255, 255, 255, 0.85)',
@@ -250,7 +250,7 @@ export default function ReelsTestimonialsMarquee({ videoTestimonials = [] }) {
                     justifyContent: 'center',
                     color: '#FFFFFF',
                     fontSize: '1.2rem',
-                    boxShadow: '0 0 30px rgba(37, 99, 235, 0.8)',
+                    boxShadow: '0 0 30px rgba(91, 46, 255, 0.8)',
                     zIndex: 2
                   }}>
                     <i className="fa-solid fa-play" style={{ marginLeft: '3px' }}></i>
@@ -276,7 +276,7 @@ export default function ReelsTestimonialsMarquee({ videoTestimonials = [] }) {
                         height: '36px',
                         borderRadius: '50%',
                         objectFit: 'cover',
-                        border: '1.5px solid #38BDF8',
+                        border: '1.5px solid #5B2EFF',
                         flexShrink: 0
                       }}
                     />
@@ -381,7 +381,7 @@ export default function ReelsTestimonialsMarquee({ videoTestimonials = [] }) {
               overflow: 'hidden',
               background: '#000000',
               boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-              border: '2px solid rgba(56, 189, 248, 0.4)'
+              border: '2px solid rgba(91, 46, 255, 0.4)'
             }}
           >
             <button

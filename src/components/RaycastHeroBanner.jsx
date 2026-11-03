@@ -46,7 +46,7 @@ export default function RaycastHeroBanner() {
       specs: 'S-LOG3 GRADE • 4K MASTER • 48H SLA',
       kpi: '4.2X LONGER WATCH TIME',
       videoEmbed: 'https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&mute=0',
-      thumbnail: 'https://images.unsplash.com/photo-1516280440502-12695fb79f15?auto=format&fit=crop&w=1200&q=80',
+      thumbnail: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80',
       action: '/services/talking-head'
     },
     ugc: {
@@ -73,7 +73,7 @@ export default function RaycastHeroBanner() {
       kpi: '60FPS VECTOR ACCURACY',
       videoEmbed: 'https://www.youtube.com/embed/L_LUpnjgPso?autoplay=1&mute=0',
       thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-      action: '/services/saas-motion'
+      action: '/services/motion-graphics'
     }
   };
 

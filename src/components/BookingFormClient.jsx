@@ -140,7 +140,7 @@ export default function BookingFormClient({ isFounder = false }) {
                       background: selectedDate === date.display ? 'var(--accent-blue-primary)' : 'var(--bg-secondary)',
                       color: selectedDate === date.display ? '#fff' : 'var(--text-primary)',
                       border: selectedDate === date.display ? '1px solid var(--accent-blue-primary)' : '1px solid var(--glass-border)',
-                      boxShadow: selectedDate === date.display ? '0 4px 12px rgba(37, 99, 235, 0.3)' : 'none',
+                      boxShadow: selectedDate === date.display ? '0 4px 12px rgba(91, 46, 255, 0.3)' : 'none',
                       transition: 'all 0.2s'
                     }}
                   >
@@ -236,7 +236,7 @@ export default function BookingFormClient({ isFounder = false }) {
             </div>
 
             <div style={{ padding: '15px', background: 'var(--glass-bg)', borderRadius: '10px', border: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.1)', color: 'var(--accent-blue-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(91, 46, 255, 0.1)', color: 'var(--accent-blue-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
                 <i className="fa-regular fa-calendar-check"></i>
               </div>
               <div>
@@ -295,7 +295,7 @@ export default function BookingFormClient({ isFounder = false }) {
               <textarea name="needs" placeholder="Tell us briefly what you're struggling with..." rows="3" style={{ width: '100%', padding: '12px 15px', borderRadius: '10px', background: 'var(--bg-secondary)', border: '1px solid var(--glass-border)', color: 'var(--text-primary)', outline: 'none', transition: 'border 0.3s ease', resize: 'none' }}></textarea>
             </div>
 
-            <button type="submit" disabled={isSubmitting} className={`btn btn-primary ${isFounder ? 'pulse-anim' : ''}`} style={{ marginTop: '10px', width: '100%', justifyContent: 'center', padding: '15px', opacity: isSubmitting ? 0.7 : 1, ...(isFounder ? {background: 'linear-gradient(135deg, #1976D2 0%, #0d47a1 100%)', border: 'none'} : {}) }}>
+            <button type="submit" disabled={isSubmitting} className={`btn btn-primary ${isFounder ? 'pulse-anim' : ''}`} style={{ marginTop: '10px', width: '100%', justifyContent: 'center', padding: '15px', opacity: isSubmitting ? 0.7 : 1, ...(isFounder ? {background: 'linear-gradient(135deg, #5B2EFF 0%, #5B2EFF 100%)', border: 'none'} : {}) }}>
               <span>{isSubmitting ? 'Sending Request...' : (isFounder ? 'Confirm Strategy Call' : 'Confirm Booking')}</span>
               {!isSubmitting && <i className="fa-solid fa-arrow-right"></i>}
             </button>

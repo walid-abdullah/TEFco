@@ -13,7 +13,7 @@ export const metadata = {
     "SaaS motion design",
   ],
   alternates: {
-    canonical: `${siteUrl}/services`,
+    canonical: "/services",
   },
   openGraph: {
     title: "Video Editing Services | The Editly Foundry",

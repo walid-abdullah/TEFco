@@ -11,7 +11,7 @@ export default function PricingCalculator() {
   const formats = [
     { id: 'short-form', name: 'Shorts & Reels (9:16)', baseRate: 50 },
     { id: 'podcasts', name: 'Podcasts & Long-Form', baseRate: 75 },
-    { id: 'saas-ads', name: '3D SaaS UI & Demos', baseRate: 110 },
+    { id: 'saas-ads', name: 'Motion Graphics', baseRate: 110 },
     { id: 'ugc-ads', name: 'Performance UGC Ads', baseRate: 65 }
   ];
 
@@ -57,9 +57,9 @@ export default function PricingCalculator() {
         {/* Section Header */}
         <div className="text-center reveal-on-scroll" style={{ maxWidth: '780px', margin: '0 auto 44px' }}>
           <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: '900', letterSpacing: '-0.03em', margin: '0 0 14px' }}>
-            Calculate Output & <span className="combination-font" style={{ color: '#EF4444' }}>Monthly Investment</span>
+            Calculate Output & <span className="combination-font" style={{ color: 'var(--theme-danger)' }}>Monthly Investment</span>
           </h2>
-          <p style={{ maxWidth: '640px', margin: '0 auto', fontSize: '1.02rem', color: 'rgba(255,255,255,0.68)', lineHeight: '1.6' }}>
+          <p style={{ maxWidth: '640px', margin: '0 auto', fontSize: '1.02rem', color: 'var(--theme-contrast-muted)', lineHeight: '1.6' }}>
             Slide to estimate your video requirements. See instant monthly retainer pricing and annual savings vs. in-house hiring.
           </p>
         </div>
@@ -78,23 +78,23 @@ export default function PricingCalculator() {
             style={{
               padding: '36px 32px',
               borderRadius: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              background: 'rgba(10, 14, 22, 0.88)',
-              boxShadow: '0 20px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1)'
+              border: '1px solid var(--theme-border)',
+              background: 'var(--theme-surface)',
+              boxShadow: 'var(--glass-shadow)'
             }}
           >
             {/* Control 1: Video Volume Slider */}
             <div style={{ marginBottom: '32px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                <label style={{ fontWeight: '700', fontSize: '0.98rem', color: '#FFFFFF' }}>
+                <label style={{ fontWeight: '700', fontSize: '0.98rem', color: 'var(--text-primary)' }}>
                   Monthly Videos Needed:
                 </label>
                 <span className="mono-spec" style={{
                   padding: '4px 14px',
                   borderRadius: '999px',
-                  background: 'rgba(239, 68, 68, 0.15)',
-                  border: '1px solid rgba(239, 68, 68, 0.4)',
-                  color: '#EF4444',
+                  background: 'var(--theme-danger-soft)',
+                  border: '1px solid var(--theme-danger-border)',
+                  color: 'var(--theme-danger)',
                   fontWeight: '800',
                   fontSize: '1rem'
                 }}>
@@ -113,9 +113,9 @@ export default function PricingCalculator() {
                   width: '100%',
                   height: '6px',
                   borderRadius: '3px',
-                  accentColor: '#EF4444',
+                  accentColor: 'var(--theme-danger)',
                   cursor: 'pointer',
-                  background: 'rgba(255,255,255,0.1)'
+                  background: 'var(--theme-border-soft)'
                 }}
               />
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '8px' }} className="mono-spec">
@@ -127,7 +127,7 @@ export default function PricingCalculator() {
 
             {/* Control 2: Target Formats */}
             <div style={{ marginBottom: '32px' }}>
-              <label style={{ display: 'block', fontWeight: '700', fontSize: '0.98rem', marginBottom: '12px', color: '#FFFFFF' }}>
+              <label style={{ display: 'block', fontWeight: '700', fontSize: '0.98rem', marginBottom: '12px', color: 'var(--text-primary)' }}>
                 Select Content Formats:
               </label>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
@@ -141,9 +141,9 @@ export default function PricingCalculator() {
                       style={{
                         padding: '10px 14px',
                         borderRadius: '10px',
-                        border: isSelected ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255, 255, 255, 0.08)',
-                        background: isSelected ? 'rgba(239, 68, 68, 0.12)' : 'rgba(255, 255, 255, 0.02)',
-                        color: isSelected ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)',
+                        border: isSelected ? '1px solid var(--theme-danger-border)' : '1px solid var(--theme-border-soft)',
+                        background: isSelected ? 'var(--theme-danger-soft)' : 'var(--theme-surface-soft)',
+                        color: isSelected ? 'var(--theme-on-accent)' : 'var(--theme-contrast-muted)',
                         textAlign: 'left',
                         cursor: 'pointer',
                         display: 'flex',
@@ -155,7 +155,7 @@ export default function PricingCalculator() {
                       <span style={{ fontSize: '0.82rem', fontWeight: isSelected ? '700' : '500' }}>
                         {fmt.name}
                       </span>
-                      {isSelected && <i className="fa-solid fa-check" style={{ color: '#EF4444', fontSize: '0.72rem' }}></i>}
+                      {isSelected && <i className="fa-solid fa-check" style={{ color: 'var(--theme-danger)', fontSize: '0.72rem' }}></i>}
                     </button>
                   );
                 })}
@@ -164,7 +164,7 @@ export default function PricingCalculator() {
 
             {/* Control 3: Turnaround SLA */}
             <div>
-              <label style={{ display: 'block', fontWeight: '700', fontSize: '0.98rem', marginBottom: '12px', color: '#FFFFFF' }}>
+              <label style={{ display: 'block', fontWeight: '700', fontSize: '0.98rem', marginBottom: '12px', color: 'var(--text-primary)' }}>
                 Turnaround SLA Speed:
               </label>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
@@ -174,9 +174,9 @@ export default function PricingCalculator() {
                   style={{
                     padding: '12px',
                     borderRadius: '10px',
-                    border: turnaround === 'standard' ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255, 255, 255, 0.08)',
-                    background: turnaround === 'standard' ? 'rgba(239, 68, 68, 0.12)' : 'rgba(255, 255, 255, 0.02)',
-                    color: turnaround === 'standard' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)',
+                    border: turnaround === 'standard' ? '1px solid var(--theme-danger-border)' : '1px solid var(--theme-border-soft)',
+                    background: turnaround === 'standard' ? 'var(--theme-danger-soft)' : 'var(--theme-surface-soft)',
+                    color: turnaround === 'standard' ? 'var(--theme-on-accent)' : 'var(--theme-contrast-muted)',
                     cursor: 'pointer',
                     textAlign: 'left',
                     transition: 'all 0.14s ease'
@@ -192,16 +192,16 @@ export default function PricingCalculator() {
                   style={{
                     padding: '12px',
                     borderRadius: '10px',
-                    border: turnaround === 'express' ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255, 255, 255, 0.08)',
-                    background: turnaround === 'express' ? 'rgba(239, 68, 68, 0.12)' : 'rgba(255, 255, 255, 0.02)',
-                    color: turnaround === 'express' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)',
+                    border: turnaround === 'express' ? '1px solid var(--theme-danger-border)' : '1px solid var(--theme-border-soft)',
+                    background: turnaround === 'express' ? 'var(--theme-danger-soft)' : 'var(--theme-surface-soft)',
+                    color: turnaround === 'express' ? 'var(--theme-on-accent)' : 'var(--theme-contrast-muted)',
                     cursor: 'pointer',
                     textAlign: 'left',
                     transition: 'all 0.14s ease'
                   }}
                 >
                   <div style={{ fontSize: '0.86rem', fontWeight: '700' }}>Express Priority</div>
-                  <div className="mono-spec" style={{ fontSize: '0.68rem', color: '#EF4444', marginTop: '2px' }}>Same-Day / 24H</div>
+                  <div className="mono-spec" style={{ fontSize: '0.68rem', color: 'var(--theme-danger)', marginTop: '2px' }}>Same-Day / 24H</div>
                 </button>
               </div>
             </div>
@@ -214,9 +214,9 @@ export default function PricingCalculator() {
             style={{
               padding: '36px 32px',
               borderRadius: '20px',
-              border: '1px solid rgba(239, 68, 68, 0.35)',
-              background: 'rgba(10, 14, 22, 0.94)',
-              boxShadow: '0 25px 80px rgba(239, 68, 68, 0.12), inset 0 1px 0 rgba(255,255,255,0.15)',
+              border: '1px solid var(--theme-danger-border)',
+              background: 'var(--theme-surface-strong)',
+              boxShadow: 'var(--glass-shadow)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -227,57 +227,57 @@ export default function PricingCalculator() {
               display: 'inline-block',
               padding: '4px 14px',
               borderRadius: '30px',
-              background: 'rgba(34, 197, 94, 0.15)',
-              color: '#22C55E',
+              background: 'var(--theme-positive-soft)',
+              color: 'var(--theme-positive)',
               fontWeight: '800',
               fontSize: '0.8rem',
               textTransform: 'uppercase',
               letterSpacing: '1px',
               marginBottom: '16px',
-              border: '1px solid rgba(34, 197, 94, 0.3)'
+              border: '1px solid var(--theme-positive-border)'
             }}>
               ★ Guaranteed High ROI
             </div>
 
             {/* Estimated Retainer */}
             <div style={{ marginBottom: '24px' }}>
-              <div style={{ fontSize: '0.88rem', color: '#94A3B8', fontWeight: '600' }}>
+              <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
                 Estimated Foundry Retainer:
               </div>
-              <div style={{ fontSize: '3rem', fontWeight: '900', color: '#FFFFFF', lineHeight: '1.1' }}>
+              <div style={{ fontSize: '3rem', fontWeight: '900', color: 'var(--text-primary)', lineHeight: '1.1' }}>
                 ${computedPrice.toLocaleString()}
-                <span style={{ fontSize: '1rem', fontWeight: '500', color: '#94A3B8' }}> / month</span>
+                <span style={{ fontSize: '1rem', fontWeight: '500', color: 'var(--text-secondary)' }}> / month</span>
               </div>
-              <div style={{ fontSize: '0.8rem', color: '#64748B', marginTop: '4px' }}>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                 Includes dedicated Senior Editor, Motion Designer & Producer Pod.
               </div>
             </div>
 
             {/* In-House vs Foundry Savings Comparison Box */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.04)',
+              background: 'var(--theme-surface-soft)',
               borderRadius: '16px',
               padding: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
+              border: '1px solid var(--theme-border-soft)',
               marginBottom: '28px'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '0.9rem' }}>
-                <span style={{ color: '#94A3B8' }}>Full-Time In-House Team:</span>
-                <span style={{ fontWeight: '700', textDecoration: 'line-through', color: '#EF4444' }}>${inHouseCost.toLocaleString()}/mo</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Full-Time In-House Team:</span>
+                <span style={{ fontWeight: '700', textDecoration: 'line-through', color: 'var(--theme-danger)' }}>${inHouseCost.toLocaleString()}/mo</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', fontSize: '0.9rem' }}>
-                <span style={{ color: '#94A3B8' }}>The Editly Foundry Pod:</span>
-                <span style={{ fontWeight: '800', color: '#22C55E' }}>${computedPrice.toLocaleString()}/mo</span>
+                <span style={{ color: 'var(--text-secondary)' }}>The Editly Foundry Pod:</span>
+                <span style={{ fontWeight: '800', color: 'var(--theme-positive)' }}>${computedPrice.toLocaleString()}/mo</span>
               </div>
               <div style={{
-                borderTop: '1px dashed rgba(255, 255, 255, 0.1)',
+                borderTop: '1px dashed var(--theme-border)',
                 paddingTop: '12px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}>
-                <span style={{ fontWeight: '800', fontSize: '0.95rem', color: '#FFFFFF' }}>Estimated Annual Savings:</span>
-                <span style={{ fontWeight: '900', fontSize: '1.4rem', color: '#22C55E' }}>
+                <span style={{ fontWeight: '800', fontSize: '0.95rem', color: 'var(--text-primary)' }}>Estimated Annual Savings:</span>
+                <span style={{ fontWeight: '900', fontSize: '1.4rem', color: 'var(--theme-positive)' }}>
                   ${annualSavings.toLocaleString()}
                 </span>
               </div>
@@ -306,7 +306,7 @@ export default function PricingCalculator() {
                 data-analytics-label="Discuss Custom Budget with Walid"
                 data-analytics-location="pricing_calculator"
                 data-analytics-value={computedPrice}
-                style={{ width: '100%', textAlign: 'center', borderRadius: '12px', padding: '12px', color: '#22C55E', borderColor: 'rgba(34, 197, 94, 0.4)', fontSize: '0.88rem' }}
+                style={{ width: '100%', textAlign: 'center', borderRadius: '12px', padding: '12px', color: 'var(--theme-positive)', borderColor: 'var(--theme-positive-border)', fontSize: '0.88rem' }}
               >
                 <i className="fa-brands fa-whatsapp" style={{ marginRight: '8px' }}></i>
                 <span>Discuss Custom Budget with Walid</span>

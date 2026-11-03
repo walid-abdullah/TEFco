@@ -3,38 +3,26 @@
 import { useEffect, useRef } from "react";
 import { urlFor } from "@/sanity/image";
 
-const fallbackReviews = [
-  {
-    _id: "review-1",
-    clientName: "Alex Hormozi",
-    clientRole: "Founder & Creator",
-    review: "The edits feel sharp, intentional, and built for retention. We finally have a system we can publish consistently.",
-  },
-  {
-    _id: "review-2",
-    clientName: "Maya Chen",
-    clientRole: "Brand Director",
-    review: "They understood the story before touching the timeline. Every deliverable felt considered and ready to ship.",
-  },
-  {
-    _id: "review-3",
-    clientName: "Jordan Lee",
-    clientRole: "SaaS Founder",
-    review: "The team brought structure to a messy content pipeline and made every platform version feel native.",
-  },
-  {
-    _id: "review-4",
-    clientName: "Priya Shah",
-    clientRole: "Marketing Lead",
-    review: "Fast, thoughtful, and unusually good at knowing what to leave out. The work speaks clearly.",
-  },
-  {
-    _id: "review-5",
-    clientName: "Daniel Brooks",
-    clientRole: "Podcast Host",
-    review: "Our long-form conversations now turn into a dependable library of clips without losing the original voice.",
-  },
-];
+// A scrolling rail needs enough different videos to fill the row.
+const MIN_VIDEOS_FOR_RAIL = 3;
+
+// YouTube blocks its normal pages inside iframes, so links must become embed URLs.
+// A link with no video in it, such as the bare youtube.com placeholder, returns null.
+function toEmbedUrl(url = "") {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "");
+    if (host === "youtu.be") return `https://www.youtube.com/embed${parsed.pathname}`;
+    if (host === "youtube.com") {
+      const shortId = parsed.pathname.match(/^\/(?:shorts|embed)\/([\w-]+)/)?.[1];
+      const id = shortId || parsed.searchParams.get("v");
+      return id ? `https://www.youtube.com/embed/${id}` : null;
+    }
+    return url;
+  } catch {
+    return null;
+  }
+}
 
 function isDirectVideo(url = "") {
   return /\.(mp4|webm|ogg)(\?.*)?$/i.test(url);
@@ -42,8 +30,15 @@ function isDirectVideo(url = "") {
 
 export default function ClientReviewsSection({ reviews = [] }) {
   const sectionRef = useRef(null);
-  const items = reviews.length ? reviews : fallbackReviews;
-  const videoReviews = items.filter((item) => item.isVideo && item.videoUrl);
+  const items = reviews;
+  const seenVideos = new Set();
+  const videoReviews = items.filter((item) => {
+    if (!item.isVideo) return false;
+    const key = isDirectVideo(item.videoUrl) ? item.videoUrl : toEmbedUrl(item.videoUrl);
+    if (!key || seenVideos.has(key)) return false;
+    seenVideos.add(key);
+    return true;
+  });
   const textReviews = items.filter((item) => !item.isVideo || !item.videoUrl);
 
   useEffect(() => {
@@ -63,13 +58,15 @@ export default function ClientReviewsSection({ reviews = [] }) {
     return () => observer.disconnect();
   }, []);
 
+  if (items.length === 0) return null;
+
   return (
     <section ref={sectionRef} className="home-foundry-reviews section-padding">
       <div className="container">
         <div className="home-foundry-section-head reveal-on-scroll">
           <div>
-            <span className="section-subtitle">Client feedback</span>
-            <h2>Good work gets<br /><span className="combination-font">remembered.</span></h2>
+            <span className="section-subtitle">Client reviews</span>
+            <h2>What clients say<br /><span className="combination-font">about working with us.</span></h2>
           </div>
         </div>
 
@@ -91,7 +88,7 @@ export default function ClientReviewsSection({ reviews = [] }) {
           </div>
         </div>
 
-        {videoReviews.length > 0 && (
+        {videoReviews.length >= MIN_VIDEOS_FOR_RAIL && (
           <div className="home-foundry-review-rail home-foundry-review-rail-video">
             <div className="home-foundry-review-track home-foundry-review-track-video">
               {[...videoReviews, ...videoReviews].map((review, index) => (
@@ -101,7 +98,7 @@ export default function ClientReviewsSection({ reviews = [] }) {
                       <source src={review.videoUrl} />
                     </video>
                   ) : (
-                    <iframe src={review.videoUrl} title={`${review.clientName} video review`} loading="lazy" allow="autoplay; fullscreen; picture-in-picture" />
+                    <iframe src={toEmbedUrl(review.videoUrl)} title={`${review.clientName} video review`} loading="lazy" allow="autoplay; fullscreen; picture-in-picture" />
                   )}
                   <div><strong>{review.clientName}</strong><span>{review.clientRole}</span></div>
                 </article>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
+  alternates: { canonical: '/brand-assets' },
   title: 'Brand Assets & Media Kit | The Editly Foundry Co.',
   description: 'Download official media kit assets, logos, brand guidelines, and executive bios for The Editly Foundry Co.'
 };
@@ -8,9 +9,9 @@ export const metadata = {
 export default function BrandAssetsPage() {
   const brandColors = [
     { name: 'Midnight Sapphire (Dark BG)', hex: '#040711', rgb: 'rgb(4, 7, 17)' },
-    { name: 'Electric Cyan (Primary Accent)', hex: '#38BDF8', rgb: 'rgb(56, 189, 248)' },
-    { name: 'Royal Cobalt (Core Blue)', hex: '#2563EB', rgb: 'rgb(37, 99, 235)' },
-    { name: 'Amethyst Violet (Motion Glow)', hex: '#8B5CF6', rgb: 'rgb(139, 92, 246)' },
+    { name: 'Electric Cyan (Primary Accent)', hex: '#5B2EFF', rgb: 'rgb(56, 189, 248)' },
+    { name: 'Royal Cobalt (Core Blue)', hex: '#5B2EFF', rgb: 'rgb(37, 99, 235)' },
+    { name: 'Amethyst Violet (Motion Glow)', hex: '#5B2EFF', rgb: 'rgb(139, 92, 246)' },
     { name: 'Ceramic Ice (Light Mode BG)', hex: '#F8FAFC', rgb: 'rgb(248, 250, 252)' }
   ];
 
@@ -19,7 +20,7 @@ export default function BrandAssetsPage() {
       <div className="container" style={{ maxWidth: '1100px', margin: '0 auto' }}>
         
         {/* Header */}
-        <div className="text-center reveal-on-scroll" style={{ marginBottom: '60px' }}>
+        <div className="hero-white sg-page-hero reveal-on-scroll">
           <span className="section-subtitle">
             <i className="fa-solid fa-photo-film" style={{ marginRight: '8px' }}></i>
             Official Agency Media Kit
@@ -52,7 +53,7 @@ export default function BrandAssetsPage() {
               </p>
               <div style={{ display: 'flex', gap: '14px' }}>
                 <a 
-                  href="/Picture/Thumbnail.png" 
+                  href="/Picture/square.png" 
                   download="Editly-Foundry-Media-Kit.png"
                   className="btn btn-primary pop-btn"
                   style={{ padding: '12px 24px', fontSize: '0.9rem' }}
@@ -66,13 +67,13 @@ export default function BrandAssetsPage() {
             {/* Logo Preview Box */}
             <div style={{
               background: 'linear-gradient(135deg, #0B1736 0%, #030610 100%)',
-              border: '1px solid rgba(56, 189, 248, 0.3)',
+              border: '1px solid rgba(91, 46, 255, 0.3)',
               borderRadius: '20px',
               padding: '40px',
               textAlign: 'center'
             }}>
               <div style={{ fontSize: '2rem', fontWeight: '800', fontFamily: "'Halenoir', sans-serif", color: '#FFFFFF', marginBottom: '8px' }}>
-                Editly<span style={{ color: '#38BDF8' }}>Foundry</span>
+                Editly<span style={{ color: '#5B2EFF' }}>Foundry</span>
               </div>
               <div style={{ fontSize: '0.85rem', color: '#94A3B8', letterSpacing: '2px', textTransform: 'uppercase' }}>
                 Official Wordmark (Dark & Light)
@@ -116,9 +117,9 @@ export default function BrandAssetsPage() {
           <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
             For interviews, guest podcast appearances, or joint studio partnerships, contact our press desk.
           </p>
-          <a href="mailto:press@editlyfoundry.com" className="btn btn-outline" style={{ padding: '12px 28px' }}>
+          <a href="mailto:theeditlyfoundry@gmail.com" className="btn btn-outline" style={{ padding: '12px 28px' }}>
             <i className="fa-solid fa-envelope"></i>
-            <span>press@editlyfoundry.com</span>
+            <span>theeditlyfoundry@gmail.com</span>
           </a>
         </div>
 

@@ -14,7 +14,7 @@ export const metadata = {
     "The Editly Foundry",
   ],
   alternates: {
-    canonical: `${siteUrl}/about`,
+    canonical: "/about",
   },
   openGraph: {
     title: "About The Editly Foundry | Video Editing & Post-Production Studio",

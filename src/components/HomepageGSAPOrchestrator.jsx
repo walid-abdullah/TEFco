@@ -71,8 +71,25 @@ export default function HomepageGSAPOrchestrator({ children }) {
         );
       }
 
+      // Founder video settles in once, so nothing moves while it plays.
+      const showreelFrame = containerRef.current.querySelector('.sg-showreel .workflow-explainer-frame');
+      if (showreelFrame) {
+        gsap.fromTo(
+          showreelFrame,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: { trigger: showreelFrame, start: 'top 92%', once: true },
+          }
+        );
+      }
+
       // 2. Work Grid: Scroll-Scrub Parallax & Optical Zoom Depth (Option 4)
-      const workCards = containerRef.current.querySelectorAll('.home-foundry-work-card');
+      const workCards = containerRef.current.querySelectorAll('.sg-work-card');
       if (workCards.length > 0) {
         workCards.forEach((card, i) => {
           // Entrance reveal
@@ -98,38 +115,6 @@ export default function HomepageGSAPOrchestrator({ children }) {
               },
             }
           );
-
-          // Continuous live scrub parallax on scroll
-          const yShift = i % 2 === 0 ? -35 : 35;
-          gsap.to(card, {
-            y: yShift,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.2,
-            },
-          });
-
-          // Inner thumbnail subtle optical zoom scrub
-          const media = card.querySelector('img, video, .work-card-media');
-          if (media) {
-            gsap.fromTo(
-              media,
-              { scale: 1.08 },
-              {
-                scale: 1.0,
-                ease: 'none',
-                scrollTrigger: {
-                  trigger: card,
-                  start: 'top bottom',
-                  end: 'bottom top',
-                  scrub: 1.2,
-                },
-              }
-            );
-          }
         });
       }
 
@@ -187,6 +172,19 @@ export default function HomepageGSAPOrchestrator({ children }) {
             },
           }
         );
+      }
+
+      // Service stack: each card eases back as the next one slides over it.
+      if (window.matchMedia('(min-width: 801px)').matches) {
+        const stackCards = gsap.utils.toArray(containerRef.current.querySelectorAll('.sg-stack-card'));
+        stackCards.slice(0, -1).forEach((card, i) => {
+          gsap.to(card, {
+            scale: 0.95,
+            transformOrigin: 'center top',
+            ease: 'none',
+            scrollTrigger: { trigger: stackCards[i + 1], start: 'top bottom', end: 'top 120px', scrub: true },
+          });
+        });
       }
 
       ScrollTrigger.refresh();

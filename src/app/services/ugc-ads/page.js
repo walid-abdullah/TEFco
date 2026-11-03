@@ -1,12 +1,14 @@
 import ServiceLandingPage from "@/components/ServiceLandingPage";
 
 export const metadata = {
+  alternates: { canonical: '/services/ugc-ads' },
   title: "UGC Ads | The Editly Foundry",
   description: "Performance-minded UGC ads that keep the human hook and sharpen the conversion path.",
 };
 
 export default function UgcAdsPage() {
   return <ServiceLandingPage service={{
+    serviceName: "UGC Ads",
     category: "PERFORMANCE CREATIVE", number: "04", signal: "RESPONSE / 00:24",
     videoUrl: process.env.NEXT_PUBLIC_UGC_VIDEO_URL || process.env.NEXT_PUBLIC_SERVICE_INTRO_VIDEO_URL || "",
     videoPoster: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1800&q=80",

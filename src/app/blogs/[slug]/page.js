@@ -14,6 +14,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${article.title} | The Editly Foundry Co.`,
     description: article.excerpt,
+    alternates: { canonical: `/blogs/${slug}` },
     openGraph: {
       title: article.title,
       description: article.excerpt,
@@ -61,9 +62,9 @@ export default async function BlogDetailPage({ params }) {
         {/* Category & Read Time Pill */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '18px', flexWrap: 'wrap' }}>
           <span style={{
-            background: 'rgba(56, 189, 248, 0.12)',
-            color: '#38BDF8',
-            border: '1px solid rgba(56, 189, 248, 0.3)',
+            background: 'rgba(91, 46, 255, 0.12)',
+            color: '#5B2EFF',
+            border: '1px solid rgba(91, 46, 255, 0.3)',
             padding: '4px 14px',
             borderRadius: '30px',
             fontSize: '0.8rem',
@@ -95,7 +96,7 @@ export default async function BlogDetailPage({ params }) {
           <img 
             src={article.authorAvatar} 
             alt={article.author} 
-            style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #38BDF8' }} 
+            style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #5B2EFF' }} 
           />
           <div>
             <h4 style={{ margin: '0 0 2px', fontSize: '1rem', fontWeight: '800', color: 'var(--text-primary)' }}>
@@ -152,15 +153,15 @@ export default async function BlogDetailPage({ params }) {
             marginTop: '45px',
             padding: '30px',
             borderRadius: '18px',
-            background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(56, 189, 248, 0.1) 100%)',
-            border: '1px solid rgba(56, 189, 248, 0.35)',
+            background: 'linear-gradient(135deg, rgba(91, 46, 255, 0.15) 0%, rgba(91, 46, 255, 0.1) 100%)',
+            border: '1px solid rgba(91, 46, 255, 0.35)',
             textAlign: 'center'
           }}>
             <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '10px', color: '#FFFFFF' }}>
               Want Viral Retention for Your Brand?
             </h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '550px', margin: '0 auto 20px' }}>
-              Partner with our dedicated video editing pods. Guaranteed 48-hour turnarounds, custom Frame.io workflows, and measurable audience ROI.
+              Partner with our dedicated video editing pods. Guaranteed 24–48 hour turnarounds, custom Frame.io workflows, and measurable audience ROI.
             </p>
             <Link href="/book-a-call" className="btn btn-primary" style={{ padding: '12px 28px', borderRadius: '12px', fontWeight: '800' }}>
               Book a 15-Min Growth Audit →
@@ -187,7 +188,7 @@ export default async function BlogDetailPage({ params }) {
                   textDecoration: 'none'
                 }}
               >
-                <span style={{ fontSize: '0.75rem', color: '#38BDF8', fontWeight: '800', marginBottom: '6px' }}>
+                <span style={{ fontSize: '0.75rem', color: '#5B2EFF', fontWeight: '800', marginBottom: '6px' }}>
                   {rel.category}
                 </span>
                 <h4 style={{ margin: '0 0 8px', fontSize: '1.05rem', fontWeight: '800', color: 'var(--text-primary)' }}>

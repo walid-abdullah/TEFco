@@ -1,10 +1,32 @@
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
 import { createClient } from 'next-sanity';
+import { clip, escapeFields, escapeHtml, isEmail, isRateLimited, safeUrl } from '@/lib/requestSafety';
+import { sendWhatsAppText } from '@/lib/whatsapp';
 
 export async function POST(request) {
   try {
-    const data = await request.json();
+    if (isRateLimited(request)) {
+      return NextResponse.json({ error: "Too many requests. Please try again shortly." }, { status: 429 });
+    }
+
+    const body = await request.json().catch(() => null);
+    if (!body || typeof body !== 'object') {
+      return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
+    }
+    const raw = Object.fromEntries(
+      ['firstName', 'name', 'email', 'whatsapp', 'phone', 'budget', 'service', 'needs', 'bottleneck', 'channelLink', 'message']
+        .map((key) => [key, clip(body?.[key], key === 'message' ? 5000 : 500)])
+    );
+
+    if (!isEmail(raw.email)) {
+      return NextResponse.json({ error: "A valid email address is required." }, { status: 400 });
+    }
+    raw.channelLink = raw.channelLink ? safeUrl(raw.channelLink) : '';
+
+    // Everything placed into email HTML uses the escaped copy; plain-text channels use raw.
+    const data = escapeFields(raw);
+    const delivered = { whatsapp: false, email: false, cms: false };
 
     // Check if credentials exist
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
@@ -13,50 +35,35 @@ export async function POST(request) {
     }
 
     // Formatting the lead content
-    const fullName = data.firstName || data.name || 'Unknown Client';
-    const cleanPhone = String(data.whatsapp || data.phone || '').replace(/[^0-9]/g, '');
+    const rawName = raw.firstName || raw.name || 'Unknown Client';
+    const fullName = escapeHtml(rawName);
+    const headerName = rawName.replace(/["\r\n]/g, '');
+    const cleanPhone = String(raw.whatsapp || raw.phone || '').replace(/[^0-9]/g, '');
     const formattedPhone = (cleanPhone.startsWith('01') && cleanPhone.length === 11) ? ('88' + cleanPhone) : cleanPhone;
 
     // 1. INSTANT DUAL WHATSAPP DISPATCH (Founder Alert + Client Confirmation)
     if (process.env.WHATSAPP_API_TOKEN && process.env.WHATSAPP_PHONE_NUMBER_ID) {
       const founderAlertPhone = '8801886755888';
       const founderLeadMsg = `*NEW PROJECT INQUIRY — THE EDITLY FOUNDRY CO.*\n\n` +
-        `Client Name: ${fullName}\n` +
-        `Email: ${data.email || 'N/A'}\n` +
-        `WhatsApp: ${data.whatsapp || data.phone || 'N/A'}\n` +
-        `Budget: ${data.budget || 'N/A'}\n` +
-        `Service: ${data.service || data.needs || 'N/A'}\n` +
-        `Channel / Brand: ${data.channelLink || 'N/A'}\n` +
-        (data.message ? `Details: ${data.message}\n\n` : '\n') +
+        `Client Name: ${rawName}\n` +
+        `Email: ${raw.email || 'N/A'}\n` +
+        `WhatsApp: ${raw.whatsapp || raw.phone || 'N/A'}\n` +
+        `Budget: ${raw.budget || 'N/A'}\n` +
+        `Service: ${raw.service || raw.needs || 'N/A'}\n` +
+        `Channel / Brand: ${raw.channelLink || 'N/A'}\n` +
+        (raw.message ? `Details: ${raw.message}\n\n` : '\n') +
         `Direct WhatsApp Client Link:\nhttps://wa.me/${formattedPhone}`;
 
       // A. Send Full Lead Alert to Founder
-      try {
-        await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            messaging_product: 'whatsapp',
-            recipient_type: 'individual',
-            to: founderAlertPhone,
-            type: 'text',
-            text: { preview_url: false, body: founderLeadMsg }
-          })
-        });
-      } catch (fErr) {
-        console.error('Founder WhatsApp notification error:', fErr);
-      }
+      delivered.whatsapp = await sendWhatsAppText(founderAlertPhone, founderLeadMsg);
 
       // B. Send Client Instant Confirmation Message
       if (formattedPhone) {
         const actualCalendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/w-abdullah5588/30min';
         const walidDirectWhatsApp = 'https://wa.me/8801886755888';
 
-        const clientWhatsAppMsg = `Hi ${fullName},\n\n` +
-          `Thank you for submitting your project brief with *The Editly Foundry Co.* We have successfully logged your inquiry regarding *"${data.service || data.needs || 'Video Post-Production'}"*.\n\n` +
+        const clientWhatsAppMsg = `Hi ${rawName},\n\n` +
+          `Thank you for submitting your project brief with *The Editly Foundry Co.* We have successfully logged your inquiry regarding *"${raw.service || raw.needs || 'Video Post-Production'}"*.\n\n` +
           `Our Executive Producer *Walid Abdullah* is currently reviewing your content and requirements.\n\n` +
           `1. Direct WhatsApp Chat with Walid:\n` +
           `${walidDirectWhatsApp}\n\n` +
@@ -66,25 +73,7 @@ export async function POST(request) {
           `_The Editly Foundry Co. Production Desk_\n` +
           `📍 United States • Dubai • Dhaka`;
 
-        try {
-          // Deliver confirmation to client
-          await fetch(`https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${process.env.WHATSAPP_API_TOKEN}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              messaging_product: 'whatsapp',
-              recipient_type: 'individual',
-              to: formattedPhone,
-              type: 'text',
-              text: { preview_url: false, body: clientWhatsAppMsg }
-            })
-          });
-        } catch (cErr) {
-          console.error('Client WhatsApp notification error:', cErr);
-        }
+        await sendWhatsAppText(formattedPhone, clientWhatsAppMsg);
       }
     }
 
@@ -103,13 +92,13 @@ export async function POST(request) {
     if (transporter) {
       try {
         const mailOptions = {
-          from: `"${fullName}" <${data.email}>`,
+          from: `"${headerName}" <${process.env.EMAIL_USER}>`,
           to: process.env.EMAIL_USER,
-          replyTo: data.email,
-          subject: `New Request: ${fullName}`,
+          replyTo: raw.email,
+          subject: `New Request: ${headerName}`,
           html: `
             <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-              <h2 style="color: #2563EB;">New ${data.message ? 'Message' : 'Booking Request'}</h2>
+              <h2 style="color: #5B2EFF;">New ${data.message ? 'Message' : 'Booking Request'}</h2>
               <p>You have received a new request from your website.</p>
               
               <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
@@ -154,6 +143,7 @@ export async function POST(request) {
         };
 
         await transporter.sendMail(mailOptions);
+        delivered.email = true;
       } catch (mailErr) {
         console.error('Founder Email notification error:', mailErr);
       }
@@ -164,10 +154,10 @@ export async function POST(request) {
       try {
         const clientAutoReply = {
           from: `"The Editly Foundry Co." <${process.env.EMAIL_USER}>`,
-          to: data.email,
+          to: raw.email,
           replyTo: process.env.EMAIL_USER,
           subject: `Your Project Brief with The Editly Foundry Co.`,
-          text: `Hi ${fullName},\n\nThank you for reaching out to The Editly Foundry Co. We have received your project brief.\n\nOur Executive Producer Walid Abdullah is currently reviewing your content.\n\nTo lock in your 48-hour turnaround, you can book a quick 15-minute slot on Walid's calendar here:\nhttps://calendly.com/w-abdullah5588/30min\n\nLooking forward to speaking with you!\n\nWalid Abdullah\nFounder & CEO, The Editly Foundry Co.\nWhatsApp: +880 1886 755 888`,
+          text: `Hi ${rawName},\n\nThank you for reaching out to The Editly Foundry Co. We have received your project brief.\n\nOur Executive Producer Walid Abdullah is currently reviewing your content.\n\nTo lock in your 48-hour turnaround, you can book a quick 15-minute slot on Walid's calendar here:\n${process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/w-abdullah5588/30min'}\n\nLooking forward to speaking with you!\n\nWalid Abdullah\nFounder & CEO, The Editly Foundry Co.\nWhatsApp: +880 1886 755 888`,
           html: `
             <!DOCTYPE html>
             <html>
@@ -176,9 +166,9 @@ export async function POST(request) {
               <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
                 
                 <!-- Header Brand Bar -->
-                <div style="background: #090e1a; padding: 28px; text-align: center;">
+                <div style="background: #0B0B14; padding: 28px; text-align: center;">
                   <div style="font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">
-                    The Editly Foundry <span style="color: #38bdf8;">Co.</span>
+                    The Editly Foundry <span style="color: #BFAFFF;">Co.</span>
                   </div>
                   <div style="font-size: 11px; color: #94a3b8; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;">
                     High-Retention Video Post-Production
@@ -203,7 +193,7 @@ export async function POST(request) {
                   <div style="text-align: center; margin: 30px 0;">
                     <!-- Primary Blue Calendly Button -->
                     <a href="${process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/w-abdullah5588/30min'}" 
-                       style="display: inline-block; padding: 13px 28px; background: #2563eb; color: #ffffff; font-size: 14px; font-weight: 700; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);">
+                       style="display: inline-block; padding: 13px 28px; background: #5B2EFF; color: #ffffff; font-size: 14px; font-weight: 700; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);">
                       Book 15-Min Strategy Call &rarr;
                     </a>
                     
@@ -218,13 +208,13 @@ export async function POST(request) {
 
                   <!-- 3 Step Next Box -->
                   <div style="background: #f1f5f9; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
-                    <div style="font-size: 12px; font-weight: 700; color: #0284c7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">
+                    <div style="font-size: 12px; font-weight: 700; color: #5B2EFF; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">
                       What Happens Next?
                     </div>
                     <ul style="margin: 0; padding-left: 18px; font-size: 14px; color: #475569; line-height: 1.6;">
                       <li>We review your raw footage & audit retention drop-offs</li>
                       <li>We assign your dedicated Senior Video Editor & Motion Lead</li>
-                      <li>First 4K draft delivered within 48 hours on Frame.io</li>
+                      <li>First 4K draft delivered within 24–48 hours on Frame.io</li>
                     </ul>
                   </div>
 
@@ -245,7 +235,7 @@ export async function POST(request) {
         };
 
         await transporter.sendMail(clientAutoReply);
-        console.log(`[Auto-Responder Sent] Successfully delivered confirmation & Calendly invite to ${data.email}`);
+        
       } catch (clientMailError) {
         console.error("Failed to send auto-reply to client:", clientMailError);
       }
@@ -263,22 +253,22 @@ export async function POST(request) {
         });
         
         let messageText = '';
-        if (data.needs || data.bottleneck) {
-          messageText = `Channel: ${data.channelLink || 'N/A'}\nBottleneck: ${data.needs || data.bottleneck}`;
-        } else if (data.message) {
-          messageText = data.message;
+        if (raw.needs || raw.bottleneck) {
+          messageText = `Channel: ${raw.channelLink || 'N/A'}\nBottleneck: ${raw.needs || raw.bottleneck}`;
+        } else if (raw.message) {
+          messageText = raw.message;
         }
 
         await sanityClient.create({
           _type: 'contactMessage',
-          name: fullName,
-          email: data.email,
-          type: (data.needs || data.bottleneck) ? 'booking' : 'general',
+          name: rawName,
+          email: raw.email,
+          type: (raw.needs || raw.bottleneck) ? 'booking' : 'general',
           message: messageText,
           status: 'unread',
           submittedAt: new Date().toISOString()
         });
-        console.log("Successfully saved lead to Sanity.");
+        delivered.cms = true;
       } catch (sanityError) {
         console.error("Failed to save lead to Sanity:", sanityError);
       }
@@ -286,7 +276,16 @@ export async function POST(request) {
       console.log("SANITY_API_TOKEN is not set. Skipping saving lead to Sanity.");
     }
 
-    return NextResponse.json({ message: "Inquiry processed successfully" }, { status: 200 });
+    if (!delivered.whatsapp && !delivered.email && !delivered.cms) {
+      console.error("Lead could not be delivered through any channel.");
+      return NextResponse.json({ error: "We could not deliver your inquiry." }, { status: 502 });
+    }
+
+    return NextResponse.json({
+      message: "Inquiry processed successfully",
+      emailStatus: delivered.email ? 'sent' : 'failed',
+      whatsappStatus: delivered.whatsapp ? 'sent' : 'failed',
+    }, { status: 200 });
   } catch (error) {
     console.error("Error processing lead inquiry:", error);
     return NextResponse.json({ error: "Failed to process inquiry" }, { status: 500 });

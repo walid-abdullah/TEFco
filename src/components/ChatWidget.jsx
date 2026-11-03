@@ -27,12 +27,12 @@ export default function ChatWidget() {
         }}
       >
         {/* Header */}
-        <div style={{ background: 'linear-gradient(135deg, #1976D2 0%, #0d47a1 100%)', padding: '20px', color: 'white', display: 'flex', alignItems: 'center', gap: '15px' }}>
+        <div style={{ background: 'linear-gradient(135deg, #5B2EFF 0%, #5B2EFF 100%)', padding: '20px', color: 'white', display: 'flex', alignItems: 'center', gap: '15px' }}>
           <div style={{ position: 'relative' }}>
             <div style={{ width: '45px', height: '45px', borderRadius: '50%', background: '#fff', overflow: 'hidden' }}>
               <img src="/Picture/square.png" alt="Team Editly" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
-            <div style={{ position: 'absolute', bottom: '2px', right: '2px', width: '12px', height: '12px', background: '#22c55e', borderRadius: '50%', border: '2px solid #0d47a1' }}></div>
+            <div style={{ position: 'absolute', bottom: '2px', right: '2px', width: '12px', height: '12px', background: '#22c55e', borderRadius: '50%', border: '2px solid #5B2EFF' }}></div>
           </div>
           <div>
             <h4 style={{ margin: '0 0 3px 0', fontSize: '1.1rem', fontWeight: '600' }}>Team Editly</h4>
@@ -66,10 +66,10 @@ export default function ChatWidget() {
         className="pulse-anim"
         style={{ 
           width: '60px', height: '60px', borderRadius: '50%', 
-          background: 'linear-gradient(135deg, #1976D2 0%, #0d47a1 100%)', 
+          background: 'linear-gradient(135deg, #5B2EFF 0%, #5B2EFF 100%)', 
           color: 'white', border: 'none', cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center', 
-          fontSize: '1.6rem', boxShadow: '0 8px 25px rgba(25, 118, 210, 0.4)', 
+          fontSize: '1.6rem', boxShadow: '0 8px 25px rgba(91, 46, 255, 0.4)', 
           transition: 'transform 0.3s'
         }}
       >

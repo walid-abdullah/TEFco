@@ -79,7 +79,7 @@ export default function CinematicFounderVideo({
             background: "#070A12",
             border: "1px solid rgba(255,255,255,0.15)",
             boxShadow:
-              "0 30px 80px rgba(0,0,0,0.9), 0 0 50px rgba(56,189,248,0.15)",
+              "0 30px 80px rgba(0,0,0,0.9), 0 0 50px rgba(91, 46, 255,0.15)",
             overflow: "hidden",
           }}
         >
