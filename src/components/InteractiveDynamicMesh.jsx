@@ -72,7 +72,7 @@ export default function InteractiveDynamicMesh() {
     }));
 
     const ribbons = [
-      { phase: 0.2, amplitude: 60, speed: 0.0009, color: 'rgba(56, 189, 248, 0.38)', glow: 'rgba(56, 189, 248, 0.65)' },
+      { phase: 0.2, amplitude: 60, speed: 0.0009, color: 'rgba(91, 46, 255, 0.38)', glow: 'rgba(91, 46, 255, 0.65)' },
       { phase: 1.4, amplitude: 78, speed: 0.0011, color: 'rgba(99, 102, 241, 0.35)', glow: 'rgba(129, 140, 248, 0.7)' },
       { phase: 2.9, amplitude: 94, speed: 0.0014, color: 'rgba(45, 212, 191, 0.28)', glow: 'rgba(45, 212, 191, 0.6)' },
     ];
@@ -81,8 +81,8 @@ export default function InteractiveDynamicMesh() {
 
     const getThemePalette = (isLight) => ({
       base: isLight ? '#f6f9ff' : '#030712',
-      glowA: isLight ? 'rgba(37, 99, 235, 0.24)' : 'rgba(56, 189, 248, 0.28)',
-      glowB: isLight ? 'rgba(124, 58, 237, 0.16)' : 'rgba(168, 85, 247, 0.2)',
+      glowA: isLight ? 'rgba(91, 46, 255, 0.24)' : 'rgba(91, 46, 255, 0.28)',
+      glowB: isLight ? 'rgba(91, 46, 255, 0.16)' : 'rgba(168, 85, 247, 0.2)',
       particle: isLight ? 'rgba(15, 23, 42, 0.6)' : 'rgba(255,255,255,0.75)',
       border: isLight ? 'rgba(15, 23, 42, 0.12)' : 'rgba(255,255,255,0.18)',
     });
@@ -126,8 +126,8 @@ export default function InteractiveDynamicMesh() {
         height * 0.2 + (pointer.y - height / 2) * 0.3,
         420,
       );
-      orbA.addColorStop(0, isLight ? 'rgba(37, 99, 235, 0.18)' : 'rgba(56,189,248,0.18)');
-      orbA.addColorStop(0.38, isLight ? 'rgba(59,130,246,0.10)' : 'rgba(99,102,241,0.14)');
+      orbA.addColorStop(0, isLight ? 'rgba(91, 46, 255, 0.18)' : 'rgba(91, 46, 255,0.18)');
+      orbA.addColorStop(0.38, isLight ? 'rgba(91, 46, 255,0.10)' : 'rgba(99,102,241,0.14)');
       orbA.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = orbA;
       ctx.fillRect(0, 0, width, height);

@@ -1,9 +1,0 @@
-<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Editly Foundry EF mark</title>
-  <desc id="desc">Geometric EF monogram inside a rounded video frame.</desc>
-  <rect width="256" height="256" rx="42" fill="#0A0E16"/>
-  <rect x="2" y="2" width="252" height="252" rx="40" stroke="#E2E8F0" stroke-opacity=".72" stroke-width="4"/>
-  <path d="M63 74H168M63 128H141M63 182H168M63 74V182" stroke="#F8FAFC" stroke-width="19" stroke-linecap="round"/>
-  <path d="M195 74V182M195 74H238M195 128H230" stroke="#94A3B8" stroke-width="17" stroke-linecap="round"/>
-  <path d="M27 61V195M229 28V228" stroke="#64748B" stroke-opacity=".7" stroke-width="3"/>
-</svg>

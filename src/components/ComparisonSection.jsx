@@ -77,9 +77,9 @@ export default function ComparisonSection() {
         <div className="section-header text-center reveal-on-scroll" style={{ maxWidth: '820px', margin: '0 auto 48px' }}>
           <h2 className="section-title" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', margin: '0 0 14px', fontWeight: '900', letterSpacing: '-0.03em' }}>
             Why Leading Brands Choose <br />
-            <span className="combination-font" style={{ color: '#EF4444' }}>The Editly Foundry OS</span>
+            <span className="combination-font" style={{ color: 'var(--theme-danger)' }}>The Editly Foundry OS</span>
           </h2>
-          <p style={{ color: 'rgba(255, 255, 255, 0.68)', fontSize: '1.02rem', lineHeight: '1.6', margin: 0 }}>
+          <p style={{ color: 'var(--theme-contrast-muted)', fontSize: '1.02rem', lineHeight: '1.6', margin: 0 }}>
             Compare our dedicated post-production engine against traditional full-time hiring and risky freelance platforms.
           </p>
         </div>
@@ -97,44 +97,44 @@ export default function ComparisonSection() {
             margin: '0 auto',
             borderRadius: '20px',
             overflow: 'hidden',
-            background: 'rgba(10, 14, 22, 0.88)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            boxShadow: '0 25px 80px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.12)'
+            background: 'var(--theme-surface)',
+            border: '1px solid var(--theme-border)',
+            boxShadow: 'var(--glass-shadow)'
           }}>
             {/* Table Header */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: '2.2fr 2.1fr 1.6fr 1.6fr',
-              background: 'rgba(255, 255, 255, 0.02)',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+              background: 'var(--theme-surface-soft)',
+              borderBottom: '1px solid var(--theme-border-soft)',
               padding: '20px 24px',
               alignItems: 'center',
               fontWeight: '700'
             }}>
-              <div className="mono-spec" style={{ fontSize: '0.74rem', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.06em' }}>
+              <div className="mono-spec" style={{ fontSize: '0.74rem', color: 'var(--text-muted)', letterSpacing: '0.06em' }}>
                 PRODUCTION CRITERIA
               </div>
               
               <div style={{
-                color: '#FFFFFF',
+                color: 'var(--text-primary)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
                 fontSize: '1rem',
                 fontWeight: '800'
               }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EF4444', boxShadow: '0 0 10px #EF4444' }}></span>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--theme-danger)', boxShadow: '0 0 10px var(--theme-danger)' }}></span>
                 <span>The Editly Foundry</span>
-                <span className="mono-spec" style={{ fontSize: '0.62rem', color: '#EF4444', background: 'rgba(239,68,68,0.12)', padding: '2px 6px', borderRadius: '4px' }}>
+                <span className="mono-spec" style={{ fontSize: '0.62rem', color: 'var(--theme-danger)', background: 'var(--theme-danger-soft)', padding: '2px 6px', borderRadius: '4px' }}>
                   STUDIO OS
                 </span>
               </div>
 
-              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
+              <div style={{ color: 'var(--theme-contrast-subtle)', fontSize: '0.9rem' }}>
                 In-House Team
               </div>
 
-              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
+              <div style={{ color: 'var(--theme-contrast-subtle)', fontSize: '0.9rem' }}>
                 Freelancer Network
               </div>
             </div>
@@ -148,13 +148,13 @@ export default function ComparisonSection() {
                     display: 'grid',
                     gridTemplateColumns: '2.2fr 2.1fr 1.6fr 1.6fr',
                     padding: '18px 24px',
-                    borderBottom: idx === comparisonData.length - 1 ? 'none' : '1px solid rgba(255, 255, 255, 0.05)',
-                    background: idx % 2 === 0 ? 'transparent' : 'rgba(255, 255, 255, 0.015)',
+                    borderBottom: idx === comparisonData.length - 1 ? 'none' : '1px solid var(--theme-border-soft)',
+                    background: idx % 2 === 0 ? 'transparent' : 'var(--theme-surface-soft)',
                     alignItems: 'center'
                   }}
                 >
                   {/* Feature Name */}
-                  <div style={{ fontWeight: '600', color: '#FFFFFF', fontSize: '0.92rem' }}>
+                  <div style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.92rem' }}>
                     {row.feature}
                   </div>
 
@@ -164,37 +164,37 @@ export default function ComparisonSection() {
                       width: '20px',
                       height: '20px',
                       borderRadius: '50%',
-                      background: 'rgba(239, 68, 68, 0.2)',
+                      background: 'var(--theme-danger-soft)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#EF4444',
+                      color: 'var(--theme-danger)',
                       fontSize: '0.65rem',
                       flexShrink: 0
                     }}>
                       <i className="fa-solid fa-check"></i>
                     </div>
-                    <span style={{ fontWeight: '700', fontSize: '0.9rem', color: '#FFFFFF' }}>
+                    <span style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
                       {row.editlyText}
                     </span>
                   </div>
 
                   {/* In-House Column */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(255,255,255,0.5)', fontSize: '0.86rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--theme-contrast-subtle)', fontSize: '0.86rem' }}>
                     {row.inHouse ? (
-                      <i className="fa-solid fa-check" style={{ color: '#94A3B8', fontSize: '0.75rem' }}></i>
+                      <i className="fa-solid fa-check" style={{ color: 'var(--text-secondary)', fontSize: '0.75rem' }}></i>
                     ) : (
-                      <i className="fa-solid fa-xmark" style={{ color: 'rgba(239,68,68,0.7)', fontSize: '0.75rem' }}></i>
+                      <i className="fa-solid fa-xmark" style={{ color: 'var(--theme-danger)', fontSize: '0.75rem' }}></i>
                     )}
                     <span>{row.inHouseText}</span>
                   </div>
 
                   {/* Freelancer Column */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(255,255,255,0.45)', fontSize: '0.86rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--theme-contrast-subtle)', fontSize: '0.86rem' }}>
                     {row.freelance ? (
-                      <i className="fa-solid fa-check" style={{ color: '#94A3B8', fontSize: '0.75rem' }}></i>
+                      <i className="fa-solid fa-check" style={{ color: 'var(--text-secondary)', fontSize: '0.75rem' }}></i>
                     ) : (
-                      <i className="fa-solid fa-xmark" style={{ color: 'rgba(239,68,68,0.7)', fontSize: '0.75rem' }}></i>
+                      <i className="fa-solid fa-xmark" style={{ color: 'var(--theme-danger)', fontSize: '0.75rem' }}></i>
                     )}
                     <span>{row.freelanceText}</span>
                   </div>
@@ -208,4 +208,3 @@ export default function ComparisonSection() {
     </section>
   );
 }
-

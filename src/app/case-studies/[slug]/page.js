@@ -17,7 +17,7 @@ export default function CaseStudyDetailPage({ params }) {
         {/* Title Header */}
         <div style={{ marginBottom: '40px' }}>
           <div style={{ display: 'inline-flex', gap: '10px', alignItems: 'center', marginBottom: '14px' }}>
-            <span style={{ padding: '6px 16px', borderRadius: '50px', background: 'rgba(37, 99, 235, 0.15)', color: '#38BDF8', fontWeight: '800', fontSize: '0.8rem', textTransform: 'uppercase' }}>
+            <span style={{ padding: '6px 16px', borderRadius: '50px', background: 'rgba(91, 46, 255, 0.15)', color: '#5B2EFF', fontWeight: '800', fontSize: '0.8rem', textTransform: 'uppercase' }}>
               B2B SaaS Growth Case Study
             </span>
             <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>48-Hour Turnaround Cycle</span>
@@ -36,7 +36,7 @@ export default function CaseStudyDetailPage({ params }) {
           <BeforeAfterSlider />
           <div style={{ textAlign: 'center', marginTop: '14px', color: 'var(--text-muted)', fontSize: '0.88rem' }}>
             <i className="fa-solid fa-arrows-left-right" style={{ marginRight: '8px' }}></i>
-            Drag the handle to see the exact difference between raw founder recording and our 48h final asset.
+            Drag the handle to see the exact difference between raw founder recording and our 24–48h final asset.
           </div>
         </div>
 
@@ -54,15 +54,15 @@ export default function CaseStudyDetailPage({ params }) {
           }}
         >
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#38BDF8', marginBottom: '4px' }}>+4.8M</div>
+            <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#5B2EFF', marginBottom: '4px' }}>+4.8M</div>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Organic Impressions</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#10B981', marginBottom: '4px' }}>74.2%</div>
+            <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#0B7A55', marginBottom: '4px' }}>74.2%</div>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Hook Retention Rate</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#8B5CF6', marginBottom: '4px' }}>$380K</div>
+            <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#5B2EFF', marginBottom: '4px' }}>$380K</div>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Attributed Pipeline</div>
           </div>
           <div style={{ textAlign: 'center' }}>
@@ -78,7 +78,7 @@ export default function CaseStudyDetailPage({ params }) {
           </h2>
 
           <div className="glass-card" style={{ padding: '30px', borderRadius: '20px' }}>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: '#38BDF8', marginBottom: '10px' }}>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: '#5B2EFF', marginBottom: '10px' }}>
               1. The 3-Second Scroll Stopper (Visual Pattern Interrupt)
             </h3>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
@@ -87,7 +87,7 @@ export default function CaseStudyDetailPage({ params }) {
           </div>
 
           <div className="glass-card" style={{ padding: '30px', borderRadius: '20px' }}>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: '#10B981', marginBottom: '10px' }}>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: '#0B7A55', marginBottom: '10px' }}>
               2. Pacing Rhythm & Dead Air Elimination
             </h3>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
@@ -96,7 +96,7 @@ export default function CaseStudyDetailPage({ params }) {
           </div>
 
           <div className="glass-card" style={{ padding: '30px', borderRadius: '20px' }}>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: '#8B5CF6', marginBottom: '10px' }}>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: '#5B2EFF', marginBottom: '10px' }}>
               3. Hollywood Film LUT Color Grading & Mastered Audio
             </h3>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
@@ -111,15 +111,15 @@ export default function CaseStudyDetailPage({ params }) {
           style={{
             padding: '60px 40px',
             borderRadius: '30px',
-            background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(139, 92, 246, 0.15) 100%)',
-            border: '1px solid rgba(56, 189, 248, 0.35)'
+            background: 'linear-gradient(135deg, rgba(91, 46, 255, 0.2) 0%, rgba(139, 92, 246, 0.15) 100%)',
+            border: '1px solid rgba(91, 46, 255, 0.35)'
           }}
         >
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '14px' }}>
             Ready to Re-Engineer Your Video Content?
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto 30px' }}>
-            Book a 15-minute intro call to see how our dedicated post-production pod scales your output in 48 hours.
+            Book an intro call to see how our dedicated post-production pod scales your output in 24–48 hours.
           </p>
           <Link href="/book-a-call" className="btn btn-primary btn-lg pop-btn">
             <span>Book a 15-Min Intro Call ➔</span>

@@ -67,9 +67,9 @@ export default function InteractiveVideoScrubber() {
                   key={p.id}
                   onClick={() => setActivePreset(p.id)}
                   style={{
-                    background: activePreset === p.id ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255, 255, 255, 0.03)',
-                    border: activePreset === p.id ? '1px solid rgba(56, 189, 248, 0.35)' : '1px solid rgba(255, 255, 255, 0.06)',
-                    color: activePreset === p.id ? '#38BDF8' : 'var(--text-muted)',
+                    background: activePreset === p.id ? 'rgba(91, 46, 255, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                    border: activePreset === p.id ? '1px solid rgba(91, 46, 255, 0.35)' : '1px solid rgba(255, 255, 255, 0.06)',
+                    color: activePreset === p.id ? '#5B2EFF' : 'var(--text-muted)',
                     padding: '3px 8px',
                     borderRadius: '4px',
                     fontSize: '0.68rem',
@@ -148,11 +148,11 @@ export default function InteractiveVideoScrubber() {
               right: '16px',
               padding: '4px 10px',
               borderRadius: '4px',
-              background: 'rgba(56, 189, 248, 0.15)',
-              color: '#38BDF8',
+              background: 'rgba(91, 46, 255, 0.15)',
+              color: '#5B2EFF',
               fontFamily: 'var(--font-mono)',
               fontSize: '0.72rem',
-              border: '1px solid rgba(56, 189, 248, 0.3)'
+              border: '1px solid rgba(91, 46, 255, 0.3)'
             }}>
               MASTERED REC.709 + -14 LUFS (AFTER)
             </div>
@@ -190,7 +190,7 @@ export default function InteractiveVideoScrubber() {
             borderTop: '1px solid rgba(255, 255, 255, 0.06)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#10B981' }}>
+              <span className="mono-spec" style={{ fontSize: '0.72rem', color: '#0B7A55' }}>
                 AUDIO LAB STATUS: DE-NOISED (-14 LUFS INTEGRATED)
               </span>
             </div>

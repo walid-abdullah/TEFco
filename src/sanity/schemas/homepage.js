@@ -1,4 +1,4 @@
-export default {
+const schema = {
   name: 'homepage',
   title: 'Homepage Content',
   type: 'document',
@@ -110,3 +110,15 @@ export default {
     testimonialsTitle2: 'Say About Us'
   }
 }
+
+// The site reads only the founder video from this document. Other fields keep their data, hidden.
+const VISIBLE_FIELDS = new Set(['founderVideoUrl', 'founderVideoThumbnail']);
+
+export default {
+  ...schema,
+  title: 'Founder video',
+  groups: undefined,
+  fields: schema.fields.map(({ group, validation, ...field }) => (
+    VISIBLE_FIELDS.has(field.name) ? field : { ...field, hidden: true }
+  )),
+};

@@ -1,66 +1,65 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import WorkflowExplainerVideo from "@/components/WorkflowExplainerVideo";
 
 const steps = [
   {
     number: "01",
-    label: "BRIEF",
-    timing: "SAME DAY",
-    title: "Start with the signal.",
-    summary: "We learn what the piece needs to make people stop, understand, and care.",
-    description:
-      "Send the footage, references, and one clear outcome. We turn the context into a focused creative direction before anyone touches the timeline.",
+    label: "Brief",
+    timing: "Same day",
+    title: "Start with what matters.",
+    description: "Send the footage, references and one clear outcome. We turn that context into a focused creative direction before anyone touches the timeline.",
+    you: "Share your footage, references and one clear goal.",
+    us: "Turn it into a creative direction for the edit.",
     output: "Creative direction",
   },
   {
     number: "02",
-    label: "ORGANIZE",
-    timing: "DAY 01",
+    label: "Organize",
+    timing: "Day 1",
     title: "Everything in its place.",
-    summary: "Your footage, notes, and references become one clear working system.",
-    description:
-      "We sort the material, sync the angles, check the audio, and prepare a clean project space so the edit moves without friction.",
+    description: "We sort the material, sync the angles, check the audio and prepare a clean project space, so the edit moves without friction.",
+    you: "Nothing. We take it from here.",
+    us: "Sort files, sync camera angles and check the audio.",
     output: "Organized project",
   },
   {
     number: "03",
-    label: "EDIT",
-    timing: "DAY 01–02",
+    label: "Edit",
+    timing: "Day 1–2",
     title: "Shape the story.",
-    summary: "The first cut finds the right pace, structure, and visual language.",
-    description:
-      "Our editors build the narrative, tighten the rhythm, and place the moments that earn the next second—without adding noise for its own sake.",
+    description: "Our editors build the narrative, tighten the rhythm and place the moments that earn the next second, without adding noise for its own sake.",
+    you: "Wait for your review link.",
+    us: "Build the story, pacing, captions and sound.",
     output: "First cut",
   },
   {
     number: "04",
-    label: "REVIEW",
-    timing: "WITHIN 24H",
+    label: "Review",
+    timing: "Within 24 hours",
     title: "Make feedback easy.",
-    summary: "Timecoded notes keep every decision visible and every revision focused.",
-    description:
-      "Review in one shared space, leave notes on the exact frame, and see changes clearly. One calm feedback loop replaces scattered messages.",
+    description: "Review in one shared space, leave notes on the exact frame and see changes clearly. One calm feedback loop replaces scattered messages.",
+    you: "Leave notes on the exact frame you want changed.",
+    us: "Apply every note and show you what changed.",
     output: "Approved master",
   },
   {
     number: "05",
-    label: "DELIVER",
-    timing: "READY TO PUBLISH",
-    title: "Leave with momentum.",
-    summary: "Your final assets arrive ready for the platforms and people they are for.",
-    description:
-      "We export the right formats, aspect ratios, captions, and source files—so the finished piece can move straight into your publishing rhythm.",
+    label: "Deliver",
+    timing: "Ready to publish",
+    title: "Publish with confidence.",
+    description: "We export the right formats, aspect ratios, captions and source files, so the finished piece moves straight into your publishing schedule.",
+    you: "Download your files and publish.",
+    us: "Export every format and aspect ratio you need.",
     output: "Platform-ready files",
   },
 ];
 
 const principles = [
-  ["01", "Clear before clever", "The idea leads. Every cut, title, and sound earns its place."],
-  ["02", "Visible by default", "Files, feedback, and delivery windows stay easy to find."],
-  ["03", "Built to repeat", "The next edit should get faster because the system gets smarter."],
+  ["Clear before clever", "The idea leads. Every cut, title and sound earns its place."],
+  ["Visible by default", "Files, feedback and delivery windows stay easy to find."],
+  ["Built to repeat", "The next edit gets faster because the system gets smarter."],
 ];
 
 const expectations = [
@@ -70,158 +69,155 @@ const expectations = [
   "Platform-ready exports when you need them",
 ];
 
+const WORKFLOW_VIDEO_URL = process.env.NEXT_PUBLIC_WORKFLOW_VIDEO_URL;
+const tools = ["Frame.io", "Google Drive", "Dropbox", "Slack", "WhatsApp", "Premiere Pro", "After Effects", "DaVinci Resolve"];
+
 const faqs = [
   ["How fast is the first edit?", "Recurring edits typically receive a first cut within 24–48 hours, depending on the brief and footage volume."],
-  ["How do we send footage?", "Use your dedicated Drive, Dropbox, or Frame.io project space. We will guide you through the cleanest setup."],
-  ["Can you handle long-form and short-form?", "Yes. One source conversation can become a long-form cut, short-form clips, captions, and platform-specific exports."],
+  ["How do we send footage?", "Use your dedicated Drive, Dropbox or Frame.io project space. We will guide you through the cleanest setup."],
+  ["Can you handle long-form and short-form?", "Yes. One source conversation can become a long-form cut, short-form clips, captions and platform-specific exports."],
 ];
 
 export default function WorkflowPage() {
   const [activeStep, setActiveStep] = useState(0);
-  const current = steps[activeStep];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActiveStep(Number(entry.target.dataset.step));
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    document.querySelectorAll(".sg-wf-step").forEach((step) => observer.observe(step));
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <main className="workflow-page">
-      <div className="workflow-page-glow" aria-hidden="true" />
-      <div className="container workflow-container">
-        <section className="workflow-hero reveal-on-scroll">
-          <div className="workflow-eyebrow">
-            <span className="about-eyebrow-line" />
-            <span className="mono-spec">THE EDITLY FOUNDRY / HOW WE WORK</span>
+    <main className="sg-page">
+      <section className="sg-phero">
+        <div className="container">
+          <span className="section-subtitle">How we work</span>
+          <h1>From raw footage to <span className="combination-font">ready to post.</span></h1>
+          <div className="sg-phero-foot">
+            <p>Five clear steps. You always know what is happening, who is doing it and what you get next.</p>
           </div>
-          <h1>
-            A clear path from raw
-            {" "}
-            <span className="combination-font">to ready.</span>
-          </h1>
-          <p>
-            A calm, visible process for turning footage into work your audience
-            can understand, remember, and act on.
-          </p>
-        </section>
+        </div>
+      </section>
 
-        <section className="workflow-console reveal-on-scroll" aria-label="Interactive production process">
-          <div className="workflow-console-rail">
-            <div className="workflow-rail-header">
-              <span className="section-subtitle">The production path</span>
-              <span className="mono-spec">01 → 05 / ONE SYSTEM</span>
-            </div>
-            <div className="workflow-step-list" role="tablist" aria-label="Workflow stages">
-              {steps.map((step, index) => (
-                <button
-                  className={`workflow-step-button ${index === activeStep ? "is-active" : ""}`}
-                  key={step.number}
-                  onClick={() => setActiveStep(index)}
-                  role="tab"
-                  aria-selected={index === activeStep}
-                  aria-controls={`workflow-stage-${step.number}`}
-                >
-                  <span className="workflow-step-button-number">{step.number}</span>
-                  <span><strong>{step.label}</strong><small>{step.timing}</small></span>
-                  <i aria-hidden="true">↗</i>
-                </button>
-              ))}
-            </div>
-            <div className="workflow-rail-actions">
-              <span className="mono-spec">READY WHEN YOU ARE</span>
-              <Link href="/book-a-call">Start a project <span aria-hidden="true">↗</span></Link>
-              <Link href="/work">See our work <span aria-hidden="true">↗</span></Link>
-            </div>
-          </div>
+      <section className="sg-stages on-ink" aria-label="The five steps">
+        <div className="sg-stages-art" aria-hidden="true">
+          <b>Five steps</b>
+          <em>Raw to ready</em>
+        </div>
+        <ol className="sg-stages-cards">
+          {steps.map((step) => (
+            <li key={step.number}>
+              <a href={`#step-${step.number}`}>
+                <span>{step.number}</span>
+                <strong>{step.label}</strong>
+                <small>{step.timing}</small>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-          <article className="workflow-featured-stage" id={`workflow-stage-${current.number}`} key={current.number} role="tabpanel">
-            <div className="workflow-stage-orbit" aria-hidden="true"><span /><span /><span /></div>
-            <div className="workflow-stage-topline">
-              <span className="mono-spec">{current.timing}</span>
-            </div>
-            <div className="workflow-stage-number">{current.number}</div>
-            <span className="mono-spec">{current.label}</span>
-            <h2>{current.title}</h2>
-            <p className="workflow-stage-summary">{current.summary}</p>
-            <p className="workflow-stage-description">{current.description}</p>
-            <div className="workflow-stage-specs">
-              <div><span className="mono-spec">YOU RECEIVE</span><strong>{current.output}</strong></div>
-              <div><span className="mono-spec">PROJECT VELOCITY</span><strong>{current.timing}</strong></div>
-            </div>
-            {current.label === "DELIVER" && (
-              <div className="workflow-delivery-visual" aria-hidden="true">
-                <div className="workflow-delivery-lanes">
-                  <span /><span /><span />
+      <section className="sg-wf">
+        <div className="container sg-wf-grid">
+          <nav className="sg-wf-index" aria-label="Workflow steps">
+            <span>The process</span>
+            {steps.map((step, index) => (
+              <a key={step.number} href={`#step-${step.number}`} className={activeStep === index ? "is-active" : ""}>
+                <b>{step.number}</b>{step.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="sg-wf-steps">
+            {steps.map((step, index) => (
+              <article className="sg-wf-step" id={`step-${step.number}`} data-step={index} key={step.number}>
+                <div className="sg-wf-step-head">
+                  <span>Step {step.number}</span>
+                  <em>{step.timing}</em>
                 </div>
-                <div className="workflow-delivery-chips">
-                  <span>9:16</span>
-                  <span>16:9</span>
-                  <span>CC</span>
-                  <span>4K</span>
-                </div>
-              </div>
-            )}
-            <div className="workflow-stage-progress">
-              <div><span className="mono-spec">WORKFLOW PROGRESS</span><span className="mono-spec">{current.number} / 05</span></div>
-              <span><i style={{ width: `${(activeStep + 1) * 20}%` }} /></span>
-            </div>
-          </article>
-        </section>
-
-        <WorkflowExplainerVideo
-          videoUrl={process.env.NEXT_PUBLIC_WORKFLOW_VIDEO_URL}
-          aspectRatio="16 / 9"
-        />
-
-        <section className="workflow-principles reveal-on-scroll">
-          <div className="workflow-section-heading">
-            <span className="section-subtitle">What stays true</span>
-            <h2>Less chasing.{" "}<span className="combination-font">More making.</span></h2>
-          </div>
-          <div className="workflow-principles-grid">
-            {principles.map(([number, title, description]) => (
-              <article className="workflow-principle" key={number}>
-                <span className="mono-spec">{number}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
+                <h2>{step.title}</h2>
+                <p>{step.description}</p>
+                <dl>
+                  <div><dt>You</dt><dd>{step.you}</dd></div>
+                  <div><dt>We</dt><dd>{step.us}</dd></div>
+                  <div><dt>You receive</dt><dd><strong>{step.output}</strong></dd></div>
+                </dl>
               </article>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="workflow-expectations reveal-on-scroll">
+      <section className="sg-band band-ink on-ink sg-band-reveal">
+        <div className="container">
+          {WORKFLOW_VIDEO_URL && (
+            <>
+              <div className="home-foundry-section-head">
+                <div>
+                  <span className="section-subtitle">See it in action</span>
+                  <h2>Watch how a project <span className="combination-font">moves.</span></h2>
+                </div>
+              </div>
+              <WorkflowExplainerVideo videoUrl={WORKFLOW_VIDEO_URL} ariaLabel="Workflow overview" aspectRatio="16 / 9" />
+            </>
+          )}
+          <span className="section-subtitle">Tools we work in</span>
+          <h2 className="sg-narrow">Everything stays in tools <span className="combination-font">you already know.</span></h2>
+          <div className="sg-tools">
+            <ul>{tools.map((tool) => <li key={tool}>{tool}</li>)}</ul>
+          </div>
+        </div>
+      </section>
+
+      <div className="sg-group sg-group-iris on-iris sg-band-reveal">
+      <section className="sg-band">
+        <div className="container sg-split">
           <div>
-            <span className="section-subtitle">From first upload to final export</span>
-            <h2>Everything you need.<span className="combination-font"> Nothing you don&apos;t.</span></h2>
+            <span className="section-subtitle">What stays true</span>
+            <h2>Less chasing.<br /><span className="combination-font">More making.</span></h2>
           </div>
-          <div className="workflow-expectation-list">
-            {expectations.map((item) => <p key={item}><i aria-hidden="true">↗</i>{item}</p>)}
+          <div className="sg-lines">
+            {principles.map(([title, text]) => (
+              <div key={title} data-rise><h3>{title}</h3><p>{text}</p></div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="workflow-faq reveal-on-scroll">
-          <div className="workflow-section-heading">
-            <span className="section-subtitle">Before we begin</span>
-            <h2>Good questions.<span className="combination-font"> Clear answers.</span></h2>
+      <section className="sg-band">
+        <div className="container sg-split">
+          <div>
+            <span className="section-subtitle">On every project</span>
+            <h2>What you can <span className="combination-font">always expect.</span></h2>
           </div>
-          <div className="about-faq-list">
-            {faqs.map(([question, answer], index) => (
-              <details className="about-faq-item" key={question}>
-                <summary><span className="mono-spec">0{index + 1}</span><span>{question}</span><span className="about-faq-plus" aria-hidden="true">+</span></summary>
+          <ul className="sg-checklist">
+            {expectations.map((item) => <li key={item} data-rise>{item}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      </div>
+
+      <section className="sg-faq">
+        <div className="container sg-faq-grid">
+          <div>
+            <span className="section-subtitle">Before we begin</span>
+            <h2>Good questions.<br /><span className="combination-font">Clear answers.</span></h2>
+          </div>
+          <div className="sg-faq-list">
+            {faqs.map(([question, answer]) => (
+              <details key={question}>
+                <summary><span>{question}</span><i aria-hidden="true" /></summary>
                 <p>{answer}</p>
               </details>
             ))}
           </div>
-        </section>
-
-        <section className="workflow-contact reveal-on-scroll">
-          <div>
-            <span className="section-subtitle">The next frame</span>
-            <h2>Have footage waiting for <span className="combination-font">direction?</span></h2>
-            <p>Send a brief, ask a question, or book a short introduction with the studio.</p>
-          </div>
-          <div className="workflow-contact-actions">
-            <Link href="/book-a-call">Book a 15-minute call <i aria-hidden="true">↗</i></Link>
-            <a href="mailto:theeditlyfoundry@gmail.com">theeditlyfoundry@gmail.com <i aria-hidden="true">↗</i></a>
-            <a href="https://wa.me/8801886755888">WhatsApp the studio <i aria-hidden="true">↗</i></a>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
   );
 }

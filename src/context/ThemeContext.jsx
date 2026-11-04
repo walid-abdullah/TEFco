@@ -1,36 +1,14 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 
-const ThemeContext = createContext({
-  theme: 'dark',
-  toggleTheme: () => {}
-});
+// The Signal design runs on one theme. Depth comes from coloured sections, not a toggle.
+// The hook stays so components reading `theme` keep working.
+const value = { theme: 'light', toggleTheme: () => {}, mounted: true };
+const ThemeContext = createContext(value);
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('dark');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const savedTheme = localStorage.getItem('app-theme') || 'dark';
-    setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(nextTheme);
-    localStorage.setItem('app-theme', nextTheme);
-    document.documentElement.setAttribute('data-theme', nextTheme);
-    window.dispatchEvent(new Event('themechange'));
-  };
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, mounted }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {

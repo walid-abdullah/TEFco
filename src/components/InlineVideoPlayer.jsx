@@ -70,7 +70,7 @@ export default function InlineVideoPlayer({ videoUrl, thumbnailUrl, altText, bad
       ) : (
         <>
           {badge}
-          <img loading="lazy" src={thumbnailUrl || "Picture/Thumbnail.png"} alt={altText || "Video Thumbnail"} style={{ width: "100%", height: "100%", objectFit: "cover", cursor: "pointer", transition: "opacity 0.3s ease" }} onClick={() => setIsPlaying(true)} />
+          <img loading="lazy" src={thumbnailUrl || "/Picture/square.png"} alt={altText || "Video Thumbnail"} style={{ width: "100%", height: "100%", objectFit: "cover", cursor: "pointer", transition: "opacity 0.3s ease" }} onClick={() => setIsPlaying(true)} />
           <button 
             onClick={() => setIsPlaying(true)}
             className="apple-glass-play-btn" 

@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import { useTheme } from '@/context/ThemeContext';
+import BudgetPicker, { formatBudget } from './BudgetPicker';
+
+const STARTING_BUDGET = 500;
 
 export default function DesignMonksContact({ isModal = false, onClose = null }) {
   const { theme } = useTheme();
@@ -14,7 +17,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
   const serviceList = [
     'Podcast & Clips Editing',
     'Long-Form Content (YouTube)',
-    'SaaS & 3D Motion UI',
+    'Motion Graphics',
     'Shorts / Reels / TikTok',
     'Others'
   ];
@@ -29,22 +32,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
   ];
   const [selectedVideoCount, setSelectedVideoCount] = useState('12 - 16 Videos / mo');
 
-  // Refined Lower-Entry Budget Options
-  const monthlyBudgetOptions = [
-    '$999/mo (Starter Pod)',
-    '$1,499/mo (Growth Retainer)',
-    '$2,499/mo (Scale)',
-    '$3.5K - $5K/mo',
-    '$5K+/mo (Enterprise)'
-  ];
-  const onetimeBudgetOptions = [
-    'Under $500',
-    '$500 - $1K',
-    '$1K - $2.5K',
-    'Custom Scope'
-  ];
-
-  const [selectedBudget, setSelectedBudget] = useState('$999/mo (Starter Pod)');
+  const [selectedBudget, setSelectedBudget] = useState(formatBudget(STARTING_BUDGET));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -58,14 +46,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
     }
   };
 
-  const handleProjectTypeChange = (type) => {
-    setProjectType(type);
-    if (type === 'monthly') {
-      setSelectedBudget('Less than $1K');
-    } else {
-      setSelectedBudget('$500 - $1K');
-    }
-  };
+  const handleProjectTypeChange = (type) => setProjectType(type);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +66,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
       projectType: projectType === 'monthly' ? 'Monthly Dedicated Retainer' : 'One-Time Project',
       services: selectedServices.join(', '),
       videoCount: projectType === 'monthly' ? selectedVideoCount : 'N/A (One-Time)',
-      budget: selectedBudget,
+      budget: projectType === 'monthly' ? `${selectedBudget} per month` : selectedBudget,
       details: formData.get('details')
     };
 
@@ -115,12 +96,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
         setSubmitted(true);
         e.target.reset();
       } else {
-        alert("Thank you! We received your inquiry.");
-        setSubmitted(true);
+        alert("Sorry, your message could not be sent. Please try again or WhatsApp us at +880 1886 755 888.");
       }
     } catch (err) {
       console.error(err);
-      setSubmitted(true);
+      alert("Sorry, your message could not be sent. Please try again or WhatsApp us at +880 1886 755 888.");
     } finally {
       setIsSubmitting(false);
     }
@@ -176,7 +156,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
             height: '60px',
             borderRadius: '50%',
             background: 'rgba(34, 197, 94, 0.15)',
-            color: '#22C55E',
+            color: '#0B7A55',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -272,9 +252,9 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                 marginBottom: '18px',
                 color: 'var(--text-primary)'
               }}>
-                Build Your Next High-Impact <br />
+                Tell us what you <br />
                 <span className="combination-font" style={{ fontStyle: 'italic', fontWeight: '400', color: 'var(--accent-silver)' }}>
-                  Video Campaign
+                  need edited.
                 </span>
               </h2>
 
@@ -284,11 +264,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                     width: '20px',
                     height: '20px',
                     borderRadius: '50%',
-                    border: '1.5px solid #38BDF8',
+                    border: '1.5px solid #5B2EFF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#38BDF8',
+                    color: '#5B2EFF',
                     fontSize: '0.7rem',
                     flexShrink: 0,
                     marginTop: '2px'
@@ -303,11 +283,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                     width: '20px',
                     height: '20px',
                     borderRadius: '50%',
-                    border: '1.5px solid #38BDF8',
+                    border: '1.5px solid #5B2EFF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#38BDF8',
+                    color: '#5B2EFF',
                     fontSize: '0.7rem',
                     flexShrink: 0,
                     marginTop: '2px'
@@ -322,11 +302,11 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                     width: '20px',
                     height: '20px',
                     borderRadius: '50%',
-                    border: '1.5px solid #38BDF8',
+                    border: '1.5px solid #5B2EFF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#38BDF8',
+                    color: '#5B2EFF',
                     fontSize: '0.7rem',
                     flexShrink: 0,
                     marginTop: '2px'
@@ -498,7 +478,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                       padding: '8px 10px',
                       borderRadius: '7px',
                       border: 'none',
-                      background: projectType === 'monthly' ? (isLight ? '#2563EB' : '#38BDF8') : 'transparent',
+                      background: projectType === 'monthly' ? (isLight ? '#5B2EFF' : '#5B2EFF') : 'transparent',
                       color: projectType === 'monthly' ? '#FFFFFF' : 'var(--text-secondary)',
                       fontSize: '0.82rem',
                       fontWeight: projectType === 'monthly' ? '700' : '500',
@@ -515,7 +495,7 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                       padding: '8px 10px',
                       borderRadius: '7px',
                       border: 'none',
-                      background: projectType === 'onetime' ? (isLight ? '#2563EB' : '#38BDF8') : 'transparent',
+                      background: projectType === 'onetime' ? (isLight ? '#5B2EFF' : '#5B2EFF') : 'transparent',
                       color: projectType === 'onetime' ? '#FFFFFF' : 'var(--text-secondary)',
                       fontSize: '0.82rem',
                       fontWeight: projectType === 'onetime' ? '700' : '500',
@@ -563,34 +543,13 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
                 </div>
               )}
 
-              {/* Dynamic Budget Dropdown */}
-              <div>
-                <label style={{ display: 'block', fontWeight: '700', fontSize: '0.88rem', marginBottom: '6px', color: 'var(--text-primary)' }}>
-                  Estimated Budget {projectType === 'monthly' ? '(Per Month)' : '(One-Off Scope)'}
-                </label>
-                <select
-                  value={selectedBudget}
-                  onChange={(e) => setSelectedBudget(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '10px',
-                    background: 'var(--input-bg)',
-                    border: '1px solid var(--input-border)',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.9rem',
-                    fontWeight: '600',
-                    outline: 'none',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {(projectType === 'monthly' ? monthlyBudgetOptions : onetimeBudgetOptions).map(b => (
-                    <option key={b} value={b} style={{ background: isLight ? '#fff' : '#0B132B', color: isLight ? '#000' : '#fff' }}>
-                      {b}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {/* Any budget, from $0 to no limit */}
+              <BudgetPicker
+                id="contact-budget"
+                initial={STARTING_BUDGET}
+                label={projectType === 'monthly' ? 'Your budget (per month)' : 'Your budget (this project)'}
+                onChange={setSelectedBudget}
+              />
 
             </div>
 
@@ -625,10 +584,8 @@ export default function DesignMonksContact({ isModal = false, onClose = null }) 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn pop-btn"
+                className="btn btn-primary pop-btn"
                 style={{
-                  background: 'linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 100%)',
-                  color: '#FFFFFF',
                   padding: '16px 36px',
                   borderRadius: '12px',
                   border: 'none',

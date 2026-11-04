@@ -1,13 +1,15 @@
 import { ORGANIZATION, BLOGS_DATA } from '@/lib/seoData';
 
+import { SITE_URL } from '@/lib/site';
+
 export default function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://editlyfoundry.vercel.app';
+  const baseUrl = SITE_URL;
   const serviceSlugs = [
     'reels-shorts',
     'podcasts',
     'talking-head',
     'ugc-ads',
-    'saas-motion',
+    'motion-graphics',
   ];
 
   const serviceUrls = serviceSlugs.map((slug) => ({

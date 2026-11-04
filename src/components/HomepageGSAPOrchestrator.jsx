@@ -71,8 +71,23 @@ export default function HomepageGSAPOrchestrator({ children }) {
         );
       }
 
+      // Founder video starts small and grows as it scrolls up. Only transforms
+      // change, so the page never recalculates layout while scrolling.
+      const showreel = containerRef.current.querySelector('.sg-showreel .workflow-explainer');
+      const showreelFrame = showreel?.querySelector('.workflow-explainer-frame');
+      if (showreelFrame) {
+        const startScale = window.innerWidth < 720 ? 0.82 : 0.6;
+        const scrollRange = { trigger: showreel, start: 'top 68%', end: 'top 14%', scrub: true };
+        // The play button holds its size while the video around it grows.
+        gsap.fromTo(
+          showreelFrame,
+          { scale: startScale, '--play-scale': 1 / startScale },
+          { scale: 1, '--play-scale': 1, ease: 'none', transformOrigin: 'center top', scrollTrigger: scrollRange }
+        );
+      }
+
       // 2. Work Grid: Scroll-Scrub Parallax & Optical Zoom Depth (Option 4)
-      const workCards = containerRef.current.querySelectorAll('.home-foundry-work-card');
+      const workCards = containerRef.current.querySelectorAll('.sg-work-card');
       if (workCards.length > 0) {
         workCards.forEach((card, i) => {
           // Entrance reveal
@@ -98,38 +113,6 @@ export default function HomepageGSAPOrchestrator({ children }) {
               },
             }
           );
-
-          // Continuous live scrub parallax on scroll
-          const yShift = i % 2 === 0 ? -35 : 35;
-          gsap.to(card, {
-            y: yShift,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.2,
-            },
-          });
-
-          // Inner thumbnail subtle optical zoom scrub
-          const media = card.querySelector('img, video, .work-card-media');
-          if (media) {
-            gsap.fromTo(
-              media,
-              { scale: 1.08 },
-              {
-                scale: 1.0,
-                ease: 'none',
-                scrollTrigger: {
-                  trigger: card,
-                  start: 'top bottom',
-                  end: 'bottom top',
-                  scrub: 1.2,
-                },
-              }
-            );
-          }
         });
       }
 
@@ -187,6 +170,48 @@ export default function HomepageGSAPOrchestrator({ children }) {
             },
           }
         );
+      }
+
+      // Service stack: each card eases back as the next one slides over it.
+      if (window.matchMedia('(min-width: 801px)').matches) {
+        const stackCards = gsap.utils.toArray(containerRef.current.querySelectorAll('.sg-stack-card'));
+        stackCards.slice(0, -1).forEach((card, i) => {
+          gsap.to(card, {
+            scale: 0.95,
+            transformOrigin: 'center top',
+            ease: 'none',
+            scrollTrigger: { trigger: stackCards[i + 1], start: 'top bottom', end: 'top 120px', scrub: true },
+          });
+        });
+      }
+
+      // The service card nearest the middle of the screen stays highlighted.
+      const stack = containerRef.current.querySelector('.sg-stack');
+      if (stack) {
+        const cards = gsap.utils.toArray(stack.querySelectorAll('.sg-stack-card'));
+        let focused = null;
+        const updateFocus = () => {
+          const middle = window.innerHeight / 2;
+          const distanceToMiddle = (card) => {
+            const box = card.getBoundingClientRect();
+            return Math.abs(box.top + box.height / 2 - middle);
+          };
+          const nearest = cards.reduce((best, card) => (distanceToMiddle(card) < distanceToMiddle(best) ? card : best));
+          if (nearest === focused) return;
+          focused?.classList.remove('is-focus');
+          nearest.classList.add('is-focus');
+          focused = nearest;
+        };
+        ScrollTrigger.create({
+          trigger: stack,
+          start: 'top 70%',
+          end: 'bottom 30%',
+          onToggle: (self) => {
+            stack.classList.toggle('has-focus', self.isActive);
+            if (self.isActive) updateFocus();
+          },
+          onUpdate: updateFocus,
+        });
       }
 
       ScrollTrigger.refresh();

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 
 export const metadata = {
+  alternates: { canonical: '/case-studies' },
   title: 'Case Studies | The Editly Foundry Co.',
   description: 'Explore our deep-dive video editing case studies with interactive before & after transformations, organic view spikes, and audience retention metrics.'
 };
@@ -57,7 +58,7 @@ export default function CaseStudiesPage() {
       <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
         
         {/* Header */}
-        <div className="text-center reveal-on-scroll" style={{ marginBottom: '60px' }}>
+        <div className="on-ink hero-ink sg-page-hero reveal-on-scroll">
           <span className="section-subtitle">
             <i className="fa-solid fa-chart-simple" style={{ marginRight: '8px' }}></i>
             Proven Production Results
@@ -91,14 +92,14 @@ export default function CaseStudiesPage() {
                 <BeforeAfterSlider />
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
                   <span><i className="fa-solid fa-arrows-left-right" style={{ marginRight: '6px' }}></i>Drag slider to compare raw vs final edit</span>
-                  <span style={{ color: '#10B981', fontWeight: '700' }}><i className="fa-solid fa-check" style={{ marginRight: '4px' }}></i>48h Turnaround</span>
+                  <span style={{ color: '#0B7A55', fontWeight: '700' }}><i className="fa-solid fa-check" style={{ marginRight: '4px' }}></i>48h Turnaround</span>
                 </div>
               </div>
 
               {/* Right Column: Case Study Data, Story & Metrics */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                  <span style={{ padding: '6px 14px', borderRadius: '50px', background: 'rgba(37, 99, 235, 0.15)', color: '#38BDF8', fontWeight: '800', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  <span style={{ padding: '6px 14px', borderRadius: '50px', background: 'rgba(91, 46, 255, 0.15)', color: '#5B2EFF', fontWeight: '800', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
                     {cs.category}
                   </span>
                   <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{cs.client}</span>
@@ -130,7 +131,7 @@ export default function CaseStudiesPage() {
                         textAlign: 'center'
                       }}
                     >
-                      <div style={{ fontSize: '1.6rem', fontWeight: '900', color: '#38BDF8', marginBottom: '4px' }}>
+                      <div style={{ fontSize: '1.6rem', fontWeight: '900', color: '#5B2EFF', marginBottom: '4px' }}>
                         {m.value}
                       </div>
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase' }}>

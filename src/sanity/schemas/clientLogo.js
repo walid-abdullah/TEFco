@@ -15,7 +15,7 @@ export default {
       type: 'image',
       options: { hotspot: true },
       validation: (Rule) => Rule.required(),
-      description: 'Upload a transparent PNG logo for best results (white or light colored if your background is dark)',
+      description: "A transparent PNG works best. It shows on a small white tile.",
     },
     {
       name: 'order',

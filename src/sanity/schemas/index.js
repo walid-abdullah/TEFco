@@ -11,8 +11,6 @@ import faq from './faq'
 import clientLogo from './clientLogo'
 import promoBanner from './promoBanner'
 import legalPage from './legalPage'
-import contactMessage from './contactMessage'
-import jobApplication from './jobApplication'
 import caseStudy from './caseStudy'
 
 export const schemaTypes = [
@@ -30,6 +28,4 @@ export const schemaTypes = [
   clientLogo,
   promoBanner,
   legalPage,
-  contactMessage,
-  jobApplication
 ]

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { BLOGS_DATA } from '@/lib/seoData';
 
 export const metadata = {
+  alternates: { canonical: '/blogs' },
   title: "Insights & Video Strategy Articles | The Editly Foundry Co.",
   description: "Deep dives into short-form retention engineering, podcast repurposing, SaaS motion graphics, and cinematic video post-production.",
 };
@@ -17,7 +18,7 @@ export default function BlogsPage() {
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1280px' }}>
         
         {/* Page Header */}
-        <div className="text-center" style={{ maxWidth: '850px', margin: '0 auto 60px' }}>
+        <div className="hero-white sg-page-hero">
           <span className="section-subtitle">Insights & Playbooks</span>
           <h1 className="section-title" style={{ fontSize: '3.2rem', marginBottom: '16px' }}>
             Mastering <span className="combination-font">Content & Video ROI</span>
@@ -61,12 +62,12 @@ export default function BlogsPage() {
                   background: 'rgba(7, 13, 24, 0.8)',
                   backdropFilter: 'blur(12px)',
                   WebkitBackdropFilter: 'blur(12px)',
-                  color: '#38BDF8',
+                  color: '#5B2EFF',
                   padding: '4px 12px',
                   borderRadius: '30px',
                   fontSize: '0.75rem',
                   fontWeight: '800',
-                  border: '1px solid rgba(56, 189, 248, 0.3)'
+                  border: '1px solid rgba(91, 46, 255, 0.3)'
                 }}>
                   {article.category}
                 </div>

@@ -13,6 +13,7 @@ const services = [
     description: "Retention-first edits for Reels, TikTok, and YouTube Shorts.",
     deliverables: ["Hooks", "Captions", "Pattern interrupts", "9:16 exports"],
     slug: "reels-shorts",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85",
   },
   {
     number: "02",
@@ -22,6 +23,7 @@ const services = [
     description: "Multi-camera edits, clean audio, and cutdowns from every episode.",
     deliverables: ["Multi-cam", "Audio cleanup", "Episode packaging", "Clip system"],
     slug: "podcasts",
+    image: "https://images.unsplash.com/photo-1589903308904-1010c2294adc?auto=format&fit=crop&w=1200&q=85",
   },
   {
     number: "03",
@@ -31,6 +33,7 @@ const services = [
     description: "Long-form storytelling for founders, educators, and brands.",
     deliverables: ["Story structure", "B-roll", "Color finishing", "Chapters"],
     slug: "talking-head",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=85",
   },
   {
     number: "04",
@@ -40,15 +43,17 @@ const services = [
     description: "Direct-response edits built for testing, learning, and conversion.",
     deliverables: ["Hook variations", "Offer callouts", "A/B versions", "Paid-social formats"],
     slug: "ugc-ads",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=85",
   },
   {
     number: "05",
-    category: "PRODUCT",
-    title: "SaaS Motion & Demos",
+    category: "MOTION",
+    title: "Motion Graphics",
     outcome: "For products that deserve to feel simple.",
-    description: "UI demos, product films, and motion systems that clarify complexity.",
+    description: "Animated explainers, product films and launch videos that clarify complexity.",
     deliverables: ["UI recreation", "Walkthroughs", "Feature callouts", "Launch films"],
-    slug: "saas-motion",
+    slug: "motion-graphics",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85",
   },
 ];
 
@@ -56,90 +61,56 @@ const faqs = Object.values(SERVICE_FAQS).flat().slice(0, 6);
 
 export default function ServicesHubPage() {
   return (
-    <main className="services-atlas-page">
-      <div className="services-atlas-glow" aria-hidden="true" />
-      <div className="container services-atlas-container">
-        <section className="services-atlas-hero reveal-on-scroll">
-          <div className="services-atlas-eyebrow">
-            <span className="about-eyebrow-line" />
-            <span className="mono-spec">THE EDITLY FOUNDRY / CAPABILITIES</span>
+    <main className="sg-page">
+      <section className="sg-phero hero-ink on-ink">
+        <div className="container">
+          <span className="section-subtitle">Services</span>
+          <h1>Five formats. <span className="combination-font">One editing team.</span></h1>
+          <div className="sg-phero-foot">
+            <p>Different goals need different cuts. Choose what you are making and we will handle the edit.</p>
           </div>
-          <h1>
-            What should your
-            <span className="combination-font"> next piece do?</span>
-          </h1>
-          <p>
-            Different goals need different cuts. Choose the outcome, then let
-            the craft follow.
-          </p>
-          <div className="services-atlas-rule">
-            <span className="mono-spec">05 CAPABILITIES</span>
-            <span className="mono-spec">BUILT AROUND THE OUTCOME</span>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="services-atlas-list reveal-on-scroll" aria-label="Our services">
+      <section className="sg-band">
+        <div className="container sg-sv-list">
           {services.map((service) => (
-            <article className="services-atlas-row" key={service.number}>
-              <div className="services-atlas-row-main">
-                <span className="services-atlas-number">{service.number}</span>
-                <div className="services-atlas-title">
-                  <span className="mono-spec">{service.category}</span>
-                  <h2>{service.title}</h2>
-                </div>
-                <p>{service.outcome}</p>
-                <span className="services-atlas-arrow" aria-hidden="true">↗</span>
-              </div>
-              <div className="services-atlas-row-detail">
+            <Link href={`/services/${service.slug}`} className="sg-sv-row" key={service.number} data-rise>
+              <span className="sg-sv-num">{service.number}</span>
+              <div className="sg-sv-copy">
+                <h2>{service.title}</h2>
                 <p>{service.description}</p>
-                <div className="services-atlas-deliverables">
-                  {service.deliverables.map((deliverable) => (
-                    <span key={deliverable}>{deliverable}</span>
-                  ))}
-                </div>
-                <Link href={`/services/${service.slug}`}>
-                  Explore service <span aria-hidden="true">↗</span>
-                </Link>
+                <ul>{service.deliverables.map((item) => <li key={item}>{item}</li>)}</ul>
+                <b>Explore service <span aria-hidden="true">→</span></b>
               </div>
-            </article>
+              <div className="sg-sv-img" style={{ backgroundImage: `url(${service.image})` }} />
+            </Link>
           ))}
-        </section>
+        </div>
+      </section>
 
-        <section className="services-atlas-statement reveal-on-scroll">
-          <span className="services-atlas-statement-mark" aria-hidden="true">“</span>
-          <p>
-            The best service is not more output. It is the right piece, made
-            clear enough to do its job.
-          </p>
-          <span className="mono-spec">THE FOUNDRY PRINCIPLE / 01</span>
-        </section>
+      <section className="sg-band band-iris on-iris sg-band-reveal">
+        <div className="container">
+          <p className="sg-statement">The best service is not more output. It is the right piece, made clear enough to do its job.</p>
+        </div>
+      </section>
 
-        <section className="services-atlas-faq reveal-on-scroll">
-          <div className="workflow-section-heading">
+      <section className="sg-faq">
+        <div className="container sg-faq-grid">
+          <div>
             <span className="section-subtitle">Before we begin</span>
-            <h2>Useful answers.<span className="combination-font"> No sales theatre.</span></h2>
+            <h2>Useful answers.<br /><span className="combination-font">No sales talk.</span></h2>
           </div>
-          <div className="about-faq-list">
-            {faqs.map((faq, index) => (
-              <details className="about-faq-item" key={faq.question}>
-                <summary><span className="mono-spec">0{index + 1}</span><span>{faq.question}</span><span className="about-faq-plus" aria-hidden="true">+</span></summary>
+          <div className="sg-faq-list">
+            {faqs.map((faq) => (
+              <details key={faq.question}>
+                <summary><span>{faq.question}</span><i aria-hidden="true" /></summary>
                 <p>{faq.answer}</p>
               </details>
             ))}
           </div>
-        </section>
-
-        <section className="services-atlas-contact reveal-on-scroll">
-          <div>
-            <span className="section-subtitle">Start with the outcome</span>
-            <h2>Bring the raw.<span className="combination-font"> We&apos;ll find the signal.</span></h2>
-          </div>
-          <div className="services-atlas-contact-links">
-            <Link href="/book-a-call">Start a project <span aria-hidden="true">↗</span></Link>
-            <a href="mailto:theeditlyfoundry@gmail.com">Email the studio <span aria-hidden="true">↗</span></a>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
       <FAQSchema faqs={faqs} />
     </main>
   );

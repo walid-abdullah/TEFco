@@ -1,4 +1,4 @@
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://editlyfoundry.vercel.app").replace(/\/$/, "");
+import { SITE_URL as siteUrl } from "@/lib/site";
 
 export const metadata = {
   title: "Video Editing Services | The Editly Foundry",
@@ -13,7 +13,7 @@ export const metadata = {
     "SaaS motion design",
   ],
   alternates: {
-    canonical: `${siteUrl}/services`,
+    canonical: "/services",
   },
   openGraph: {
     title: "Video Editing Services | The Editly Foundry",

@@ -6,7 +6,7 @@ import * as THREE from 'three';
  */
 
 // 1. Procedural Media Frame Texture (Thumbnails for Scene 01)
-export function createMediaFrameTexture(index, title, colorPrimary = '#38BDF8', colorSecondary = '#818CF8') {
+export function createMediaFrameTexture(index, title, colorPrimary = '#5B2EFF', colorSecondary = '#818CF8') {
   if (typeof document === 'undefined') return null;
   const canvas = document.createElement('canvas');
   canvas.width = 512;
@@ -95,9 +95,9 @@ export function createTimelineTexture() {
 
   // 4 Video / Audio Multi-Tracks
   const tracks = [
-    { y: 46, h: 42, color: '#38BDF8', label: 'V2 MOTION GRAPHICS' },
+    { y: 46, h: 42, color: '#5B2EFF', label: 'V2 MOTION GRAPHICS' },
     { y: 96, h: 42, color: '#818CF8', label: 'V1 A-ROLL 4K MASTER' },
-    { y: 146, h: 42, color: '#10B981', label: 'A1 DIALOGUE STEREO' },
+    { y: 146, h: 42, color: '#0B7A55', label: 'A1 DIALOGUE STEREO' },
     { y: 196, h: 42, color: '#F59E0B', label: 'A2 SOUND DESIGN FX' }
   ];
 
@@ -167,7 +167,7 @@ export function createColorWheelTexture() {
   ctx.stroke();
 
   // Crosshair center
-  ctx.strokeStyle = '#38BDF8';
+  ctx.strokeStyle = '#5B2EFF';
   ctx.beginPath();
   ctx.moveTo(cx - 15, cy); ctx.lineTo(cx + 15, cy);
   ctx.moveTo(cx, cy - 15); ctx.lineTo(cx, cy + 15);
@@ -188,7 +188,7 @@ export function createFoundryGridTexture() {
   ctx.fillStyle = 'rgba(3, 7, 18, 0.9)';
   ctx.fillRect(0, 0, 512, 512);
 
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.18)';
+  ctx.strokeStyle = 'rgba(91, 46, 255, 0.18)';
   ctx.lineWidth = 1.5;
 
   const step = 64;
@@ -204,7 +204,7 @@ export function createFoundryGridTexture() {
   }
 
   // Glowing Intersections
-  ctx.fillStyle = '#38BDF8';
+  ctx.fillStyle = '#5B2EFF';
   for (let x = 0; x <= 512; x += step) {
     for (let y = 0; y <= 512; y += step) {
       ctx.beginPath();

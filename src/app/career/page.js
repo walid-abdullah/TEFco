@@ -140,11 +140,11 @@ export default function CareerPage() {
       if (res.ok) {
         setApplied(true);
       } else {
-        setApplied(true); // graceful feedback
+        alert("Sorry, your message could not be sent. Please try again or WhatsApp us at +880 1886 755 888.");
       }
     } catch (err) {
       console.error(err);
-      setApplied(true);
+      alert("Sorry, your message could not be sent. Please try again or WhatsApp us at +880 1886 755 888.");
     } finally {
       setIsSubmitting(false);
     }
@@ -160,7 +160,7 @@ export default function CareerPage() {
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Top Header */}
-        <div className="text-center reveal-on-scroll" style={{ maxWidth: '850px', margin: '0 auto 50px' }}>
+        <div className="hero-white sg-page-hero reveal-on-scroll">
           <span className="section-subtitle">Careers at The Editly Foundry Co.</span>
           <h1 className="section-title" style={{ fontSize: '3.4rem', marginBottom: '18px' }}>
             Build the Future of <span className="combination-font">Attention & Media</span>
@@ -184,7 +184,7 @@ export default function CareerPage() {
               className="glass-card reveal-on-scroll"
               style={{ padding: '28px 24px', borderRadius: '20px', textAlign: 'center' }}
             >
-              <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(37, 99, 235, 0.15)', color: '#38BDF8', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(91, 46, 255, 0.15)', color: '#5B2EFF', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <i className={perk.icon}></i>
               </div>
               <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '8px' }}>{perk.title}</h3>
@@ -224,7 +224,7 @@ export default function CareerPage() {
                         {job.type}
                       </span>
                       <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--text-muted)' }}></span>
-                      <span style={{ color: '#10B981', fontSize: '0.85rem', fontWeight: '700' }}>
+                      <span style={{ color: '#0B7A55', fontSize: '0.85rem', fontWeight: '700' }}>
                         {job.salary}
                       </span>
                     </div>
@@ -251,7 +251,7 @@ export default function CareerPage() {
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '8px' }}>
                     {job.requirements.map((req, i) => (
                       <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.86rem', color: 'var(--text-secondary)' }}>
-                        <i className="fa-solid fa-circle-check" style={{ color: '#10B981', fontSize: '0.8rem', flexShrink: 0 }}></i>
+                        <i className="fa-solid fa-circle-check" style={{ color: '#0B7A55', fontSize: '0.8rem', flexShrink: 0 }}></i>
                         <span>{req}</span>
                       </li>
                     ))}
@@ -317,7 +317,7 @@ export default function CareerPage() {
                   borderRadius: '50%',
                   background: 'rgba(16, 185, 129, 0.15)',
                   border: '2px solid #10B981',
-                  color: '#10B981',
+                  color: '#0B7A55',
                   fontSize: '2.4rem',
                   display: 'flex',
                   alignItems: 'center',
@@ -406,7 +406,7 @@ export default function CareerPage() {
                             padding: '8px 14px',
                             borderRadius: '20px',
                             border: selectedTools.includes(tool) ? '1.5px solid var(--accent-blue-light)' : '1px solid var(--glass-border)',
-                            background: selectedTools.includes(tool) ? 'rgba(37, 99, 235, 0.15)' : 'var(--input-bg)',
+                            background: selectedTools.includes(tool) ? 'rgba(91, 46, 255, 0.15)' : 'var(--input-bg)',
                             color: selectedTools.includes(tool) ? 'var(--text-primary)' : 'var(--text-secondary)',
                             fontSize: '0.82rem',
                             fontWeight: selectedTools.includes(tool) ? '700' : '500',
@@ -414,7 +414,7 @@ export default function CareerPage() {
                             transition: 'all 0.2s ease'
                           }}
                         >
-                          {selectedTools.includes(tool) && <i className="fa-solid fa-check" style={{ marginRight: '6px', color: '#38BDF8' }}></i>}
+                          {selectedTools.includes(tool) && <i className="fa-solid fa-check" style={{ marginRight: '6px', color: '#5B2EFF' }}></i>}
                           {tool}
                         </button>
                       ))}

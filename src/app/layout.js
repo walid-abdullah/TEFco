@@ -1,19 +1,28 @@
 import "./globals.css";
+import "./brand.css";
 import ClientScripts from "@/components/ClientScripts";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import PromoBanner from "@/components/PromoBanner";
-import CinematicHeroCanvas from "@/components/3d/CinematicHeroCanvas";
 
-import { client } from '@/sanity/client';
+import { client, urlFor } from '@/sanity/client';
+import { SITE_URL } from '@/lib/site';
 
-import { urlFor } from '@/sanity/client';
 
 import { KEYWORDS, GLOBAL_META, ORGANIZATION, BREADCRUMBS } from '@/lib/seoData';
 
+// A CMS outage must degrade to defaults, never take the whole site down.
+async function fetchOrNull(query) {
+  try {
+    return await client.fetch(query);
+  } catch (error) {
+    console.error('Sanity fetch failed:', error);
+    return null;
+  }
+}
+
 export async function generateMetadata() {
-  const query = `*[_type == "globalSettings"][0]`;
-  const settings = await client.fetch(query);
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || ORGANIZATION.url || 'https://editlyfoundry.vercel.app').replace(/\/$/, '');
+  const settings = await fetchOrNull(`*[_type == "globalSettings"][0]`);
+  const siteUrl = SITE_URL;
 
   const seoTitle = settings?.seoTitle || GLOBAL_META.siteTitle;
   const seoDescription = settings?.seoDescription || GLOBAL_META.siteDescription;
@@ -21,7 +30,6 @@ export async function generateMetadata() {
 
   const metadata = {
     metadataBase: new URL(siteUrl),
-    alternates: { canonical: siteUrl },
     title: seoTitle,
     description: seoDescription,
     keywords: seoKeywords,
@@ -48,14 +56,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default async function RootLayout({ children }) {
-  const query = `*[_type == "globalSettings"][0]`;
-  const settings = await client.fetch(query);
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || ORGANIZATION.url || 'https://editlyfoundry.vercel.app').replace(/\/$/, '');
-
-  const bannerQuery = `*[_type == "promoBanner"][0]`;
-  const bannerSettings = await client.fetch(bannerQuery);
-
-  const defaultTheme = settings?.defaultTheme || 'dark';
+  const settings = await fetchOrNull(`*[_type == "globalSettings"][0]`);
+  const bannerSettings = await fetchOrNull(`*[_type == "promoBanner"][0]`);
 
   const orgLd = {
     '@context': 'https://schema.org',
@@ -65,14 +67,6 @@ export default async function RootLayout({ children }) {
     logo: ORGANIZATION.logo,
     email: ORGANIZATION.email,
     telephone: ORGANIZATION.phone,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: ORGANIZATION.address.street,
-      addressLocality: ORGANIZATION.address.locality,
-      addressRegion: ORGANIZATION.address.region,
-      postalCode: ORGANIZATION.address.postalCode,
-      addressCountry: ORGANIZATION.address.country
-    },
     sameAs: ORGANIZATION.sameAs
   };
 
@@ -95,14 +89,12 @@ export default async function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" data-theme={defaultTheme}>
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=Syne:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-        <link rel="canonical" href={siteUrl} />
-        <meta name="google-site-verification" content="google397bc2b4bbbb7f90" />
         <meta name="google-site-verification" content="397bc2b4bbbb7f90" />
 
         {/* Organization / Breadcrumb / Website structured data */}
@@ -123,7 +115,6 @@ export default async function RootLayout({ children }) {
         <PromoBanner banner={bannerSettings} />
         <ClientScripts />
         <LayoutWrapper settings={settings}>{children}</LayoutWrapper>
-        <script src="https://awliaa.com/widget.js" data-key="pk_WXGfdiY391hTXQjn8pGkt0uZ" async></script>
         <Analytics />
         <SpeedInsights />
       </body>

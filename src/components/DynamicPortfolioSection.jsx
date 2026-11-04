@@ -58,7 +58,7 @@ export default function DynamicPortfolioSection({
       metric1Text: '1.2M YouTube Views',
       metric2Icon: 'fa-solid fa-user-plus',
       metric2Text: '+45k Subscribers',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1516280440502-12695fb79f15?auto=format&fit=crop&w=800&q=80',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
       videoUrl: 'https://www.youtube.com/watch?v=M7lc1UVf-VE'
     },
     {
@@ -95,7 +95,7 @@ export default function DynamicPortfolioSection({
     { id: 'podcasts', label: 'Podcasts' },
     { id: 'talking-head', label: 'Talking Head' },
     { id: 'ugc', label: 'UGC Ads' },
-    { id: 'saas', label: 'SaaS Motion' }
+    { id: 'saas', label: 'Motion Graphics' }
   ];
 
   const filteredProjects = activeFilter === 'all'

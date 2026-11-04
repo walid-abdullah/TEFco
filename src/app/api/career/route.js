@@ -1,9 +1,30 @@
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
+import { clip, escapeFields, isEmail, isRateLimited, safeUrl } from '@/lib/requestSafety';
 
 export async function POST(request) {
   try {
-    const data = await request.json();
+    if (isRateLimited(request)) {
+      return NextResponse.json({ error: 'Too many requests. Please try again shortly.' }, { status: 429 });
+    }
+
+    const body = await request.json().catch(() => null);
+    if (!body || typeof body !== 'object') {
+      return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
+    }
+    const rawEmail = clip(body?.email, 320);
+    if (!isEmail(rawEmail)) {
+      return NextResponse.json({ error: 'A valid email address is required.' }, { status: 400 });
+    }
+    const rawName = clip(body?.fullName, 200) || 'Candidate';
+    const headerName = rawName.replace(/["\r\n]/g, '');
+    const headerTitle = clip(body?.jobTitle, 200).replace(/[\r\n]/g, '') || 'General Application';
+    const cleaned = Object.fromEntries(Object.entries(body || {}).map(([key, value]) => [
+      key,
+      Array.isArray(value) ? value.slice(0, 30).map((item) => clip(item, 100)) : clip(value, key === 'coverNote' ? 5000 : 500),
+    ]));
+    if (cleaned.portfolioUrl) cleaned.portfolioUrl = safeUrl(cleaned.portfolioUrl);
+    const data = escapeFields(cleaned);
 
     const {
       jobTitle = 'General Application',
@@ -33,10 +54,10 @@ export async function POST(request) {
       });
 
       const mailOptions = {
-        from: `"${fullName} (Job Applicant)" <${email || process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_USER || 'theeditlyfoundry@gmail.com',
-        replyTo: email,
-        subject: `🚀 New Job Application: ${jobTitle} - ${fullName}`,
+        from: `"${headerName} (Job Applicant)" <${process.env.EMAIL_USER}>`,
+        to: process.env.EMAIL_USER,
+        replyTo: rawEmail,
+        subject: `🚀 New Job Application: ${headerTitle} - ${headerName}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 680px; margin: 0 auto; padding: 25px; border: 1px solid #E2E8F0; border-radius: 14px; background-color: #FAFAFA;">
             <div style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%); padding: 20px; border-radius: 10px; color: #FFFFFF; margin-bottom: 20px;">
@@ -51,7 +72,7 @@ export async function POST(request) {
               </tr>
               <tr>
                 <td style="padding: 12px 16px; border-bottom: 1px solid #F1F5F9; font-weight: bold; color: #475569;">Email Address</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #F1F5F9; color: #2563EB;"><a href="mailto:${email}">${email}</a></td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid #F1F5F9; color: #5B2EFF;"><a href="mailto:${email}">${email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 12px 16px; border-bottom: 1px solid #F1F5F9; font-weight: bold; color: #475569;">Phone / WhatsApp</td>
@@ -79,8 +100,8 @@ export async function POST(request) {
               </tr>
               <tr>
                 <td style="padding: 12px 16px; border-bottom: 1px solid #F1F5F9; font-weight: bold; color: #475569;">Showreel / Portfolio</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #F1F5F9; color: #2563EB;">
-                  <a href="${portfolioUrl}" target="_blank" style="background: #2563EB; color: #FFF; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-block; font-size: 13px; font-weight: bold;">
+                <td style="padding: 12px 16px; border-bottom: 1px solid #F1F5F9; color: #5B2EFF;">
+                  <a href="${portfolioUrl}" target="_blank" style="background: #5B2EFF; color: #FFF; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-block; font-size: 13px; font-weight: bold;">
                     🔗 View Candidate Portfolio
                   </a>
                 </td>
@@ -108,7 +129,8 @@ export async function POST(request) {
 
       await transporter.sendMail(mailOptions);
     } else {
-      console.log("Career application received (EMAIL_USER not configured in env):", data);
+      console.error("Career application could not be delivered: email is not configured.");
+      return NextResponse.json({ error: 'Applications are temporarily unavailable.' }, { status: 503 });
     }
 
     return NextResponse.json({

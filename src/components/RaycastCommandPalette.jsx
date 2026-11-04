@@ -15,7 +15,7 @@ export default function RaycastCommandPalette() {
     { id: 'act-2', category: 'Services', title: 'Reels & Shorts Retention Engine', shortcut: 'R', href: '/services/reels-shorts', desc: '9:16 scroll-stopping viral editing & sound design' },
     { id: 'act-3', category: 'Services', title: 'Multi-Cam Podcasts & Audio Suite', shortcut: 'M', href: '/services/podcasts', desc: '1-to-30 content multiplication engine & 4K switching' },
     { id: 'act-4', category: 'Services', title: 'YouTube Long-Form Authority', shortcut: 'Y', href: '/services/talking-head', desc: 'Documentary pacing, J-cuts & bespoke B-roll' },
-    { id: 'act-5', category: 'Services', title: '3D SaaS UI & Product Demos', shortcut: 'S', href: '/services/saas-motion', desc: 'Apple-grade vector UI cursor kinetics & 60fps motion' },
+    { id: 'act-5', category: 'Services', title: 'Motion Graphics', shortcut: 'S', href: '/services/motion-graphics', desc: 'Apple-grade vector UI cursor kinetics & 60fps motion' },
     { id: 'act-6', category: 'Services', title: 'High-ROAS UGC & Performance Ads', shortcut: 'U', href: '/services/ugc-ads', desc: '5x split-test hooks for Meta, TikTok & YouTube' },
     { id: 'act-7', category: 'Workflow', title: 'Studio Production Pipeline & SLA', shortcut: 'F', href: '/workflow', desc: 'Frame.io review sync, Slack connect & 48h turnaround' },
     { id: 'act-8', category: 'Retainers', title: 'Transparent Retainer Vault & Pricing', shortcut: 'P', href: '/pricing', desc: 'Starter ($999), Growth ($1,499), Scale ($2,499)' },
@@ -98,12 +98,7 @@ export default function RaycastCommandPalette() {
   return (
     <>
       {/* Floating Bottom Raycast Trigger HUD Pill */}
-      <div style={{
-        position: 'fixed',
-        bottom: '24px',
-        right: '24px',
-        zIndex: 99990
-      }}>
+      <div className="command-palette-pill" style={{ position: 'fixed', bottom: '24px', zIndex: 99990 }}>
         <button
           onClick={() => setIsOpen(true)}
           style={{

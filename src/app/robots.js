@@ -1,5 +1,7 @@
+import { SITE_URL } from '@/lib/site';
+
 export default function robots() {
-  const baseUrl = 'https://editlyfoundry.vercel.app';
+  const baseUrl = SITE_URL;
 
   return {
     rules: {

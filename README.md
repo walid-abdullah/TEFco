@@ -239,3 +239,6 @@ Unauthorized reproduction, reverse engineering, or redistribution is strictly pr
 <div align="center">
   <sub>Architected with Precision Systems by <strong>Walid Abdullah</strong> • Founder & Executive Producer</sub>
 </div>
+
+---
+**Editly with C note:** Runs on Next.js 16 and Tailwind 4. Brand overrides live in `src/app/brand.css`. Required env vars are listed in `.env.example`.

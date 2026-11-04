@@ -1,33 +1,11 @@
 import React from 'react'
 
-export const CustomLogo = (props) => {
+export const CustomLogo = () => {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-      <div 
-        style={{
-          background: 'linear-gradient(135deg, #1976D2, #F2994A)',
-          color: 'white',
-          width: '32px',
-          height: '32px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontWeight: 'bold',
-          fontFamily: 'sans-serif',
-          letterSpacing: '1px',
-          borderRadius: '6px'
-        }}
-      >
-        EF
-      </div>
-      <span style={{ 
-        fontWeight: '800', 
-        fontSize: '16px', 
-        letterSpacing: '1.5px',
-        fontFamily: 'sans-serif',
-        textTransform: 'uppercase'
-      }}>
-        Editly Foundry
+      <img src="/Logo/the-editly-foundry-co-mark-tile.svg" alt="" width="32" height="32" style={{ display: 'block' }} />
+      <span style={{ fontWeight: '700', fontSize: '15px', fontFamily: 'sans-serif' }}>
+        The Editly Foundry Co.
       </span>
     </div>
   )

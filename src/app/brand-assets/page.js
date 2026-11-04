@@ -1,17 +1,30 @@
 import Link from 'next/link';
 
 export const metadata = {
+  alternates: { canonical: '/brand-assets' },
   title: 'Brand Assets & Media Kit | The Editly Foundry Co.',
   description: 'Download official media kit assets, logos, brand guidelines, and executive bios for The Editly Foundry Co.'
 };
 
 export default function BrandAssetsPage() {
   const brandColors = [
-    { name: 'Midnight Sapphire (Dark BG)', hex: '#040711', rgb: 'rgb(4, 7, 17)' },
-    { name: 'Electric Cyan (Primary Accent)', hex: '#38BDF8', rgb: 'rgb(56, 189, 248)' },
-    { name: 'Royal Cobalt (Core Blue)', hex: '#2563EB', rgb: 'rgb(37, 99, 235)' },
-    { name: 'Amethyst Violet (Motion Glow)', hex: '#8B5CF6', rgb: 'rgb(139, 92, 246)' },
-    { name: 'Ceramic Ice (Light Mode BG)', hex: '#F8FAFC', rgb: 'rgb(248, 250, 252)' }
+    { name: 'Iris (main brand colour)', hex: '#5B2EFF' },
+    { name: 'Deep Iris', hex: '#2C12B8' },
+    { name: 'Light Iris (mark on black)', hex: '#BFAFFF' },
+    { name: 'Ink', hex: '#0B0B14' },
+    { name: 'White', hex: '#FFFFFF' }
+  ];
+
+  const logoFiles = [
+    { label: 'Colour, for white backgrounds', file: 'the-editly-foundry-co-horizontal-color-on-white.svg', tone: 'white' },
+    { label: 'Gradient, for large uses on white', file: 'the-editly-foundry-co-horizontal-gradient-on-white.svg', tone: 'white' },
+    { label: 'Colour, for black backgrounds', file: 'the-editly-foundry-co-horizontal-color-on-dark.svg', tone: 'ink' },
+    { label: 'For the brand colour', file: 'the-editly-foundry-co-horizontal-color-on-violet.svg', tone: 'iris' },
+    { label: 'One colour, black', file: 'the-editly-foundry-co-horizontal-black.svg', tone: 'white' },
+    { label: 'One colour, white', file: 'the-editly-foundry-co-horizontal-white.svg', tone: 'ink' },
+    { label: 'Profile picture and app icon', file: 'the-editly-foundry-co-profile-picture.png', tone: 'white', square: true },
+    { label: 'Mark only, violet', file: 'the-editly-foundry-co-mark-violet.svg', tone: 'white', square: true },
+    { label: 'Mark only, white', file: 'the-editly-foundry-co-mark-white.svg', tone: 'iris', square: true }
   ];
 
   return (
@@ -19,7 +32,7 @@ export default function BrandAssetsPage() {
       <div className="container" style={{ maxWidth: '1100px', margin: '0 auto' }}>
         
         {/* Header */}
-        <div className="text-center reveal-on-scroll" style={{ marginBottom: '60px' }}>
+        <div className="hero-white sg-page-hero reveal-on-scroll">
           <span className="section-subtitle">
             <i className="fa-solid fa-photo-film" style={{ marginRight: '8px' }}></i>
             Official Agency Media Kit
@@ -51,33 +64,35 @@ export default function BrandAssetsPage() {
                 We are a specialized post-production video editing agency engineered to transform raw client footage into high-retention visual assets that build authority, drive conversions, and dominate algorithms.
               </p>
               <div style={{ display: 'flex', gap: '14px' }}>
-                <a 
-                  href="/Picture/Thumbnail.png" 
-                  download="Editly-Foundry-Media-Kit.png"
-                  className="btn btn-primary pop-btn"
-                  style={{ padding: '12px 24px', fontSize: '0.9rem' }}
-                >
+                <a href="#logo-files" className="btn btn-primary pop-btn" style={{ padding: '12px 24px', fontSize: '0.9rem' }}>
                   <i className="fa-solid fa-download"></i>
-                  <span>Download Pitch Deck (PDF)</span>
+                  <span>Download the logo</span>
                 </a>
               </div>
             </div>
 
             {/* Logo Preview Box */}
-            <div style={{
-              background: 'linear-gradient(135deg, #0B1736 0%, #030610 100%)',
-              border: '1px solid rgba(56, 189, 248, 0.3)',
-              borderRadius: '20px',
-              padding: '40px',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '2rem', fontWeight: '800', fontFamily: "'Halenoir', sans-serif", color: '#FFFFFF', marginBottom: '8px' }}>
-                Editly<span style={{ color: '#38BDF8' }}>Foundry</span>
-              </div>
-              <div style={{ fontSize: '0.85rem', color: '#94A3B8', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                Official Wordmark (Dark & Light)
-              </div>
+            <div className="sg-logo-preview">
+              <img src="/Logo/the-editly-foundry-co-horizontal-color-on-violet.svg" alt="The Editly Foundry Co. logo" width="1019" height="381" />
             </div>
+          </div>
+        </div>
+
+        {/* Logo Files */}
+        <div id="logo-files" style={{ marginBottom: '60px', scrollMarginTop: '110px' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '24px' }}>
+            Logo files
+          </h2>
+          <div className="sg-logo-files">
+            {logoFiles.map((logo) => (
+              <a key={logo.file} href={`/Logo/${logo.file}`} download>
+                <span className={`sg-logo-file is-${logo.tone}${logo.square ? ' is-square' : ''}`}>
+                  <img src={`/Logo/${logo.file}`} alt="" loading="lazy" />
+                </span>
+                <strong>{logo.label}</strong>
+                <small>{logo.file.endsWith('.png') ? 'PNG' : 'SVG'} · Download</small>
+              </a>
+            ))}
           </div>
         </div>
 
@@ -116,9 +131,9 @@ export default function BrandAssetsPage() {
           <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
             For interviews, guest podcast appearances, or joint studio partnerships, contact our press desk.
           </p>
-          <a href="mailto:press@editlyfoundry.com" className="btn btn-outline" style={{ padding: '12px 28px' }}>
+          <a href="mailto:theeditlyfoundry@gmail.com" className="btn btn-outline" style={{ padding: '12px 28px' }}>
             <i className="fa-solid fa-envelope"></i>
-            <span>press@editlyfoundry.com</span>
+            <span>theeditlyfoundry@gmail.com</span>
           </a>
         </div>
 
