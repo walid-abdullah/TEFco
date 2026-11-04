@@ -1,8 +1,9 @@
 "use client";
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import BrandLogo from './BrandLogo';
 
 const serviceItems = [
   { title: 'Reels & Shorts', slug: 'reels-shorts' },
@@ -11,6 +12,20 @@ const serviceItems = [
   { title: 'UGC Ads', slug: 'ugc-ads' },
   { title: 'Motion Graphics', slug: 'motion-graphics' },
 ];
+
+// The bar is glass, so its text and logo follow whatever full-width section sits behind it.
+function isDarkBehind(x, y) {
+  const minWidth = window.innerWidth * 0.7;
+  for (const element of document.elementsFromPoint(x, y)) {
+    if (element.closest('#navbar') || element.getBoundingClientRect().width < minWidth) continue;
+    if (element.matches('.on-ink, .on-iris')) return true;
+    const style = getComputedStyle(element);
+    if (style.backgroundImage.includes('gradient')) return Boolean(element.closest('.on-ink, .on-iris'));
+    const [r, g, b, alpha = 1] = (style.backgroundColor.match(/[\d.]+/g) || []).map(Number);
+    if (alpha > 0.5) return 0.299 * r + 0.587 * g + 0.114 * b < 128;
+  }
+  return false;
+}
 
 const links = [
   { href: '/work', label: 'Work' },
@@ -23,15 +38,30 @@ const links = [
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isOnDark, setIsOnDark] = useState(true);
+  const barRef = useRef(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      const bar = barRef.current.getBoundingClientRect();
+      setIsOnDark(isDarkBehind(bar.left + bar.width / 2, bar.top + bar.height / 2));
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(measure); };
+    schedule();
+    // A new page can finish laying out just after the route changes.
+    const settle = setTimeout(schedule, 500);
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      clearTimeout(settle);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
@@ -46,11 +76,11 @@ export default function Navbar() {
   const linkClass = (active) => `sg-nav-link${active ? ' is-active' : ''}`;
 
   return (
-    <header className={`sg-nav${isScrolled ? ' is-scrolled' : ''}`} id="navbar">
-      <div className="sg-nav-bar">
+    <header className={`sg-nav${isOnDark ? ' is-on-dark' : ''}`} id="navbar">
+      <div className="sg-nav-bar" ref={barRef}>
         <Link href="/" className="sg-brand" onClick={closeMenus} aria-label="The Editly Foundry Co. home">
-          <img src="/Logo/editly-foundry-mark.svg" alt="" width="34" height="34" />
-          <span>TEFco<b>.</b></span>
+          <BrandLogo alt="" className="sg-brand-light" />
+          <BrandLogo alt="" variant="color-on-dark" className="sg-brand-dark" />
         </Link>
 
         <nav className="sg-nav-links" aria-label="Main">

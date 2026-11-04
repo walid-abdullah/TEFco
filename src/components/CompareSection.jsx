@@ -1,4 +1,5 @@
 import { pricingPlans } from "@/data/pricingPlans";
+import BrandLogo from "./BrandLogo";
 
 const columns = ["In-house hire", "Freelancer", "Editly Foundry"];
 const startingPrice = Math.min(...pricingPlans.map((plan) => plan.monthlyPrice)).toLocaleString("en-US");
@@ -21,7 +22,8 @@ export default function CompareSection() {
           <thead>
             <tr>
               <td />
-              {columns.map((column) => <th scope="col" key={column}>{column}</th>)}
+              {columns.slice(0, -1).map((column) => <th scope="col" key={column}>{column}</th>)}
+              <th scope="col"><BrandLogo variant="color-on-violet" className="sg-compare-logo" /></th>
             </tr>
           </thead>
           <tbody>

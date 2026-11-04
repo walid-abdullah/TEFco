@@ -103,6 +103,24 @@ export default function WorkflowPage() {
         </div>
       </section>
 
+      <section className="sg-stages on-ink" aria-label="The five steps">
+        <div className="sg-stages-art" aria-hidden="true">
+          <b>Five steps</b>
+          <em>Raw to ready</em>
+        </div>
+        <ol className="sg-stages-cards">
+          {steps.map((step) => (
+            <li key={step.number}>
+              <a href={`#step-${step.number}`}>
+                <span>{step.number}</span>
+                <strong>{step.label}</strong>
+                <small>{step.timing}</small>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       <section className="sg-wf">
         <div className="container sg-wf-grid">
           <nav className="sg-wf-index" aria-label="Workflow steps">

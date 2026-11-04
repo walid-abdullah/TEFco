@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { BrandMark } from "./BrandLogo";
 
 const STORAGE_KEY = "editly-chat";
 const WELCOME = "Hi! Ask me anything about our editing, prices or process, in English, বাংলা or Español.";
@@ -84,6 +85,7 @@ export default function ChatWidget() {
       {isOpen && (
         <section className="sg-chat-panel" aria-label="Chat with the Editly assistant">
           <div className="sg-chat-head">
+            <i className="sg-chat-mark"><BrandMark /></i>
             <div>
               <strong>Editly assistant</strong>
               <span>AI · English, বাংলা, Español</span>

@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
 import { clip, escapeFields, escapeHtml, isEmail, isRateLimited, safeUrl } from '@/lib/requestSafety';
 import { sendWhatsAppText } from '@/lib/whatsapp';
+import { SITE_URL } from '@/lib/site';
 
 export async function POST(request) {
   try {
@@ -166,9 +167,7 @@ export async function POST(request) {
                 
                 <!-- Header Brand Bar -->
                 <div style="background: #0B0B14; padding: 28px; text-align: center;">
-                  <div style="font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">
-                    The Editly Foundry <span style="color: #BFAFFF;">Co.</span>
-                  </div>
+                  <img src="${SITE_URL}/Logo/the-editly-foundry-co-horizontal-white.png" alt="The Editly Foundry Co." width="220" style="display: block; width: 220px; max-width: 100%; height: auto; margin: 0 auto; color: #ffffff; font-size: 20px; font-weight: 700;" />
                   <div style="font-size: 11px; color: #94a3b8; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;">
                     High-Retention Video Post-Production
                   </div>

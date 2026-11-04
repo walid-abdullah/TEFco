@@ -21,7 +21,7 @@ export const GLOBAL_META = {
   siteTitle: 'The Editly Foundry Co. | Global Video Production & Editing Agency (US • Europe • Global)',
   siteDescription:
     'The Editly Foundry Co. is a premier global video editing agency serving high-growth brands and top creators across the United States, Europe, North America, and worldwide. 48-hour turnarounds, dedicated editor pods, and conversion-engineered video post-production.',
-  ogImage: '/Picture/square.png'
+  ogImage: '/Logo/the-editly-foundry-co-social-share.png'
 };
 
 export const PRIORITY_PAGES = [
@@ -38,7 +38,7 @@ export const CANONICAL_OVERRIDES = [];
 export const ORGANIZATION = {
   name: 'The Editly Foundry Co.',
   url: SITE_URL,
-  logo: `${SITE_URL}/Logo/editly-foundry-logo.svg`,
+  logo: `${SITE_URL}/Logo/the-editly-foundry-co-horizontal-color-on-white.svg`,
   phone: '+8801886755888',
   email: 'theeditlyfoundry@gmail.com',
   areaServed: [
