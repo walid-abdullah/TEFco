@@ -15,6 +15,14 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // The old address sends visitors and search engines to the real domain.
+      // API routes stay put so webhooks registered on the old address keep working.
+      {
+        source: '/:path((?!api/).*)',
+        has: [{ type: 'host', value: 'editlyfoundry.vercel.app' }],
+        destination: 'https://editlyfoundry.studio/:path',
+        permanent: true,
+      },
       {
         source: '/booking',
         destination: '/book-a-call',
